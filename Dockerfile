@@ -1,8 +1,8 @@
 FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND="noninteractive"
 #RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections; \
-    sed -Ei 's/security.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list; \
-    sed -Ei 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list;
+#    sed -Ei 's/security.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list; \
+#    sed -Ei 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list;
 
 RUN date
 
