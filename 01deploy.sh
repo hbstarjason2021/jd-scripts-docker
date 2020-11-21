@@ -39,4 +39,4 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_sign.js'
 
 
-
+docker-compose down
