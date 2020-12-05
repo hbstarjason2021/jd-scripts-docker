@@ -1,0 +1,12 @@
+FROM alpine
+
+RUN set -ex \
+        && apk update && apk upgrade\
+        && apk add --no-cache tzdata moreutils git nodejs npm cron openssl \
+        && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+        && echo "Asia/Shanghai" > /etc/timezone
+        
+WORKDIR /
+COPY sync.sh /sync.sh
+RUN bash /sync.sh
+CMD crontab -l && cron -f        
