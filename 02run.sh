@@ -36,10 +36,10 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##jd_bean_home.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_home.js'
 
-##jd_car.js 
+## 京东汽车jd_car.js 
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_car.js'
 
-##jd_health.js
+## 健康抽奖机jd_health.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_health.js'
 
 ##jd_kd.js
@@ -48,8 +48,8 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##jd_split.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_split.js'
 
-##jd_digital_floor.js
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_digital_floor.js'
+## 5折数码加购jd_digital_floor.js
+##docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_digital_floor.js'
 
-##jd_live_redrain.js
+## 直播红包雨jd_live_redrain.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_live_redrain.js'
