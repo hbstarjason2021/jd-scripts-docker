@@ -1,6 +1,7 @@
 #!/bin/bash
 
-docker-compose up --build --force-recreate --detach jd1
+#docker-compose up --build --force-recreate --detach jd1
+docker-compose up --no-build --force-recreate --detach jd1
 
 ##京豆变动通知jd_bean_change.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_change.js'
