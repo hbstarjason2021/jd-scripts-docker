@@ -1,0 +1,18 @@
+version: "2.1"
+x-logger: &logger
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "3"
+x-common: &common
+  image: jd-scripts:latest
+  restart: always
+services:
+  jd1:
+    <<: [ *logger, *common ]
+    container_name: jd1
+    volumes:
+      - ./env/all:/all
+      - ./env/env1:/env
+
