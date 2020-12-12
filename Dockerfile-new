@@ -2,7 +2,7 @@ FROM alpine
 
 RUN set -ex \
         && apk update && apk upgrade\
-        && apk add --no-cache tzdata moreutils git nodejs npm cron openssl \
+        && apk add --no-cache tzdata moreutils git nodejs npm openssl \
         && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
         && echo "Asia/Shanghai" > /etc/timezone
         
