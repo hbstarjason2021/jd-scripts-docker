@@ -49,6 +49,8 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 直播红包雨jd_live_redrain.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_live_redrain.js'
 
+## 金融打卡jr_sign.js
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jr_sign.js'
 
 ## 京喜金牌厂长
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxstory.js'
