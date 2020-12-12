@@ -6,9 +6,9 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 RUN date
 
-RUN apt update && apt install -y cron openssl coreutils git wget tzdata
-RUN apt update && apt install -y nodejs
-RUN apt update && apt install -y npm
+RUN apt update && apt install -y cron openssl coreutils git wget tzdata nodejs npm
+#RUN apt update && apt install -y nodejs
+#RUN apt update && apt install -y npm
 WORKDIR /
 COPY sync.sh /sync.sh
 RUN bash /sync.sh
