@@ -1,0 +1,39 @@
+name: build image & push
+
+on: 
+  push:
+  #schedule:
+    # - cron: '0 21 * * *'
+    branches:
+     - main
+
+jobs:
+  maven:
+    #name: Units & Integrations
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      #run: |
+      #  git clone https://github.com/hbstarjason/jd-scripts-docker/ && \
+      #  cd jd-scripts-docker
+
+    - name: List env
+      run: env
+
+    #- name: Install docker-compose
+    #  run: |
+    #    sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)"  \
+    #    -o /usr/local/bin/docker-compose  && \
+    #    sudo chmod +x /usr/local/bin/docker-compose &&  docker-compose version 
+    
+    - name: Build and push Docker image to Dockerhub
+      uses: docker/build-push-action@v1.1.0
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: hbstarjason/jd-scripts
+        tags: 1216
+
