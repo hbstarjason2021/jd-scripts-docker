@@ -8,7 +8,7 @@ on:
      - main
 
 jobs:
-  maven:
+  build:
     #name: Units & Integrations
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
