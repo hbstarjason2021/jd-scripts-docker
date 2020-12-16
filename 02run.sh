@@ -27,7 +27,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 东东工厂jd_jdfactory.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdfactory.js'
 
-
 ##jd_bean_home.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_home.js'
 
@@ -43,8 +42,18 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 金融打卡jr_sign.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jr_sign.js'
 
+## 东东萌宠jd_pet.js
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_pet.js'
+
+## 京东健康APP集汪汪卡jd_jdh.js
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdh.js'
+
+## 看一看jd_watch.js
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_watch.js'
+
 ##取关京东店铺和商品jd_unsubscribe.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_unsubscribe.js'
+
 
 
 ##jd_split.js
@@ -58,3 +67,4 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 ## 京喜金牌厂长
 ##docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxstory.js'
+
