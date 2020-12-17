@@ -35,5 +35,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: hbstarjason/jd-scripts
-        tags: ${{github.sha}}
+        #tags: ${{github.sha}}
+        tags: latest  
 
