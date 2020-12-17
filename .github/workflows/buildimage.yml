@@ -2,10 +2,10 @@ name: build image & push
 
 on: 
   push:
-   schedule:
+     branches:
+       - main
+  schedule:
      - cron: '30 13 * * *'
-    branches:
-     - main
 
 jobs:
   build:
