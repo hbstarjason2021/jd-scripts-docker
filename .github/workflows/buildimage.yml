@@ -2,8 +2,8 @@ name: build image & push
 
 on: 
   push:
-  #schedule:
-    # - cron: '0 21 * * *'
+   schedule:
+     - cron: '30 13 * * *'
     branches:
      - main
 
