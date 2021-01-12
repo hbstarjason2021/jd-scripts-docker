@@ -30,3 +30,9 @@ services:
     volumes:
       - ./env/all:/all
       - ./env/env3:/env
+  jd4:
+    <<: [ *logger, *common ]
+    container_name: jd4
+    volumes:
+      - ./env/all:/all
+      - ./env/env4:/env      
