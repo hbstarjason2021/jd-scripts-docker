@@ -22,3 +22,6 @@ cp 01run.sh 04run.sh &&  sed -i "s/jd1/jd4/g"  04run.sh
 
 sed -i '2s/pt_key=/XXXX/' env/env1 && \
   sed -i '3s/pt_pin=/pt_pin=jd_709c349f13b51/' env/env1
+  
+
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node getJDCookie.js'
