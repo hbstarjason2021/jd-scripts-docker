@@ -42,7 +42,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/shylocks/Loon
     })
   })
 }
-function scriptsCDN(url = 'https://raw.fastgit.org/shylocks/Loon/main/jd_ms.js') {
+function scriptsCDN(url = 'https://raw.fastgit.org/shylocks/Loon/main/jd_gyec.js') {
   return new Promise(resolve => {
     $.get({url}, async (err, resp, data) => {
       try {
