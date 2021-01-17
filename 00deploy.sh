@@ -25,3 +25,5 @@ sed -i '2s/pt_key=/XXXX/' env/env1 && \
   
 
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node getJDCookie.js'
+
+docker cp jd_ms.js jd1:/scripts/jd_ms.js
