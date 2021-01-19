@@ -11,7 +11,7 @@ cron "11 9 * * *" script-path=https://raw.githubusercontent.com/yangtingxiao/Qua
 // Surge
 京东排行榜 = type=cron,cronexp=11 9 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_rankingList.js
  */
-const $ = new Env('京东秒杀');
+const $ = new Env('京年团圆pick');
 main();
 async function main() {
   $.http.get({url: `https://purge.jsdelivr.net/gh/shylocks/Loon/@main/jd_vote.js`}).then((resp) => {
