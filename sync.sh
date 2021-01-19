@@ -24,6 +24,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
     mv /scripts_tmp /scripts
   }
 }
+
 cd /scripts || exit 1
 npm install || npm install --registry=https://registry.npm.taobao.org || exit 1
 
@@ -46,6 +47,10 @@ cat /etc/os-release | grep -q ubuntu && {
   }
   ' > /crontab.list
 }
+
+git clone https://github.com/shylocks/Loon
+cp Loon/jd_ms.js    /jd-scripts-docker/from/
+cp Loon/jd_vote.js  /jd-scripts-docker/from/
 
 cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
