@@ -31,7 +31,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   git pull
 ) || {
   git clone --branch=main https://github.com/shylocks/Loon.git /Loon_tmp
-  [ -d /scripts_tmp ] && {
+  [ -d /Loon_tmp ] && {
     rm -rf /Loon
     mv /Loon_tmp /Loon
   }
