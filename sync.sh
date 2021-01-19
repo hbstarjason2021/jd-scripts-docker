@@ -63,6 +63,9 @@ cat /etc/os-release | grep -q ubuntu && {
 
 cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
+cp /jd-scripts-docker/jd_ms.js  /scripts
+cp /jd-scripts-docker/jd_vote.js  /scripts
+
 crontab -r
 
 crontab /crontab.list || {
