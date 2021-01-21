@@ -69,7 +69,7 @@ cp /jd-scripts-docker/jd_vote.js  /scripts
 cp /jd-scripts-docker/USER_AGENTS.js /Loon
 cp /jd-scripts-docker/jdCookie.js /Loon
 
-npm install -g
+cd /Loon && npm install -g
 
 crontab -r
 
