@@ -24,18 +24,18 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
     mv /scripts_tmp /scripts
   }
 }
-(
-  exec 2<>/dev/null
-  set -e
-  cd /Loon
-  git pull
-) || {
-  git clone --branch=main https://github.com/shylocks/Loon.git /Loon_tmp
-  [ -d /Loon_tmp ] && {
-    rm -rf /Loon
-    mv /Loon_tmp /Loon
-  }
-}
+#(
+#  exec 2<>/dev/null
+#  set -e
+#  cd /Loon
+#  git pull
+#) || {
+#  git clone --branch=main https://github.com/shylocks/Loon.git /Loon_tmp
+#  [ -d /Loon_tmp ] && {
+#    rm -rf /Loon
+#    mv /Loon_tmp /Loon
+#  }
+#}
 
 (
   exec 2<>/dev/null
@@ -76,7 +76,7 @@ cat /etc/os-release | grep -q ubuntu && {
 
 cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
-cp /jd-scripts-docker/jd_ms.js  /scripts
+#cp /jd-scripts-docker/jd_ms.js  /scripts
 cp /jd-scripts-docker/jd_vote.js  /scripts
 
 cp /jd-scripts-docker/USER_AGENTS.js /Loon
