@@ -6,7 +6,7 @@ x-logger: &logger
       max-size: "10m"
       max-file: "3"
 x-common: &common
-  image: hbstarjason/jd-scripts:latest
+  image: hbstarjason/jd-scripts:f5770e9adb7b52acb000dcdc3c116d687bf31dd4
   build:
     context: .
     dockerfile: ./Dockerfile
