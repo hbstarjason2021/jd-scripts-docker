@@ -6,7 +6,7 @@ sudo curl -L "http://rancher-mirror.cnrancher.com/docker-compose/v1.27.4/docker-
    sudo chmod +x /usr/local/bin/docker-compose &&  docker-compose version && \
     git clone https://github.com/hbstarjason/jd-scripts-docker/ && \
    cd jd-scripts-docker && ls -l  && \
- docker pull hbstarjason/jd-scripts
+ docker pull hbstarjason/jd-scripts:f5770e9adb7b52acb000dcdc3c116d687bf31dd4
 
 docker-compose up --no-build --force-recreate --detach jd1
 docker-compose up --no-build --force-recreate --detach jd2
