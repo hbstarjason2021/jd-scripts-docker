@@ -45,6 +45,5 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: hbstarjason/jd-scripts
-        tags: ${{date +"%Y-%m-%d-%s"}}
-        #tags: ${{github.sha}}
+        tags: ${{github.sha}}
         #tags: latest 
