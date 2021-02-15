@@ -65,6 +65,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##京东金融养猪猪jd_pigPet.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_pigPet.js'
 
+#### 各种签到
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_sign.js'
+
 ##取关京东店铺和商品jd_unsubscribe.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_unsubscribe.js'
 
