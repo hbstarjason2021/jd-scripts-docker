@@ -75,6 +75,10 @@ cat /etc/os-release | grep -q ubuntu && {
 
 cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
+cp /jd-scripts-docker/from/jx_cfd.js /scripts/jx_cfd.js
+cp /jd-scripts-docker/from/jx_cfd_exchange.js /scripts/jx_cfd_exchange.js
+
+cp /scripts-bak/jd_jxcfd.js /scripts/jd_jxcfd.js
 
 #cp /jd-scripts-docker/jd_ms.js  /scripts
 #cp /jd-scripts-docker/jd_vote.js  /scripts
@@ -83,8 +87,6 @@ cp /jd-scripts-docker/crontab.list /crontab.list
 #cp /jd-scripts-docker/jdCookie.js /Loon
 
 #cd /Loon && npm install -g
-
-cp /scripts-bak/jd_jxcfd.js /scripts/jd_jxcfd.js
 
 crontab -r
 
