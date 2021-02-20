@@ -78,6 +78,9 @@ cp /jd-scripts-docker/crontab.list /crontab.list
 cp /jd-scripts-docker/from/jx_cfd.js /scripts/jx_cfd.js
 cp /jd-scripts-docker/from/jx_cfd_exchange.js /scripts/jx_cfd_exchange.js
 
+cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
+cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
+
 cp /scripts-bak/jd_jxcfd.js /scripts/jd_jxcfd.js
 
 #cp /jd-scripts-docker/jd_ms.js  /scripts
