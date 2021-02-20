@@ -29,7 +29,7 @@ const $ = new Env('百变大咖秀');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [], cookie = '', originCookie = '', message = '';
-let helpAuthor = true;//为作者助力的开关
+let helpAuthor = false;//为作者助力的开关
 const ACT_ID = 'dz2102100001340203';
 const questionList = [
   { q: '84d9ef3ccb2543449935871c2a95f2aa', a: 'B:玲花' },
