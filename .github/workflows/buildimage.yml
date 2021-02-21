@@ -1,12 +1,12 @@
 name: build image & push
 
 on: 
-  push:
-     branches:
-       - main
+  #push:
+  #   branches:
+  #     - main
   workflow_dispatch: 
-  schedule:
-     - cron: '01 1,13 * * *'
+  #schedule:
+  #   - cron: '01 1,13 * * *'
 
 jobs:
   build:
