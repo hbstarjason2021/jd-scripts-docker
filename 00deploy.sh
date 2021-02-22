@@ -4,10 +4,11 @@
 sudo curl -L "http://rancher-mirror.cnrancher.com/docker-compose/v1.27.4/docker-compose-$(uname -s)-$(uname -m)"  \
    -o /usr/local/bin/docker-compose  && \
    sudo chmod +x /usr/local/bin/docker-compose &&  docker-compose version && \
-    git clone https://github.com/hbstarjason/jd-scripts-docker/ && \
+    git clone https://gitee.com/starjason/jd-scripts-docker/ && \
    cd jd-scripts-docker && ls -l  && \
  docker pull hbstarjason/jd-scripts
  
+ #git clone https://github.com/hbstarjason/jd-scripts-docker
  #docker pull hbstarjason/jd-scripts:f5770e9adb7b52acb000dcdc3c116d687bf31dd4
 
 docker-compose up --no-build --force-recreate --detach jd1
