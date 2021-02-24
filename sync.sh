@@ -80,6 +80,8 @@ cp /jd-scripts-docker/from/jx_cfd_exchange.js /scripts/jx_cfd_exchange.js
 
 cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
+cp /jd-scripts-docker/from/jd_fanslove.js /scripts/jd_fanslove.js
+cp /jd-scripts-docker/from/jd_getFanslove.js /scripts/jd_getFanslove.js
 
 cp /scripts-bak/jd_jxcfd.js /scripts/jd_jxcfd.js
 
