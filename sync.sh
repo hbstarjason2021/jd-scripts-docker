@@ -24,18 +24,20 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
     mv /scripts_tmp /scripts
   }
 }
-#(
-#  exec 2<>/dev/null
-#  set -e
-#  cd /Loon
-#  git pull
-#) || {
-#  git clone --branch=main https://github.com/shylocks/Loon.git /Loon_tmp
-#  [ -d /Loon_tmp ] && {
-#    rm -rf /Loon
-#    mv /Loon_tmp /Loon
-#  }
-#}
+
+(
+  exec 2<>/dev/null
+  set -e
+  cd /Loon
+  git pull
+) || {
+  #git clone --branch=main https://github.com/shylocks/Loon.git /Loon_tmp
+  git clone --branch=main https://github.com/chinnkarahoi/Loon.git /Loon_tmp
+  [ -d /Loon_tmp ] && {
+    rm -rf /Loon
+    mv /Loon_tmp /Loon
+  }
+}
 
 (
   exec 2<>/dev/null
