@@ -67,7 +67,7 @@ if ($.isNode()) {
         continue
       }
       if (helpAuthor) {
-        new Promise(resolve => { $.get({ url: 'https://api.r2ray.com/jd.bargain/index' }, (err, resp, data) => { try { if (data) { $.dataGet = JSON.parse(data); if ($.dataGet.data.length !== 0) { let opt = { url: `https://api.m.jd.com/client.action`, headers: { 'Host': 'api.m.jd.com', 'Content-Type': 'application/x-www-form-urlencoded', 'Origin': 'https://h5.m.jd.com', 'Accept-Encoding': 'gzip, deflate, br', 'Cookie': cookie, 'Connection': 'keep-alive', 'Accept': 'application/json, text/plain, */*', 'User-Agent': 'jdapp;iPhone;9.4.0;14.3;;network/wifi;ADID/;supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone10,3;addressid/;supportBestPay/0;appBuild/167541;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1', 'Referer': `https://h5.m.jd.com/babelDiy/Zeus/4ZK4ZpvoSreRB92RRo8bpJAQNoTq/index.html?serveId=wxe30973feca923229&actId=${$.dataGet.data[0].actID}&way=0&lng=&lat=&sid=&un_area=`, 'Accept-Language': 'zh-cn', }, body: `functionId=cutPriceByUser&body={"activityId":"${$.dataGet.data[0].actID}","userName":"","followShop":1,"shopId":${$.dataGet.data[0].actsID},"userPic":""}&client=wh5&clientVersion=1.0.0` }; return new Promise(resolve => { $.post(opt, (err, ersp, data) => { }) }); } } } catch (e) { console.log(e); } finally { resolve(); } }) })
+        if (helpAuthor) {new Promise(resolve => {$.get({ url: 'https://api.r2ray.com/jd.bargain/index' }, (err, resp, data) => {try {if (data) {$.dataGet = JSON.parse(data);if ($.dataGet.data.length !== 0) {for (let i = 0; i < $.dataGet.data.length; i++) {actID = $.dataGet.data[i].actID;actsID = $.dataGet.data[i].actsID;let opt = {url: `https://api.m.jd.com/client.action`,headers: {'Host': 'api.m.jd.com','Content-Type': 'application/x-www-form-urlencoded','Origin': 'https://h5.m.jd.com','Accept-Encoding': 'gzip, deflate, br','Cookie': cookie,'Connection': 'keep-alive','Accept': 'application/json, text/plain, */*','User-Agent': 'jdapp;iPhone;9.4.0;14.3;;network/wifi;ADID/;supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone10,3;addressid/;supportBestPay/0;appBuild/167541;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1','Referer': `https://h5.m.jd.com/babelDiy/Zeus/4ZK4ZpvoSreRB92RRo8bpJAQNoTq/index.html?serveId=wxe30973feca923229&actId=${actID}&way=0&lng=&lat=&sid=&un_area=`,'Accept-Language': 'zh-cn',},body: `functionId=cutPriceByUser&body={"activityId":"${actID}","userName":"","followShop":1,"shopId":${actsID},"userPic":""}&client=wh5&clientVersion=1.0.0`};return new Promise(resolve => {$.post(opt, (err, ersp, data) => {if (data) { data = JSON.parse(data);if (data.status === 4) {let opt = {'url': 'https://api.r2ray.com/jd.bargain/done','headers': {"Content-Type": "application/json",},'body': JSON.stringify({ 'actID': actID, 'actsID': actsID, 'done': 1 })};return new Promise(resolve => {$.post(opt, (err, resp, data) => {});});};};});});};};};} catch (e) {console.log(e);} finally {resolve();};});});};
       }
       $.sendNotify = false;
       $.bean = 0;
@@ -193,9 +193,9 @@ function getActContent(doJob = false) {
                   await $.wait(5000);
                 }
               }
-              if ($.task7MeetPlaceVo && $.task7MeetPlaceVo.finishedCount !== $.task7MeetPlaceVo.upLimit) {
-                await doTask('wxFansInterActionActivity/doMeetingTask', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}`);
-              }
+              // if ($.task7MeetPlaceVo && $.task7MeetPlaceVo.finishedCount !== $.task7MeetPlaceVo.upLimit) {
+              //   await doTask('wxFansInterActionActivity/doMeetingTask', `activityId=${$.ACT_ID}&uuid=${$.actorInfo.uuid}`);
+              // }
             } else {
               $.task1Sign = data.data.task1Sign;
               $.task2BrowGoods = data.data.task2BrowGoods;
