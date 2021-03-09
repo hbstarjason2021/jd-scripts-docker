@@ -4,16 +4,16 @@
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdtx.js | sed 's/^/ 【财富岛提现】/'; "
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; MARKET_COIN_TO_BEANS=1000; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_blueCoin.js | sed 's/^/ 【京小超兑换1000豆】/'; "
 
+1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_blueCoin.js | sed 's/^/ 【京小超兑换20豆】/'; "
 
 2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_shop.js | sed 's/^/ 【进店领豆脚本】/'; "
-
 8 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car.js | sed 's/^/ 【京东汽车】/'; "
-9 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_blueCoin.js | sed 's/^/ 【京小超兑换20豆】/'; "
+
 
 10 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_superMarket.js | sed 's/^/ 【京小超】/'; "
 12 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_ms.js | sed 's/^/ 【秒杀币】/'; "
 
-
+30,31 20-23/1 9,12 3 *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_live_redrain.js | sed 's/^/ 【超级直播间红包雨】/'; "
 
 
 
