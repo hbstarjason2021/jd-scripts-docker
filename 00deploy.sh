@@ -32,6 +32,8 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node z_wish.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_global.js'
 
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_mohe.js'
+
 cp 01run.sh 02run.sh &&  sed -i "s/jd1/jd2/g"  02run.sh 
 cp 01run.sh 04run.sh &&  sed -i "s/jd1/jd4/g"  04run.sh
 
