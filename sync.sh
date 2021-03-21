@@ -12,6 +12,8 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
     mv /jd-scripts-docker_tmp /jd-scripts-docker
   }
 }
+
+#######
 (
   exec 2<>/dev/null
   set -e
@@ -28,6 +30,22 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   }
 }
 
+#######
+(
+  exec 2<>/dev/null
+  set -e
+  cd /qx
+  git pull
+) || {
+  git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
+  
+  [ -d /qx_tmp ] && {
+    rm -rf /qx
+    mv /qx_tmp /qx
+  }
+}
+
+########
 (
   exec 2<>/dev/null
   set -e
@@ -42,6 +60,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   }
 }
 
+#######
 (
   exec 2<>/dev/null
   set -e
