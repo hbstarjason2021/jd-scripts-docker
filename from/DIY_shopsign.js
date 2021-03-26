@@ -1,20 +1,19 @@
-/* https://raw.githubusercontent.com/cui521/jdqd/main/DIY_shopsign.js
-店铺签到，各类店铺签到，有新的店铺直接添加token即可
+//https://raw.githubusercontent.com/cui521/jdqd/main/DIY_shopsign.js
+//https://github.com/cui521/jdqd/blob/main/DIY_shopsign.js
 
-更新地址：https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js
+/*
+店铺签到，各类店铺签到，有新的店铺直接添加token即可
 ============Quantumultx===============
 [task_local]
-#粉丝互动
-0 0 * * * https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js, tag=粉丝互动,  enabled=true
-[rewrite_local]
-^https://lzkjdz\-isv\.isvjcloud\.com\/wxFansInterActionActivity\/activityContent url script-response-body https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_getFanslove.js
-================Loon==============
+#店铺签到
+0 0 * * * https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js, tag=店铺签到, enabled=true
+===========Loon============
 [Script]
-cron "3 10 * * *" script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js,tag=粉丝互动
-===============Surge=================
-粉丝互动 = type=cron,cronexp="3 10 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js
-============小火箭=========
-粉丝互动 = type=cron,script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js, cronexpr="3 10 * * *", timeout=3600, enable=true
+cron "0 0 * * *" script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js,tag=店铺签到
+============Surge=============
+店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js
+===========小火箭========
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
 */
 
 
