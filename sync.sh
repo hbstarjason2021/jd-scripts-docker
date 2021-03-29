@@ -6,7 +6,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   cd /jd-scripts-docker
   git pull
 ) || {
-  git clone https://github.com/hbstarjason/jd-scripts-docker.git /jd-scripts-docker_tmp
+  git clone --branch=main https://github.com/hbstarjason/jd-scripts-docker.git /jd-scripts-docker_tmp
   [ -d /jd-scripts-docker_tmp ] && {
     rm -rf /jd-scripts-docker
     mv /jd-scripts-docker_tmp /jd-scripts-docker
@@ -22,7 +22,8 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 ) || {
   #git clone --branch=master https://gitee.com/lxk0301/jd_scripts.git /scripts_tmp
   #git clone --branch=main https://github.com/hbstarjason/jd-scripts.git /scripts_tmp
-  git clone --branch=master https://github.com/hbstarjason/jd_scripts.git /scripts_tmp
+  #git clone --branch=master https://github.com/hbstarjason/jd_scripts.git /scripts_tmp
+  git clone --branch=master https://github.com/hbstarjason/a.git /scripts_tmp
   
   [ -d /scripts_tmp ] && {
     rm -rf /scripts
@@ -37,7 +38,8 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   cd /qx
   git pull
 ) || {
-  git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
+  #git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
+  git clone --branch=qx https://github.com/hbstarjason/jd_scripts.git /qx_tmp
   
   [ -d /qx_tmp ] && {
     rm -rf /qx
