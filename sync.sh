@@ -110,6 +110,10 @@ cp /jd-scripts-docker/from/jdJxncTokens.js /scripts/jdJxncTokens.js
 cp /jd-scripts-docker/from/jd_daydlt.js /scripts/jd_daydlt.js
 cp /jd-scripts-docker/from/jdautogan.js /scripts/jdautogan.js
 
+cp /jd-scripts-docker/from/jd_blueCoin_1000.js        /scripts/jd_blueCoin_1000.js
+cp /jd-scripts-docker/from/jd_blueCoin_20.js          /scripts/jd_blueCoin_20.js
+cp /jd-scripts-docker/from/jd_blueCoin_chunzhen.js    /scripts/jd_blueCoin_chunzhen.js
+cp /jd-scripts-docker/from/jd_blueCoin_chunzhenxmy.js /scripts/jd_blueCoin_chunzhenxmy.js
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
