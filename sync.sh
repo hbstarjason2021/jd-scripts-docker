@@ -23,7 +23,8 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   #git clone --branch=master https://gitee.com/lxk0301/jd_scripts.git /scripts_tmp
   #git clone --branch=main https://github.com/hbstarjason/jd-scripts.git /scripts_tmp
   #git clone --branch=master https://github.com/hbstarjason/jd_scripts.git /scripts_tmp
-  git clone --branch=master https://github.com/hbstarjason/a.git /scripts_tmp
+  #git clone --branch=master https://github.com/hbstarjason/a.git /scripts_tmp
+  git clone --branch=jd_scripts https://github.com/hbstarjason/jd_scripts.git /scripts_tmp
   
   [ -d /scripts_tmp ] && {
     rm -rf /scripts
