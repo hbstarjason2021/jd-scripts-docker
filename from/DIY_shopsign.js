@@ -6,14 +6,14 @@
 ============Quantumultx===============
 [task_local]
 #店铺签到
-0 0 * * * https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js, tag=店铺签到, enabled=true
+0 0 * * * https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/DIY_shopsign.js, tag=店铺签到, enabled=true
 ===========Loon============
 [Script]
-cron "0 0 * * *" script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js,tag=店铺签到
+cron "0 0 * * *" script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/DIY_shopsign.js,tag=店铺签到
 ============Surge=============
-店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js
+店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/DIY_shopsign.js
 ===========小火箭========
-店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/DIY_shopsign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
 */
 
 
@@ -33,12 +33,14 @@ let shopname=''
 const token=[
   'F2FA870C86F2BDC5B11B92A7DC671256',//3.17日添加10天8 20天66
   'A35B7B46F7B056EFE884124129793A9E',//3.18日添加7天5  10天10 15天20
-  '8BB3061D36F7B14D248A04D67A55B95F',//3.18日添加7天10
-  '98D37500400A712301AE1CCCD653DDE0',//3.22日添加3天2 5天5 7天10
-  '51F3E0459250D0807F444494D3B15FAE',//3.24日添加15天100
   '00673762F360F776DA942F68E2B91ACE',//3.24日添加21天10
   'F90F0DF847EF306E6379A8E3D9ABD90F',//3.25日添加3天4 7天5
   '44E5725028E336D5102E398099A8B264',//3.27日添加1天1 3天3  5天5
+  '220D127E711766907E62480E0E693F32',//3.27日添加3天1 
+  '732B48427C8380EB7717B3CA3DB3537A',//3.28日添加3天1 
+  '61DF59828A709F700637E2E9556B9450',//3.28日添加3天10
+  '2AD0DD295FB46BFAF7867E76A5C8A386',//3.28日添加1天1 4天5  7天10
+
 ]
 //IOS等用户直接用NobyDa的jd cookie
 
