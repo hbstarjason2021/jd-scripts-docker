@@ -70,7 +70,8 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   cd /scripts-bak
   git pull
 ) || {
-  git clone --branch=master https://gitlab.com/MrRight/Scripts.git /scripts-bak_tmp
+  #git clone --branch=master https://gitlab.com/MrRight/Scripts.git /scripts-bak_tmp
+  git clone --branch=dust https://github.com/hbstarjason/jd_scripts.git /scripts-bak_tmp
   [ -d /scripts-bak_tmp ] && {
     rm -rf /scripts-bak
     mv /scripts-bak_tmp /scripts-bak
