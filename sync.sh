@@ -123,10 +123,10 @@ cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/hel
 ##cp /jd-scripts-docker/from/z_wish.js  /scripts/z_wish.js 
 cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
 
-cp /qx/z_lenovo.js     /scripts/z_lenovo.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_lenovo.js
-cp /qx/z_mgold.js      /scripts/z_mgold.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_mgold.js
-cp /qx/z_super5g.js    /scripts/z_super5g.js   && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_super5g.js
-cp /qx/z_city_cash.js  /scripts/z_city_cash.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_city_cash.js
+#cp /qx/z_lenovo.js     /scripts/z_lenovo.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_lenovo.js
+#cp /qx/z_mgold.js      /scripts/z_mgold.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_mgold.js
+#cp /qx/z_super5g.js    /scripts/z_super5g.js   && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_super5g.js
+#cp /qx/z_city_cash.js  /scripts/z_city_cash.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_city_cash.js
 
 cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
 cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
