@@ -131,7 +131,7 @@ cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor =
 cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
 cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
 
-cp /scripts-bak/jd_jxcfd.js /scripts/jd_jxcfd.js
+cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
 
 #cp /jd-scripts-docker/jd_ms.js  /scripts
 #cp /jd-scripts-docker/jd_vote.js  /scripts
