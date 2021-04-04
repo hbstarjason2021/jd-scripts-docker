@@ -145,7 +145,13 @@ cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
 sed -i "s/eU9YL5XqGLxSmRSAkwxR@eU9YaO7jMvwh-W_VzyUX0Q@eU9YaurkY69zoj3UniVAgg@eU9YaOnjYK4j-GvWmXIWhA@eU9YMZ_gPpRurC-foglg@eU9Ya77gZK5z-TqHn3UWhQ@eU9Yaui2ZP4gpG-Gz3EThA@eU9YaeizbvQnpG_SznIS0w/eU9Ya-y7Nf8i-DjUyCEW1w@al5_Nb3hPql4sDc@dV4yae6yPKV4pg@YF9mLrbjJaN4/g" /scripts/jd_cash.js
 sed -i "s/-4msulYas0O2JsRhE-2TA5XZmBQ@eU9Yar_mb_9z92_WmXNG0w@eU9YaO7jMvwh-W_VzyUX0Q@eU9YaurkY69zoj3UniVAgg@eU9YaOnjYK4j-GvWmXIWhA@eU9YaO23bvtyozuGyHsR1A/ /g" /scripts/jd_cash.js
 
+sed -i "s/28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869@ce2536153a8742fb9e8754a9a7d361da@38ba4e7ba8074b78851e928af2b4f6b2/cada6cf13e48414d971a92bdba5375e8@5abc6697f1e34f8f8e14d7145a123a4c@ac3821ebe5ba4e69a097255fb57a6db6@1afd0390d67148e68e32808922be6c4f/g" /scripts/jd_bookshop.js
+sed -i "s/28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869/cada6cf13e48414d971a92bdba5375e8@5abc6697f1e34f8f8e14d7145a123a4c@ac3821ebe5ba4e69a097255fb57a6db6@1afd0390d67148e68e32808922be6c4f/g" /scripts/jd_bookshop.js
 
+sed -i 's/helpAu = true/helpAu = false/' /scripts/jd_dreamFactory.js
+
+
+###################################
 
 crontab -r
 
