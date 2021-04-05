@@ -9,7 +9,7 @@ let JxncTokens = [
   '{"smp":"757f75595adb54056bd3a264e3aeb36d","active":"jdnc_1_guamian210305_2","joinnum":1}',//账号一的京喜农场token
   '{"smp":"431c73bda6931eda56bce452084a574e","active":"jdnc_1_2yuanqiaokeli210315_2","joinnum":1}',//账号二的京喜农场token
   '{"smp":"f4e1a5d9f08af27144504066ff749391","active":"jdnc_1_2yuanqiaokeli210315_2","joinnum":1}',
-  '{"smp":"ff23020244682904302b7273c4074786","active":"jdnc_1_ganju210315_2","joinnum":1}', 
+  '{"smp":"ff23020244682904302b7273c4074786","active":"jdnc_1_yumi210315_2","joinnum":1}', 
 ]
 // 判断github action里面是否有京喜农场 token 
 if (process.env.JXNCTOKENS) {
