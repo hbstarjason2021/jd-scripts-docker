@@ -146,6 +146,7 @@ cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
 #cd /Loon && npm install -g
 
 ##################################
+sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_cash.js
 sed -i "s/eU9YL5XqGLxSmRSAkwxR@eU9YaO7jMvwh-W_VzyUX0Q@eU9YaurkY69zoj3UniVAgg@eU9YaOnjYK4j-GvWmXIWhA@eU9YMZ_gPpRurC-foglg@eU9Ya77gZK5z-TqHn3UWhQ@eU9Yaui2ZP4gpG-Gz3EThA@eU9YaeizbvQnpG_SznIS0w/eU9Ya-y7Nf8i-DjUyCEW1w@al5_Nb3hPql4sDc@dV4yae6yPKV4pg@YF9mLrbjJaN4/g" /scripts/jd_cash.js
 sed -i "s/-4msulYas0O2JsRhE-2TA5XZmBQ@eU9Yar_mb_9z92_WmXNG0w@eU9YaO7jMvwh-W_VzyUX0Q@eU9YaurkY69zoj3UniVAgg@eU9YaOnjYK4j-GvWmXIWhA@eU9YaO23bvtyozuGyHsR1A/ /g" /scripts/jd_cash.js
 
