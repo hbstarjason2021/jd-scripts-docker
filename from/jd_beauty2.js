@@ -254,7 +254,7 @@ async function mr() {
             console.log(`任务完成失败，错误信息${vo.msg}`)
           }
           break
-        case "produce_position_info":
+        case "produce_position_info_v2":
           if (vo.data.material_name !== '') {
             console.log(`【${vo.data.position}】上正在生产【${vo.data.material_name}】，可收取 ${vo.data.produce_num} 份`)
             if (vo.data.produce_num > 0) {
