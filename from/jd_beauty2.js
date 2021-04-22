@@ -293,8 +293,7 @@ async function mr() {
           client.send(`{"msg":{"type":"action","args":{},"action":"to_employee"}}`)
           $.pos.push(vo.data.position)
           break
-        case "
-          ":
+        case "material_fetch_v2":
           if (vo.code === '200' || vo.code === 200) {
             console.log(vo)
             console.log(`【${vo.data.position}】收取成功，获得${vo.data.procedure.produce_num}份${vo.data.material_name}`)
