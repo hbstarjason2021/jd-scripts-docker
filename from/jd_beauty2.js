@@ -365,7 +365,7 @@ async function mr() {
           if (vo.code === '200' || vo.code === 200) {
             for (let product of vo.data) {
               if (product.num === product.produce_num) {
-                client.send(`{"msg":{"type":"action","args":{"log_id":${product.id}},"action":"product_fetch"}}`)
+                client.send(`{"msg":{"type":"action","args":{"log_id":${product.id}},"action":"new_product_fetch"}}`)
               } else {
                 console.log(`产品【${product.product.id}】未生产完成，无法收取`)
               }
@@ -374,7 +374,7 @@ async function mr() {
             console.log(`生产商品信息获取失败，错误信息${vo.msg}`)
           }
           break
-        case "product_fetch":
+        case "new_product_fetch":
           if (vo.code === '200' || vo.code === 200) {
             console.log(`收取产品【${vo.data.product.name}】${vo.data.num}份`)
           } else {
