@@ -132,6 +132,11 @@ cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor =
 #cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
 #cp /scripts-bak/normal/monk_shop_lottery.js     /scripts/monk_shop_lottery.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_lottery.js
 
+cp /scripts-bak/normal/jd_super_redrain.js     /scripts/jd_super_redrain.js
+cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
+cp /scripts-bak/normal/jd_zjd_tuan.js     /scripts/jd_zjd_tuan.js
+cp /scripts-bak/normal/jd_zjd.js     /scripts/jd_zjd.js
+
 cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
 cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
 
