@@ -128,9 +128,9 @@ cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor =
 #cp /qx/z_super5g.js    /scripts/z_super5g.js   && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_super5g.js
 #cp /qx/z_city_cash.js  /scripts/z_city_cash.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_city_cash.js
 
-#cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
-#cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
-#cp /scripts-bak/normal/monk_shop_lottery.js     /scripts/monk_shop_lottery.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_lottery.js
+cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
+cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
+cp /scripts-bak/normal/monk_shop_lottery.js     /scripts/monk_shop_lottery.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_lottery.js
 
 cp /scripts-bak/normal/jd_super_redrain.js     /scripts/jd_super_redrain.js
 cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
