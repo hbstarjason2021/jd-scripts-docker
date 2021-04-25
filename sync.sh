@@ -151,6 +151,7 @@ cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
 #cp /jd-scripts-docker/jdCookie.js /Loon
 
 #cd /Loon && npm install -g
+npm install request
 
 ##################################
 sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_cash.js
