@@ -28,7 +28,16 @@ jobs:
               run: |
                   cd ~/jddj/JD/
                   npm install request
-                  sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
-                  sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
+                  #sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
+                  #sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
+                  cat << EOF > jddj_cookie.js
+                     let cookies = [
+                         '${{ secrets.JDDJ_COOKIE1 }}',
+                         '${{ secrets.JDDJ_COOKIE2 }}',
+                         '${{ secrets.JDDJ_COOKIE3 }}'
+                        ];
+                      module.exports = cookies;
+                    EOF
+                  
                   node jddj_bean.js
                   node jddj_plantBeans.js
