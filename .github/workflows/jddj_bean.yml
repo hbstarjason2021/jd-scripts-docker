@@ -1,0 +1,38 @@
+name: 京东到家鲜豆任务
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "1 2 * * *"
+    watch:
+        types: [started]
+    repository_dispatch:
+        types: jddj_bean
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: github.event.repository.owner.id == github.event.sender.id
+        steps:
+            #- uses: actions/checkout@v1
+            - name: Checkout
+              run: |
+                  git clone -b jddj https://github.com/hbstarjason/jd_scripts ~/jddj
+                  
+            - name: Use Node.js 14.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 14.x
+                  
+            - name: npm install
+              run: |
+                  cd ~/jddj/JD/
+                  npm install request
+                  sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
+                  sed -i "s/'ck2',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
+            - name: "运行 【京东到家鲜豆任务】"
+              run: |
+                  node jddj_bean.js
+              env:
+                  JDDJ_COOKIE: ${{ secrets.JDDJ_COOKIE1 }}
+                  JDDJ_COOKIE: ${{ secrets.JDDJ_COOKIE1 }}
