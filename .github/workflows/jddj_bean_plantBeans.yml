@@ -28,15 +28,9 @@ jobs:
               run: |
                   cd ~/jddj/JD/
                   npm install request
-                  #sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
-                  #sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
-                  cat << EOF > jddj_cookie.js
-                  let cookies = [
-                         '${{ secrets.JDDJ_COOKIE1 }}',
-                         '${{ secrets.JDDJ_COOKIE2 }}',
-                         '${{ secrets.JDDJ_COOKIE3 }}'
-                  ];
-                  module.exports = cookies;
-                  EOF
+                  curl -O https://raw.githubusercontent.com/hbstarjason/jd-scripts-docker/main/jddj_cookie.js
+                  sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
+                  sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
+                  sed -i "s/'ck3'/'${{ secrets.JDDJ_COOKIE3 }}'/g" jddj_cookie.js
                   node jddj_bean.js
                   node jddj_plantBeans.js
