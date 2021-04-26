@@ -30,5 +30,5 @@ jobs:
                   npm install request
                   node --version 
                   sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
-                  sed -i "s/'ck2',/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
+                  sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
                   node jddj_getPoints.js
