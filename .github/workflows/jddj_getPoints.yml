@@ -1,0 +1,34 @@
+name: jddj_getPoints
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "*/8 * * * *"
+    watch:
+        types: [started]
+    repository_dispatch:
+        types: jddj_getPoints
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: github.event.repository.owner.id == github.event.sender.id
+        steps:
+            #- uses: actions/checkout@v1
+            - name: Checkout
+              run: |
+                  git clone -b jddj https://github.com/hbstarjason/jd_scripts ~/jddj
+                  
+            - name: Use Node.js 14.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 14.15.0
+                  
+            - name: run
+              run: |
+                  cd ~/jddj/JD/
+                  npm install request
+                  node --version 
+                  sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
+                  sed -i "s/'ck2',/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
+                  node jddj_getPoints.js
