@@ -1,4 +1,4 @@
-name: jddj_getPoints
+name: jddj_getPoints_fruit_collectWater
 
 on:
     workflow_dispatch:
@@ -7,7 +7,7 @@ on:
     watch:
         types: [started]
     repository_dispatch:
-        types: jddj_getPoints
+        types: jddj_getPoints_fruit_collectWater
 
 jobs:
     build:
@@ -32,3 +32,4 @@ jobs:
                   sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
                   sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
                   node jddj_getPoints.js
+                  node jddj_fruit_collectWater.js
