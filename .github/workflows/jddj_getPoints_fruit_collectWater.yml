@@ -33,3 +33,4 @@ jobs:
                   sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
                   node jddj_getPoints.js
                   node jddj_fruit_collectWater.js
+                  node jddj_fruit.js
