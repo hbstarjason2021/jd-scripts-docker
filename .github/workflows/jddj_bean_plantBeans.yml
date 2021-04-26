@@ -1,4 +1,4 @@
-name: jddj_bean
+name: jddj_bean_plantBeans
 
 on:
     workflow_dispatch:
@@ -7,7 +7,7 @@ on:
     watch:
         types: [started]
     repository_dispatch:
-        types: jddj_bean
+        types: jddj_bean_plantBeans
 
 jobs:
     build:
@@ -31,3 +31,4 @@ jobs:
                   sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
                   sed -i "s/'ck2'/'${{ secrets.JDDJ_COOKIE2 }}'/g" jddj_cookie.js
                   node jddj_bean.js
+                  node jddj_plantBeans.js
