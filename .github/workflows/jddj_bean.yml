@@ -1,4 +1,4 @@
-name: 京东到家鲜豆任务
+name: jddj_bean
 
 on:
     workflow_dispatch:
