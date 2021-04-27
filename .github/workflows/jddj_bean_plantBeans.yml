@@ -17,7 +17,7 @@ jobs:
             #- uses: actions/checkout@v1
             - name: Checkout
               run: |
-                  git clone -b jddj https://github.com/hbstarjason/jd_scripts ~/jddj
+                  git clone -b jddj-new https://github.com/hbstarjason/jd_scripts ~/jddj
                   
             - name: Use Node.js 14.x
               uses: actions/setup-node@v1
@@ -26,7 +26,7 @@ jobs:
                   
             - name: run
               run: |
-                  cd ~/jddj/JD/
+                  cd ~/jddj/
                   npm install request
                   curl -O https://raw.githubusercontent.com/hbstarjason/jd-scripts-docker/main/jddj_cookie.js
                   sed -i "s/'ck1',/'${{ secrets.JDDJ_COOKIE1 }}',/g" jddj_cookie.js
