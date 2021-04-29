@@ -6,7 +6,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   cd /jd-scripts-docker
   git pull
 ) || {
-  git clone --branch=main https://github.com/hbstarjason/jd-scripts-docker.git /jd-scripts-docker_tmp
+  git clone --branch=main https://github.com/hbstarjason2021/jd-scripts-docker.git /jd-scripts-docker_tmp
   [ -d /jd-scripts-docker_tmp ] && {
     rm -rf /jd-scripts-docker
     mv /jd-scripts-docker_tmp /jd-scripts-docker
@@ -24,7 +24,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   #git clone --branch=main https://github.com/hbstarjason/jd-scripts.git /scripts_tmp
   #git clone --branch=master https://github.com/hbstarjason/jd_scripts.git /scripts_tmp
   #git clone --branch=master https://github.com/hbstarjason/a.git /scripts_tmp
-  git clone --branch=jd_scripts-new https://github.com/hbstarjason/jd_scripts.git /scripts_tmp
+  git clone --branch=jd_scripts-new https://github.com/hbstarjason2021/jd_scripts.git /scripts_tmp
   
   [ -d /scripts_tmp ] && {
     rm -rf /scripts
@@ -33,33 +33,46 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 }
 
 #######
-(
-  exec 2<>/dev/null
-  set -e
-  cd /qx
-  git pull
-) || {
-  #git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
-  git clone --branch=qx https://github.com/hbstarjason/jd_scripts.git /qx_tmp
-  
-  [ -d /qx_tmp ] && {
-    rm -rf /qx
-    mv /qx_tmp /qx
-  }
-}
+#(
+#  exec 2<>/dev/null
+#  set -e
+#  cd /qx
+#  git pull
+#) || {
+#  #git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
+#  git clone --branch=qx https://github.com/hbstarjason/jd_scripts.git /qx_tmp  
+#  [ -d /qx_tmp ] && {
+#    rm -rf /qx
+#    mv /qx_tmp /qx
+#  }
+#}
 
 ########
+#(
+#  exec 2<>/dev/null
+#  set -e
+#  cd /Loon
+#  git pull
+#) || {
+  #git clone --branch=main https://github.com/shylocks/Loon.git /Loon_tmp
+#  git clone --branch=main https://github.com/chinnkarahoi/Loon.git /Loon_tmp
+#  [ -d /Loon_tmp ] && {
+#    rm -rf /Loon
+#    mv /Loon_tmp /Loon
+#  }
+#}
+
+#######
 (
   exec 2<>/dev/null
   set -e
-  cd /Loon
+  cd /jddj
   git pull
 ) || {
-  #git clone --branch=main https://github.com/shylocks/Loon.git /Loon_tmp
-  git clone --branch=main https://github.com/chinnkarahoi/Loon.git /Loon_tmp
-  [ -d /Loon_tmp ] && {
-    rm -rf /Loon
-    mv /Loon_tmp /Loon
+  git clone --branch=jddj-new https://github.com/hbstarjason/jd_scripts.git /jddj_tmp
+  [ -d /jddj_tmp ] && {
+    rm -rf /jddj
+    mv /jddj_tmp /jddj
   }
 }
 
