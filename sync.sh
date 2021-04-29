@@ -33,19 +33,19 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 }
 
 #######
-#(
-#  exec 2<>/dev/null
-#  set -e
-#  cd /qx
-#  git pull
-#) || {
-#  #git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
-#  git clone --branch=qx https://github.com/hbstarjason/jd_scripts.git /qx_tmp  
-#  [ -d /qx_tmp ] && {
-#    rm -rf /qx
-#    mv /qx_tmp /qx
-#  }
-#}
+(
+  exec 2<>/dev/null
+  set -e
+  cd /qx
+  git pull
+) || {
+  #git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
+  git clone --branch=qx https://github.com/hbstarjason2021/jd_scripts.git /qx_tmp  
+  [ -d /qx_tmp ] && {
+    rm -rf /qx
+    mv /qx_tmp /qx
+  }
+}
 
 ########
 #(
@@ -135,6 +135,8 @@ cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor 
 cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_fanslove.js
 ##cp /jd-scripts-docker/from/z_wish.js  /scripts/z_wish.js 
 cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
+
+cp /jd-scripts-docker/from/z_tcl_lining.js /scripts/z_tcl_lining.js
 
 #cp /qx/z_lenovo.js     /scripts/z_lenovo.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_lenovo.js
 #cp /qx/z_mgold.js      /scripts/z_mgold.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_mgold.js
