@@ -34,3 +34,8 @@
 
 1,2,3 0-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_super_redrain.js | sed 's/^/ 【整点红包雨】/'; "
 
+*/20 0-23/1 * * *       bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /jddj; node /jddj/jddj_getPoints.js  | sed 's/^/ 【鲜豆庄园水滴】/'; "
+*/21 0-23/1 * * *       bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /jddj; node /jddj/jddj_fruit_collectWater.js  | sed 's/^/ 【果园水车】/'; "
+1 8-13,17,18,19 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /jddj; node /jddj/jddj_fruit.js  | sed 's/^/ 【到家果园定时水滴】/'; "
+
+
