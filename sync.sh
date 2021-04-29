@@ -69,7 +69,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   cd /jddj
   git pull
 ) || {
-  git clone --branch=jddj-new https://github.com/hbstarjason/jd_scripts.git /jddj_tmp
+  git clone --branch=jddj-new https://github.com/hbstarjason2021/jd_scripts.git /jddj_tmp
   [ -d /jddj_tmp ] && {
     rm -rf /jddj
     mv /jddj_tmp /jddj
@@ -84,7 +84,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   git pull
 ) || {
   #git clone --branch=master https://gitlab.com/MrRight/Scripts.git /scripts-bak_tmp
-  git clone --branch=dust-new https://github.com/hbstarjason/jd_scripts.git /scripts-bak_tmp
+  git clone --branch=dust-new https://github.com/hbstarjason2021/jd_scripts.git /scripts-bak_tmp
   [ -d /scripts-bak_tmp ] && {
     rm -rf /scripts-bak
     mv /scripts-bak_tmp /scripts-bak
