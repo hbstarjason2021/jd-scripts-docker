@@ -18,7 +18,7 @@ services:
     volumes:
       - ./env/all:/all
       - ./env/env1:/env
-      - ./env/jddj:/jddj
+      - ./env/jddj:/jddj/jddj_cookie.js
   jd2:
     <<: [ *logger, *common ]
     container_name: jd2
