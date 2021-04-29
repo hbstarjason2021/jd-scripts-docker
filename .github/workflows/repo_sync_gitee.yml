@@ -20,7 +20,7 @@ jobs:
       uses: Yikun/hub-mirror-action@master
       with:
         # 必选，需要同步的Github用户（源）
-        src: github/hbstarjason
+        src: github/hbstarjason2021
         # 必选，需要同步到的Gitee的用户（目的）
         dst: gitee/starjason
         #https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
