@@ -18,6 +18,7 @@ services:
     volumes:
       - ./env/all:/all
       - ./env/env1:/env
+      - ./env/jddj:/jddj
   jd2:
     <<: [ *logger, *common ]
     container_name: jd2
