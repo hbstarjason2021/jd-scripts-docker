@@ -132,7 +132,8 @@ cp /jd-scripts-docker/from/jd_blueCoin_chunzhenxmy.js /scripts/jd_blueCoin_chunz
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
 ##cp /jd-scripts-docker/from/jd_fanslove.js /scripts/jd_fanslove.js
-#cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_fanslove.js
+
+cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_fanslove.js
 ##cp /jd-scripts-docker/from/z_wish.js  /scripts/z_wish.js 
 #cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
 
@@ -153,6 +154,10 @@ cp /jd-scripts-docker/from/jd_super_redrain.js     /scripts/jd_super_redrain.js
 cp /jd-scripts-docker/from/jd_half_redrain.js     /scripts/jd_half_redrain.js
 cp /jd-scripts-docker/from/jd_hour_redrain.js     /scripts/jd_hour_redrain.js
 
+cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
+cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
+
+cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
 cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
 cp /scripts-bak/normal/jd_zjd_tuan.js     /scripts/jd_zjd_tuan.js
 cp /scripts-bak/normal/jd_zjd.js     /scripts/jd_zjd.js
