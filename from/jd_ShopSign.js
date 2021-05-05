@@ -1,4 +1,4 @@
-//https://github.com/wuzhi01/MyActions/blob/main/jd_ShopSign.js
+//https://github.com/wuzhi03/MyActions/blob/main/jd_ShopSign.js
 
 /*
 店铺签到，各类店铺签到，有新的店铺直接添加token即可
