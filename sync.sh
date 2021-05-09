@@ -147,25 +147,30 @@ cp /jd-scripts-docker/from/z_tcl_lining.js /scripts/z_tcl_lining.js
 cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
 cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
 cp /scripts-bak/normal/monk_shop_lottery.js     /scripts/monk_shop_lottery.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_lottery.js
-cp /scripts-bak/car/monk_shop_add_to_car.js     /scripts/monk_shop_add_to_car.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_add_to_car.js
+cp /scripts-bak/car/monk_shop_add_to_car.js     /scripts/monk_shop_add_to_car.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_add_to_car.js
 
+cp /scripts-bak/car/adolf_haier.js  /scripts/adolf_haier.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/adolf_haier.js
+
+cp /scripts-bak/normal/adolf_oppo.js     /scripts/adolf_oppo.js
+
+
+#cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
+#cp /scripts-bak/normal/jd_zjd_tuan.js     /scripts/jd_zjd_tuan.js
+#cp /scripts-bak/normal/jd_zjd.js     /scripts/jd_zjd.js
 
 cp /jd-scripts-docker/from/jd_super_redrain.js     /scripts/jd_super_redrain.js
 cp /jd-scripts-docker/from/jd_half_redrain.js     /scripts/jd_half_redrain.js
 cp /jd-scripts-docker/from/jd_hour_redrain.js     /scripts/jd_hour_redrain.js
 
-cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
-cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
-
-cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
-cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
-cp /scripts-bak/normal/jd_zjd_tuan.js     /scripts/jd_zjd_tuan.js
-cp /scripts-bak/normal/jd_zjd.js     /scripts/jd_zjd.js
-
 cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
 cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
 
 cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
+
+
+cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
+cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
+cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
 
 #cp /jd-scripts-docker/jd_ms.js  /scripts
 #cp /jd-scripts-docker/jd_vote.js  /scripts
