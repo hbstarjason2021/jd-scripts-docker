@@ -1,3 +1,7 @@
+###  https://github.com/tubie75/jdqd
+###  python3 wait24.py 0.1 0.1 29
+###  node jd_jxfactoryn.js
+
 import time
 import datetime
 import logging
