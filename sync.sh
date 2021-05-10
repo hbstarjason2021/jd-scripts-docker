@@ -150,6 +150,7 @@ cp /scripts-bak/normal/monk_shop_lottery.js     /scripts/monk_shop_lottery.js   
 cp /scripts-bak/car/monk_shop_add_to_car.js     /scripts/monk_shop_add_to_car.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_add_to_car.js
 
 cp /scripts-bak/car/adolf_haier.js  /scripts/adolf_haier.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/adolf_haier.js
+cp /scripts-bak/car/adolf_ETIP.js  /scripts/adolf_ETIP.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/adolf_ETIP.js
 
 cp /scripts-bak/normal/adolf_oppo.js     /scripts/adolf_oppo.js
 
