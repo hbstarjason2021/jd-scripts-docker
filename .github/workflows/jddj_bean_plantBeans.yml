@@ -2,8 +2,8 @@ name: jddj_bean_plantBeans
 
 on:
     workflow_dispatch:
-    schedule:
-        - cron: "1 2,13 * * *"
+    #schedule:
+    #    - cron: "1 2,13 * * *"
     watch:
         types: [started]
     repository_dispatch:
