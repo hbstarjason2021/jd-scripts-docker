@@ -192,6 +192,7 @@ sed -i "s/28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf8
 sed -i "s/28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869/cada6cf13e48414d971a92bdba5375e8@5abc6697f1e34f8f8e14d7145a123a4c@ac3821ebe5ba4e69a097255fb57a6db6@1afd0390d67148e68e32808922be6c4f/g" /scripts/jd_bookshop.js
 
 sed -i 's/helpAu = true/helpAu = false/' /scripts/jd_dreamFactory.js
+sed -i 's/helpAu = true/helpAu = false/' /scripts/jd_bean_home.js
 
 sed -i "s/T019-aknAFRllhyoQlyI46gCjVfnoaW5kRrbA@T0225KkcRhcbp1CBJhv0wfZedQCjVfnoaW5kRrbA@T010_aU6SR8Q_QCjVfnoaW5kRrbA@T0225KkcREtN9lOGJUinl_dfcwCjVfnoaW5kRrbA@T0225KkcRBYdoFaGIxOnnPMJdACjVfnoaW5kRrbA@T027Zm_olqSxIOtH97BATGmKoWraLawCjVfnoaW5kRrbA@T0225KkcRk1N_FeCJhv3xvdfcQCjVfnoaW5kRrbA/T0225KkcRx4QplfTKUz1l6UPdQCjVfnoaW5kRrbA@T01597g7GU9KrQGJYUMCjVfnoaW5kRrbA@T0146Lh2RRwZrw2JdwCjVfnoaW5kRrbA@T012_bkiAkRItguJCjVfnoaW5kRrbA/g" /scripts/jd_health.js
 
