@@ -183,7 +183,7 @@ cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuth
 
 #cd /Loon && npm install -g
 
-cd /jddj && npm install request
+cd /jddj && npm install request && npm cache clean --force
 
 ##################################
 sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_cash.js
