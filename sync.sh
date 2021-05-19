@@ -6,7 +6,9 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   cd /jd-scripts-docker
   git pull
 ) || {
-  git clone --branch=main https://github.com/hbstarjason2021/jd-scripts-docker.git /jd-scripts-docker_tmp
+  #git clone --branch=main https://github.com/hbstarjason2021/jd-scripts-docker.git /jd-scripts-docker_tmp
+  git clone --branch=main https://${{ secrets.PAT }}@github.com/hbstarjason2021/jd-scripts-docker.git /jd-scripts-docker_tmp
+  
   [ -d /jd-scripts-docker_tmp ] && {
     rm -rf /jd-scripts-docker
     mv /jd-scripts-docker_tmp /jd-scripts-docker
