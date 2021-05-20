@@ -156,6 +156,8 @@ cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
 
 cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
 
+cp /jd-scripts-docker/from/jd_ShopSign-new.js /scripts/jd_ShopSign-new.js
+
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
 ##cp /jd-scripts-docker/from/jd_fanslove.js /scripts/jd_fanslove.js
