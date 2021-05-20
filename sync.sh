@@ -68,6 +68,20 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 (
   exec 2<>/dev/null
   set -e
+  cd /ljqailym
+  git pull
+) || {
+  git clone --branch=ljqailym https://github.com/hbstarjason2021/jd_scripts.git /ljqailym_tmp
+  [ -d /ljqailym_tmp ] && {
+    rm -rf /ljqailym
+    mv /ljqailym_tmp /ljqailym
+  }
+}
+
+#######
+(
+  exec 2<>/dev/null
+  set -e
   cd /jddj
   git pull
 ) || {
@@ -133,6 +147,15 @@ cp /jd-scripts-docker/from/jd_blueCoin_20.js          /scripts/jd_blueCoin_20.js
 cp /jd-scripts-docker/from/jd_blueCoin_chunzhen.js    /scripts/jd_blueCoin_chunzhen.js
 cp /jd-scripts-docker/from/jd_blueCoin_chunzhenxmy.js /scripts/jd_blueCoin_chunzhenxmy.js
 
+cp /jd-scripts-docker/from/jd_super_redrain.js     /scripts/jd_super_redrain.js
+cp /jd-scripts-docker/from/jd_half_redrain.js     /scripts/jd_half_redrain.js
+cp /jd-scripts-docker/from/jd_hour_redrain.js     /scripts/jd_hour_redrain.js
+
+cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
+cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
+
+cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
+
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
 ##cp /jd-scripts-docker/from/jd_fanslove.js /scripts/jd_fanslove.js
@@ -147,6 +170,12 @@ cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/hel
 #cp /qx/z_mgold.js      /scripts/z_mgold.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_mgold.js
 #cp /qx/z_super5g.js    /scripts/z_super5g.js   && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_super5g.js
 #cp /qx/z_city_cash.js  /scripts/z_city_cash.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_city_cash.js
+
+cp /ljqailym/jd_live_redrain_half.js /scripts/jd_live_redrain_half.js
+cp /ljqailym/redman_rain_hr.js       /scripts/redman_rain_hr.js 
+cp /ljqailym/redman_rain_hy.js       /scripts/redman_rain_hy.js 
+cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js 
+
 
 cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
 cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
@@ -163,15 +192,6 @@ cp /scripts-bak/normal/adolf_pk.js    /scripts/adolf_pk.js
 #cp /scripts-bak/normal/jd_zjd_tuan.js     /scripts/jd_zjd_tuan.js
 #cp /scripts-bak/normal/jd_zjd.js     /scripts/jd_zjd.js
 
-cp /jd-scripts-docker/from/jd_super_redrain.js     /scripts/jd_super_redrain.js
-cp /jd-scripts-docker/from/jd_half_redrain.js     /scripts/jd_half_redrain.js
-cp /jd-scripts-docker/from/jd_hour_redrain.js     /scripts/jd_hour_redrain.js
-
-cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
-cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
-
-cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
-
 
 cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
 cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
@@ -184,6 +204,7 @@ cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuth
 #cp /jd-scripts-docker/jdCookie.js /Loon
 
 #cd /Loon && npm install -g
+
 
 cd /jddj && npm install request && npm cache clean --force
 
