@@ -178,6 +178,9 @@ cp /ljqailym/redman_rain_hr.js       /scripts/redman_rain_hr.js
 cp /ljqailym/redman_rain_hy.js       /scripts/redman_rain_hy.js 
 cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js 
 
+cp /scripts-bak/normal/adolf_martin.js  /scripts/adolf_martin.js
+cp /scripts-bak/normal/adolf_mi.js      /scripts/adolf_mi.js
+cp /scripts-bak/normal/adolf_pk.js      /scripts/adolf_pk.js
 
 cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
 cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
@@ -187,13 +190,9 @@ cp /scripts-bak/car/monk_shop_add_to_car.js     /scripts/monk_shop_add_to_car.js
 #cp /scripts-bak/car/adolf_haier.js  /scripts/adolf_haier.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/adolf_haier.js
 #cp /scripts-bak/car/adolf_ETIP.js  /scripts/adolf_ETIP.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/adolf_ETIP.js
 
-cp /scripts-bak/normal/adolf_oppo.js  /scripts/adolf_oppo.js
-cp /scripts-bak/normal/adolf_pk.js    /scripts/adolf_pk.js
-
 #cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
 #cp /scripts-bak/normal/jd_zjd_tuan.js     /scripts/jd_zjd_tuan.js
 #cp /scripts-bak/normal/jd_zjd.js     /scripts/jd_zjd.js
-
 
 cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
 cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
