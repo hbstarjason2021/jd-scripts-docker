@@ -3,6 +3,8 @@
 ### sleep 3 && node jx_cfdtx.js
 ### sleep 3 && node jx_cfdtx.js
 
+## python3 wait.py 08:59:57.999
+
 import time
 from datetime import datetime, timedelta, timezone
 import logging
