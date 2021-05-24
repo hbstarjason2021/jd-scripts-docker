@@ -137,8 +137,6 @@ cp /jd-scripts-docker/from/jx_cfd_exchange.js /scripts/jx_cfd_exchange.js
 cp /jd-scripts-docker/from/jx_cfdtx.js /scripts/jx_cfdtx.js
 cp /jd-scripts-docker/from/jdJxncTokens.js /scripts/jdJxncTokens.js
 
-cp /jd-scripts-docker/from/jx_cash_sign.js /scripts/jx_cash_sign.js
-
 cp /jd-scripts-docker/from/jd_daydlt.js /scripts/jd_daydlt.js
 cp /jd-scripts-docker/from/jdautogan.js /scripts/jdautogan.js
 
@@ -158,6 +156,10 @@ cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
 
 cp /jd-scripts-docker/from/jd_ShopSign-new.js /scripts/jd_ShopSign-new.js
 cp /jd-scripts-docker/from/jd_jintie_wx.js /scripts/jd_jintie_wx.js
+
+cp /jd-scripts-docker/from/jx_cash_sign.js /scripts/jx_cash_sign.js
+cp /jd-scripts-docker/from/jd_zoo.js /scripts/jd_zoo.js
+
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
