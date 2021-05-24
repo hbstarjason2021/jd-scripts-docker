@@ -162,12 +162,11 @@ cp /jd-scripts-docker/from/jd_jintie_wx.js /scripts/jd_jintie_wx.js
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
 ##cp /jd-scripts-docker/from/jd_fanslove.js /scripts/jd_fanslove.js
+#cp /jd-scripts-docker/from/z_tcl_lining.js /scripts/z_tcl_lining.js
 
 cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_fanslove.js
 ##cp /jd-scripts-docker/from/z_wish.js  /scripts/z_wish.js 
 #cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
-
-#cp /jd-scripts-docker/from/z_tcl_lining.js /scripts/z_tcl_lining.js
 
 #cp /qx/z_lenovo.js     /scripts/z_lenovo.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_lenovo.js
 #cp /qx/z_mgold.js      /scripts/z_mgold.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_mgold.js
@@ -199,6 +198,10 @@ cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
 cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
 cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
 
+cp /scripts-bak/i-chenzhe/z_city_cash.js     /scripts/z_city_cash.js
+cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
+
+
 #cp /jd-scripts-docker/jd_ms.js  /scripts
 #cp /jd-scripts-docker/jd_vote.js  /scripts
 
@@ -227,6 +230,8 @@ sed -i 's/helpAu = true/helpAu = false/' /scripts/jd_bean_home.js
 
 sed -i "s/T019-aknAFRllhyoQlyI46gCjVfnoaW5kRrbA@T0225KkcRhcbp1CBJhv0wfZedQCjVfnoaW5kRrbA@T010_aU6SR8Q_QCjVfnoaW5kRrbA@T0225KkcREtN9lOGJUinl_dfcwCjVfnoaW5kRrbA@T0225KkcRBYdoFaGIxOnnPMJdACjVfnoaW5kRrbA@T027Zm_olqSxIOtH97BATGmKoWraLawCjVfnoaW5kRrbA@T0225KkcRk1N_FeCJhv3xvdfcQCjVfnoaW5kRrbA/T0225KkcRx4QplfTKUz1l6UPdQCjVfnoaW5kRrbA@T01597g7GU9KrQGJYUMCjVfnoaW5kRrbA@T0146Lh2RRwZrw2JdwCjVfnoaW5kRrbA@T012_bkiAkRItguJCjVfnoaW5kRrbA/g" /scripts/jd_health.js
 
+sed -i "s/RtGKibTnM0jiBvf6QKppmqrr0L_Lep1Cx8s26Y2rwfyB0Glv@RtGKzO2hSQ33LNbJFNwx1E-Q1tDn9K8F8qFofiSm-kb9IkmSbg@RtGKzuigFAr1K9HPQYBh1gAvRwvmoOS9ZN8FSDjHtppcL3RU5g/RtGKz-ytEgmnd9WbFIY21wi0WAby6b7-_TwSjslwpiFLtlxJ2w@VcCtkb33GV_9P9rWW5gzmm8elPMfXOe8z_QdOEEwM3s@SsDgze6kG1P9Kc_WW9R_miwM1wjj9yFbflluWvGc7g@X8G0irb1AlX9Ms_WF5h_mqlwj7Qxo5h2OIxo45-u/g" /scripts/jd_city.js
+sed -i "s/RtGKibTnM0jiBvf6QKppmqrr0L_Lep1Cx8s26Y2rwfyB0Glv@RtGKzuigFAr1K9HPQYBh1gAvRwvmoOS9ZN8FSDjHtppcL3RU5g@RtGKzO2hSQ33LNbJFNwx1E-Q1tDn9K8F8qFofiSm-kb9IkmSbg/RtGKz-ytEgmnd9WbFIY21wi0WAby6b7-_TwSjslwpiFLtlxJ2w@VcCtkb33GV_9P9rWW5gzmm8elPMfXOe8z_QdOEEwM3s@SsDgze6kG1P9Kc_WW9R_miwM1wjj9yFbflluWvGc7g@X8G0irb1AlX9Ms_WF5h_mqlwj7Qxo5h2OIxo45-u/g" /scripts/jd_city.js
 ###################################
 
 crontab -r
