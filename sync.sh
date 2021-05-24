@@ -232,8 +232,7 @@ sed -i 's/helpAu = true/helpAu = false/' /scripts/jd_bean_home.js
 
 sed -i "s/T019-aknAFRllhyoQlyI46gCjVfnoaW5kRrbA@T0225KkcRhcbp1CBJhv0wfZedQCjVfnoaW5kRrbA@T010_aU6SR8Q_QCjVfnoaW5kRrbA@T0225KkcREtN9lOGJUinl_dfcwCjVfnoaW5kRrbA@T0225KkcRBYdoFaGIxOnnPMJdACjVfnoaW5kRrbA@T027Zm_olqSxIOtH97BATGmKoWraLawCjVfnoaW5kRrbA@T0225KkcRk1N_FeCJhv3xvdfcQCjVfnoaW5kRrbA/T0225KkcRx4QplfTKUz1l6UPdQCjVfnoaW5kRrbA@T01597g7GU9KrQGJYUMCjVfnoaW5kRrbA@T0146Lh2RRwZrw2JdwCjVfnoaW5kRrbA@T012_bkiAkRItguJCjVfnoaW5kRrbA/g" /scripts/jd_health.js
 
-sed -i "s/RtGKibTnM0jiBvf6QKppmqrr0L_Lep1Cx8s26Y2rwfyB0Glv@RtGKzO2hSQ33LNbJFNwx1E-Q1tDn9K8F8qFofiSm-kb9IkmSbg@RtGKzuigFAr1K9HPQYBh1gAvRwvmoOS9ZN8FSDjHtppcL3RU5g/RtGKz-ytEgmnd9WbFIY21wi0WAby6b7-_TwSjslwpiFLtlxJ2w@VcCtkb33GV_9P9rWW5gzmm8elPMfXOe8z_QdOEEwM3s@SsDgze6kG1P9Kc_WW9R_miwM1wjj9yFbflluWvGc7g@X8G0irb1AlX9Ms_WF5h_mqlwj7Qxo5h2OIxo45-u/g" /scripts/jd_city.js
-sed -i "s/RtGKibTnM0jiBvf6QKppmqrr0L_Lep1Cx8s26Y2rwfyB0Glv@RtGKzuigFAr1K9HPQYBh1gAvRwvmoOS9ZN8FSDjHtppcL3RU5g@RtGKzO2hSQ33LNbJFNwx1E-Q1tDn9K8F8qFofiSm-kb9IkmSbg/RtGKz-ytEgmnd9WbFIY21wi0WAby6b7-_TwSjslwpiFLtlxJ2w@VcCtkb33GV_9P9rWW5gzmm8elPMfXOe8z_QdOEEwM3s@SsDgze6kG1P9Kc_WW9R_miwM1wjj9yFbflluWvGc7g@X8G0irb1AlX9Ms_WF5h_mqlwj7Qxo5h2OIxo45-u/g" /scripts/jd_city.js
+sed -i "s/xBd-HlYMlLUzqSkuz0qzAzuayqOG3FfAIeOTGLowr29_KbnH2bV4EX4@RtGKzr_wSAn2eIKZRdRm07jvOMS2zVH-g8ri6aOIZPDcI8v7CA/RtGKz-ytEgmnd9WbFIY21wi0WAby6b7-_TwSjslwpiFLtlxJ2w@VcCtkb33GV_9P9rWW5gzmm8elPMfXOe8z_QdOEEwM3s@SsDgze6kG1P9Kc_WW9R_miwM1wjj9yFbflluWvGc7g@X8G0irb1AlX9Ms_WF5h_mqlwj7Qxo5h2OIxo45-u/g" /scripts/jd_city.js
 ###################################
 
 crontab -r
