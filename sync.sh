@@ -158,7 +158,7 @@ cp /jd-scripts-docker/from/jd_ShopSign-new.js /scripts/jd_ShopSign-new.js
 cp /jd-scripts-docker/from/jd_jintie_wx.js /scripts/jd_jintie_wx.js
 
 cp /jd-scripts-docker/from/jx_cash_sign.js /scripts/jx_cash_sign.js
-cp /jd-scripts-docker/from/jd_zoo.js /scripts/jd_zoo.js
+cp /jd-scripts-docker/from/jd_zoo-new.js /scripts/jd_zoo-new.js
 
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
