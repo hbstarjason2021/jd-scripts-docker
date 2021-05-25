@@ -184,6 +184,10 @@ cp /scripts-bak/normal/adolf_martin.js  /scripts/adolf_martin.js
 cp /scripts-bak/normal/adolf_mi.js      /scripts/adolf_mi.js
 cp /scripts-bak/normal/adolf_pk.js      /scripts/adolf_pk.js
 
+cp /scripts-bak/normal/adolf_newInteraction.js  /scripts/adolf_newInteraction.js
+cp /scripts-bak/normal/adolf_superbox.js        /scripts/adolf_superbox.js
+cp /scripts-bak/normal/adolf_urge.js            /scripts/adolf_urge.js
+
 cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
 cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
 cp /scripts-bak/normal/monk_shop_lottery.js     /scripts/monk_shop_lottery.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_lottery.js
