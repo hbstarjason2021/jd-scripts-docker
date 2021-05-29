@@ -1,6 +1,6 @@
 /*
 动物联萌 618活动
-更新时间：2021-05-25 10:18
+更新时间：2021-05-29 09:57
 做任务，收金币
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 // quantumultx
@@ -15,9 +15,9 @@ cron "5 * * * *" script-path=https://raw.githubusercontent.com/yangtingxiao/Quan
 */
 const $ = new Env('动物联萌');
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '',secretp = '',shareCodeList = [],showCode = true;
+let doPkSkill = true;  //自动放技能，不需要的改为false
 const JD_API_HOST = `https://api.m.jd.com/client.action?functionId=`;
 !(async () => {
   await requireConfig()
@@ -38,6 +38,9 @@ const JD_API_HOST = `https://api.m.jd.com/client.action?functionId=`;
         continue;
       }
       console.log('\n\n京东账号：'+merge.nickname + ' 任务开始')
+      await zoo_sign()
+      //console.log('加密算法解密中。暂无法使用')
+      //return ;
       await zoo_pk_getHomeData();
       await zoo_getHomeData();
       //await qryCompositeMaterials()
@@ -126,7 +129,8 @@ function zoo_getTaskDetail(shopSign = "",appSign = "",timeout = 0){
                     let nonstr = randomWord(false,10)
                     let time = Date.now()
                     let key = minusByByte(nonstr.slice(0,5),String(time).slice(-5))
-                    let msg = `random=${rnd}&token=d89985df35e6a2227fd2e85fe78116d2&time=${time}&nonce_str=${nonstr}&key=${key}&is_trust=true`
+                    //let msg = `random=${rnd}&token=d89985df35e6a2227fd2e85fe78116d2&time=${time}&nonce_str=${nonstr}&key=${key}&is_trust=true`
+                    let msg = `random=${rnd}&token=MDFnc2lFaTAxMQ==.VkVbd1hRQ1BwUFFLWTtcMRFZHAASQi0vF1ZfX2ldS0IXdxdWDQALGCs6XHBZEhA5Bx4kOBgXGCoLBC4oWk4X.2d95d9ed&time=${time}&nonce_str=${nonstr}&key=${key}&is_trust=1`
                     let sign = bytesToHex(wordsToBytes(getSign(msg))).toUpperCase() //,\"random\":\"${rnd}\"
                     let taskBody = `functionId=zoo_collectScore&body={"taskId":${data.data.result.taskVos[i].taskId},"taskToken" : "${list[j].taskToken}","ss":"{\\"extraData\\":{\\"is_trust\\":true,\\"sign\\":\\"${sign}\\",\\"fpb\\":\\"\\",\\"time\\":${time},\\"encrypt\\":\\"3\\",\\"nonstr\\":\\"${nonstr}\\",\\"jj\\":\\"\\",\\"token\\":\\"d89985df35e6a2227fd2e85fe78116d2\\",\\"cf_v\\":\\"1.0.2\\",\\"client_version\\":\\"2.2.1\\",\\"buttonid\\":\\"jmdd-react-smash_62\\",\\"sceneid\\":\\"homePageh5\\"},\\"secretp\\":\\"${secretp}\\",\\"random\\":\\"${rnd}\\"}","itemId":"${list[j].itemId}","actionType":1,"shopSign":${shopSign}}&client=wh5&clientVersion=1.0.0`
                     //console.log(taskBody)
@@ -244,6 +248,38 @@ function zoo_pk_doPkSkill(skillType, timeout = 0){
           } else {
             console.log('技能释放失败：' + data.data.bizMsg);
           }
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+      })
+    },timeout)
+  })
+}
+//签到
+function zoo_sign(timeout = 0){
+  return new Promise((resolve) => {
+    setTimeout( ()=>{
+      let url = {
+        url : `${JD_API_HOST}zoo_sign`,
+        headers : {
+          'Origin' : `https://wbbny.m.jd.com`,
+          'Cookie' : cookie,
+          'Connection' : `keep-alive`,
+          'Accept' : `application/json, text/plain, */*`,
+          'Host' : `api.m.jd.com`,
+          'User-Agent' : `jdapp;iPhone;9.2.0;14.1;`,
+          'Accept-Encoding' : `gzip, deflate, br`,
+          'Accept-Language' : `zh-cn`
+        },
+        body : `functionId=zoo_sign&body={}&client=wh5&clientVersion=1.0.0`
+      }
+      $.post(url, async (err, resp, data) => {
+        try {
+          //console.log(data)
+          data = JSON.parse(data);
+          console.log('签到结果：' + data.data.bizMsg);
         } catch (e) {
           $.logErr(e, resp);
         } finally {
@@ -684,7 +720,7 @@ function zoo_getHomeData(inviteId= "",timeout = 0) {
             //await zoo_pk_assistGroup()
             if (data.data.result.homeMainInfo.raiseInfo.buttonStatus === 1 ) await zoo_raise(1000)
             await zoo_getHomeData('ZXTKT0225KkcRx4b8lbWJU72wvZZcwFjRWn6-7zx55awQ');
-            //await zoo_getTaskDetail("","app")
+            await zoo_getTaskDetail("","app")
             await zoo_getTaskDetail()
           } else {
             return
@@ -864,7 +900,17 @@ function zoo_pk_getHomeData(body = "",timeout = 0) {
               console.log('您的队伍助力码：' + data.data.result.groupInfo.groupAssistInviteId);
               showCode = false;
             }
-            if (data.data.result.groupPkInfo.aheadFinish) return ;
+            //if (data.data.result.groupPkInfo.aheadFinish) return ;
+            if (!doPkSkill) return ;
+            if (typeof data.data.result.groupPkInfo.dayTotalValue !== "undefined") {
+              if (parseInt(data.data.result.groupPkInfo.dayTotalValue) >= parseInt(data.data.result.groupPkInfo.dayTargetSell)) return;
+            }
+            else
+            if (typeof data.data.result.groupPkInfo.nightTotalValue !== "undefined") {
+              if (parseInt(data.data.result.groupPkInfo.nightTotalValue) >= parseInt(data.data.result.groupPkInfo.nightTargetSell)) return;
+            }
+            else
+              return;
             for (let i in data.data.result.groupInfo.skillList) {
               if (data.data.result.groupInfo.skillList[i].num > 0) {
                 await zoo_pk_doPkSkill(data.data.result.groupInfo.skillList[i].code);
@@ -934,6 +980,7 @@ function jsonParse(str) {
     }
   }
 }
+
 
 function minusByByte(t, n) {
   var e = t.length
@@ -1048,6 +1095,7 @@ function initial() {
     merge[i].notify = "";
     merge[i].show = true;
   }
+  showCode = true;
 }
 //通知
 function msgShow() {
