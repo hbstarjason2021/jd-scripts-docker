@@ -160,6 +160,7 @@ cp /jd-scripts-docker/from/jd_jintie_wx.js /scripts/jd_jintie_wx.js
 cp /jd-scripts-docker/from/jx_cash_sign.js /scripts/jx_cash_sign.js
 cp /jd-scripts-docker/from/jd_zoo-new.js /scripts/jd_zoo-new.js
 
+cp /jd-scripts-docker/from/jd_starStore.js /scripts/jd_starStore.js
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
