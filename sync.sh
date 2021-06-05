@@ -162,6 +162,12 @@ cp /jd-scripts-docker/from/jd_zoo-new.js /scripts/jd_zoo-new.js
 
 cp /jd-scripts-docker/from/jd_starStore.js /scripts/jd_starStore.js
 
+cp /jd-scripts-docker/from/jd_618redpacket.js /scripts/jd_618redpacket.js
+cp /jd-scripts-docker/from/zy_618jc.js /scripts/zy_618jc.js
+cp /jd-scripts-docker/from/ddo_pk.js /scripts/ddo_pk.js
+cp /jd-scripts-docker/from/jd_gcip.js /scripts/jd_gcip.js
+cp /jd-scripts-docker/from/jd_mcxhd_brandcity.js /scripts/jd_mcxhd_brandcity.js
+
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
 ##cp /jd-scripts-docker/from/jd_fanslove.js /scripts/jd_fanslove.js
