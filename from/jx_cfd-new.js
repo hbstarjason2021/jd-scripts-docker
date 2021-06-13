@@ -6,7 +6,7 @@
     Address: 京喜App ====>>>> 全民赚大钱
     Author: MoPoQAQ
     Created：2020/x/xx xx:xx
-    Updated: 2021/6/9 22:00
+    Updated: 2021/6/10 23:30
     Thanks:
       whyour大佬
       GitHub: https://github.com/whyour
@@ -172,11 +172,10 @@ $.appId = 10009;
   .catch((e) => $.logErr(e))
   .finally(() => $.done());
 
-// jxcfd/user/QueryUserInfo?
-// strZone=jxcfd&bizCode=jxcfd&source=jxcfd&dwEnv=7&_cfd_t=1623240830281&ptag=7155.9.47&ddwTaskId=&strShareId=&_stk=_cfd_t%2CbizCode%2CddwTaskId%2CdwEnv%2Cptag%2Csource%2CstrShareId%2CstrZone&_ste=1&h5st=20210609201350282%3B4075501589651162%3B10009%3Btk01wc3271c6ba8nYnhIU3NoYjEwBWRk8wJNprtee4cIn%2F40DqRTMRlGCjYZjTrlY8jZ7FboMEEifVIWY5r%2Bk7VKLWrg%3B6c27404d0f884a954a3ca48a1d11f365f81d9f3d8d7892cd0b4f405aa6aeefb8&_=1623240830287&sceneval=2&g_login_type=1&callback=jsonpCBKA&g_ty=ls
+
 function getUserInfo() {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/QueryUserInfo`, `ptag=7155.9.47`, `_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strShareId,strZone`), (err, resp, data) => {
+    $.get(taskUrl(`user/QueryUserInfo`, `ptag=7155.9.47`, `_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strShareId,strZone`), async (err, resp, data) => {
       try {
         const {
           iret,
@@ -218,8 +217,6 @@ function getUserInfo() {
 }
 
 //签到列表
-// /jxcfd/task/QuerySignListV2?
-// strZone=jxcfd&bizCode=jxcfd&source=jxcfd&dwEnv=7&_cfd_t=1623241005564&ptag=&_stk=_cfd_t%2CbizCode%2CdwEnv%2Cptag%2Csource%2CstrZone&_ste=1&h5st=20210609201645565%3B2319738197510188%3B10009%3Btk01w7fa61b91a8nZXZ0UG1KNThmCDX8l17vfUjeNgy4%2BH2KeBO7PAJg5C3LOayqxMrGk7NiEMey8Qbqc4vJavW0PfsI%3B704983240b71659fe19715b47db4354b60ef99c9a8d8aeee5b2d4707190e1792&_=1623241005567&sceneval=2&g_login_type=1&callback=jsonpCBKZ&g_ty=ls
 function querySignList() {
   return new Promise(async (resolve) => {
     $.get(taskUrl(`task/QuerySignListV2`, `ptag=`, `_cfd_t,bizCode,dwEnv,ptag,source,strZone`), async (err, resp, data) => {
@@ -354,21 +351,23 @@ function getMoney_dwSource_3(_key, sceneList) {
 
 //判断年终福利是否领取
 function getAdvEmployee(_key) {
-  $.get(taskUrl(`user/GetAdvEmployee`, `ptag=&dwSenceId=${_key}&dwIsSlave=0`, `_cfd_t,bizCode,dwEnv,dwIsSlave,dwSenceId,ptag,source,strZone`), async (err, resp, data) => {
-    try {
-      const { SceneEmployeeInfo: { SceneId, SceneName, dwCurStage }, dwNextSceneId, sErrMsg } = JSON.parse(data);
-      if (sErrMsg === `success` && dwCurStage === 1) {
-        //await advEmployeeAward(SceneId, SceneName);
-        await $.wait(500);
-        if (dwNextSceneId > 0) {
-          _key = dwNextSceneId;
-          getAdvEmployee(_key);
+  return new Promise(async (resolve) => {
+    $.get(taskUrl(`user/GetAdvEmployee`, `ptag=&dwSenceId=${_key}&dwIsSlave=0`, `_cfd_t,bizCode,dwEnv,dwIsSlave,dwSenceId,ptag,source,strZone`), async (err, resp, data) => {
+      try {
+        const { SceneEmployeeInfo: { SceneId, SceneName, dwCurStage }, dwNextSceneId, sErrMsg } = JSON.parse(data);
+        if (sErrMsg === `success` && dwCurStage === 1) {
+          //await advEmployeeAward(SceneId, SceneName);
+          await $.wait(500);
+          if (dwNextSceneId > 0) {
+            _key = dwNextSceneId;
+            getAdvEmployee(_key);
+          }
         }
+      } catch (e) {
+        $.logErr(e, resp);
       }
-    } catch (e) {
-      $.logErr(e, resp);
-    }
-  });
+    });
+  })
 }
 
 //领取年终福利
@@ -389,14 +388,16 @@ function advEmployeeAward(_key, strSceneName) {
 
 //领取岛主升级奖励
 function promotionAward() {
-  $.get(taskUrl(`user/PromotionAward`, ``, `_cfd_t,bizCode,dwEnv,ptag,source,strZone`), async (err, resp, data) => {
-    try {
-      const { sErrMsg, strPrizeName } = JSON.parse(data);
-      $.log(`\n💰岛主升级奖励：${sErrMsg == 'success' ? `获取升级奖励：¥ ${strPrizeName || 0}` : sErrMsg} \n${$.showLog ? data : ""}`);
-    } catch (e) {
-      $.logErr(e, resp);
-    }
-  });
+  return new Promise(async (resolve) => {
+    $.get(taskUrl(`user/PromotionAward`, ``, `_cfd_t,bizCode,dwEnv,ptag,source,strZone`), async (err, resp, data) => {
+      try {
+        const { sErrMsg, strPrizeName } = JSON.parse(data);
+        $.log(`\n💰岛主升级奖励：${sErrMsg == 'success' ? `获取升级奖励：¥ ${strPrizeName || 0}` : sErrMsg} \n${$.showLog ? data : ""}`);
+      } catch (e) {
+        $.logErr(e, resp);
+      }
+    });
+  })
 }
 
 //好友圈偷财富
@@ -424,7 +425,7 @@ function friendCircle() {
 //获取好友信息
 function queryFriendIsland(strShareId,) {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/QueryFriendIsland`, `ptag=&strShareId=${strShareId}&sceneval=2`, `_cfd_t,bizCode,dwEnv,ptag,source,strShareId,strZone`),
+    $.get(taskUrl(`user/QueryFriendIsland`, `ptag=7155.9.47&strShareId=${strShareId}&sceneval=2`, `_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strShareId,strZone`),
       async (err, resp, data) => {
         try {
           //$.log(`\n获取好友信息\n${data}`);
@@ -449,7 +450,7 @@ function queryFriendIsland(strShareId,) {
 //偷财富
 function stealMoney(strShareId, sceneId, strFriendNick, strSceneName) {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/StealMoney`, `ptag=&strFriendId=${strShareId}&dwSceneId=${sceneId}&sceneval=2`), async (err, resp, data) => {
+    $.get(taskUrl(`user/StealMoney`, `ptag=&strFriendId=${strShareId}&dwSceneId=${sceneId}&sceneval=2`,`_cfd_t,bizCode,dwEnv,dwSceneId,ptag,source,strFriendId,strZone`), async (err, resp, data) => {
       try {
         //$.log(data);
         const { dwGetMoney, iRet, sErrMsg } = JSON.parse(data);
@@ -482,8 +483,6 @@ async function treasureHunt() {
   }
 }
 
-///jxcfd/consume/TreasureHunt?strZone=jxcfd&bizCode=jxcfd&source=jxcfd&dwEnv=7&_cfd_t=1623240842801&ptag=7155.9.47&strIndex=tree&dwIsShare=0
-// &_stk=_cfd_t%2CbizCode%2CdwEnv%2CdwIsShare%2Cptag%2Csource%2CstrIndex%2CstrZone&_ste=1&h5st=20210609201402801%3B4075501589651162%3B10009%3Btk01wc3271c6ba8nYnhIU3NoYjEwBWRk8wJNprtee4cIn%2F40DqRTMRlGCjYZjTrlY8jZ7FboMEEifVIWY5r%2Bk7VKLWrg%3B8d33a59c8cc9fdbc6897c73e1ae02e521b193db66059fc3b96c11bb3a4e03ce7&_=1623240842804&sceneval=2&g_login_type=1&callback=jsonpCBKU&g_ty=ls
 function doTreasureHunt(place) {
   return new Promise(async (resolve) => {
     $.get(
@@ -522,7 +521,7 @@ function getTaskList(taskType) {
         });
         break;
       case 1: //成就任务
-        $.get(taskUrl(`consume/AchieveInfo`,`ptag=`,``), async (err, resp, data) => {
+        $.get(taskUrl(`consume/AchieveInfo`,`ptag=7155.9.47`,`_cfd_t,bizCode,dwEnv,ptag,source,strZone`), async (err, resp, data) => {
           try {
             const { iRet, sErrMsg, taskinfo = [] } = JSON.parse(data);
             $.allTask = taskinfo.filter((x) => x.dwAwardStatus === 1);
@@ -589,8 +588,6 @@ function browserTask(taskType) {
   });
 }
 
-// /newtasksys/newtasksys_front/DoTask?strZone=jxcfd&bizCode=jxcfd&source=jxcfd&dwEnv=7&_cfd_t=1623247522076&ptag=&taskId=1592&configExtra=10399891
-// &_stk=_cfd_t%2CbizCode%2CconfigExtra%2CdwEnv%2Cptag%2Csource%2CstrZone%2CtaskId&_ste=1&h5st=20210609220522079%3B2319738197510188%3B10009%3Btk01w7fa61b91a8nZXZ0UG1KNThmCDX8l17vfUjeNgy4%2BH2KeBO7PAJg5C3LOayqxMrGk7NiEMey8Qbqc4vJavW0PfsI%3B2a1ec86e93e12b6951d54702bd170bcad1521739fe4f11548cee0d67491a7789&_=1623247522082&sceneval=2&g_login_type=1&callback=jsonpCBKVVV&g_ty=ls
 //做任务
 function doTask(taskinfo) {
   return new Promise(async (resolve) => {
@@ -636,11 +633,11 @@ function doTask(taskinfo) {
 
 //领取奖励
 function awardTask(taskType, taskinfo) {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     switch (taskType) {
       case 0://日常任务
         const { taskId, taskName } = taskinfo;
-        $.get(taskListUrl(`Award`, `ptag=&taskId=${taskId}`,`_cfd_t,bizCode,dwEnv,ptag,source,strZone,taskId`), (err, resp, data) => {
+        $.get(taskListUrl(`Award`, `ptag=&taskId=${taskId}`,`_cfd_t,bizCode,dwEnv,ptag,source,strZone,taskId`), async (err, resp, data) => {
           try {
             const { msg, ret, data: { prizeInfo = '' } = {} } = JSON.parse(data);
             let str = '';
@@ -660,7 +657,7 @@ function awardTask(taskType, taskinfo) {
         break
       case 1://成就奖励
         const { strTaskIndex, strTaskDescr } = taskinfo;
-        $.get(taskUrl(`consume/AchieveAward`, `ptag=&strTaskIndex=${strTaskIndex}`,`_cfd_t,bizCode,dwEnv,ptag,source,strZone,strTaskIndex`), (err, resp, data) => {
+        $.get(taskUrl(`consume/AchieveAward`, `ptag=&strTaskIndex=${strTaskIndex}`,`_cfd_t,bizCode,dwEnv,ptag,source,strZone,strTaskIndex`), async (err, resp, data) => {
           try {
             const { iRet, sErrMsg, dwExpericnce } = JSON.parse(data);
             $.log(`\n${strTaskDescr}【领成就奖励】： success 获得财富值：¥ ${dwExpericnce}\n${$.showLog ? data : ''}`);
@@ -679,7 +676,7 @@ function awardTask(taskType, taskinfo) {
 
 //娱乐中心 未修改
 function funCenterState() {
-  return new Promise(resolve => {
+  return new Promise(async(resolve) => {
     $.get(taskUrl(`consume/FunCenterState`, `strType=1`), async (err, resp, data) => {
       try {
         const { SlotMachine: { ddwConfVersion, dwFreeCount, strCouponPool, strGoodsPool } = {}, iRet, sErrMsg } = JSON.parse(data);
@@ -698,7 +695,7 @@ function funCenterState() {
 
 //抽奖机 未修改
 function soltMachine(strCouponPool, strGoodsPool, ddwConfVersion) {
-  return new Promise(resolve => {
+  return new Promise(async(resolve) => {
     $.get(taskUrl(`consume/SlotMachine`, `strCouponPool=${strCouponPool}&strGoodsPool=${strGoodsPool}&ddwConfVersion=${ddwConfVersion}`), async (err, resp, data) => {
       try {
         const { iRet, sErrMsg, strAwardPoolName } = JSON.parse(data);
@@ -714,7 +711,7 @@ function soltMachine(strCouponPool, strGoodsPool, ddwConfVersion) {
 
 //提交互助码
 function submitInviteId(userName) {
-  return new Promise(resolve => {
+  return new Promise(async (resolve) => {
     if (!$.info || !$.info.strMyShareId) {
       resolve();
       return;
@@ -743,7 +740,7 @@ function submitInviteId(userName) {
 
 //随机超级助力好友
 function createSuperAssistUser() {
-  return new Promise(resolve => {
+  return new Promise(async(resolve) => {
     const sceneIds = Object.keys($.info.SceneList);
     const sceneId = Math.min(...sceneIds);
     $.get({ url: 'https://api.ninesix.cc/api/jx-cfd' }, async (err, resp, _data) => {
@@ -774,7 +771,7 @@ function createSuperAssistUser() {
 
 //随机助力好友 未修改
 function createAssistUser() {
-  return new Promise(resolve => {
+  return new Promise(async (resolve) => {
     const sceneIds = Object.keys($.info.SceneList);
     const sceneId = Math.min(...sceneIds);
     $.get({ url: 'https://api.ninesix.cc/api/jx-cfd' }, async (err, resp, _data) => {
@@ -802,7 +799,7 @@ function createAssistUser() {
 
 //提交互助码
 function submitGroupId() {
-  return new Promise(resolve => {
+  return new Promise(async (resolve) => {
     $.get(taskUrl(`user/GatherForture`), async (err, resp, g_data) => {
       try {
         const { GroupInfo: { strGroupId }, strPin } = JSON.parse(g_data);
@@ -827,7 +824,7 @@ function submitGroupId() {
                 }
               } catch (e) {
                 $.logErr(e, resp);
-                resolve();
+                //resolve();
               } finally {
                 resolve();
               }
@@ -836,6 +833,7 @@ function submitGroupId() {
         }
       } catch (e) {
         $.logErr(e, resp);
+        //resolve();
       } finally {
         resolve();
       }
@@ -846,7 +844,7 @@ function submitGroupId() {
 //开启寻宝大作战
 function openGroup() {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/OpenGroup`, `dwIsNewUser=${$.info.dwIsNewUser}`), async (err, resp, data) => {
+    $.get(taskUrl(`user/OpenGroup`, `dwIsNewUser=${$.info.dwIsNewUser}`,`_cfd_t,bizCode,dwEnv,dwIsNewUser,ptag,source,strZone`), async (err, resp, data) => {
       try {
         const { sErrMsg } = JSON.parse(data);
         $.log(`\n【🏝寻宝大作战】${sErrMsg}\n${$.showLog ? data : ''}`);
@@ -863,14 +861,14 @@ function openGroup() {
 //助力好友寻宝大作战
 function joinGroup() {
   return new Promise(async (resolve) => {
-    $.get({ url: 'https://api.ninesix.cc/api/jx-cfd-group' }, (err, resp, _data) => {
+    $.get({ url: 'https://api.ninesix.cc/api/jx-cfd-group' },async (err, resp, _data) => {
       try {
         const { data = {} } = JSON.parse(_data);
         $.log(`\n【🏝寻宝大作战】随机助力码：${data.value}\n${$.showLog ? _data : ''}`);
         $.get(taskUrl(`user/JoinGroup`, 
           `ptag=138920.20.4&strGroupId=${data.value}&dwIsNewUser=${$.info.dwIsNewUser}&strPgtimestamp=${$.strPgtimestamp}&strPhoneID=${$.strPhoneID}&strPgUUNum=${$.strPgUUNum}`,
           `_cfd_t,bizCode,dwEnv,dwIsNewUser,pgUUNum,pgtimestamp,phoneID,ptag,source,strGroupId,strZone`), 
-          (err, resp, data) => {
+          async (err, resp, data) => {
           try {
             const { sErrMsg } = JSON.parse(data);
             $.log(`\n【🏝寻宝大作战】助力：${sErrMsg}\n${$.showLog ? data : ''}`);
