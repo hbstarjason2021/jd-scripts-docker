@@ -655,7 +655,7 @@ function zoo_getHomeData(inviteId= "",timeout = 0) {
             if (merge.black) return;
             let date = new Date($.time("yyyy/MM/dd HH:mm:ss"));
             if (date.getHours() >= 9 && date.getHours() < 23) {
-              await zoo_pk_getHomeData('sSKNX-MpqKOQoOX6w8qaW1Yw7ZjLslc0bHFeV9tp6qNJ')
+              await zoo_pk_getHomeData('sSKNX-MpqKOQoOX6w8qaW1Yw7ZjLslc0bHFeV9tp6qNP9Q')
             }
             //await zoo_pk_assistGroup()
             //if (data.data.result.homeMainInfo.raiseInfo.buttonStatus === 1 )
