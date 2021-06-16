@@ -59,6 +59,7 @@
 #618动物联萌收集金币
 0-59/30 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_zooCollect.js | sed 's/^/ 【618动物联萌收集金币】/'; "
 0-59/30 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_zooCollect-new.js | sed 's/^/ 【618动物联萌收集金币】/'; "
+0-59/45 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_zoo-new.js | sed 's/^/ 【618动物联萌】/'; "
 
 
 ## 手机狂欢城
