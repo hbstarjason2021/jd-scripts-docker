@@ -170,6 +170,7 @@ cp /jd-scripts-docker/from/jd_mcxhd_brandcity.js /scripts/jd_mcxhd_brandcity.js
 cp /jd-scripts-docker/from/jd_hby_lottery.js /scripts/jd_hby_lottery.js
 cp /jd-scripts-docker/from/jd_qqtmy.js /scripts/jd_qqtmy.js
 cp /jd-scripts-docker/from/jd_zooCollect-new.js /scripts/jd_zooCollect-new.js
+cp /jd-scripts-docker/from/zooElecsport.js /scripts/zooElecsport.js
 
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
