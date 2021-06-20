@@ -29,11 +29,12 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 京东快递jd_kd.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_kd.js'
 
-####### 新潮品牌狂欢
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_mcxhd_brandcity.js'
 
 ####### 寻找陆一八京奇探秘夜
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_qqtmy.js'
+
+### 东东电竞经理
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node zooElecsport.js'
 
 
 ## 十元街jd_syj.js
@@ -192,3 +193,5 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 京喜金牌厂长
 ##docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxstory.js'
 
+####### 新潮品牌狂欢
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_mcxhd_brandcity.js'
