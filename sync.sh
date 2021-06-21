@@ -159,7 +159,6 @@ cp /jd-scripts-docker/from/jd_jintie_wx.js /scripts/jd_jintie_wx.js
 
 cp /jd-scripts-docker/from/jx_cash_sign.js /scripts/jx_cash_sign.js
 cp /jd-scripts-docker/from/jd_zoo-new.js /scripts/jd_zoo-new.js
-
 cp /jd-scripts-docker/from/jd_starStore.js /scripts/jd_starStore.js
 
 cp /jd-scripts-docker/from/jd_618redpacket.js /scripts/jd_618redpacket.js
@@ -171,7 +170,9 @@ cp /jd-scripts-docker/from/jd_hby_lottery.js /scripts/jd_hby_lottery.js
 cp /jd-scripts-docker/from/jd_qqtmy.js /scripts/jd_qqtmy.js
 cp /jd-scripts-docker/from/jd_zooCollect-new.js /scripts/jd_zooCollect-new.js
 cp /jd-scripts-docker/from/zooElecsport.js /scripts/zooElecsport.js
+cp /jd-scripts-docker/from/jd_EsportsManager.js /scripts/jd_EsportsManager.js
 
+cp /jd-scripts-docker/from/jd_jxnc-new.js  /scripts/jd_jxnc-new.js 
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
