@@ -172,7 +172,8 @@ cp /jd-scripts-docker/from/jd_zooCollect-new.js /scripts/jd_zooCollect-new.js
 cp /jd-scripts-docker/from/zooElecsport.js /scripts/zooElecsport.js
 cp /jd-scripts-docker/from/jd_EsportsManager.js /scripts/jd_EsportsManager.js
 
-cp /jd-scripts-docker/from/jd_jxnc-new.js  /scripts/jd_jxnc-new.js 
+cp /jd-scripts-docker/from/jd_jxnc-new.js  /scripts/jd_jxnc-new.js
+cp /jd-scripts-docker/from/jd_syj-new.js  /scripts/jd_syj-new.js
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
