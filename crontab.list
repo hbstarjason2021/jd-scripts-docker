@@ -30,8 +30,8 @@
 
 
 ### 京喜财富岛
-*/55 2-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd.js | sed 's/^/ 【财富岛】/'; "
-3 */2 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfd.js | sed 's/^/ 【财富岛】/'; "
+*/25 2-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd.js | sed 's/^/ 【财富岛】/'; "
+*/55 3-23/1 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfd.js | sed 's/^/ 【财富岛】/'; "
 ## */25 2-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxcfd.js | sed 's/^/ 【财富岛】/'; "
 ## */35 2-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfd.js | sed 's/^/ 【财富岛】/'; "
 
@@ -67,7 +67,7 @@
 #0-59/45 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_zoo-new.js | sed 's/^/ 【618动物联萌】/'; "
 
 ## 手机狂欢城
-3 */2 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/z_carnivalcity.js | sed 's/^/ 【手机狂欢城】/'; "
+#3 */2 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/z_carnivalcity.js | sed 's/^/ 【手机狂欢城】/'; "
 
 ## 京东极速版-我的-省钱大赢家-翻翻乐
 1 0-23/1 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_618redpacket.js | sed 's/^/ 【极速版翻翻乐】/'; "
