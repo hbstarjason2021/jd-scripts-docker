@@ -38,7 +38,7 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 
 ## 十元街jd_syj.js
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_syj.js'
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_syj-new.js'
 
 ##京小超jd_superMarket.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_superMarket.js'
