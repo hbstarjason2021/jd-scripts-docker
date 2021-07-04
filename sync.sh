@@ -174,6 +174,13 @@ cp /jd-scripts-docker/from/jd_EsportsManager.js /scripts/jd_EsportsManager.js
 
 cp /jd-scripts-docker/from/jd_jxnc-new.js  /scripts/jd_jxnc-new.js
 cp /jd-scripts-docker/from/jd_syj-new.js  /scripts/jd_syj-new.js
+cp /jd-scripts-docker/from/ddo_pk-new.js  /scripts/ddo_pk-new.js
+cp /jd-scripts-docker/from/jd_nzmh-new.js  /scripts/jd_nzmh-new.js
+
+cp /jd-scripts-docker/from/jd_SpeedUp.js  /scripts/jd_SpeedUp.js
+cp /jd-scripts-docker/from/jd_ddnc_farmpark.js /scripts/jd_ddnc_farmpark.js
+cp /jd-scripts-docker/from/jd_lsj.js /scripts/jd_lsj.js
+
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
 #cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
