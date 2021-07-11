@@ -180,6 +180,10 @@ cp /jd-scripts-docker/from/jd_nzmh-new.js  /scripts/jd_nzmh-new.js
 cp /jd-scripts-docker/from/jd_SpeedUp.js  /scripts/jd_SpeedUp.js
 cp /jd-scripts-docker/from/jd_ddnc_farmpark.js /scripts/jd_ddnc_farmpark.js
 cp /jd-scripts-docker/from/jd_lsj.js /scripts/jd_lsj.js
+cp /jd-scripts-docker/from/jd_necklace_new.js /scripts/jd_necklace_new.js
+cp /jd-scripts-docker/from/jd_summer_movement.js /scripts/jd_summer_movement.js
+cp /jd-scripts-docker/from/jd_goodMorning.js /scripts/jd_goodMorning.js
+
 
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
