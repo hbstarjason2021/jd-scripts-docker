@@ -176,6 +176,9 @@ cp /jd-scripts-docker/from/jd_jxnc-new.js  /scripts/jd_jxnc-new.js
 cp /jd-scripts-docker/from/jd_syj-new.js  /scripts/jd_syj-new.js
 cp /jd-scripts-docker/from/ddo_pk-new.js  /scripts/ddo_pk-new.js
 cp /jd-scripts-docker/from/jd_nzmh-new.js  /scripts/jd_nzmh-new.js
+cp /jd-scripts-docker/from/JDJRValidator_Pure.js  /scripts/JDJRValidator_Pure.js
+cp /jd-scripts-docker/from/jd_joy-new.js  /scripts/jd_joy-new.js
+cp /jd-scripts-docker/from/jd_joy_steal-new.js  /scripts/jd_joy_steal-new.js
 
 cp /jd-scripts-docker/from/jd_SpeedUp.js  /scripts/jd_SpeedUp.js
 cp /jd-scripts-docker/from/jd_ddnc_farmpark.js /scripts/jd_ddnc_farmpark.js
@@ -245,7 +248,7 @@ cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
 
 #cd /Loon && npm install -g
 
-
+npm install png-js
 cd /jddj && npm install request && npm cache clean --force
 
 ##################################
