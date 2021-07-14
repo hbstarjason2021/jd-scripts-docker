@@ -93,10 +93,10 @@ function randomString(e) {
     $.innerShInviteList = await getAuthorShareCode('');
     res2 = await getAuthorShareCode('');
     if(!$.innerShInviteList[0]){
-      $.innerShInviteList = await getAuthorShareCode('https://ghproxy.com/https://raw.githubusercontent.com/smiek2221/updateTeam/master/shareCodes/summer_movement.json');
+      $.innerShInviteList = await getAuthorShareCode('');
     }
     if(!res2[0]){
-      res2 = await getAuthorShareCode('https://ghproxy.com/https://raw.githubusercontent.com/smiek2221/updateTeam/master/shareCodes/summer_movement.json');
+      res2 = await getAuthorShareCode('');
     }
     $.innerShInviteLists = getRandomArrayElements([...res, ...res2], [...res, ...res2].length);
     $.ShInviteLists.push(...$.ShInviteList,...$.innerShInviteList,...$.innerShInviteLists);
