@@ -186,7 +186,7 @@ cp /jd-scripts-docker/from/jd_lsj.js /scripts/jd_lsj.js
 cp /jd-scripts-docker/from/jd_necklace_new.js /scripts/jd_necklace_new.js
 cp /jd-scripts-docker/from/jd_summer_movement.js /scripts/jd_summer_movement.js
 cp /jd-scripts-docker/from/jd_goodMorning.js /scripts/jd_goodMorning.js
-
+cp /jd-scripts-docker/from/gua_wealth_island.js /scripts/gua_wealth_island.js
 
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
@@ -248,7 +248,7 @@ cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
 
 #cd /Loon && npm install -g
 
-npm install png-js
+npm install png-js  date-fns axios
 cd /jddj && npm install request && npm cache clean --force
 
 ##################################
