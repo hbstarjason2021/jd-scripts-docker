@@ -187,7 +187,7 @@ function requireConfig() {
 
     try {
       let options = {
-        "url": `https://ghproxy.com/https://raw.githubusercontent.com/hbstarjason2021/yangmao/main/jxnc.txt`,
+        "url": `https://cdn.jsdelivr.net/gh/hbstarjason2021/yangmao/jxnc.txt`,
         "headers": {
           "Accept": "application/json,text/plain, */*",
           "Content-Type": "application/x-www-form-urlencoded",
