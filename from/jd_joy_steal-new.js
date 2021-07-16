@@ -11,11 +11,14 @@ IOS用户支持京东双账号,NodeJs用户支持N个京东账号
 [task_local]
 #宠汪汪偷好友积分与狗粮
 10 0-21/3 * * * jd_joy_steal.js, tag=宠汪汪偷好友积分与狗粮, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+
 =======Loon========
 [Script]
 cron "10 0-21/3 * * *" script-path=jd_joy_steal.js,tag=宠汪汪偷好友积分与狗粮
+
 ========Surge==========
 宠汪汪偷好友积分与狗粮 = type=cron,cronexp="10 0-21/3 * * *",wake-system=1,timeout=3600,script-path=jd_joy_steal.js
+
 =======小火箭=====
 宠汪汪偷好友积分与狗粮 = type=cron,script-path=jd_joy_steal.js, cronexpr="10 0-21/3 * * *", timeout=3600, enable=true
 */
@@ -283,7 +286,7 @@ async function helpFriendsFeed() {
 }
 function getFriends(currentPage = '1') {
   return new Promise(resolve => {
-    const url = `${JD_API_HOST}/common/pet/h5/getFriends?itemsPerPage=20&currentPage=${currentPage * 1}&reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE`
+    const url = `${JD_API_HOST}/common/pet/h5/getFriends?itemsPerPage=20&currentPage=${currentPage * 1}&reqSource=h5&invokeKey=qRKHmL4sna8ZOP9F`
     const options = {
       url,
       headers: {
@@ -462,7 +465,7 @@ function getRandomFood(friendPin) {
 }
 function getCoinChanges() {
   return new Promise(resolve => {
-    const url = `${JD_API_HOST}/common/pet/getCoinChanges?changeDate=${Date.now()}&reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE`
+    const url = `${JD_API_HOST}/common/pet/getCoinChanges?changeDate=${Date.now()}&reqSource=h5&invokeKey=qRKHmL4sna8ZOP9F`
     const options = {
       url,
       headers: {
@@ -580,7 +583,7 @@ function TotalBean() {
   })
 }
 function taskUrl(functionId, friendPin) {
-  const url = `${JD_API_HOST}/common/pet/${functionId}?reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE${friendPin && "&friendPin=" + encodeURI(friendPin)}`
+  const url = `${JD_API_HOST}/common/pet/${functionId}?reqSource=h5&invokeKey=qRKHmL4sna8ZOP9F${friendPin && "&friendPin=" + encodeURI(friendPin)}`
   return {
     url,
     headers: {
