@@ -132,71 +132,9 @@ cat /etc/os-release | grep -q ubuntu && {
 
 cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
-cp /jd-scripts-docker/from/jx_cfd.js /scripts/jx_cfd.js
-cp /jd-scripts-docker/from/jx_cfd_exchange.js /scripts/jx_cfd_exchange.js
-cp /jd-scripts-docker/from/jx_cfdtx.js /scripts/jx_cfdtx.js
-cp /jd-scripts-docker/from/jdJxncTokens.js /scripts/jdJxncTokens.js
 
-cp /jd-scripts-docker/from/jd_daydlt.js /scripts/jd_daydlt.js
-cp /jd-scripts-docker/from/jdautogan.js /scripts/jdautogan.js
+cp /jd-scripts-docker/from/*  /scripts/
 
-cp /jd-scripts-docker/from/jd_blueCoin_1000.js        /scripts/jd_blueCoin_1000.js
-cp /jd-scripts-docker/from/jd_blueCoin_20.js          /scripts/jd_blueCoin_20.js
-cp /jd-scripts-docker/from/jd_blueCoin_chunzhen.js    /scripts/jd_blueCoin_chunzhen.js
-cp /jd-scripts-docker/from/jd_blueCoin_chunzhenxmy.js /scripts/jd_blueCoin_chunzhenxmy.js
-
-cp /jd-scripts-docker/from/jd_super_redrain.js     /scripts/jd_super_redrain.js
-cp /jd-scripts-docker/from/jd_half_redrain.js     /scripts/jd_half_redrain.js
-cp /jd-scripts-docker/from/jd_hour_redrain.js     /scripts/jd_hour_redrain.js
-
-cp /jd-scripts-docker/from/jd_mlyjy.js /scripts/jd_mlyjy.js
-cp /jd-scripts-docker/from/jd_xmf.js /scripts/jd_xmf.js
-
-cp /jd-scripts-docker/from/jd_jxcfd.js /scripts/jd_jxcfd.js
-
-cp /jd-scripts-docker/from/jd_ShopSign-new.js /scripts/jd_ShopSign-new.js
-cp /jd-scripts-docker/from/jd_jintie_wx.js /scripts/jd_jintie_wx.js
-
-cp /jd-scripts-docker/from/jx_cash_sign.js /scripts/jx_cash_sign.js
-cp /jd-scripts-docker/from/jd_zoo-new.js /scripts/jd_zoo-new.js
-cp /jd-scripts-docker/from/jd_starStore.js /scripts/jd_starStore.js
-
-cp /jd-scripts-docker/from/jd_618redpacket.js /scripts/jd_618redpacket.js
-cp /jd-scripts-docker/from/zy_618jc.js /scripts/zy_618jc.js
-cp /jd-scripts-docker/from/ddo_pk.js /scripts/ddo_pk.js
-cp /jd-scripts-docker/from/jd_gcip.js /scripts/jd_gcip.js
-cp /jd-scripts-docker/from/jd_mcxhd_brandcity.js /scripts/jd_mcxhd_brandcity.js
-cp /jd-scripts-docker/from/jd_hby_lottery.js /scripts/jd_hby_lottery.js
-cp /jd-scripts-docker/from/jd_qqtmy.js /scripts/jd_qqtmy.js
-cp /jd-scripts-docker/from/jd_zooCollect-new.js /scripts/jd_zooCollect-new.js
-cp /jd-scripts-docker/from/zooElecsport.js /scripts/zooElecsport.js
-cp /jd-scripts-docker/from/jd_EsportsManager.js /scripts/jd_EsportsManager.js
-
-cp /jd-scripts-docker/from/jd_jxnc-new.js  /scripts/jd_jxnc-new.js
-cp /jd-scripts-docker/from/jd_syj-new.js  /scripts/jd_syj-new.js
-cp /jd-scripts-docker/from/ddo_pk-new.js  /scripts/ddo_pk-new.js
-cp /jd-scripts-docker/from/jd_nzmh-new.js  /scripts/jd_nzmh-new.js
-cp /jd-scripts-docker/from/JDJRValidator_Pure.js  /scripts/JDJRValidator_Pure.js
-cp /jd-scripts-docker/from/jd_joy-new.js  /scripts/jd_joy-new.js
-cp /jd-scripts-docker/from/jd_joy_steal-new.js  /scripts/jd_joy_steal-new.js
-
-cp /jd-scripts-docker/from/jd_SpeedUp.js  /scripts/jd_SpeedUp.js
-cp /jd-scripts-docker/from/jd_ddnc_farmpark.js /scripts/jd_ddnc_farmpark.js
-cp /jd-scripts-docker/from/jd_lsj.js /scripts/jd_lsj.js
-cp /jd-scripts-docker/from/jd_necklace_new.js /scripts/jd_necklace_new.js
-cp /jd-scripts-docker/from/jd_summer_movement.js /scripts/jd_summer_movement.js
-cp /jd-scripts-docker/from/jd_goodMorning.js /scripts/jd_goodMorning.js
-cp /jd-scripts-docker/from/gua_wealth_island.js /scripts/gua_wealth_island.js
-cp /jd-scripts-docker/from/jx_cfd-new2.js /scripts/jx_cfd-new2.js
-cp /jd-scripts-docker/from/jd_cfd_new.js /scripts/jd_cfd_new.js
-cp /jd-scripts-docker/from/jd_cfdqiqiu.js /scripts/jd_cfdqiqiu.js
-cp /jd-scripts-docker/from/jd_cfd_loop.js /scripts/jd_cfd_loop.js
-cp /jd-scripts-docker/from/jd_health_exchange.js /scripts/jd_health_exchange.js
-
-##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
-#cp /qx/jd_entertainment.js /scripts/jd_entertainment.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_entertainment.js
-##cp /jd-scripts-docker/from/jd_fanslove.js /scripts/jd_fanslove.js
-#cp /jd-scripts-docker/from/z_tcl_lining.js /scripts/z_tcl_lining.js
 
 cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_fanslove.js
 ##cp /jd-scripts-docker/from/z_wish.js  /scripts/z_wish.js 
@@ -215,14 +153,11 @@ cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js
 cp /scripts-bak/normal/adolf_martin.js  /scripts/adolf_martin.js
 cp /scripts-bak/normal/adolf_mi.js      /scripts/adolf_mi.js
 cp /scripts-bak/normal/adolf_pk.js      /scripts/adolf_pk.js
-
 cp /scripts-bak/normal/adolf_newInteraction.js  /scripts/adolf_newInteraction.js
 cp /scripts-bak/normal/adolf_superbox.js        /scripts/adolf_superbox.js
 cp /scripts-bak/normal/adolf_urge.js            /scripts/adolf_urge.js
-
 cp /scripts-bak/normal/adolf_jxhb.js            /scripts/adolf_jxhb.js
 cp /scripts-bak/normal/adolf_star.js            /scripts/adolf_star.js
-
 
 cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
 cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
