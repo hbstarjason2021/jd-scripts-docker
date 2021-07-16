@@ -188,7 +188,9 @@ cp /jd-scripts-docker/from/jd_summer_movement.js /scripts/jd_summer_movement.js
 cp /jd-scripts-docker/from/jd_goodMorning.js /scripts/jd_goodMorning.js
 cp /jd-scripts-docker/from/gua_wealth_island.js /scripts/gua_wealth_island.js
 cp /jd-scripts-docker/from/jx_cfd-new2.js /scripts/jx_cfd-new2.js
+cp /jd-scripts-docker/from/jd_cfd_new.js /scripts/jd_cfd_new.js
 cp /jd-scripts-docker/from/jd_cfdqiqiu.js /scripts/jd_cfdqiqiu.js
+cp /jd-scripts-docker/from/jd_cfd_loop.js /scripts/jd_cfd_loop.js
 cp /jd-scripts-docker/from/jd_health_exchange.js /scripts/jd_health_exchange.js
 
 ##cp /jd-scripts-docker/from/jd_entertainment.js /scripts/jd_entertainment.js
