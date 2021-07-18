@@ -1,7 +1,7 @@
 #### 55 */2 * * * bash /sync 1>/proc/1/fd/1 2>/proc/1/fd/2
 
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car_exchange.js | sed 's/^/ 【京东汽车兑换】/'; "
-0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdtx.js | sed 's/^/ 【财富岛提现】/'; "
+#0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdtx.js | sed 's/^/ 【财富岛提现】/'; "
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; MARKET_COIN_TO_BEANS=1000; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_blueCoin.js | sed 's/^/ 【京小超兑换1000豆】/'; "
 
 ### 京小超兑换
@@ -15,7 +15,7 @@
 1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/ddo_pk-new.js | sed 's/^/ 【京享值pk】/'; "
 
 1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_shop.js | sed 's/^/ 【进店领豆脚本】/'; "
-2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_daydlt.js | sed 's/^/ 【天天优惠大乐透】/'; "
+#2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_daydlt.js | sed 's/^/ 【天天优惠大乐透】/'; "
 4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_ms.js | sed 's/^/ 【秒杀币】/'; "
 6 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_superMarket.js | sed 's/^/ 【京小超】/'; "
 8 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car.js | sed 's/^/ 【京东汽车】/'; "
