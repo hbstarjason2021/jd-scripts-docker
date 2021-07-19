@@ -1,6 +1,8 @@
 #### 55 */2 * * * bash /sync 1>/proc/1/fd/1 2>/proc/1/fd/2
 
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car_exchange.js | sed 's/^/ 【京东汽车兑换】/'; "
+0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jdcar500bean.js | sed 's/^/ 【京东汽车兑换】/'; "
+
 #0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdtx.js | sed 's/^/ 【财富岛提现】/'; "
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; MARKET_COIN_TO_BEANS=1000; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_blueCoin.js | sed 's/^/ 【京小超兑换1000豆】/'; "
 
