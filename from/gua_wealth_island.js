@@ -17,8 +17,7 @@ function randomString(e) {
     n += t.charAt(Math.floor(Math.random() * a));
   return n
 }
-//$.InviteList = ['79FB86C05729714821EABCDACFA13EA14C6A3CB4E32B8C91EB88BF9165E7D1D1','04685F11326F3B374A3F8B5859F88C7172E0A0C2B1B9ED1D981BDFAFF71F68B7','E6AA3E34B8C94E51FD8D121FBEA02C68DF3A6F8EAB7DA0B0361CB44B41D7965C','D9D9D9FBEAF1C81477D3B1338FAC56F7E8B0794DF6C1D361271F1AAF6B07668A']
-$.InviteList = ['79FB86C05729714821EABCDACFA13EA1306807A98252B90A78274212BA2F27B5','04685F11326F3B374A3F8B5859F88C71855C24161407C287A47274E9915FE0EA','101794B084FF41345BD5CC120C28E4B8A9D617D4E272E028B4D31909A7805B8C','BBCFAFC41EF7A23CFAD15072E68E5E014296F40F9AC40FCA069DB86F535B9A67']
+$.InviteList = ['79FB86C05729714821EABCDACFA13EA13CC64B3D0A97E4D5C98651CE2AC457B9','04685F11326F3B374A3F8B5859F88C7167EF38F4979643979AC6B58C090A1AFC','160602261EDDB94FA12855189BF93069EF0E58CFCD76B738DF15A272452A51D3','2D2947F18EE267B4460B56391299D596732CD76FD2644211B640BA3567B33BDA']
 $.innerInviteList = [];
 const HelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不助力
 
@@ -206,10 +205,15 @@ async function StoryInfo(){
         if(TypeCnt){
           console.log(`出售`)
           await $.wait(1000)
-          additional = `&ptag=&strTypeCnt=${TypeCnt}&dwSceneId=1`
+          additional = `&ptag=&strTypeCnt=${TypeCnt}&dwSceneId=2`
           stk = `_cfd_t,bizCode,dwEnv,dwSceneId,ptag,source,strTypeCnt,strZone`
           res = await taskGet(`story/sellgoods`, stk, additional)
           await printRes(res, '贩卖')
+          additional = `&ptag=&strStoryId=${$.HomeInfo.StoryInfo.StoryList[0].strStoryId}&dwType=4&ddwTriggerDay=${$.HomeInfo.StoryInfo.StoryList[0].ddwTriggerDay}`
+          stk = `_cfd_t,bizCode,ddwTriggerDay,dwEnv,dwType,ptag,source,strStoryId,strZone`
+          type = `CollectorOper`
+          res = await taskGet(`story/${type}`, stk, additional)
+          // console.log(JSON.stringify(res))
         }
       }else if($.HomeInfo.StoryInfo.StoryList[0].dwType == 1 && ( (res && res.iRet == 0) || res == '')){
         if(res && res.iRet == 0 && res.Data && res.Data.Serve && res.Data.Serve.dwWaitTime){
@@ -349,7 +353,7 @@ async function sign(){
     }
     
     if($.Aggrtask && $.Aggrtask.Data && $.Aggrtask.Data.Employee && $.Aggrtask.Data.Employee.EmployeeList){
-        if($.Aggrtask.Data && $.Aggrtask.Data.Employee && !$.Aggrtask.Data.Employee.EmployeeList){
+        if($.Aggrtask.Data && $.Aggrtask.Data.Employee && $.Aggrtask.Data.Employee.EmployeeList){
         console.log(`\n领取邀请奖励`)
         for(let i of $.Aggrtask.Data.Employee.EmployeeList){
           if(i.dwStatus == 0){
@@ -410,15 +414,17 @@ async function RubbishOper(){
         if(i.strStoryId == 3){
           console.log(`\n倒垃圾`)
           $.RubbishOper = await taskGet(`story/RubbishOper`, '_cfd_t,bizCode,dwEnv,dwRewardType,dwType,ptag,source,strZone', '&ptag=&dwType=1&dwRewardType=0')
-          for(let j of $.RubbishOper.Data.ThrowRubbish.Game.RubbishList){
-            console.log(`放置[${j.strName}]等待任务完成`)
-            res = await taskGet(`story/RubbishOper`, '_cfd_t,bizCode,dwEnv,dwRewardType,dwRubbishId,dwType,ptag,source,strZone', `&ptag=&dwType=2&dwRewardType=0&dwRubbishId=${j.dwId}`)
-            await $.wait(2000)
-          }
-          if(res.Data && res.Data.RubbishGame && res.Data.RubbishGame.AllRubbish && res.Data.RubbishGame.AllRubbish.dwIsGameOver && res.Data.RubbishGame.AllRubbish.dwIsGameOver == 1){
-            console.log(`任务完成获得:${res.Data.RubbishGame.AllRubbish.ddwCoin && res.Data.RubbishGame.AllRubbish.ddwCoin+'金币' || ''}`)
-          }else{
-            console.log(JSON.stringify(res))
+          if($.RubbishOper && $.RubbishOper.Data && $.RubbishOper.Data.ThrowRubbish && $.RubbishOper.Data.ThrowRubbish.Game && $.RubbishOper.Data.ThrowRubbish.Game.RubbishList){
+            for(let j of $.RubbishOper.Data.ThrowRubbish.Game.RubbishList){
+              console.log(`放置[${j.strName}]等待任务完成`)
+              res = await taskGet(`story/RubbishOper`, '_cfd_t,bizCode,dwEnv,dwRewardType,dwRubbishId,dwType,ptag,source,strZone', `&ptag=&dwType=2&dwRewardType=0&dwRubbishId=${j.dwId}`)
+              await $.wait(2000)
+            }
+            if(res && res.Data && res.Data.RubbishGame && res.Data.RubbishGame.AllRubbish && res.Data.RubbishGame.AllRubbish.dwIsGameOver && res.Data.RubbishGame.AllRubbish.dwIsGameOver == 1){
+              console.log(`任务完成获得:${res.Data.RubbishGame.AllRubbish.ddwCoin && res.Data.RubbishGame.AllRubbish.ddwCoin+'金币' || ''}`)
+            }else{
+              console.log(JSON.stringify(res))
+            }
           }
         }
       }
@@ -599,7 +605,6 @@ async function UserTask(){
         console.log(`任务 ${item.taskName} (${item.completedTimes}/${item.targetTimes})`)
         if (item.awardStatus == 2 && item.completedTimes === item.targetTimes) {
           res = await taskGet(`Award`, '_cfd_t,bizCode,dwEnv,ptag,source,strZone,taskId', `&ptag=&taskId=${item.taskId}`)
-          console.log(JSON.stringify(res))
           if(res.ret == 0){
             if(res.data.prizeInfo){
               res.data.prizeInfo = $.toObj(res.data.prizeInfo)
@@ -657,8 +662,8 @@ function printRes(res, msg=''){
     if(res.Data){
       result = res.Data
     }
-    if(result.ddwCoin || result.ddwMoney || result.strPrizeName){
-      console.log(`${msg}获得:${result.ddwCoin && ' '+result.ddwCoin+'金币' || ''}${result.ddwMoney && ' '+result.ddwMoney+'财富' || ''}${result.strPrizeName && ' '+result.strPrizeName+'红包' || ''}`)
+    if(result.ddwCoin || result.ddwMoney || result.strPrizeName || result.StagePrizeInfo && result.StagePrizeInfo.strPrizeName){
+      console.log(`${msg}获得:${result.ddwCoin && ' '+result.ddwCoin+'金币' || ''}${result.ddwMoney && ' '+result.ddwMoney+'财富' || ''}${result.strPrizeName && ' '+result.strPrizeName+'红包' || ''}${result.StagePrizeInfo && result.StagePrizeInfo.strPrizeName && ' '+result.StagePrizeInfo.strPrizeName || ''}`)
     }else if(result.Prize){
       console.log(`${msg}获得: ${result.Prize.strPrizeName && '优惠券 '+result.Prize.strPrizeName || ''}`)
     }else if(res && res.sErrMsg){
