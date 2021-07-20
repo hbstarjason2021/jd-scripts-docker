@@ -58,8 +58,7 @@
 30 20-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_half_redrain.js  | sed 's/^/ 【整点红包雨】/'; "
 
 #### 618主会场红包雨
-0 20,21 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_hby_lottery.js | sed 's/^/ 【618主会场红包雨】/'; "
-
+#0 20,21 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_hby_lottery.js | sed 's/^/ 【618主会场红包雨】/'; "
 
 ### 京东到家
 10 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /jddj; node /jddj/jddj_bean.js  | sed 's/^/ 【鲜豆任务】/'; "
@@ -78,3 +77,4 @@
 40 * * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_big_winner.js | sed 's/^/ 【极速版翻翻乐】/'; "
 
 18 0-23/2 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joypark_joy.js | sed 's/^/ 【极速汪汪乐园】/'; "
+21 0-23/2 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joypark_task.js | sed 's/^/ 【极速汪汪乐园】/'; "
