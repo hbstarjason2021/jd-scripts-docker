@@ -187,7 +187,7 @@ function requireConfig() {
 
     try {
       let options = {
-        "url": `https://cdn.jsdelivr.net/gh/hbstarjason2021/yangmao/jxnc.txt`,
+        "url": `https://cdn.jsdelivr.net/gh/hbstarjason2021/yangmao/jxnc.txt`, //https://gitee.com/starjason/sharecode/raw/master/jxnc.txt
         "headers": {
           "Accept": "application/json,text/plain, */*",
           "Content-Type": "application/x-www-form-urlencoded",
