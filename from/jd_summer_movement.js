@@ -46,9 +46,9 @@ const ShHelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不�
 let cookiesArr = [];
 $.cookie = '';
 $.inviteList = [
-  'HcmphLbwLg2jd9CZE91l13QE43FrwqgTPO1B8u0tSB3JspfMNuf4KJg4st8OwgEVEUh3WKvdoYhs1eM1CUjUGA'
-  'HcmphKXhCVPyLdvPSZVqml7-GNlLDAlTMJu4FcNAWH02fij4ZXl9BzEQ-hVWH2oi5RcfFQ'
-  'HcmphK_gEEj5L8DFSZh_mrAuBXkWJTAlMz8g7WT8oeTaWrJC3sDkHhdvYOna3UY'
+  'HcmphLbwLg2jd9CZE91l13QE43FrwqgTPO1B8u0tSB3JspfMNuf4KJg4st8OwgEVEUh3WKvdoYhs1eM1CUjUGA',
+  'HcmphKXhCVPyLdvPSZVqml7-GNlLDAlTMJu4FcNAWH02fij4ZXl9BzEQ-hVWH2oi5RcfFQ',
+  'HcmphK_gEEj5L8DFSZh_mrAuBXkWJTAlMz8g7WT8oeTaWrJC3sDkHhdvYOna3UY',
   'HcmphLrhRA-hftnDSYN_msFqBbVs6BCPbvthmaXcBjmGx3EUYuQxkU4UOrPjXs5rL5s'
 ];
 $.secretpInfo = {};
