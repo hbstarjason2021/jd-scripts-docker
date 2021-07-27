@@ -18,6 +18,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Mirror the Github organization repos to Gitee .
       uses: Yikun/hub-mirror-action@master
+      ### uses: x-dr/sync-repo-to-gitee@master
+      ### uses: serverlesslife-cn/sync-repo-to-coding@master
       with:
         # 必选，需要同步的Github用户（源）
         src: github/hbstarjason2021
