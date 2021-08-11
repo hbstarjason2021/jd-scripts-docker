@@ -98,8 +98,18 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 每日抽奖
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_daily_lottery.js'
 
-## 七夕
+####### 七夕情报局
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node gua_doge.js'
+
+## 金机馆投票
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_golden_machine.js'
+
+## 来电好物季
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node zy_ldhwj.js'
+
+## 荣耀焕新季
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node zy_ryhxj.js'
+
 
 ## 金榜创造营
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_gold_creator.js'
