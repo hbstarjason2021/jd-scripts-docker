@@ -110,7 +110,11 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 荣耀焕新季
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node zy_ryhxj.js'
 
+## 家电
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_appliances.js'
+
+## 许愿池
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_xyc.js'
 
 
 ## 金榜创造营
