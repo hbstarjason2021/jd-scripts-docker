@@ -63,7 +63,7 @@ message = ""
     return;
   }
   //$.shareUuid = '6a12ad0a31124c33975758f68a88dfb9'
-  $.shareUuid = ''
+  $.shareUuid = '3f948350804a4c0b85eea86a2a09fa66'
   $.activityId = 'dz2108100000412302'
   console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/xiaomi/gameupd/activity/1272964?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
   console.log(`设置第${stopIndex}个账号停止\n`)
