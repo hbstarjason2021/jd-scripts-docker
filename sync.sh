@@ -148,7 +148,9 @@ cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/hel
 cp /ljqailym/jd_live_redrain_half.js /scripts/jd_live_redrain_half.js
 cp /ljqailym/redman_rain_hr.js       /scripts/redman_rain_hr.js 
 cp /ljqailym/redman_rain_hy.js       /scripts/redman_rain_hy.js 
-cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js 
+cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js
+cp /ljqailym/redman_rain_hyzb.js     /scripts/redman_rain_hyzb.js
+cp /ljqailym/redman_rain_x9b.js      /scripts/redman_rain_x9b.js
 
 cp /scripts-bak/normal/adolf_martin.js  /scripts/adolf_martin.js
 cp /scripts-bak/normal/adolf_mi.js      /scripts/adolf_mi.js
