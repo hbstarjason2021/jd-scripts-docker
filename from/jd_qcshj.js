@@ -6,11 +6,11 @@ https://h5.m.jd.com/babelDiy/Zeus/2FdCyR9rffxKUkMpQTP4WT4bArmL/index.html
 ============Quantumultx===============
 [task_local]
 #8.12-8.20 汽车生活节
-30 7,19 12-20 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/jd_qcshj.js, tag=8.12-8.20 汽车生活节, enabled=true
+30 9,21 12-20 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/jd_qcshj.js, tag=8.12-8.20 汽车生活节, enabled=true
 
 ================Loon==============
 [Script]
-cron "30 7,19 12-20 8 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/jd_qcshj.js,tag=8.12-8.20 汽车生活节
+cron "30 9,21 12-20 8 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/jd_qcshj.js,tag=8.12-8.20 汽车生活节
 
 ===============Surge=================
 8.12-8.20 汽车生活节 = type=cron,cronexp="30 9,21 12-20 8 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/jd_qcshj.js
@@ -289,7 +289,7 @@ async function lottery() {
         if (result.userAwardsCacheDto.type == 0)
           console.log('抽个寂寞')
         else if (result.userAwardsCacheDto.type == 2) {
-          $.beans += result.userAwardsCacheDto.jBeanAwardVo.quantity || 0
+          $.beans += Number(result.userAwardsCacheDto.jBeanAwardVo.quantity) || 0
           console.log(result.userAwardsCacheDto.jBeanAwardVo)
         } else
           console.log('没用的优惠券' + JSON.stringify(result))
