@@ -53,7 +53,8 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
         continue
       }
       $.ADID = getUUID('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 1);
-      $.UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+      //$.UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');6693465653160366-2633430333236616
+      $.UUID = getUUID('6693465653160366-2633430333236616');
       $.noChance = false;
       await extend();
       for (let x = 0; x < 3; x++) {
