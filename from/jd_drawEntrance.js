@@ -54,7 +54,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
       }
       $.ADID = getUUID('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 1);
       //$.UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');6693465653160366-2633430333236616
-      $.UUID = getUUID('6693465653160366-2633430333236616');
+      $.UUID = getUUID('3353234393134326-3673735303632613');
       $.noChance = false;
       await extend();
       for (let x = 0; x < 3; x++) {
@@ -154,8 +154,8 @@ function taskUrl(function_id, body = {}) {
       "Content-Length": "0",
       "Connection": "keep-alive",
       "Accept": "application/json, text/plain, */*",
-      //"User-Agent": `jdapp;iPhone;9.5.0;13.5;${$.UUID};network/wifi;ADID/${$.ADID};supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone11,6;addressid/138222502;supportBestPay/0;appBuild/167638;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`,
-      "User-Agent": `jdapp;android;10.1.0;10;6693465653160366-2633430333236616;network/wifi;model/Redmi Note 7;addressid/138039298;aid/f9de5a0fb34032fa;oaid/de58d4cbd4515a0f;osVer/29;appBuild/89568;partner/xiaomi001;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 10; Redmi Note 7 Build/QKQ1.190910.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36`,
+      "User-Agent": `jdapp;iPhone;9.5.0;13.5;${$.UUID};network/wifi;ADID/${$.ADID};supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone11,6;addressid/138222502;supportBestPay/0;appBuild/167638;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`,
+      //"User-Agent": `jdapp;android;10.1.0;10;6693465653160366-2633430333236616;network/wifi;model/Redmi Note 7;addressid/138039298;aid/f9de5a0fb34032fa;oaid/de58d4cbd4515a0f;osVer/29;appBuild/89568;partner/xiaomi001;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 10; Redmi Note 7 Build/QKQ1.190910.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36`,
       "Accept-Language": "zh-cn",
       "Referer": "https://h5.m.jd.com/babelDiy/Zeus/yj8mbcm6roENn7qhNdhiekyeqtd/index.html",
       "Accept-Encoding": "gzip, deflate, br",
@@ -186,8 +186,8 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        //"User-Agent": `jdapp;iPhone;9.5.0;13.5;${$.UUID};network/wifi;ADID/${$.ADID};supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone11,6;addressid/138222502;supportBestPay/0;appBuild/167638;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`,
-        "User-Agent": `jdapp;android;10.1.0;10;6693465653160366-2633430333236616;network/wifi;model/Redmi Note 7;addressid/138039298;aid/f9de5a0fb34032fa;oaid/de58d4cbd4515a0f;osVer/29;appBuild/89568;partner/xiaomi001;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 10; Redmi Note 7 Build/QKQ1.190910.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36`,
+        "User-Agent": `jdapp;iPhone;9.5.0;13.5;${$.UUID};network/wifi;ADID/${$.ADID};supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone11,6;addressid/138222502;supportBestPay/0;appBuild/167638;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`,
+        //"User-Agent": `jdapp;android;10.1.0;10;6693465653160366-2633430333236616;network/wifi;model/Redmi Note 7;addressid/138039298;aid/f9de5a0fb34032fa;oaid/de58d4cbd4515a0f;osVer/29;appBuild/89568;partner/xiaomi001;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 10; Redmi Note 7 Build/QKQ1.190910.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36`,
       }
     }
     $.post(options, (err, resp, data) => {
