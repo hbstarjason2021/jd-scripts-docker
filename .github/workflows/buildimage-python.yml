@@ -32,6 +32,9 @@ jobs:
          echo "${{ secrets.DOCKER_PASSWORD }}" |  docker login --username=${{ secrets.DOCKER_USERNAME }}  --password-stdin
          docker push hbstarjason/jd-scripts-python
          
+         docker tag  hbstarjason/jd-scripts-python  registry.cn-beijing.aliyuncs.com/hbstarjason/jd-scripts-python
+         echo "${{ secrets.ALIYUN_IMAGES_HUB_TOKEN }}" | docker login --username=${{ secrets.ALIYUN_IMAGES_HUB_USER_NAME }} registry.cn-beijing.aliyuncs.com --password-stdin
+         
     - name: List env
       run: env
 
