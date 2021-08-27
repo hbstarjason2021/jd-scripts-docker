@@ -34,6 +34,7 @@ jobs:
          
          docker tag  hbstarjason/jd-scripts-python  registry.cn-beijing.aliyuncs.com/hbstarjason/jd-scripts-python
          echo "${{ secrets.ALIYUN_IMAGES_HUB_TOKEN }}" | docker login --username=${{ secrets.ALIYUN_IMAGES_HUB_USER_NAME }} registry.cn-beijing.aliyuncs.com --password-stdin
+         docker push registry.cn-beijing.aliyuncs.com/hbstarjason/jd-scripts-python
          
     - name: List env
       run: env
