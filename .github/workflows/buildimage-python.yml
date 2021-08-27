@@ -25,6 +25,8 @@ jobs:
          
          echo "###### pwd ######"
          pwd
+         
+         ls -l 
 
     - name: List env
       run: env
