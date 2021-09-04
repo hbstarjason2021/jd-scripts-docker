@@ -1,18 +1,9 @@
 /*
 金贴小程序（每天大概可得0.07金贴）
 活动入口：微信-金贴小程序
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-=================QuantumultX==============
-[task_local]
-#领金贴
-10 0 * * * https://github.com/wulove/my_scripts/raw/master/jd_jintie_wx.js, tag=金贴小程序, enabled=true
-===========Loon===============
-[Script]
-cron "10 0 * * *" script-path=https://github.com/wulove/my_scripts/raw/master/jd_jintie_wx.js,tag=金贴小程序
-=======Surge===========
-金贴小程序 = type=cron,cronexp="10 0 * * *",wake-system=1,timeout=3600,script-path=https://github.com/wulove/my_scripts/raw/master/jd_jintie_wx.js
-==============小火箭=============
-金贴小程序 = type=cron,script-path=https://github.com/wulove/my_scripts/raw/master/jd_jintie_wx.js, cronexpr="10 0 * * *", timeout=3600, enable=true
+
+#金贴小程序
+cron "45 0,12,22 * * *" jd_jintie_wx.js,tag=金贴小程序
  */
 const $ = new Env('金贴小程序');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -20,13 +11,12 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
-const linkId = "ZTCPS112071853458";
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item]);
   });
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === "false") console.log = () => {};
-  if (JSON.stringify(process.env).indexOf('GITHUB') > -1) process.exit(0);
+//  if (JSON.stringify(process.env).indexOf('GITHUB') > -1) process.exit(0);
 } else {
   cookiesArr = [$.getdata("CookieJD"),$.getdata("CookieJD2"),...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
@@ -67,7 +57,9 @@ async function main() {
   try {
     await queryAvailableSubsidyAmount();
     await queryMission();
+    await $.wait(1000);
     await doTask();
+    await $.wait(1000);
     await queryAvailableSubsidyAmount();
   } catch (e) {
     $.logErr(e)
@@ -76,11 +68,16 @@ async function main() {
 function queryMission() {
   $.taskData = [];
   const body = JSON.stringify({
-    "sourceType":"2",
-    "environment":"wxMiniEnv",
-    "linkId":linkId,
+    "source":"MINI_APP",
+    "channel":"default",
+    "apiVersion":"4.0.0",
+    "others":{
+      "taskCode":"TTJT-weixin",
+      "token":"",
+      "userOpenId":""
+    }
   })
-  const options = taskUrl('appletSubsidyMissionsNew', body, 'uc');
+  const options = taskUrl('channelQueryCenterMissionList', body, 'jrm');
   return new Promise((resolve) => {
     $.get(options, async (err, resp, data) => {
       try {
@@ -88,16 +85,16 @@ function queryMission() {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
+          // console.log(data)
           data = JSON.parse(data);
           if (data.resultCode === 0) {
-            if (data.resultData.code === 0) {
+            if (data.resultData.code === '000') {
               console.log('互动任务获取成功')
-              const {missionPlayingList, missionLimitList} = data.resultData.data
-              $.taskData = [...missionPlayingList, ...missionLimitList];
-              $.willTask = $.taskData.filter(t => t.status === 1) || [];
+              $.taskData = data.resultData.data.missionList;
+              $.willTask = $.taskData.filter(t => (t.status === -1 || t.status === 0)) || [];
               $.willingTask = $.taskData.filter(t => t.status === 0) || [];//已领取任务，但未完成
-              $.recevieTask = $.taskData.filter(t => t.status === 2) || [];//待领取奖励
-              const doneTask = $.taskData.filter(t => t.status === 3);
+              $.recevieTask = $.taskData.filter(t => t.status === 1) || [];//待领取奖励
+              const doneTask = $.taskData.filter(t => t.status === 2);
               console.log(`\n总任务数：${$.taskData.length}`)
               console.log(`剩余未接取任务数：${$.willTask.length}`)
               console.log(`剩余未领取奖励数：${$.recevieTask.length}`)
@@ -120,125 +117,47 @@ function queryMission() {
 // 做任务
 async function doTask() {
   for (let task of $.willTask) {
-    console.log(`\n开始领取 【${task['title']}】任务`);
+    console.log(`\n开始【${task['name']}】任务`);
 
-    if (task.taskType === 5) {
-      await doMission(task, 'seeVideoMission');
-      await $.wait(10000);
-      await doMission(task, 'videoMissionDone');
-      await $.wait(100);
-      await drawMission(task, 'videoSubsidyReceive');
+    if (task.taskType === 1) {
+      /*await doMission(task, 'seeVideoMission');
+      await $.wait(10000);*/
+      await doMission(task, 'channelFinishSelfTask');
+      await $.wait(1000);
+      await doMission(task, 'channelRewardSelfTask');
     } else {
-      await receiveMession(task);
-      await $.wait(100);
-      await doMission(task, 'appletDoTaskNew');
-      await $.wait(100);
-      await doMission(task, 'sentMissionMq');
-      await $.wait(100);
-      await drawMission(task, 'appletWithDrawMissionNew');
+      await doMission(task, 'channelReceiveCenterMission');
+      await $.wait(1000);
+      await doMission(task, 'channelDoCenterMissionReport');
+      await $.wait(1000);
+      await doMission(task, 'channelAwardCenterMission');
     }
   }
   if ($.recevieTask && $.recevieTask.length) {
     for (let task of $.recevieTask) {
-      console.log('预计获得：', task['awardStr'])
-      if (task.taskType === 5) {
-        await drawMission(task, 'videoSubsidyReceive');
+      console.log('预计获得：', task['amount'])
+      if (task.taskType === 1) {
+        await doMission(task, 'channelRewardSelfTask');
       } else {
-        await drawMission(task, 'appletWithDrawMissionNew');
+        await doMission(task, 'channelAwardCenterMission');
       }
     }
   }
 }
-//领取任务
-function receiveMession(mission) {
-  const body = JSON.stringify({
-    "sourceType":"2",
-    "environment":"wxMiniEnv",
-    "linkId":linkId,
-    "channelCode":"JTYSXCX",
-    "missionId":mission['missionId'],
-    "taskType":mission['taskType'],
-  });
-  const options = taskUrl('receiveMission', body);
-  return new Promise((resolve) => {
-    $.get(options, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.resultCode === 0) {
-            if (data.resultData.success) {
-              console.log("任务接取操作成功")
-            } else {
-              console.log('任务接取失败', data.resultData.msg)
-            }
-          } else {
-            console.log('任务接取失败', data.resultMsg)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
 function doMission(mission, functionId) {
-  let body = {
-    "sourceType":"2",
-    "environment":"wxMiniEnv",
-    "linkId":linkId,
-  };
-  if (functionId === 'appletDoTaskNew') {
-    body['taskId'] = mission['id'];
-    body['taskType'] = mission['taskType'];
-  } else if (functionId === 'sentMissionMq') {
-    body['missionId'] = mission['missionId'];
-  } else if (functionId === 'seeVideoMission' || functionId === 'videoMissionDone') {
-    body['missionId'] = mission['missionId'];
-    body['amount'] = mission['award'];
-  }
-  const options = taskUrl(functionId, JSON.stringify(body), 'uc');
-  return new Promise((resolve) => {
-    $.get(options, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.resultCode === 0) {
-            if (data.resultData.success) {
-              console.log("任务操作成功")
-            } else {
-              console.log('任务操作失败', data.resultData.message)
-            }
-          } else {
-            console.log('任务操作失败', data.resultMsg)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-//领取金贴奖励
-function drawMission(mission, functionId) {
   const body = JSON.stringify({
-    "sourceType":"2",
-    "environment":"wxMiniEnv",
-    "linkId":linkId,
-    "channel":"JTYSXCX",
-    "missionId":mission['missionId'],
-    "taskType":mission['taskType']
+    "source":"MINI_APP",
+    "channel":"default",
+    "channelLv":"",
+    "apiVersion":"4.0.0",
+    "others":{
+      "missionId":mission['missionId'],
+      "taskCode":'TTJT-weixin',
+      "token":"",
+      "userOpenId":""
+    }
   });
-  const options = taskUrl(functionId, body, 'uc');
+  const options = taskUrl(functionId, body, 'jrm');
   return new Promise((resolve) => {
     $.get(options, (err, resp, data) => {
       try {
@@ -246,16 +165,15 @@ function drawMission(mission, functionId) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-          console.log(data)
           data = JSON.parse(data);
           if (data.resultCode === 0) {
-            if (data.resultData.success) {
-              console.log('奖励领取成功')
+            if (data.resultData.code === '000') {
+              console.log(functionId, '成功')
             } else {
-              console.log('奖励领取失败', data.resultData.message)
+              console.log(functionId, data.resultData.msg)
             }
           } else {
-            console.log('奖励领取失败', data.resultMsg)
+            console.log(functionId, data.resultMsg)
           }
         }
       } catch (e) {
@@ -269,11 +187,16 @@ function drawMission(mission, functionId) {
 //获取用户金贴信息
 function queryAvailableSubsidyAmount() {
   const body = JSON.stringify({
-    "sourceType":"2",
-    "environment":"wxMiniEnv",
-    "linkId":linkId,
+    "apiVersion": "4.0.0",
+    "channel": "default",
+    "channelLv": "",
+    "others": {
+      "shareId": ""
+    },
+    "riskDeviceParam": {},
+    "source": "MINI_APP"
   })
-  const options = taskUrl('appletSubsidyUserInfoNew', body, 'uc');
+  const options = taskUrl('channelUserSubsidyInfo', body, 'jrm');
   return new Promise((resolve) => {
     $.get(options, async (err, resp, data) => {
       try {
@@ -281,18 +204,19 @@ function queryAvailableSubsidyAmount() {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
+          //console.log('userAvailableSubsidyInfo:', data)
           data = JSON.parse(data);
           if (data.resultCode === 0) {
-            if (data.resultData.code === 0) {
-              let state = data.resultData.data.todayIsOver
+            if (data.resultData.code === '000') {
+              /*let state = data.resultData.data.todayIsOver
               if (!state) signOfJinTie();
-              $.totalSubsidy = data.resultData.data.totalSubsidy / 100;
-              console.log(`当前总金贴：${data.resultData.data.totalSubsidyStr}元`)
+              $.totalSubsidy = data.resultData.data.totalSubsidy / 100;*/
+              console.log(`当前金贴：`, JSON.stringify(data.resultData.data))
             } else {
-              console.log('获取金贴失败', data.resultData.message)
+              console.log('获取金贴失败', data.resultData.msg)
             }
           } else {
-            console.log('获取金贴失败', data.resultData.retMsg)
+            console.log('获取金贴失败', data.resultMsg)
           }
         }
       } catch (e) {
@@ -318,6 +242,7 @@ function signOfJinTie() {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
+          console.log('signOfJinTie', data)
           data = JSON.parse(data);
           if (data.resultCode === 0) {
             if (data.resultData.code === 0) {
@@ -348,7 +273,7 @@ function taskUrl(function_id, body, type = 'mission') {
       'Content-Type' : `application/json`,
       'Host' : `ms.jr.jd.com`,
       'Connection' : `keep-alive`,
-      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 12_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16A404 MicroMessenger/8.0.4(0x1800042c) NetType/4G Language/zh_CN",
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 12_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16A404 MicroMessenger/8.0.6(0x18000633) NetType/4G Language/zh_CN",
       'Referer' : `https://servicewechat.com/wx5c9a5ce20be8207b/199/page-frame.html`,
       'Accept-Language' : `zh-cn`
     }
