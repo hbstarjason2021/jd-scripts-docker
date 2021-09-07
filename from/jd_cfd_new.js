@@ -64,7 +64,7 @@ $.appId = 10028;
   if (!res) {
     $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/cfd.json')
+    res = await getAuthorShareCode(')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -152,11 +152,11 @@ async function cfd() {
 
     // 寻宝
     console.log(`寻宝`)
-    let XBDetail = beginInfo.XbStatus.XBDetail.filter((x) => x.ddwColdEndTm === 0 && x.dwRemainCnt === 3)
+    let XBDetail = beginInfo.XbStatus.XBDetail.filter((x) => x.dwRemainCnt !== 1)
     if (XBDetail.length !== 0) {
       console.log(`开始寻宝`)
-      for (let key of Object.keys(beginInfo.XbStatus.XBDetail)) {
-        let vo = beginInfo.XbStatus.XBDetail[key]
+      for (let key of Object.keys(XBDetail)) {
+        let vo = XBDetail[key]
         await $.wait(2000)
         await TreasureHunt(vo.strIndex)
       }
