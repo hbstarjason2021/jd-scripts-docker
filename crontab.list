@@ -3,6 +3,8 @@
 ## 京东汽车兑换
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car_exchange.js | sed 's/^/ 【京东汽车兑换】/'; "
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jdcar500bean.js | sed 's/^/ 【京东汽车兑换】/'; "
+0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car_exchange_xh.js | sed 's/^/ 【京东汽车兑换】/'; "
+
 
 ## 零食街兑换
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; lsjdh="jdAward3"; node /scripts/jd_lsj.js | sed 's/^/ 【零食街兑换】/'; "
