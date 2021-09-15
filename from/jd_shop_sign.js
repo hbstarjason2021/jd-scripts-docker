@@ -3,40 +3,40 @@
 ============Quantumultx===============
 [task_local]
 #店铺签到
-0 0 * * * https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js, tag=店铺签到, enabled=true
+0 0 * * * https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js, tag=店铺签到, enabled=true
 ===========Loon============
 [Script]
-cron "7 0,21 * * *" script-path= ,tag=店铺签到
+cron "0 0 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js,tag=店铺签到
 ============Surge=============
-店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js
+店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js
 ===========小火箭========
-店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
 */
-
-
 const $ = new Env('店铺签到');
-
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message;
+let cookiesArr = [], cookie = '', allMessage = '', message;
 const JD_API_HOST = 'https://api.m.jd.com/api?appid=interCenter_shopSign';
 
-let activityId = ''
-let vender = ''
-let num = 0
+let activityId=''
+let vender=''
+let num=0
+let shopname=''
 const token = [
-  // 自己手工添加
-  'FA2A07ABF7B7B53B309D7400AE62E57F', //京东进口超市
-  // ending...
+  'DFB373125B145462667D17615298C7E8',
+  'A4469A359592ECFDF1A927B3EE6E7357',
+  '64DE462E1DF45B508CF4D57BBBF07E62',
+  '90C5F16B69445902405E303E392CAD04',
+  '36053DF1EE52DE74433378ABBE7E2288',
+  'B586BFDD10B81EC74B62BC926E1CC533',
+  '66925084B111514C6DA1B86CCCF216CF',
+  '7E8733E42216757589C61C3F7A10A387',
+  '94DC6B63655FEBAC448D621D2814ECD2',
+  'F264B2478DA780835752188235D33CB6',
   'D0091B5128433C41D58F698665048E9F',
   '4C3EE43458D3603173B190B3AE67A2F2',
-  '9A6361E78BFEF7FAFAAA5B4B8271D6DE',
-  '5AC2FB3A9785CBDF9A857DA2A7116F45',
-  '2CE2AE8C24D6E1DC60B7FC5A13A04A61',
-  '795F5ACAD4972C3233AF3D36213653D7',
-  '3D99640B8E65273658E3A21908FFEC4C',
   '9A6361E78BFEF7FAFAAA5B4B8271D6DE',
   '5AC2FB3A9785CBDF9A857DA2A7116F45',
   '2CE2AE8C24D6E1DC60B7FC5A13A04A61',
@@ -46,7 +46,6 @@ const token = [
   'F06840A438B3C85550A5734639FD64BD',
   '3D99640B8E65273658E3A21908FFEC4C',
 ]
-//IOS等用户直接用NobyDa的jd cookie
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -54,7 +53,13 @@ if ($.isNode()) {
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+  let cookiesData = $.getdata('CookiesJD') || "[]";
+  cookiesData = jsonParse(cookiesData);
+  cookiesArr = cookiesData.map(item => item.cookie);
+  cookiesArr.reverse();
+  cookiesArr.push(...[$.getdata('CookieJD2'), $.getdata('CookieJD')]);
+  cookiesArr.reverse();
+  cookiesArr = cookiesArr.filter(item => item !== "" && item !== null && item !== undefined);
 }
 
 !(async () => {
@@ -65,7 +70,7 @@ if ($.isNode()) {
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
@@ -74,7 +79,6 @@ if ($.isNode()) {
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
-
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
@@ -84,25 +88,28 @@ if ($.isNode()) {
       await showMsg()
     }
   }
+  if ($.isNode() && allMessage) {
+    await notify.sendNotify(`${$.name}`, `${allMessage}`)
+  }
 })()
-  .catch((e) => {
-    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-  })
-  .finally(() => {
-    $.done();
-  })
+    .catch((e) => {
+      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+    })
+    .finally(() => {
+      $.done();
+    })
 
 //开始店铺签到
-async function dpqd() {
+async function dpqd(){
   for (var j = 0; j < token.length; j++) {
     num=j+1
     if (token[j]=='') {continue}
     await getvenderId(token[j])
     if (vender=='') {continue}
     await getvenderName(vender)
-    await getActivityInfo(token[j], vender)
-    await signCollectGift(token[j], vender, activityId)
-    await taskUrl(token[j], vender)
+    await getActivityInfo(token[j],vender)
+    await signCollectGift(token[j],vender,activityId)
+    await taskUrl(token[j],vender)
   }
 }
 
@@ -128,12 +135,12 @@ function getvenderId(token) {
         } else {
           //console.log(data)
           data = JSON.parse(/{(.*)}/g.exec(data)[0])
-          if (data.code == 402) {
-            vender = ''
-            console.log(`第` + num + `个店铺（${token}）签到活动已失效`)
-            message += `第` + num + `个店铺签到活动已失效\n`
-          } else {
-            vender = data.data.venderId
+          if (data.code==402) {
+            vender=''
+            console.log(`第`+num+`个店铺签到活动已失效`)
+            message +=`第`+num+`个店铺签到活动已失效\n`
+          }else{
+            vender=data.data.venderId
           }
         }
       } catch (e) {
@@ -167,8 +174,8 @@ function getvenderName(venderId) {
           //console.log(data)
           data = JSON.parse(data)
           shopName = data.shopName
-          console.log(`【` + shopName + `】`)
-          message += `【` + shopName + `】`
+          console.log(`【`+shopName+`】`)
+          message +=`【`+shopName+`】`
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -181,7 +188,7 @@ function getvenderName(venderId) {
 
 
 //获取店铺活动信息
-function getActivityInfo(token, venderId) {
+function getActivityInfo(token,venderId) {
   return new Promise(resolve => {
     const options = {
       url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getActivityInfo&body={%22token%22:%22${token}%22,%22venderId%22:${venderId}}&jsonp=jsonp1005`,
@@ -203,16 +210,16 @@ function getActivityInfo(token, venderId) {
         } else {
           //console.log(data)
           data = JSON.parse(/{(.*)}/g.exec(data)[0])
-          activityId = data.data.id
+          activityId=data.data.id
           //console.log(data)
-          let mes = '';
+          let mes='';
           for (let i = 0; i < data.data.continuePrizeRuleList.length; i++) {
-            const level = data.data.continuePrizeRuleList[i].level
-            const discount = data.data.continuePrizeRuleList[i].prizeList[0].discount
-            mes += "签到" + level + "天,获得" + discount + '豆'
+            const level=data.data.continuePrizeRuleList[i].level
+            const discount=data.data.continuePrizeRuleList[i].prizeList[0].discount
+            mes += "签到"+level+"天,获得"+discount+'豆'
           }
-          //console.log(message+mes+'\n')
-          //message += mes+'\n'
+          // console.log(message+mes+'\n')
+          // message += mes+'\n'
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -224,7 +231,7 @@ function getActivityInfo(token, venderId) {
 }
 
 //店铺签到
-function signCollectGift(token, venderId, activitytemp) {
+function signCollectGift(token,venderId,activitytemp) {
   return new Promise(resolve => {
     const options = {
       url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_signCollectGift&body={%22token%22:%22${token}%22,%22venderId%22:688200,%22activityId%22:${activitytemp},%22type%22:56,%22actionType%22:7}&jsonp=jsonp1004`,
@@ -256,7 +263,7 @@ function signCollectGift(token, venderId, activitytemp) {
 }
 
 //店铺获取签到信息
-function taskUrl(token, venderId) {
+function taskUrl(token,venderId) {
   return new Promise(resolve => {
     const options = {
       url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getSignRecord&body={%22token%22:%22${token}%22,%22venderId%22:${venderId},%22activityId%22:${activityId},%22type%22:56}&jsonp=jsonp1006`,
@@ -275,10 +282,10 @@ function taskUrl(token, venderId) {
           console.log(`\n${$.name}: API查询请求失败 ‼️‼️`)
           $.logErr(err);
         } else {
-          //console.log(data)
-          data = JSON.parse(/{(.*)}/g.exec(data)[0])
-          console.log(`已签到：` + data.data.days + `天`)
-          message += `已签到：` + data.data.days + `天\n`
+            //console.log(data)
+            data = JSON.parse(/{(.*)}/g.exec(data)[0])
+            console.log(`已签到：`+data.data.days+`天`)
+            message +=`已签到：`+data.data.days+`天\n`
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -292,7 +299,7 @@ function taskUrl(token, venderId) {
 async function showMsg() {
   if ($.isNode()) {
     $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
-    await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, `【京东账号${$.index}】${$.nickName}\n${message}`);
+    allMessage += `【京东账号${$.index}】${$.nickName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : ''}`;
   }
 }
 
@@ -308,7 +315,7 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+        "User-Agent": `jdapp;android;9.3.5;10;3353234393134326-3673735303632613;network/wifi;model/MI 8;addressid/138719729;aid/3524914bc77506b1;oaid/274aeb3d01b03a22;osVer/29;appBuild/86390;psn/Mp0dlaZf4czQtfPNMEfpcYU9S/f2Vv4y|2255;psq/1;adk/;ads/;pap/JA2015_311210|9.3.5|ANDROID 10;osv/10;pv/2039.1;jdv/0|androidapp|t_335139774|appshare|QQfriends|1611211482018|1611211495;ref/com.jingdong.app.mall.home.JDHomeFragment;partner/jingdong;apprpd/Home_Main;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045230 Mobile Safari/537.36`
       }
     }
     $.post(options, (err, resp, data) => {
@@ -324,7 +331,7 @@ function TotalBean() {
               return
             }
             if (data['retcode'] === 0) {
-              $.nickName = (data['base'] && data['base'].nickname) || $.UserName;
+              $.nickName = data['base'].nickname;
             } else {
               $.nickName = $.UserName
             }
