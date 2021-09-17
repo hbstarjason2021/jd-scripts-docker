@@ -20,6 +20,7 @@ jobs:
       uses: Yikun/hub-mirror-action@master
       ### uses: x-dr/sync-repo-to-gitee@master
       ### uses: serverlesslife-cn/sync-repo-to-coding@master
+      ### uses: wearerequired/git-mirror-action@v1
       with:
         # 必选，需要同步的Github用户（源）
         src: github/hbstarjason2021
