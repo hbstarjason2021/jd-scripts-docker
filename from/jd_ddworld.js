@@ -1,6 +1,5 @@
-/**
-cron "15 3,16 * * *" jd_ddworld.js
- 活动地址:https://ddsj-dz.isvjcloud.com/dd-world/load_app/load_app.html
+/*
+* 活动地址:https://ddsj-dz.isvjcloud.com/dd-world/load_app/load_app.html
 * */
 const $ = new Env('东东世界');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -114,6 +113,13 @@ async function doTask(){
                 'taskToken':$.taskDetailList.taskToken,
                 'needTime':Number($.oneTask.maxTimes) - Number($.oneTask.times)
             })
+            continue;
+        }
+        if($.oneTask.taskType === 12){
+            $.info = $.taskDetailList;
+            console.log(`任务：${$.oneTask.taskName} 去执行`);
+            await takePostRequest('do_task');
+            await $.wait(1000);
             continue;
         }
         for (let j = 0; j < $.taskDetailList.length; j++) {
