@@ -67,11 +67,11 @@ let tokenInfo = {}, hotInfo = {}
       hotInfo[$.UserName] = $.hot
     }
   }
-  let res = await getAuthorShareCode('')
+  let res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/ddworld.json')
   if (!res) {
-    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: 'https://gitee.com/starjason/sharecode/raw/master/ddworld.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('')
+    res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/ddworld.json')
   }
   $.shareCodes = [...$.shareCodes, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
