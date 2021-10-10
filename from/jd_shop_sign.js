@@ -3,60 +3,49 @@
 ============Quantumultx===============
 [task_local]
 #店铺签到
-0 0 * * * https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js, tag=店铺签到, enabled=true
+0 0 * * * https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js, tag=店铺签到, enabled=true
 ===========Loon============
 [Script]
-cron "7 0,21 * * *" script-path= ,tag=店铺签到
+cron "0 0 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js,tag=店铺签到
 ============Surge=============
-店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.js
+店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js
 ===========小火箭========
-店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Misaka09982/AutoSignMachine/master/diy_shopsign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
 */
-
-
 const $ = new Env('店铺签到');
-
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message;
+let cookiesArr = [], cookie = '', allMessage = '', message;
 const JD_API_HOST = 'https://api.m.jd.com/api?appid=interCenter_shopSign';
 
-let activityId = ''
-let vender = ''
-let num = 0
+let activityId=''
+let vender=''
+let num=0
+let shopname=''
 const token = [
-    "E51D8F403EE7B7C11AA23771254DCD8A",
-    "DA052DD01D564F695F96D229AB525783",
-    "2D01F8529A3FDF70C106459FE90E263C",
-    "B3A9883216190B198C546D21A18E0738",
-    "A67EE89F75D841DFA0E81269C872A56A",
-    "A999F0F41763FD4C392677A00B930D4E",
-    "2D01F8529A3FDF70C106459FE90E263C",
-    "B3A9883216190B198C546D21A18E0738",
-    "E401DB88AD9518168404A947BD069655",
-    'CEF366C139A7D0A5ADC99F19CFBA4054',
-    '2A9A3CEC924CAE7FE0176B42DF0D88F4',
-    '407910EA26539B7058C483ACAAD92EA8',
-    'F741C9C67E4B67ABEF716F27AB2AF6F8',
-    '3A5DA1F4D7BE40E65654C733F7333657',
-    '5988608149D2C71FB2AAE1AA9D35EDE4',
-    "FBD586E1BA834B20BD4CC7CC04C3D0BD",
-    "E2C480571521C4CC992AF19BB6B4978E",
-    "A82BB3D06455B9674F63F48979A73BCC",
-    "7DC877395EBDCFE3C3E6031782CAB049",
-    "50A6EFF0F4CFCE65B0FA46CF0A23DB53",
-    "889BB484BDC0F98C9760B44DE353E04E",
-    "95FB2047E4912D89A9394B446C118E08",
-    "CEF366C139A7D0A5ADC99F19CFBA4054",
-    "EDC5452E351B6360488A611BBCB6FD18",
-    "3A5DA1F4D7BE40E65654C733F7333657",
-    "6DA953F013BAF9AC80B074A15752048F",
-    "C30B2DCBE52B8830CA52B5D7FFB1FC12",
-    "2F18BA1F94BB3F601ADC5CB0756F32BB",
+  "C42A5A817AFEFD928254B42D3249873B",
+  "32BCC4761C4F50A8173C5E0B9FE52A6E",
+  "9745341EAF7A0D198BB2D3ED10E538CB",
+  "1278D2D9916E3BAC83FCB2636E85D756",
+  "1C031CDF02B934C060936F1FB5ABF062",
+  "90FF9108E3769B3C0FA04B723F692EB7",
+  "9EACB4A30B9E44DBC2780BEF1E5D2C8C",
+  "AB5172B51CF895DB51A9C9CAE86DF17B",
+  "AE67114D509F65CF7BF7ADD27419489D",
+  "407910EA26539B7058C483ACAAD92EA8",
+  "FBD586E1BA834B20BD4CC7CC04C3D0BD",
+  "E2C480571521C4CC992AF19BB6B4978E",
+  "A82BB3D06455B9674F63F48979A73BCC",
+  "7DC877395EBDCFE3C3E6031782CAB049",
+  "50A6EFF0F4CFCE65B0FA46CF0A23DB53",
+  "95FB2047E4912D89A9394B446C118E08",
+  "3A5DA1F4D7BE40E65654C733F7333657",
+  "6DA953F013BAF9AC80B074A15752048F",
+  "C30B2DCBE52B8830CA52B5D7FFB1FC12",
+  "2F18BA1F94BB3F601ADC5CB0756F32BB"
 ]
-//IOS等用户直接用NobyDa的jd cookie
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -64,7 +53,13 @@ if ($.isNode()) {
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+  let cookiesData = $.getdata('CookiesJD') || "[]";
+  cookiesData = jsonParse(cookiesData);
+  cookiesArr = cookiesData.map(item => item.cookie);
+  cookiesArr.reverse();
+  cookiesArr.push(...[$.getdata('CookieJD2'), $.getdata('CookieJD')]);
+  cookiesArr.reverse();
+  cookiesArr = cookiesArr.filter(item => item !== "" && item !== null && item !== undefined);
 }
 
 !(async () => {
@@ -75,7 +70,7 @@ if ($.isNode()) {
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
@@ -84,7 +79,6 @@ if ($.isNode()) {
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
-
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
@@ -94,25 +88,28 @@ if ($.isNode()) {
       await showMsg()
     }
   }
+  if ($.isNode() && allMessage) {
+    await notify.sendNotify(`${$.name}`, `${allMessage}`)
+  }
 })()
-  .catch((e) => {
-    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-  })
-  .finally(() => {
-    $.done();
-  })
+    .catch((e) => {
+      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+    })
+    .finally(() => {
+      $.done();
+    })
 
 //开始店铺签到
-async function dpqd() {
+async function dpqd(){
   for (var j = 0; j < token.length; j++) {
     num=j+1
     if (token[j]=='') {continue}
     await getvenderId(token[j])
     if (vender=='') {continue}
     await getvenderName(vender)
-    await getActivityInfo(token[j], vender)
-    await signCollectGift(token[j], vender, activityId)
-    await taskUrl(token[j], vender)
+    await getActivityInfo(token[j],vender)
+    await signCollectGift(token[j],vender,activityId)
+    await taskUrl(token[j],vender)
   }
 }
 
@@ -138,12 +135,12 @@ function getvenderId(token) {
         } else {
           //console.log(data)
           data = JSON.parse(/{(.*)}/g.exec(data)[0])
-          if (data.code == 402) {
-            vender = ''
-            console.log(`第` + num + `个店铺（${token}）签到活动已失效`)
-            message += `第` + num + `个店铺签到活动已失效\n`
-          } else {
-            vender = data.data.venderId
+          if (data.code==402) {
+            vender=''
+            console.log(`第`+num+`个店铺签到活动已失效`)
+            message +=`第`+num+`个店铺签到活动已失效\n`
+          }else{
+            vender=data.data.venderId
           }
         }
       } catch (e) {
@@ -177,8 +174,8 @@ function getvenderName(venderId) {
           //console.log(data)
           data = JSON.parse(data)
           shopName = data.shopName
-          console.log(`【` + shopName + `】`)
-          message += `【` + shopName + `】`
+          console.log(`【`+shopName+`】`)
+          message +=`【`+shopName+`】`
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -191,7 +188,7 @@ function getvenderName(venderId) {
 
 
 //获取店铺活动信息
-function getActivityInfo(token, venderId) {
+function getActivityInfo(token,venderId) {
   return new Promise(resolve => {
     const options = {
       url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getActivityInfo&body={%22token%22:%22${token}%22,%22venderId%22:${venderId}}&jsonp=jsonp1005`,
@@ -213,16 +210,16 @@ function getActivityInfo(token, venderId) {
         } else {
           //console.log(data)
           data = JSON.parse(/{(.*)}/g.exec(data)[0])
-          activityId = data.data.id
+          activityId=data.data.id
           //console.log(data)
-          let mes = '';
+          let mes='';
           for (let i = 0; i < data.data.continuePrizeRuleList.length; i++) {
-            const level = data.data.continuePrizeRuleList[i].level
-            const discount = data.data.continuePrizeRuleList[i].prizeList[0].discount
-            mes += "签到" + level + "天,获得" + discount + '豆'
+            const level=data.data.continuePrizeRuleList[i].level
+            const discount=data.data.continuePrizeRuleList[i].prizeList[0].discount
+            mes += "签到"+level+"天,获得"+discount+'豆'
           }
-          //console.log(message+mes+'\n')
-          //message += mes+'\n'
+          // console.log(message+mes+'\n')
+          // message += mes+'\n'
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -234,7 +231,7 @@ function getActivityInfo(token, venderId) {
 }
 
 //店铺签到
-function signCollectGift(token, venderId, activitytemp) {
+function signCollectGift(token,venderId,activitytemp) {
   return new Promise(resolve => {
     const options = {
       url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_signCollectGift&body={%22token%22:%22${token}%22,%22venderId%22:688200,%22activityId%22:${activitytemp},%22type%22:56,%22actionType%22:7}&jsonp=jsonp1004`,
@@ -266,7 +263,7 @@ function signCollectGift(token, venderId, activitytemp) {
 }
 
 //店铺获取签到信息
-function taskUrl(token, venderId) {
+function taskUrl(token,venderId) {
   return new Promise(resolve => {
     const options = {
       url: `${JD_API_HOST}&t=${Date.now()}&loginType=2&functionId=interact_center_shopSign_getSignRecord&body={%22token%22:%22${token}%22,%22venderId%22:${venderId},%22activityId%22:${activityId},%22type%22:56}&jsonp=jsonp1006`,
@@ -287,8 +284,8 @@ function taskUrl(token, venderId) {
         } else {
           //console.log(data)
           data = JSON.parse(/{(.*)}/g.exec(data)[0])
-          console.log(`已签到：` + data.data.days + `天`)
-          message += `已签到：` + data.data.days + `天\n`
+          console.log(`已签到：`+data.data.days+`天`)
+          message +=`已签到：`+data.data.days+`天\n`
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -302,7 +299,7 @@ function taskUrl(token, venderId) {
 async function showMsg() {
   if ($.isNode()) {
     $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
-    await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, `【京东账号${$.index}】${$.nickName}\n${message}`);
+    allMessage += `【京东账号${$.index}】${$.nickName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : ''}`;
   }
 }
 
@@ -318,7 +315,7 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+        "User-Agent": `jdapp;android;9.3.5;10;3353234393134326-3673735303632613;network/wifi;model/MI 8;addressid/138719729;aid/3524914bc77506b1;oaid/274aeb3d01b03a22;osVer/29;appBuild/86390;psn/Mp0dlaZf4czQtfPNMEfpcYU9S/f2Vv4y|2255;psq/1;adk/;ads/;pap/JA2015_311210|9.3.5|ANDROID 10;osv/10;pv/2039.1;jdv/0|androidapp|t_335139774|appshare|QQfriends|1611211482018|1611211495;ref/com.jingdong.app.mall.home.JDHomeFragment;partner/jingdong;apprpd/Home_Main;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 10; MI 8 Build/QKQ1.190828.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045230 Mobile Safari/537.36`
       }
     }
     $.post(options, (err, resp, data) => {
@@ -334,7 +331,7 @@ function TotalBean() {
               return
             }
             if (data['retcode'] === 0) {
-              $.nickName = (data['base'] && data['base'].nickname) || $.UserName;
+              $.nickName = data['base'].nickname;
             } else {
               $.nickName = $.UserName
             }
