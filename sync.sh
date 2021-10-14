@@ -189,7 +189,7 @@ cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
 
 #cd /Loon && npm install -g
 
-npm install png-js  date-fns axios
+npm install png-js  date-fns axios dotenv ts-md5 
 cd /jddj && npm install request && npm cache clean --force
 
 ##################################
