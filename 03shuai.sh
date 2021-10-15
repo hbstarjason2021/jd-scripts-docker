@@ -30,8 +30,8 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##东东小窝
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_small_home-new.js'
 
-docker-compose down
-
+#docker-compose down
+docker stop jd3 && docker rm jd3
 
 ##集卡
 ##docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jika.js'
