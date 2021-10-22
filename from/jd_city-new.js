@@ -373,7 +373,8 @@ function uploadShareCode(code) {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `http://${randomString(40)}.transfer.nz.lu/city`, 'timeout': 10000}, (err, resp, data) => {
+    //$.get({url: `http://${randomString(40)}.transfer.nz.lu/city`, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 10000}, (err, resp, data) => {  
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
