@@ -144,11 +144,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 一加手机
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_yijia.js'
 
-## 海尔
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_haier.js'
 
-## 美妆周年庆
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_beauty_twelfth.js'
+## 美妆馆-选品官
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_selectionOfficer.js'
 
 ## 京喜农场 jd_jxnc.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxnc-new.js'
@@ -198,7 +196,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxqd.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jx_sign.js'
 
-
 ###### 各种签到
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_sign.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_sign_graphics.js'
@@ -223,6 +220,12 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 
 #######################################################################################################################
+
+## 海尔
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_haier.js'
+
+## 美妆周年庆
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_beauty_twelfth.js'
 
 ####### 七夕情报局
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node gua_doge.js'
