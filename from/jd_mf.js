@@ -25,7 +25,8 @@ let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭�
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let uuid
-$.shareCodes = ['S5KkcRx4QplfTKUz1l6UPdQ','S97g7GU9KrQGJYUM','S_bkiAkRItguJ','S6Lh2RRwZrw2Jdw']
+//$.shareCodes = ['S5KkcRx4QplfTKUz1l6UPdQ','S97g7GU9KrQGJYUM','S_bkiAkRItguJ','S6Lh2RRwZrw2Jdw']
+$.shareCodes = [{"use":"jd_709c349f13b51","code":"S5KkcRx4QplfTKUz1l6UPdQ"},{"use":"yuxiachenqi","code":"S97g7GU9KrQGJYUM"},{"use":"starjason","code":"S_bkiAkRItguJ"},{"use":"fu5520jing","code":"S6Lh2RRwZrw2Jdw"}]
 let hotInfo = {}
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
