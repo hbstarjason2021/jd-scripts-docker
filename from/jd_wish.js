@@ -262,7 +262,7 @@ function interact_template_getLotteryResult() {
             let userAwardsCacheDto = data && data.data && data.data.result && data.data.result.userAwardsCacheDto
             if (userAwardsCacheDto) {
               if (userAwardsCacheDto.type === 2) {
-                console.log(`抽中：${userAwardsCacheDto.jBeanAwardVo.quantity}${userAwardsCacheDto.jBeanAwardVo.ext}`)
+                console.log(`抽中：${userAwardsCacheDto.jBeanAwardVo.quantity}${userAwardsCacheDto.jBeanAwardVo.ext || `京豆`}`)
               } else if (userAwardsCacheDto.type === 0) {
                 console.log(`很遗憾未中奖~`)
               } else {
