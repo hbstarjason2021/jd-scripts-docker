@@ -1,6 +1,7 @@
 "use strict";
 /**
- * 我就是看看，不抢
+ * cfd 100
+ * cron: 0 0 * * *
  */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -40,10 +41,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var axios_1 = require("axios");
+var date_fns_1 = require("date-fns");
 var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
-var cookie = '', cookiesArr, res = '';
+var cookie = '', res = '', UserName, token = {};
 !(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var PrettyTable, pt, title, datas, _i, _a, t;
+    var cookiesArr, _i, _a, t;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requestAlgo)()];
@@ -53,50 +55,72 @@ var cookie = '', cookiesArr, res = '';
             case 2:
                 cookiesArr = _b.sent();
                 cookie = cookiesArr[0];
+                UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
+                console.log("\n\u5F00\u59CB\u3010\u4EAC\u4E1C\u8D26\u53F7 " + UserName + "\n");
+                token = (0, TS_USER_AGENTS_1.getJxToken)(cookie);
                 return [4 /*yield*/, api('user/ExchangeState', '_cfd_t,bizCode,dwEnv,dwType,ptag,source,strZone', { dwType: '2' })];
             case 3:
                 res = _b.sent();
+                console.log(JSON.stringify(res));
+                _i = 0, _a = res.hongbao;
                 _b.label = 4;
             case 4:
-                if (!1) return [3 /*break*/, 8];
-                if (!(new Date().getSeconds() < 61)) return [3 /*break*/, 5];
-                return [3 /*break*/, 8];
-            case 5: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
-            case 6:
+                if (!(_i < _a.length)) return [3 /*break*/, 12];
+                t = _a[_i];
+                console.log(t.strPrizeName, 'state:', t.dwState, 'num:', t.dwStockNum);
+                if (!(t.strPrizeName === '100元')) return [3 /*break*/, 11];
+                _b.label = 5;
+            case 5:
+                if (!1) return [3 /*break*/, 9];
+                if (!(new Date().getSeconds() < 10)) return [3 /*break*/, 6];
+                return [3 /*break*/, 9];
+            case 6: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(200)];
+            case 7:
                 _b.sent();
-                _b.label = 7;
-            case 7: return [3 /*break*/, 4];
-            case 8:
-                PrettyTable = require('prettytable');
-                pt = new PrettyTable();
-                title = ['Value', 'Status', 'Stock'];
-                datas = [];
-                for (_i = 0, _a = res.hongbao; _i < _a.length; _i++) {
-                    t = _a[_i];
-                    datas.push([t.strPrizeName.replace('元', ''), t.dwState ? 'True' : 'False', t.dwStockNum]);
-                }
-                pt.create(title, datas);
-                pt.print();
-                return [2 /*return*/];
+                _b.label = 8;
+            case 8: return [3 /*break*/, 5];
+            case 9:
+                console.log('exchange:', (0, date_fns_1.format)(Date.now(), 'yyyy-MM-dd HH:mm:ss:SSS'));
+                return [4 /*yield*/, api('user/ExchangePrize', '_cfd_t,bizCode,ddwPaperMoney,dwEnv,dwLvl,dwType,ptag,source,strPgUUNum,strPgtimestamp,strPhoneID,strPoolName,strZone', {
+                        ddwPaperMoney: 100000,
+                        dwLvl: 3,
+                        dwType: 3,
+                        strPgUUNum: token.strPgUUNum,
+                        strPgtimestamp: token.strPgtimestamp,
+                        strPhoneID: token.strPhoneID,
+                        strPoolName: res.hongbaopool
+                    })];
+            case 10:
+                res = _b.sent();
+                console.log(res);
+                return [3 /*break*/, 12];
+            case 11:
+                _i++;
+                return [3 /*break*/, 4];
+            case 12: return [2 /*return*/];
         }
     });
 }); })();
 function api(fn, stk, params) {
-    if (params === void 0) { params = {}; }
-    return new Promise(function (resolve, reject) {
-        var url = "https://m.jingxi.com/jxbfd/" + fn + "?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=7&_cfd_t=" + Date.now() + "&ptag=&_ste=1&_=" + Date.now() + "&sceneval=2&_stk=" + encodeURIComponent(stk);
-        url = (0, TS_USER_AGENTS_1.h5st)(url, stk, params, 10032);
-        axios_1["default"].get(url, {
-            headers: {
-                'Host': 'm.jingxi.com',
-                'Referer': 'https://st.jingxi.com/',
-                'User-Agent': TS_USER_AGENTS_1["default"],
-                'Cookie': cookie
+    return __awaiter(this, void 0, void 0, function () {
+        var url, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    url = "https://m.jingxi.com/jxbfd/" + fn + "?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=7&_cfd_t=" + Date.now() + "&ptag=&_ste=1&_=" + Date.now() + "&sceneval=2&_stk=" + encodeURIComponent(stk);
+                    url = (0, TS_USER_AGENTS_1.h5st)(url, stk, params, 10032);
+                    return [4 /*yield*/, axios_1["default"].get(url, {
+                            headers: {
+                                'Host': 'm.jingxi.com',
+                                'Referer': 'https://st.jingxi.com/',
+                                'User-Agent': 'jdpingou',
+                                'Cookie': cookie
+                            }
+                        })];
+                case 1:
+                    data = (_a.sent()).data;
+                    return [2 /*return*/, data];
             }
-        }).then(function (res) {
-            resolve(res.data);
-        })["catch"](function (e) {
-            reject(e);
         });
     });
 }
