@@ -118,6 +118,7 @@
 22 0-23/3 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joy_park_task.js | sed 's/^/ 【极速汪汪乐园】/'; "
 
 ## 京喜牧场
+45 0-23/1 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc-new.js | sed 's/^/ 【京喜牧场】/'; "
 25 0-23/2 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc.js | sed 's/^/ 【京喜牧场】/'; "
 
 23 0-23/3 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_ddgame.js | sed 's/^/ 【东东玩家游戏】/'; "
