@@ -79,7 +79,7 @@ if ($.isNode()) {
         console.log(`\n开始互助\n`);
     }
     //authorCodes = ['ba4a6b72-8b92-4072-8340-75ce8e450dbb', '90b0ff1b-6969-452a-9053-243a727aed3c'];
-    authorCodes = ['', ''];
+    authorCodes = ['5068a06e-f411-4be7-a105-44b4819ba2f8', '804ee815-c8eb-4144-be29-ad0135406f3b', '15443874-1e06-47c8-94dd-caf90283a063', '2836c049-1ce9-4ed3-8ffa-9bce8765fb4a'];
     shareCodes = [...new Set([...shareCodes, ...(authorCodes || [])])];
     for (let i = 0; i < cookiesArr.length; i++) {
         $.cookie = cookiesArr[i];
