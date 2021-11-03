@@ -50,10 +50,10 @@ var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
 var cookie = '', res = '', UserName, index;
 var shareCodes = [], shareCodesSelf = [];
 var shareCodesHW = [
-    'e7e44617-c869-4528-beb5-44fe7bcf24aa',
-    'c92b94be-7291-4bfd-9d03-d61be9e9128f',
-    'ec1abf1f-fa08-4596-b24f-5298059caee2',
-    'af449c96-3fb9-417c-a7c6-9b662430f748'
+    '44f0109a-c7ce-41f4-9d70-6787024f897b',
+    'be74d030-f627-44fd-bd80-e1e599081a9b',
+    'add14625-604f-4cc6-a539-fb09835d9492',
+    'b27d1354-cdca-4bcc-8944-1f4c52c6366d'
 ];
 !(function () { return __awaiter(void 0, void 0, void 0, function () {
     var cookiesArr, i, j, ret, score, j, i, _i, shareCodes_1, code;
