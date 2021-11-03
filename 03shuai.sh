@@ -28,7 +28,7 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ddworld-new.js'
 
 ##许愿池
-docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_with.js'
+docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wish.js'
 
 #docker-compose down
 docker stop jd3 && docker rm jd3
