@@ -318,7 +318,7 @@ async function petTask() {
           await $.wait(1000)
           const followShopRes = await followShop(shop.shopId);
           console.log(`关注店铺${shop.name}结果::${JSON.stringify(followShopRes)}`)
-          await $.wait(3000)
+          await $.wait(5000)
         }
       }
     }
@@ -352,7 +352,7 @@ async function petTask() {
           await $.wait(2000)
           const scanMarketRes = await scanMarket('scan', body);
           console.log(`浏览频道-${followChannelItem.channelName}结果::${JSON.stringify(scanMarketRes)}`)
-          await $.wait(3000)
+          await $.wait(5000)
         }
       }
     }
@@ -368,7 +368,7 @@ async function petTask() {
           const scanMarketRes = await scanMarket('followGood', body, 'application/x-www-form-urlencoded');
           // const scanMarketRes = await appScanMarket('followGood', `sku=${followGoodItem.sku}&reqSource=h5`, 'application/x-www-form-urlencoded');
           console.log(`关注商品-${followGoodItem.skuName}结果::${JSON.stringify(scanMarketRes)}`)
-          await $.wait(3000)
+          await $.wait(5000)
         }
       }
     }
@@ -383,7 +383,7 @@ async function petTask() {
           const body = {"taskType":"ViewVideo","reqSource":"weapp"}
           let sanVideoRes = await scanMarket('scan', body);
           console.log(`看视频激励结果--${JSON.stringify(sanVideoRes)}`);
-          await $.wait(3000)
+          await $.wait(5000)
         }
       }
     }
