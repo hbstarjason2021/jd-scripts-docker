@@ -81,6 +81,12 @@
 ## 东东世界
 15 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_ddworld-new.js | sed 's/^/ 【东东世界】/'; "
 
+## 超级盲盒
+17 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_superbox.js | sed 's/^/ 【超级盲盒】/'; "
+
+## 电器盲盒
+19 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_dqmh.js | sed 's/^/ 【电器盲盒】/'; "
+
 
 ## 粉丝互动
 1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fan.js | sed 's/^/ 【粉丝互动】/'; "
@@ -141,5 +147,5 @@
 ##23 0-23/3 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_ddgame.js | sed 's/^/ 【东东玩家游戏】/'; "
 
 ## 特物
-5 9,13,15,16,19,20 2-8 11 *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_superBrand.js | sed 's/^/ 【特物】/'; "
+3 9,13,15,16,19,20 2-8 11 *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_superBrand.js | sed 's/^/ 【特物】/'; "
 1 9,13,15,16,19,20 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_homepageTW.js | sed 's/^/ 【特物】/'; "
