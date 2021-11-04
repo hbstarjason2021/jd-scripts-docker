@@ -5,7 +5,20 @@
 更新时间：2021-06-07
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-cron "32 0,1,2 * * *" jd_cash.js
+============Quantumultx===============
+[task_local]
+#签到领现金
+2 0-23/4 * * * jd_cash.js, tag=签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+================Loon==============
+[Script]
+cron "2 0-23/4 * * *" script-path=jd_cash.js,tag=签到领现金
+
+===============Surge=================
+签到领现金 = type=cron,cronexp="2 0-23/4 * * *",wake-system=1,timeout=3600,script-path=jd_cash.js
+
+============小火箭=========
+签到领现金 = type=cron,script-path=jd_cash.js, cronexpr="2 0-23/4 * * *", timeout=3600, enable=true
  */
 const $ = new Env('签到领现金');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -82,9 +95,9 @@ async function jdCash() {
   await index()
 
   await shareCodesFormat()
-  await helpFriends()
-  await getReward()
-  await getReward('2');
+  // await helpFriends()
+  // await getReward()
+  // await getReward('2');
   $.exchangeBeanNum = 0;
   cash_exchange = $.isNode() ? (process.env.CASH_EXCHANGE ? process.env.CASH_EXCHANGE : `${cash_exchange}`) : ($.getdata('cash_exchange') ? $.getdata('cash_exchange') : `${cash_exchange}`);
   // if (cash_exchange === 'true') {
@@ -296,11 +309,11 @@ async function appdoTask(type,taskInfo) {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            if( data.code === 0){
+            if(data.code === 0) {
               console.log(`任务完成成功`)
               // console.log(data.data.result.taskInfos)
-            }else{
-              console.log(data)
+            } else {
+              console.log(JSON.stringify(data))
             }
           }
         }
@@ -433,21 +446,19 @@ function getSign(functionid, body, uuid) {
       "client":"apple",
       "clientVersion":"10.1.0"
     }
-    let HostArr = ['jdsign.cf', 'signer.nz.lu']
-    let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
     let options = {
       url: `https://cdn.nz.lu/ddo`,
       body: JSON.stringify(data),
       headers: {
-        Host,
+        "Host": "jdsign.cf",
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       },
-      timeout: 15000
+      timeout: 30 * 1000
     }
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
+          console.log(JSON.stringify(err))
           console.log(`${$.name} getSign API请求失败，请检查网路重试`)
         } else {
 
@@ -480,11 +491,11 @@ function showMsg() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: ``, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 30000}, (err, resp, data) => {
       try {
         if (err) {
-          //console.log(`${JSON.stringify(err)}`)
-          //console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
             console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
@@ -497,7 +508,7 @@ function readShareCode() {
         resolve(data);
       }
     })
-    await $.wait(10000);
+    await $.wait(30000);
     resolve()
   })
 }
@@ -607,7 +618,7 @@ function taskUrl(functionId, body = {}) {
 function getAuthorShareCode(url) {
   return new Promise(resolve => {
     const options = {
-      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
+      url: `${url}?${new Date()}`, "timeout": 30000, headers: {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       }
     };
