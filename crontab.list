@@ -90,6 +90,10 @@
 ## 美妆馆-选品官
 20 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_selectionOfficer.js | sed 's/^/ 【美妆馆-选品官】/'; "
 
+## 牛牛福利
+22 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_nnfls.js | sed 's/^/ 【牛牛福利】/'; "
+24 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_nnfls-new.js | sed 's/^/ 【牛牛福利】/'; "
+
 
 ## 粉丝互动
 1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fan.js | sed 's/^/ 【粉丝互动】/'; "
