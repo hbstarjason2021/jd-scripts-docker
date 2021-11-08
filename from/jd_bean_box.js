@@ -309,7 +309,7 @@ function getShareCodeHW() {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios_1["default"].get("")];
+                    return [4 /*yield*/, axios_1["default"].get("https://gitee.com/starjason/sharecode/raw/master/HW_CODES")];
                 case 1:
                     data = (_a.sent()).data;
                     console.log('获取HW_CODES成功(api)');
