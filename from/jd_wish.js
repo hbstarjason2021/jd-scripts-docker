@@ -68,6 +68,10 @@ if ($.isNode()) {
       }
     }
   }
+  if (allMessage) {
+    if ($.isNode()) await notify.sendNotify($.name, allMessage);
+    $.msg($.name, '', allMessage)
+  }
   let res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json')
   if (!res) {
     $.http.get({url: 'https://gitee.com/starjason/sharecode/raw/master/wish.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
@@ -132,6 +136,7 @@ async function jd_wish() {
       await interact_template_getLotteryResult()
       await $.wait(2000)
     }
+    if (message) allMessage += `京东账号${$.index} ${$.nickName || $.UserName}\n${appName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : ''}`
 
   } catch (e) {
     $.logErr(e)
@@ -151,7 +156,7 @@ async function healthyDay_getHomeData(type = true) {
             if (type) {
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
-                if (vo.status !== 2) {
+                if (vo.status !== 2 && vo.status !== 0) {
                   if (vo.taskType === 13 || vo.taskType === 12) {
                     console.log(`签到`)
                     await harmony_collectScore({"appId":appId,"taskToken":vo.simpleRecordInfoVo.taskToken,"taskId":vo.taskId,"actionType":"0"}, vo.taskType)
@@ -267,6 +272,7 @@ function interact_template_getLotteryResult() {
                 console.log(`很遗憾未中奖~`)
               } else {
                 console.log(JSON.stringify(data))
+                message += `抽中：${JSON.stringify(data)}\n`
               }
             } else {
               $.canLottery = false
