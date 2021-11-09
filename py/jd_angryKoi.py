@@ -60,7 +60,7 @@ def get_env(env):
                 a=eval(env)
         elif '/jd' in os.path.abspath(os.path.dirname(__file__)):
             try:
-                a=v4_env(env,'/jd/config/config.sh')
+                a=v4_env(env,'./config.sh')
             except:
                 a=eval(env)
         else:
