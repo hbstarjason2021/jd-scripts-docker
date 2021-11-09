@@ -153,7 +153,7 @@ cp /ljqailym/redman_rain_hyzb.js     /scripts/redman_rain_hyzb.js
 cp /ljqailym/redman_rain_x9b.js      /scripts/redman_rain_x9b.js
 
 cp /scripts-bak/normal/adolf_martin.js  /scripts/adolf_martin.js
-cp /scripts-bak/normal/adolf_mi.js      /scripts/adolf_mi.js
+#cp /scripts-bak/normal/adolf_mi.js      /scripts/adolf_mi.js
 cp /scripts-bak/normal/adolf_pk.js      /scripts/adolf_pk.js
 cp /scripts-bak/normal/adolf_newInteraction.js  /scripts/adolf_newInteraction.js
 cp /scripts-bak/normal/adolf_superbox.js        /scripts/adolf_superbox.js
@@ -175,7 +175,7 @@ cp /scripts-bak/car/monk_shop_add_to_car.js     /scripts/monk_shop_add_to_car.js
 
 cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
 cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
-cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
+#cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
 
 cp /scripts-bak/i-chenzhe/z_city_cash.js     /scripts/z_city_cash.js
 cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
