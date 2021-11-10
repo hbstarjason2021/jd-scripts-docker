@@ -8,7 +8,7 @@
 const $ = new Env("宠汪汪二代目")
 console.log('\n====================Hello World====================\n')
 
-const injectToRequest = require("./utils/jd_joy_validate").injectToRequest, USER_AGENT = require("./USER_AGENTS").USER_AGENT, md5 = require('md5')
+const injectToRequest = require("./jd_joy_validate").injectToRequest, USER_AGENT = require("./USER_AGENTS").USER_AGENT, md5 = require('md5')
 
 let cookiesArr = [], cookie = '', notify;
 let invokeKey = 'q8DNJdpcfRQ69gIx';
