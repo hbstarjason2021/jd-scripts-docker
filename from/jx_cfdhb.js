@@ -46,30 +46,33 @@ const duArr = {
   '1000': 5,
   '500': 6,
 }
+process.env.JX_MONEY = '100000'
 if (!process.env.JX_MONEY) {
   return;
 }
 ddwPaperMoney = process.env.JX_MONEY, dwLvl = duArr[ddwPaperMoney];
 console.log(`去兑换${ddwPaperMoney / 1000}元红包`)
 !(async () => {
-    let nowtime = new Date().Format("s.S")
+    let nowSecond = new Date().Format("s.S")
     let starttime = $.isNode() ? (process.env.CFD_STARTTIME ? process.env.CFD_STARTTIME * 1 : 60) : ($.getdata('CFD_STARTTIME') ? $.getdata('CFD_STARTTIME') * 1 : 60);
-    if (nowtime < 59) {
-      let sleeptime = (starttime - nowtime) * 1000;
-      console.log(starttime, nowtime)
+    if (nowSecond < 59) {
+      let sleeptime = (starttime - nowSecond) * 1000;
+      console.log(starttime, nowSecond)
       console.log(`等待时间 ${sleeptime / 1000}`);
       await sleep(sleeptime)
+        console.log(`执行时间：${new Date().Format("hh:mm:ss.S")}`)
       await Promise.all([
-        cashOut($.cookieArr[0], 11000, 4),
         cashOut($.cookieArr[1], 100000, 3)
       ]);
-      if (new Date().getHours() == 20) {
+      if (new Date().getHours() == 16) {
+          await $.wait(1000)
           await Promise.all([
               cashOut($.cookieArr[0], 1000, 5),
               cashOut($.cookieArr[1], 1000, 5),
           ]);
       }
-      if (new Date().getHours() == 23) {
+      if (new Date().getHours() == 18) {
+          await $.wait(1000)
           await Promise.all([
               cashOut($.cookieArr[0], 500, 6),
               cashOut($.cookieArr[1], 500, 6),
@@ -82,6 +85,8 @@ console.log(`去兑换${ddwPaperMoney / 1000}元红包`)
 
 function cashOut(ac, ddwPaperMoney, dwLvl) {
     return new Promise(async (resolve) => {
+        $.UserName = decodeURIComponent(ac.match(/pt_pin=([^; ]+)(?=;?)/) && ac.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+        $.log(`\n========================================\n开始【账号：${$.UserName}】兑换${ddwPaperMoney / 1000}元红包 时间：${new Date().Format("hh:mm:ss.S")}`)
         $.get(
             taskUrl(
                 `user/ExchangePrize`,
@@ -93,8 +98,6 @@ function cashOut(ac, ddwPaperMoney, dwLvl) {
                     if (err) {
                         $.logErr(`❌ 账号${ac.no} API请求失败，请检查网络后重试\n data: ${JSON.stringify(err, null, 2)}`);
                     } else {
-                      $.UserName = decodeURIComponent(ac.match(/pt_pin=([^; ]+)(?=;?)/) && ac.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-                      $.log(`\n=======================================\n开始【账号：${$.UserName}】 ${new Date().Format("s.S")}`)
                       console.log('兑换结果：', data)
                       data = $.toObj(data);
                       if (data.iRet === 0) {
