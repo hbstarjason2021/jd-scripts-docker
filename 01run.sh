@@ -143,10 +143,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_yijia.js'
 
 
-## 潮玩儿制躁团
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_zzt.js'
-
-
 ## 美妆馆-选品官
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_selectionOfficer.js'
 
@@ -226,6 +222,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 
 #######################################################################################################################
+
+## 潮玩儿制躁团
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_zzt.js'
 
 ##京东排行榜jd_rankingList.js
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_rankingList.js'
