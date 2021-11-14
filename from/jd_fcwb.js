@@ -32,7 +32,10 @@ let fcwbinviteCode = "";
         return;
     }
     console.log(`\n注意：本脚本暂时只会执行助力，助力后，请手动进活动进行游戏（发财挖宝: 入口,极速版-》我的-》发财挖宝）\n`)
-    let res = [];
+    let res = [
+        {fcwbinviter:'yylFEZHBTnWiHV3PcC5mOQ',fcwbinviteCode:'a8625b846b0a42bd8961f429b873e08599551636906757201'},
+        {fcwbinviter:'',fcwbinviteCode:''}
+    ];
     try{res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/fcwb.json');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/fcwb.json');}catch (e) {}
