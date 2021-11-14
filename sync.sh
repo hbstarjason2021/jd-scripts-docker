@@ -177,9 +177,8 @@ cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
 cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
 #cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
 
-cp /scripts-bak/i-chenzhe/z_city_cash.js     /scripts/z_city_cash.js
-cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
-
+#cp /scripts-bak/i-chenzhe/z_city_cash.js     /scripts/z_city_cash.js
+#cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
 
 #cp /jd-scripts-docker/jd_ms.js  /scripts
 #cp /jd-scripts-docker/jd_vote.js  /scripts
@@ -189,7 +188,7 @@ cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
 
 #cd /Loon && npm install -g
 
-npm install png-js  date-fns axios dotenv ts-md5 
+npm install png-js  date-fns axios dotenv ts-md5 jsdom
 cd /jddj && npm install request && npm cache clean --force
 
 ##################################
