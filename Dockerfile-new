@@ -1,5 +1,8 @@
 FROM alpine
 
+## RUN echo -e "http://mirrors.aliyun.com/alpine/latest-stable/main\n\
+http://mirrors.aliyun.com/alpine/latest-stable/community" > /etc/apk/repositories
+
 RUN set -ex \
         && apk update && apk upgrade\
         && apk add --no-cache tzdata moreutils git nodejs npm openssl \
