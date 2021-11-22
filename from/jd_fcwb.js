@@ -1,10 +1,9 @@
 /*
 发财挖宝: 入口,极速版-我的,发财挖宝
-说明
-    1、脚本只执行助力和做1个任务,需要手动进活动进行游戏
-    2、第一个账号会助力作者，其他账号助力第一个CK
-cron 40 12,16 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_fcwb.js
-
+1、脚本只执行助力和做1个任务,需要手动进活动进行游戏
+2、每个账号每天2次助力好友的机会
+3、所有的账号先助力自己的第一个CK，剩下的一次助力会助力作者。
+40 12,16,22 * * * jd_fcwb.js
 * * */
 const $ = new Env('发财挖宝');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -12,206 +11,232 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 let link = `yCcpwTLIbY6pjaM42ACUVg`;
 if ($.isNode()) {
-    Object.keys(jdCookieNode).forEach((item) => {
-        cookiesArr.push(jdCookieNode[item])
-    })
-    if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {
-    };
+  Object.keys(jdCookieNode).forEach((item) => {
+    cookiesArr.push(jdCookieNode[item])
+  })
 } else {
-    cookiesArr = [
-        $.getdata("CookieJD"),
-        $.getdata("CookieJD2"),
-        ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
+  cookiesArr = [
+    $.getdata("CookieJD"),
+    $.getdata("CookieJD2"),
+    ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 let cookie = '';
 let fcwbinviter = "";
 let fcwbinviteCode = "";
+$.shareCodes = [];
+let res = [];
 !(async () => {
-    if (!cookiesArr[0]) {
-        $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
-        return;
+  if (!cookiesArr[0]) {
+    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+    return;
+  }
+  console.log('发财挖宝: 入口,极速版-我的,发财挖宝\n' +
+      '1、脚本只执行助力和做1个任务,需要手动进活动进行游戏\n' +
+      '2、每个账号每天2次助力好友的机会\n' +
+      '3、所有的账号先助力自己的第一个CK，剩下的一次助力会助力作者。')
+  try {
+    res = await getAuthorShareCode();
+  } catch (e) {
+  }
+  if (!res) {
+    try {
+      res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/fcwb.json');
+    } catch (e) {
     }
-    console.log(`\n注意：本脚本暂时只会执行助力，助力后，请手动进活动进行游戏（发财挖宝: 入口,极速版-》我的-》发财挖宝）\n`)
-    let res = [
-        {fcwbinviter:'yylFEZHBTnWiHV3PcC5mOQ',fcwbinviteCode:'a8625b846b0a42bd8961f429b873e08599551636906757201'},
-        {fcwbinviter:'',fcwbinviteCode:''}
-    ];
-    try{res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/fcwb.json');}catch (e) {}
-    if(!res){
-        try{res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/fcwb.json');}catch (e) {}
-        if(!res){res = [];}
+    if (!res) {
+      res = [];
     }
-    if(res.length > 0){
-        let actCodeInfo = getRandomArrayElements(res,1)[0];
-        fcwbinviter = actCodeInfo.fcwbinviter;
-        fcwbinviteCode = actCodeInfo.fcwbinviteCode;
+  }
+  for (let i = 0; i < cookiesArr.length; i++) {
+    if (cookiesArr[i]) {
+      cookie = cookiesArr[i];
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
+      $.index = i + 1;
+      $.isLogin = true;
+      $.nickName = '';
+      console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
+      try {
+        await main()
+      } catch (e) {
+        $.logErr(e)
+      }
     }
-    for (let i = 0; i < cookiesArr.length; i++) {
-        if (cookiesArr[i]) {
-            cookie = cookiesArr[i];
-            $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
-            $.index = i + 1;
-            $.isLogin = true;
-            $.nickName = '';
-            //await TotalBean();
-            console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
-            if (!$.isLogin) {
-                $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, {"open-url": "https://bean.m.jd.com/"});
-                if ($.isNode()) {
-                    await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-                }
-                continue
+  }
+  for (let i = 0; i < cookiesArr.length; i++) {
+    if (cookiesArr[i]) {
+      cookie = cookiesArr[i];
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
+      $.index = i + 1;
+      try {
+        for (const item of $.shareCodes) {
+          const { fcwbinviter, fcwbinviteCode } = item;
+          if (fcwbinviter && fcwbinviteCode) {
+            console.log(`【京东账号${$.index}】${$.UserName}去助力:${fcwbinviter}`);
+            const HelpInfo = await takeRequest(`happyDigHelp`, `{"linkId":"${link}","inviter":"${fcwbinviter}","inviteCode":"${fcwbinviteCode}"}`);
+            if (HelpInfo && HelpInfo['code'] === 0 && HelpInfo.success) {
+              console.log(`助力 ${fcwbinviter} 成功\n`);
+            } else {
+              console.log(`助力 ${fcwbinviter} 失败，详情：${HelpInfo && HelpInfo.errMsg}\n`);
             }
-            try {
-                await main()
-            } catch (e) {
-                $.logErr(e)
-            }
+            await $.wait(2000)
+          }
         }
+      } catch (e) {
+        $.logErr(e)
+      }
     }
+  }
 })().catch((e) => {
-    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+  $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
 }).finally(() => {
-    $.done();
+  $.done();
 });
 
 async function main() {
-    let homeInfo = await takeRequest(`happyDigHome`,`{"linkId":"${link}"}`,true);
-    if(JSON.stringify(homeInfo) === '{}' || !homeInfo){
-        console.log(`都黑号了，别薅了`);
-        return;
+  let homeInfo = await takeRequest(`happyDigHome`, `{"linkId":"${link}"}`, true);
+  if (JSON.stringify(homeInfo) === '{}' || !homeInfo) {
+    console.log(`账号火爆，跳过此账号`);
+    return;
+  }
+  console.log(`获取活动详情成功`);
+  console.log(`fcwbinviteCode='${homeInfo.inviteCode}'`)
+  console.log(`fcwbinviter='${homeInfo.markedPin}'`)
+  if (fcwbinviter && fcwbinviteCode) {
+    console.log(`去助力:${fcwbinviter}`);
+    const HelpInfo = await takeRequest(`happyDigHelp`, `{"linkId":"${link}","inviter":"${fcwbinviter}","inviteCode":"${fcwbinviteCode}"}`);
+  }
+  $.freshFlag = false;
+  if ($.index === 1) {
+    const shareCodes = {
+      "fcwbinviter": homeInfo.markedPin,
+      "fcwbinviteCode": homeInfo.inviteCode,
     }
-    console.log(`获取活动详情成功`);
-    console.log(`fcwbinviteCode='${homeInfo.inviteCode}'`)
-    console.log(`fcwbinviter='${homeInfo.markedPin}'`)
-    if(fcwbinviter && fcwbinviteCode){
-        console.log(`去助力:${fcwbinviter}`);
-        await takeRequest(`happyDigHelp`,`{"linkId":"${link}","inviter":"${fcwbinviter}","inviteCode":"${fcwbinviteCode}"}`);
-        //console.log(`助力结果：${JSON.stringify(HelpInfo)}`);
-    }
-    $.freshFlag = false;
-    if($.index === 1){
-        fcwbinviter = homeInfo.markedPin;
-        fcwbinviteCode = homeInfo.inviteCode;
-    }
-    await doTask();
-    if($.freshFlag){
-        await $.wait(2000);
-        homeInfo = await takeRequest(`happyDigHome`,`{"linkId":"${link}"}`,true);
-    }
-    let blood = homeInfo.blood;
-    console.log(`当前有${blood}滴血`);
-}
-async function doTask(){
-    let taskList = await takeRequest(`apTaskList`,`{"linkId":"${link}"}`);
-    for (let i = 0; i < taskList.length; i++) {
-        let oneTask = taskList[i];
-        if(oneTask.taskFinished){
-            console.log(`任务：${oneTask.taskTitle},${oneTask.taskShowTitle},已完成`);
-            continue;
-        }
-        if(oneTask.taskType === 'BROWSE_CHANNEL'){
-            if(oneTask.id === 360){
-                console.log(`任务：${oneTask.taskTitle},${oneTask.taskShowTitle},去执行`);
-                let doTask = await takeRequest(`apDoTask`,`{"linkId":"${link}","taskType":"${oneTask.taskType}","taskId":${oneTask.id},"channel":4,"itemId":"${encodeURIComponent(oneTask.taskSourceUrl)}","checkVersion":false}`);
-                console.log(`执行结果：${JSON.stringify(doTask)}`);
-                await $.wait(2000);
-                $.freshFlag = true;
-            }
-            if(oneTask.id === 357){
-                // let detail = await takeRequest(`apTaskDetail`,`{"linkId":"${link}","taskType":"${oneTask.taskType}","taskId":${oneTask.id},"channel":4}`);
-                // await $.wait(1000);
-                // let status = detail.status;
-                // let taskItemList =  detail.taskItemList;
-                // for (let j = 0; j < taskItemList.length && j < (status.finishNeed - status.userFinishedTimes); j++) {
-                //     console.log(`浏览：${taskItemList[j].itemName}`);
-                //     let doTask = await takeRequest(`apDoTask`,`{"linkId":"${link}","taskType":"${oneTask.taskType}","taskId":${oneTask.id},"channel":4,"itemId":"${encodeURIComponent(taskItemList[j].itemId)}","checkVersion":false}`);
-                //     console.log(`执行结果：${JSON.stringify(doTask)}`);
-                //     await $.wait(2000);
-                // }
-            }
-        }
-    }
+    $.shareCodes = [...[shareCodes], ...res]
+    // fcwbinviter = homeInfo.markedPin;
+    // fcwbinviteCode = homeInfo.inviteCode;
+  }
+  await doTask();
+  if ($.freshFlag) {
+    await $.wait(2000);
+    homeInfo = await takeRequest(`happyDigHome`, `{"linkId":"${link}"}`, true);
+  }
+  let blood = homeInfo.blood;
+  console.log(`当前有${blood}滴血`);
 }
 
-async function takeRequest(functionId,bodyInfo,h5stFlag = false){
-    let  url = `https://api.m.jd.com/?functionId=${functionId}&body=${encodeURIComponent(bodyInfo)}&t=${Date.now()}&appid=activities_platform&client=H5&clientVersion=1.0.0`;
-    if(h5stFlag){
-        //url = await getH5stUrl(functionId,bodyInfo);
+async function doTask() {
+  let taskList = await takeRequest(`apTaskList`, `{"linkId":"${link}"}`);
+  for (let i = 0; i < taskList.length; i++) {
+    let oneTask = taskList[i];
+    if (oneTask.taskFinished) {
+      console.log(`任务：${oneTask.taskTitle},${oneTask.taskShowTitle},已完成`);
+      continue;
     }
-    const headers = {
-        'Host' : `api.m.jd.com`,
-        'Accept' : `application/json, text/plain, */*`,
-        'Origin' : `https://bnzf.jd.com`,
-        'Cookie' : cookie ,
-        'Accept-Encoding' : `gzip, deflate, br`,
-        'user-agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-        'Accept-Language' : `zh-cn`,
-        'Referer' : `https://bnzf.jd.com/?activityId=${link}`
-    };
-    let sentInfo = {url: url, headers: headers};
-    return new Promise(async resolve => {
-        $.get(sentInfo, (err, resp, data) => {
-            try {
-                if(err){
-                    console.log(err);
-                }else{
-                    data = JSON.parse(data);
-                    if(data && data.data && JSON.stringify(data.data) === '{}'){
-                        console.log(JSON.stringify(data))
-                    }
-                }
-            } catch (e) {
-                console.log(data);
-                //$.logErr(e, resp)
-            } finally {
-                resolve(data.data || {});
-            }
-        })
-    })
+    if (oneTask.taskType === 'BROWSE_CHANNEL') {
+      if (oneTask.id === 360) {
+        console.log(`任务：${oneTask.taskTitle},${oneTask.taskShowTitle},去执行`);
+        let doTask = await takeRequest(`apDoTask`, `{"linkId":"${link}","taskType":"${oneTask.taskType}","taskId":${oneTask.id},"channel":4,"itemId":"${encodeURIComponent(oneTask.taskSourceUrl)}","checkVersion":false}`);
+        console.log(`执行结果：${JSON.stringify(doTask)}`);
+        await $.wait(2000);
+        $.freshFlag = true;
+      }
+      if (oneTask.id === 357) {
+        // let detail = await takeRequest(`apTaskDetail`,`{"linkId":"${link}","taskType":"${oneTask.taskType}","taskId":${oneTask.id},"channel":4}`);
+        // await $.wait(1000);
+        // let status = detail.status;
+        // let taskItemList =  detail.taskItemList;
+        // for (let j = 0; j < taskItemList.length && j < (status.finishNeed - status.userFinishedTimes); j++) {
+        //     console.log(`浏览：${taskItemList[j].itemName}`);
+        //     let doTask = await takeRequest(`apDoTask`,`{"linkId":"${link}","taskType":"${oneTask.taskType}","taskId":${oneTask.id},"channel":4,"itemId":"${encodeURIComponent(taskItemList[j].itemId)}","checkVersion":false}`);
+        //     console.log(`执行结果：${JSON.stringify(doTask)}`);
+        //     await $.wait(2000);
+        // }
+      }
+    }
+  }
 }
-function getAuthorShareCode(url) {
-    return new Promise(resolve => {
-        const options = {
-            url: `${url}?${new Date()}`, "timeout": 10000, headers: {
-                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-            }
-        };
-        if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
-            const tunnel = require("tunnel");
-            const agent = {
-                https: tunnel.httpsOverHttp({
-                    proxy: {
-                        host: process.env.TG_PROXY_HOST,
-                        port: process.env.TG_PROXY_PORT * 1
-                    }
-                })
-            }
-            Object.assign(options, { agent })
+
+async function takeRequest(functionId, bodyInfo, h5stFlag = false) {
+  let url = `https://api.m.jd.com/?functionId=${functionId}&body=${encodeURIComponent(bodyInfo)}&t=${Date.now()}&appid=activities_platform&client=H5&clientVersion=1.0.0`;
+  if (h5stFlag) {
+    //url = await getH5stUrl(functionId,bodyInfo);
+  }
+  const headers = {
+    'Host': `api.m.jd.com`,
+    'Accept': `application/json, text/plain, */*`,
+    'Origin': `https://bnzf.jd.com`,
+    'Cookie': cookie,
+    'Accept-Encoding': `gzip, deflate, br`,
+    'user-agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+    'Accept-Language': `zh-cn`,
+    'Referer': `https://bnzf.jd.com/?activityId=${link}`
+  };
+  let sentInfo = {url: url, headers: headers};
+  return new Promise(async resolve => {
+    $.get(sentInfo, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(err);
+        } else {
+          if (functionId === 'happyDigHelp') console.log(functionId, data);
+          data = JSON.parse(data);
+          if (data && data.data && JSON.stringify(data.data) === '{}') {
+            console.log(JSON.stringify(data))
+          }
         }
-        $.get(options, async (err, resp, data) => {
-            try {
-                if (err) {
-                } else {
-                    if (data) data = JSON.parse(data)
-                }
-            } catch (e) {
-                // $.logErr(e, resp)
-            } finally {
-                resolve(data);
-            }
-        })
+      } catch (e) {
+        console.log(data);
+        $.logErr(e, resp)
+      } finally {
+        resolve(data.data || data);
+      }
     })
+  })
 }
-function getRandomArrayElements(arr, count) {
-    var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
-    while (i-- > min) {
-        index = Math.floor((i + 1) * Math.random());
-        temp = shuffled[index];
-        shuffled[index] = shuffled[i];
-        shuffled[i] = temp;
+
+function getAuthorShareCode(url = 'https://gitee.com/starjason/sharecode/raw/master/fcwb.json') {
+  return new Promise(resolve => {
+    const options = {
+      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }
+    };
+    if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
+      const tunnel = require("tunnel");
+      const agent = {
+        https: tunnel.httpsOverHttp({
+          proxy: {
+            host: process.env.TG_PROXY_HOST,
+            port: process.env.TG_PROXY_PORT * 1
+          }
+        })
+      }
+      Object.assign(options, {agent})
     }
-    return shuffled.slice(min);
+    $.get(options, async (err, resp, data) => {
+      try {
+        if (err) {
+        } else {
+          if (data) data = JSON.parse(data)
+        }
+      } catch (e) {
+        // $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+
+function getRandomArrayElements(arr, count) {
+  var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+  while (i-- > min) {
+    index = Math.floor((i + 1) * Math.random());
+    temp = shuffled[index];
+    shuffled[index] = shuffled[i];
+    shuffled[i] = temp;
+  }
+  return shuffled.slice(min);
 }
 
 // prettier-ignore
