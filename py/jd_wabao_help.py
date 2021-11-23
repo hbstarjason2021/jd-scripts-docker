@@ -39,12 +39,12 @@ def get_env(env):
             a=os.environ[env]
         elif '/ql' in os.path.abspath(os.path.dirname(__file__)):
             try:
-                a=v4_env(env,'/ql/config/config.sh')
+                a=v4_env(env,'./config.sh')
             except:
                 a=eval(env)
         elif '/jd' in os.path.abspath(os.path.dirname(__file__)):
             try:
-                a=v4_env(env,'/jd/config/config.sh')
+                a=v4_env(env,'./config.sh')
             except:
                 a=eval(env)
         else:
@@ -93,7 +93,7 @@ class Judge_env(object):
     def v4_cookie(self):
         a=[]
         b=re.compile(r'Cookie'+'.*?=\"(.*?)\"', re.I)
-        with open('/jd/config/config.sh', 'r') as f:
+        with open('./config.sh', 'r') as f:
             for line in f.readlines():
                 try:
                     regular=b.match(line).group(1)
