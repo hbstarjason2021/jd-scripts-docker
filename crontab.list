@@ -38,6 +38,12 @@
 ## 合成月饼
 */25 0-23/1 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_mooncake.js | sed 's/^/ 【合成月饼】/'; "
 
+## 财富岛珍珠兑换
+59 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jx_cfd_pearl_exchange.js | sed 's/^/ 【财富岛珍珠兑换】/'; "
+
+## 牧场助农兑换
+59 19 11-30 11 *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jx_mc_zn_exchange.js | sed 's/^/ 【牧场助农兑换】/'; "
+
 ## 健康社区兑换
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health_exchange.js | sed 's/^/ 【健康社区兑换】/'; "
 
