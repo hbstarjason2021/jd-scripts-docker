@@ -102,7 +102,7 @@ function getBeanShareCode(cookie) {
         var data;
         return __generator(this, function (_c) {
             switch (_c.label) {
-                case 0: return [4 /*yield*/, axios_1["default"].post('https://api.m.jd.com/client.action', "functionId=plantBeanIndex&body=" + escape(JSON.stringify({ version: "9.0.0.1", "monitor_source": "plant_app_plant_index", "monitor_refer": "" })) + "&appid=ld&client=apple&area=5_274_49707_49973&build=167283&clientVersion=9.1.0", {
+                case 0: return [4 /*yield*/, axios_1["default"].post('https://api.m.jd.com/client.action', "functionId=plantBeanIndex&body=".concat(escape(JSON.stringify({ version: "9.0.0.1", "monitor_source": "plant_app_plant_index", "monitor_refer": "" })), "&appid=ld&client=apple&area=5_274_49707_49973&build=167283&clientVersion=9.1.0"), {
                         headers: {
                             Cookie: cookie,
                             Host: "api.m.jd.com",
@@ -128,7 +128,7 @@ function getFarmShareCode(cookie) {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios_1["default"].post('https://api.m.jd.com/client.action?functionId=initForFarm', "body=" + escape(JSON.stringify({ "version": 4 })) + "&appid=wh5&clientVersion=9.1.0", {
+                case 0: return [4 /*yield*/, axios_1["default"].post('https://api.m.jd.com/client.action?functionId=initForFarm', "body=".concat(escape(JSON.stringify({ "version": 4 })), "&appid=wh5&clientVersion=9.1.0"), {
                         headers: {
                             "cookie": cookie,
                             "origin": "https://home.m.jd.com",
@@ -159,7 +159,7 @@ function requireConfig() {
                 cookiesArr.push(jdCookieNode[item]);
             }
         });
-        console.log("\u5171" + cookiesArr.length + "\u4E2A\u4EAC\u4E1C\u8D26\u53F7\n");
+        console.log("\u5171".concat(cookiesArr.length, "\u4E2A\u4EAC\u4E1C\u8D26\u53F7\n"));
         resolve(cookiesArr);
     });
 }
@@ -210,10 +210,10 @@ function requestAlgo(appId) {
                                     console.log('token:', token);
                                     enCryptMethodJDString = data.data.result.algo;
                                     if (enCryptMethodJDString)
-                                        enCryptMethodJD = new Function("return " + enCryptMethodJDString)();
+                                        enCryptMethodJD = new Function("return ".concat(enCryptMethodJDString))();
                                 }
                                 else {
-                                    console.log("fp: " + fingerprint);
+                                    console.log("fp: ".concat(fingerprint));
                                     console.log('request_algo 签名参数API请求失败:');
                                 }
                                 resolve();
@@ -250,12 +250,12 @@ function decrypt(stk, url, appId) {
         var random = '5gkjB6SpmC9s';
         token = "tk01wcdf61cb3a8nYUtHcmhSUFFCfddDPRvKvYaMjHkxo6Aj7dhzO+GXGFa9nPXfcgT+mULoF1b1YIS1ghvSlbwhE0Xc";
         fingerprint = 9686767825751161;
-        var str = "" + token + fingerprint + timestamp + appId + random;
+        var str = "".concat(token).concat(fingerprint).concat(timestamp).concat(appId).concat(random);
         hash1 = CryptoJS.SHA512(str, token).toString(CryptoJS.enc.Hex);
     }
     var st = '';
     stk.split(',').map(function (item, index) {
-        st += item + ":" + getQueryString(url, item) + (index === stk.split(',').length - 1 ? '' : '&');
+        st += "".concat(item, ":").concat(getQueryString(url, item)).concat(index === stk.split(',').length - 1 ? '' : '&');
     });
     var hash2 = CryptoJS.HmacSHA256(st, hash1.toString()).toString(CryptoJS.enc.Hex);
     return encodeURIComponent(["".concat(timestamp.toString()), "".concat(fingerprint.toString()), "".concat(appId.toString()), "".concat(token), "".concat(hash2)].join(";"));
@@ -265,7 +265,7 @@ function h5st(url, stk, params, appId) {
     if (appId === void 0) { appId = 10032; }
     for (var _i = 0, _a = Object.entries(params); _i < _a.length; _i++) {
         var _b = _a[_i], key = _b[0], val = _b[1];
-        url += "&" + key + "=" + val;
+        url += "&".concat(key, "=").concat(val);
     }
     url += '&h5st=' + decrypt(stk, url, appId);
     return url;
@@ -295,7 +295,7 @@ function exceptCookie(filename) {
     if (filename === void 0) { filename = 'x.ts'; }
     var except;
     try {
-        (0, fs_1.accessSync)('./utils/exceptCookie.json');
+        (0, fs_1.accessSync)('./exceptCookie.json');
         except = JSON.parse((0, fs_1.readFileSync)('./exceptCookie.json').toString() || '{}')[filename] || [];
     }
     catch (e) {
@@ -335,19 +335,37 @@ function randomNumString(e) {
 exports.randomNumString = randomNumString;
 function getshareCodeHW(key) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, e_1;
+        var shareCodeHW, i, data, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, axios_1["default"].get('https://gitee.com/starjason/sharecode/raw/master/HW_CODES')];
+                    shareCodeHW = [];
+                    i = 0;
+                    _a.label = 1;
                 case 1:
-                    data = (_a.sent()).data;
-                    return [2 /*return*/, data[key] || []];
+                    if (!(i < 5)) return [3 /*break*/, 7];
+                    _a.label = 2;
                 case 2:
+                    _a.trys.push([2, 4, , 6]);
+                    return [4 /*yield*/, axios_1["default"].get('https://gitee.com/starjason/sharecode/raw/master/HW_CODES')];
+                case 3:
+                    data = (_a.sent()).data;
+                    shareCodeHW = data[key] || [];
+                    if (shareCodeHW.length !== 0) {
+                        return [3 /*break*/, 7];
+                    }
+                    return [3 /*break*/, 6];
+                case 4:
                     e_1 = _a.sent();
-                    return [2 /*return*/, []];
-                case 3: return [2 /*return*/];
+                    console.log("getshareCodeHW Error, Retry...");
+                    return [4 /*yield*/, wait(getRandomNumberByRange(2000, 6000))];
+                case 5:
+                    _a.sent();
+                    return [3 /*break*/, 6];
+                case 6:
+                    i++;
+                    return [3 /*break*/, 1];
+                case 7: return [2 /*return*/, shareCodeHW];
             }
         });
     });
