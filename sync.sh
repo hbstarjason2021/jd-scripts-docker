@@ -134,6 +134,7 @@ cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
 
 cp /jd-scripts-docker/from/*  /scripts/
+cp -rf /jd-scripts-docker/utils/*  /scripts/
 
 
 cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_fanslove.js
