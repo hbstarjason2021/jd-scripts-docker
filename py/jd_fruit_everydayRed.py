@@ -1,10 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 '''
 cron: 5 15 * * *
 new Env('东东农场-天天红包抽奖');
 入口: 京东》我的>东东农场>天天红包
-变量: JD_COOKIE
-export JD_COOKIE="第1个cookie&第2个cookie"
-地址：https://raw.githubusercontent.com/wuye999/myScripts/main/jd/jd_fruit_everydayRed.py
+青龙拉取命令：ql raw https://raw.githubusercontent.com/wuye999/myScripts/main/jd/jd_fruit_everydayRed.py
 '''
 
 import os,json,random,time,re,string,functools
@@ -203,10 +203,14 @@ def lotteryForTurntableFarm(cookie):
             type_i=res['type']        # 奖品类型
             remainLotteryTimes=res['remainLotteryTimes']        # 剩余抽奖次数
             name=type_name_s[type_i]
-            msg(f"本次抽到 {name}")
-            msg(f'剩余抽奖次数为 {remainLotteryTimes}')
-            if int(remainLotteryTimes)>0:
+            msg(f"抽到 {name}")
+            if int(remainLotteryTimes) > 0:
+                # msg(f'剩余抽奖次数为 {remainLotteryTimes}')
                 return lotteryForTurntableFarm(cookie)
+            else:
+                msg('抽奖次数不足\n')
+        else:
+            return lotteryForTurntableFarm(cookie)
     except:
         msg(f"错误\n{res}")    
 
@@ -214,7 +218,7 @@ def main():
     msg('🔔东东农场-天天红包抽奖，开始！\n')
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
     for e,cookie in enumerate(cookie_list):
-        msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
+        msg(f'******开始【账号 {e+1}】 {get_pin(cookie)} *********\n')
         remainLotteryTimes=initForTurntableFarm(cookie)
         if remainLotteryTimes>0:
             lotteryForTurntableFarm(cookie)
