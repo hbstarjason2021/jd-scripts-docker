@@ -6,6 +6,10 @@ docker-compose up --no-build --force-recreate --detach jd3
 ##京豆变动通知jd_bean_change.js
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_change.js'
 
+## 芥么
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jmsign.js'
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_genz.js'
+
 ##东东农场
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_fruit.js'
 
@@ -36,8 +40,8 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 #docker-compose down
 docker stop jd3 && docker rm jd3
 
+
 ##集卡
 ##docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jika.js'
-
 ##东东小窝
 ##docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_small_home-new.js'
