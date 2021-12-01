@@ -156,6 +156,9 @@
 ## 京东极速版-我的-省钱大赢家-翻翻乐
 1 0-23/1 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_618redpacket.js | sed 's/^/ 【极速版翻翻乐】/'; "
 40 * * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_big_winner.js | sed 's/^/ 【极速版翻翻乐】/'; "
+41 * * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_big_winner-new.js | sed 's/^/ 【极速版翻翻乐】/'; "
+42 * * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_big_winner_Mod.js | sed 's/^/ 【极速版翻翻乐】/'; "
+
 
 ## 极速汪汪乐园
 18 0-23/2 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joypark_joy.js | sed 's/^/ 【极速汪汪乐园】/'; "
