@@ -78,11 +78,11 @@ if ($.isNode()) {
     await $.wait(1000)
     res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json')
   }
-  let res2 = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json)
-  if (!res2) {
-    await $.wait(1000)
-    res2 = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json')
-  }
+  //let res2 = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json)
+  //if (!res2) {
+  //  await $.wait(1000)
+  //  res2 = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json')
+  //}
   $.shareCode = [...$.shareCode, ...(res || []), ...(res2 || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
