@@ -25,10 +25,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-//let appIdArr = ['1E1NXxq0', '1FV1VwKc', '1FFRWxaY', '1FFVQyqw', '1FV1ZwKY', '1FFdSxqw'];
-//let appNameArr = ['众筹许愿池', '惊喜大作战', '荣耀钞能力', '1FFVQyqw', '好物好生活', '焕新带电生活'];
-let appIdArr = ['1E1NXxq0','1E1xZy6s','1FFVQyqw'];
-let appNameArr = ['众筹许愿池','PLUS生活特权','1FFVQyqw'];
+let appIdArr = ['1E1NXxq0', '1FFVQyqw','1EFVXxg'];
+let appNameArr = ['众筹许愿池', '1111点心动','金榜年终奖'];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
@@ -80,7 +78,12 @@ if ($.isNode()) {
     await $.wait(1000)
     res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json')
   }
-  $.shareCode = [...$.shareCode, ...(res || [])]
+  let res2 = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json)
+  if (!res2) {
+    await $.wait(1000)
+    res2 = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json')
+  }
+  $.shareCode = [...$.shareCode, ...(res || []), ...(res2 || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -163,14 +166,17 @@ async function healthyDay_getHomeData(type = true) {
                     console.log(`签到`)
                     await harmony_collectScore({"appId":appId,"taskToken":vo.simpleRecordInfoVo.taskToken,"taskId":vo.taskId,"actionType":"0"}, vo.taskType)
                   } else if (vo.taskType === 1) {
+                    $.complete = false;
                     for (let key of Object.keys(vo.followShopVo)) {
                       let followShopVo = vo.followShopVo[key]
                       if (followShopVo.status !== 2) {
                         console.log(`【${followShopVo.shopName}】${vo.subTitleName}`)
                         await harmony_collectScore({"appId":appId,"taskToken":followShopVo.taskToken,"taskId":vo.taskId,"actionType":"0"})
+                        if ($.complete) break;
                       }
                     }
                   } else if (vo.taskType === 8) {
+                    $.complete = false;
                     for (let key of Object.keys(vo.productInfoVos)) {
                       let productInfoVos = vo.productInfoVos[key]
                       if (productInfoVos.status !== 2) {
@@ -178,9 +184,11 @@ async function healthyDay_getHomeData(type = true) {
                         await harmony_collectScore({"appId":appId,"taskToken":productInfoVos.taskToken,"taskId":vo.taskId,"actionType":"1"})
                         await $.wait(vo.waitDuration * 1000)
                         await harmony_collectScore({"appId":appId,"taskToken":productInfoVos.taskToken,"taskId":vo.taskId,"actionType":"0"})
+                        if ($.complete) break;
                       }
                     }
                   } else if (vo.taskType === 9 || vo.taskType === 26) {
+                    $.complete = false;
                     for (let key of Object.keys(vo.shoppingActivityVos)) {
                       let shoppingActivityVos = vo.shoppingActivityVos[key]
                       if (shoppingActivityVos.status !== 2) {
@@ -190,9 +198,10 @@ async function healthyDay_getHomeData(type = true) {
                           await $.wait(vo.waitDuration * 1000)
                         }
                         await harmony_collectScore({"appId":appId,"taskToken":shoppingActivityVos.taskToken,"taskId":vo.taskId,"actionType":"0"})
+                        if ($.complete) break;
                       }
                     }
-                  } else if (vo.taskType === 14) {
+                  } else if (vo.taskType === 14 || vo.taskType === 6) {
                     console.log(`【京东账号${$.index}（${$.UserName}）的${appName}好友互助码】${vo.assistTaskDetailVo.taskToken}\n`)
                     if (vo.times !== vo.maxTimes) {
                       $.shareCode.push({
@@ -244,6 +253,7 @@ function harmony_collectScore(body = {}, taskType = '') {
                 if (data.data.bizCode === 103) $.delcode = true
               } else {
                 console.log(body.actionType === "0" ? `完成任务失败：${data.data.bizMsg}\n` : data.data.bizMsg)
+                if (data.data.bizMsg === "任务已完成") $.complete = true;
               }
             }
           }
@@ -258,7 +268,7 @@ function harmony_collectScore(body = {}, taskType = '') {
 }
 function interact_template_getLotteryResult() {
   return new Promise(resolve => {
-    $.post(taskUrl('interact_template_getLotteryResult', {"appId":appId}), (err, resp, data) => {
+    $.post(taskUrl(appId == '1EFVXxg' ? 'splitHongbao_getLotteryResult' : 'interact_template_getLotteryResult', {"appId":appId}), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -266,15 +276,17 @@ function interact_template_getLotteryResult() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            let userAwardsCacheDto = data && data.data && data.data.result && data.data.result.userAwardsCacheDto
+            let userAwardsCacheDto = data && data.data && data.data.result && data.data.result.userAwardsCacheDto;
             if (userAwardsCacheDto) {
               if (userAwardsCacheDto.type === 2) {
-                console.log(`抽中：${userAwardsCacheDto.jBeanAwardVo.quantity}${userAwardsCacheDto.jBeanAwardVo.ext || `京豆`}`)
+                console.log(`抽中：${userAwardsCacheDto.jBeanAwardVo.quantity}${userAwardsCacheDto.jBeanAwardVo.ext || `京豆`}`);
               } else if (userAwardsCacheDto.type === 0) {
                 console.log(`很遗憾未中奖~`)
+              } else if (userAwardsCacheDto.type === 1) {
+                console.log(`抽中：${userAwardsCacheDto.couponVo.prizeName}，金额${userAwardsCacheDto.couponVo.usageThreshold}-${userAwardsCacheDto.couponVo.quota}，使用时间${userAwardsCacheDto.couponVo.useTimeRange}`);
               } else {
-                console.log(JSON.stringify(data))
-                message += `抽中：${JSON.stringify(data)}\n`
+                console.log(`抽中：${JSON.stringify(data)}`);
+                message += `抽中：${JSON.stringify(data)}\n`;
               }
             } else {
               $.canLottery = false
