@@ -126,8 +126,8 @@
 5 0-23/3 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joy_steal-new.js | sed 's/^/ 【宠汪汪】/'; "
 
 ### 红包雨
-30,31 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_live_redrain.js | sed 's/^/ 【超级直播间红包雨】/'; "
-30,31 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_live_redrain-new.js | sed 's/^/ 【超级直播间红包雨】/'; "
+0,1,30,31 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_live_redrain.js | sed 's/^/ 【超级直播间红包雨】/'; "
+0,1,30,31 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_live_redrain-new.js | sed 's/^/ 【超级直播间红包雨】/'; "
 
 1,4 0-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_super_redrain.js | sed 's/^/ 【整点红包雨】/'; "
 1,2 0-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_super_redrain-new.js | sed 's/^/ 【整点红包雨】/'; "
