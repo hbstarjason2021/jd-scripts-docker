@@ -73,5 +73,6 @@ jobs:
          cd ~/jd-scripts-docker
          export NIAO_CLOUD_COOKIES="${{secrets.NIAO_CLOUD_COOKIES}}"
          #npm install
-         
+         pwd
+         node -v 
          node niaocloud.js
