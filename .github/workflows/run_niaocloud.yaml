@@ -72,6 +72,8 @@ jobs:
          git clone -b main https://github.com/hbstarjason2021/jd-scripts-docker.git ~/jd-scripts-docker
          cd ~/jd-scripts-docker
          #export NIAO_CLOUD_COOKIES="${{secrets.NIAO_CLOUD_COOKIES}}"
+         export NIAO_CLOUD_EMAIL="${{secrets.NIAO_CLOUD_EMAIL}}"
+         export NIAO_CLOUD_PWD="p${{secrets.NIAO_CLOUD_PWD}}"
          #npm install
          pwd
          node -v 
