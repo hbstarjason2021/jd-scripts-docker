@@ -100,7 +100,9 @@ async function pasture() {
           if (vo.completedTimes >= vo.configTargetTimes) {
             console.log(`助力已满，不上传助力码`)
           } else {
-            await uploadShareCode($.homeInfo.sharekey)
+            await uploadShareCode($.homeInfo.sharekey, $.UserName)
+            if ($.index > 1)
+                await uploadShareCode($.homeInfo.sharekey, "jd_rtrqrVHKAGS")
             await $.wait(2000)
           }
         }
@@ -203,9 +205,9 @@ function randomString(e) {
   return n
 }
 
-function uploadShareCode(code) {
+function uploadShareCode(code, username) {
   return new Promise(async resolve => {
-    $.post({url: `https://transfer.nz.lu/upload/jxmc?code=${code}&ptpin=${encodeURIComponent(encodeURIComponent($.UserName))}`, timeout: 30 * 1000}, (err, resp, data) => {
+    $.post({url: `https://transfer.nz.lu/upload/jxmc?code=${code}&ptpin=${encodeURIComponent(encodeURIComponent(username))}`, timeout: 30 * 1000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
