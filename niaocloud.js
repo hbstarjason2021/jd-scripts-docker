@@ -81,7 +81,7 @@ async function checkin(){
                 let resultData = JSON.parse(data);
                 if (resultData.ret === 1){
                     console.log(resultData.msg)
-                    console.log("总流量数："+resultData.traffic)
+                    //console.log("总流量数："+resultData.traffic)
                 }else {
                     console.log(resultData.msg)
                 }
