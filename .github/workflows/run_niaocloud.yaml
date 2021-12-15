@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.5]
+        node-version: [14.18.0]
         node-registry: ['https://registry.npmjs.org']
 
     steps:
@@ -69,12 +69,14 @@ jobs:
 
     - name: Run niaocloud
       run: |
-         git clone -b main https://github.com/hbstarjason2021/jd-scripts-docker.git ~/jd-scripts-docker
-         cd ~/jd-scripts-docker
+         git clone -b jd_scripts-new  https://github.com/hbstarjason2021/jd_scripts/ ~/jd_scripts
+         cd ~/jd_scripts
          #export NIAO_CLOUD_COOKIES="${{secrets.NIAO_CLOUD_COOKIES}}"
          export NIAO_CLOUD_EMAIL="${{secrets.NIAO_CLOUD_EMAIL}}"
          export NIAO_CLOUD_PWD="p${{secrets.NIAO_CLOUD_PWD}}"
          #npm install
+         curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/niaocloud.js
          pwd
          node -v 
+         npm install got
          node niaocloud.js
