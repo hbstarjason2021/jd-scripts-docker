@@ -1310,7 +1310,7 @@ function timeFormat(time) {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `http://transfer.nz.lu/farm`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: ``, timeout: 10000}, (err, resp, data) => { //http://transfer.nz.lu/farm
       try {
         if (err) {
           console.log(JSON.stringify(err))
