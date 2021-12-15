@@ -116,7 +116,7 @@ async function login(){
                     for (let cookieArrElement of cookieArr) {
                         ck = ck+";"+cookieArrElement
                     }
-                    console.log('获取到COOKIE: '+ck)
+                    //console.log('获取到COOKIE: '+ck)
                     cookieList.push(ck)
                 }else {
                     console.log(resultData.msg)
