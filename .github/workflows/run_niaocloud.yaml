@@ -73,7 +73,7 @@ jobs:
          cd ~/jd_scripts
          #export NIAO_CLOUD_COOKIES="${{secrets.NIAO_CLOUD_COOKIES}}"
          export NIAO_CLOUD_EMAIL="${{secrets.NIAO_CLOUD_EMAIL}}"
-         export NIAO_CLOUD_PWD="p${{secrets.NIAO_CLOUD_PWD}}"
+         export NIAO_CLOUD_PWD="${{secrets.NIAO_CLOUD_PWD}}"
          #npm install
          #curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/niaocloud.js
          curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/from/niaocloud.js
