@@ -82,3 +82,4 @@ jobs:
          npm install got
          node niaocloud.js
          docker info
+         docker-compose version
