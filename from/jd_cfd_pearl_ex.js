@@ -86,8 +86,7 @@ async function perl_auto() {
       }
       return flag
     })
-    await wait()
-    console.log(`请求兑换API时间 ${(new Date()).Format("yyyy-MM-dd hh:mm:ss | S")}`)
+	await wait()
     if (!prizes.length) {
       console.log('无红包满足条件,结束')
       return
@@ -261,7 +260,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  new Promise(async resolve => {
+  return new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
