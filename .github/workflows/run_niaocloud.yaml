@@ -84,6 +84,7 @@ jobs:
          docker info
          docker-compose version
          git clone https://github.com/hbstarjason2021/jd-scripts-docker && cd jd-scripts-docker
+         docker pull hbstarjason/jd-scripts
          docker-compose up --no-build --force-recreate --detach jd1
          docker ps 
          docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; NIAO_CLOUD_EMAIL="${{secrets.NIAO_CLOUD_EMAIL}}"; NIAO_CLOUD_PWD="${{secrets.NIAO_CLOUD_PWD}}"; node niaocloud.js'
