@@ -69,18 +69,18 @@ jobs:
 
     - name: Run niaocloud
       run: |
-         git clone -b jd_scripts-new  https://github.com/hbstarjason2021/jd_scripts/ ~/jd_scripts
-         cd ~/jd_scripts
+         #git clone -b jd_scripts-new  https://github.com/hbstarjason2021/jd_scripts/ ~/jd_scripts
+         #cd ~/jd_scripts
          #export NIAO_CLOUD_COOKIES="${{secrets.NIAO_CLOUD_COOKIES}}"
-         export NIAO_CLOUD_EMAIL="${{secrets.NIAO_CLOUD_EMAIL}}"
-         export NIAO_CLOUD_PWD="${{secrets.NIAO_CLOUD_PWD}}"
+         #export NIAO_CLOUD_EMAIL="${{secrets.NIAO_CLOUD_EMAIL}}"
+         #export NIAO_CLOUD_PWD="${{secrets.NIAO_CLOUD_PWD}}"
          #npm install
          #curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/niaocloud.js
-         curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/from/niaocloud.js
-         pwd
-         node -v 
-         npm install got
-         node niaocloud.js
+         #curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/from/niaocloud.js
+         #pwd
+         #node -v 
+         #npm install got
+         #node niaocloud.js
          docker info
          docker-compose version
          git clone https://github.com/hbstarjason2021/jd-scripts-docker && cd jd-scripts-docker
