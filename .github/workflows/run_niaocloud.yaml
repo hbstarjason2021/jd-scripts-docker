@@ -75,7 +75,8 @@ jobs:
          export NIAO_CLOUD_EMAIL="${{secrets.NIAO_CLOUD_EMAIL}}"
          export NIAO_CLOUD_PWD="p${{secrets.NIAO_CLOUD_PWD}}"
          #npm install
-         curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/niaocloud.js
+         #curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/niaocloud.js
+         curl -O https://raw.githubusercontent.com/hbstarjason2021/jd-scripts-docker/main/from/niaocloud.js
          pwd
          node -v 
          npm install got
