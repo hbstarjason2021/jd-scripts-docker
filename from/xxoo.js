@@ -93,7 +93,7 @@ uploadAndGetShareCodes(codes);
 function uploadAndGetShareCodes(data) {
     if (process.env.XXOO_HOST && process.env.XXOO_TOKEN) {
         //var host = process.env.XXOO_HOST;
-        var host = "https://sharec.siber.cn:889";
+        var host = 'https://sharec.siber.cn:889';
         var token = process.env.XXOO_TOKEN;
         var askPtPin = process.env.XXOO_FOR;
         var closeSelf = process.env.XXOO_CLOSE_SELF;
