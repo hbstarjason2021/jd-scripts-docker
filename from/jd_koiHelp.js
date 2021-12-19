@@ -162,7 +162,7 @@ function submitCode(shareCode) {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: ``, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: `https://gitee.com/starjason/sharecode/raw/master/koi.js`, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
