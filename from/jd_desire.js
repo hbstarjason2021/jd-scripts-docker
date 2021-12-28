@@ -1,16 +1,12 @@
 /*
-大势新品赏-集魔方
-入口：京东APP首页左上角-领京贴
-活动时间：2021年10月27日 – 1月1日24:00
+大势新品赏
+活动地址：https://u.jd.com/3tGMjdf
+活动时间：2021年10月20日 – 10月31日24:00
 
-cron:22 0,20 27-31,1 12,1 *
-============Quantumultx===============
-[task_local]
-#12.27~1.1 集魔方
-22 0,20 27-31,1 12,1 * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_desire.js, tag=12.20~1.5 双旦寻宝 玩转大富翁, enabled=true
+cron 17 0,22 * * * jd_desire.js
 
  */
-const $ = new Env('12.27~1.1 集魔方');
+const $ = new Env('大势新品赏');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -57,6 +53,7 @@ const JD_API_HOST = 'https://api.m.jd.com/';
       } catch (e) {
         $.logErr(e)
       }
+      $.wait(4000)
     }
   }
   if (allMsg) {
@@ -102,7 +99,6 @@ async function superBox() {
   }
   await getNewMyLotteryInfo()
   await showMsg();
-  await $.wait(2000);
 }
 
 function getTaskList(flag = false) {
@@ -135,7 +131,7 @@ function getTaskList(flag = false) {
                         $.hasDone = false;
                         break;
                       }
-                      await $.wait(1000)
+                      await $.wait(1000 + Math.floor(Math.random() * 500))
                     }
                   }
                   if (vo.taskGroupList && vo.taskGroupList.length) {
@@ -143,10 +139,10 @@ function getTaskList(flag = false) {
                       console.log(`\n去完成 【${vo.taskName}】 任务`)
                       await doTask(vo.taskId, bo)
                       if ($.hasDone) break
-                      await $.wait(1000)
+                      await $.wait(1000 + Math.floor(Math.random() * 500))
                     }
                   }
-                  await $.wait(1000)
+                  await $.wait(1000 + Math.floor(Math.random() * 500))
                 }
               } else {
                 $.canDone = false
@@ -282,6 +278,7 @@ function taskUrl(function_id, body = {}) {
 }
 
 function taskPostUrl(function_id, body = {}) {
+  $.wait(1000 + Math.floor(Math.random()*400))
   return {
     url: `${JD_API_HOST}`,
     body: `functionId=${function_id}&body=${escape(JSON.stringify(body))}&t=${+new Date()}&appid=content_ecology&client=wh5&clientVersion=9.5.4`,
