@@ -44,6 +44,9 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##许愿池
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wish.js'
 
+##京喜牧场
+docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxmc-new3.js'
+
 #docker-compose down
 docker stop jd3 && docker rm jd3
 
