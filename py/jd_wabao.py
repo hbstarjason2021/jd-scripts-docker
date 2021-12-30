@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
-cron: 30 0,15 * * *
+cron: 35 20 * * *
 new Env('发财挖宝');
-活动入口：京东极速版>我的>发财挖宝
-脚本功能为:玩一玩得1血，内部互助，挖宝，提现
-由于每个号只有两次助力机会，所以只助力前两个助力码
+活动入口: 京东极速版>我的>发财挖宝
+脚本功能为: 挖宝，提现，没有助力功能! 
 当血量剩余 1 时停止挖宝，领取奖励并提现
-环境变量：JD_COOKIE，wabao_spring
-export JD_COOKIE="第1个cookie&第2个cookie"
-export wabao_spring="是否自动领取奖励并提现微信红包，yes或no,不填则默认yes领取奖励并提现微信红包"
-11 13 12:00 添加玩一玩任务，更新linkId
 '''
 import os,json,random,time,re,string,functools,asyncio
 import sys
@@ -22,8 +17,7 @@ except Exception as e:
 requests.packages.urllib3.disable_warnings()
 
 
-run_send='yes'          # yes或no, yes则启用通知推送服务
-wabao_spring='yes'      # 是否自动领取奖励并提现,环境变量优先于脚本内部变量
+run_send='no'          # yes或no, yes则启用通知推送服务
 linkId="pTTvJeSTrpthgk9ASBVGsw"
 
 
@@ -42,12 +36,12 @@ def get_env(env):
             a=os.environ[env]
         elif '/ql' in os.path.abspath(os.path.dirname(__file__)):
             try:
-                a=v4_env(env,'/ql/config/config.sh')
+                a=v4_env(env,'./config.sh')
             except:
                 a=eval(env)
         elif '/jd' in os.path.abspath(os.path.dirname(__file__)):
             try:
-                a=v4_env(env,'/jd/config/config.sh')
+                a=v4_env(env,'./config.sh')
             except:
                 a=eval(env)
         else:
@@ -109,29 +103,32 @@ cookie_list=Judge_env().main_run()
 
 ## 获取通知服务
 class Msg(object):
-    def getsendNotify(self, a=1):
-        try:
-            url = 'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
-            response = requests.get(url,timeout=3)
-            with open('sendNotify.py', "w+", encoding="utf-8") as f:
-                f.write(response.text)
-            return
-        except:
-            pass
-        if a < 5:
-            a += 1
-            return self.getsendNotify(a)
-
-    def main(self,f=1):
+    def getsendNotify(self):
+        url_list = [
+            'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
+            'https://cdn.jsdelivr.net/gh/wuye999/myScripts@main/sendNotify.py',
+            'https://raw.fastgit.org/wuye999/myScripts/main/sendNotify.py',
+            'https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
+        ]
+        for e,url in enumerate(url_list):
+            try:
+                response = requests.get(url,timeout=10)
+                with open('sendNotify.py', "w+", encoding="utf-8") as f:
+                    f.write(response.text)
+                return
+            except:
+                if e >= (len(url_list)-1):
+                    print('获取通知服务失败，请检查网络连接...')               
+    def main(self,f=0):
         global send,msg,initialize
         sys.path.append(os.path.abspath('.'))
-        for n in range(3):
+        for _ in range(2):
             try:
                 from sendNotify import send,msg,initialize
                 break
             except:
                 self.getsendNotify()
-        l=['BARK','SCKEY','TG_BOT_TOKEN','TG_USER_ID','TG_API_HOST','TG_PROXY_HOST','TG_PROXY_PORT','DD_BOT_TOKEN','DD_BOT_SECRET','Q_SKEY','QQ_MODE','QYWX_AM','PUSH_PLUS_TOKEN','PUSH_PLUS_USER']
+        l=['BARK_PUSH', 'BARK_ARCHIVE', 'BARK_GROUP', 'BARK_SOUND', 'DD_BOT_SECRET', 'DD_BOT_TOKEN', 'FSKEY', 'GOBOT_URL', 'GOBOT_QQ', 'GOBOT_TOKEN', 'GOTIFY_URL', 'GOTIFY_TOKEN', 'GOTIFY_PRIORITY', 'IGOT_PUSH_KEY', 'PUSH_KEY', 'PUSH_PLUS_TOKEN', 'PUSH_PLUS_USER', 'QMSG_KEY', 'QMSG_TYPE', 'QYWX_AM', 'QYWX_KEY', 'TG_BOT_TOKEN', 'TG_USER_ID', 'TG_API_HOST', 'TG_PROXY_AUTH', 'TG_PROXY_HOST', 'TG_PROXY_PORT']
         d={}
         for a in l:
             try:
@@ -141,13 +138,11 @@ class Msg(object):
         try:
             initialize(d)
         except:
-            self.getsendNotify()
-            if f < 5:
+            if f < 2:
                 f += 1
+                self.getsendNotify()
                 return self.main(f)
-            else:
-                print('获取通知服务失败，请检查网络连接...')
-Msg().main()   # 初始化通知服务    
+Msg().main()   # 初始化通知服务     
 
 
 def taskGetUrl(functionId, body, cookie):
@@ -170,29 +165,6 @@ def taskGetUrl(functionId, body, cookie):
         except:
             if n==2:
                 msg('API请求失败，请检查网路重试❗\n')   
-
-
-# 开局验证？
-def activity(cookie):
-    url="https://h5speed.m.jd.com/v2/speed/activity?flag=132&sid=f77337204fa0b3cdbc02fa03b6cfb45w&libVer=2.0.0&url=https%3A%2F%2Fbnzf.jd.com%2F&rts=1635613363462&title=%E5%8F%91%E8%B4%A2%E6%8C%96%E5%AE%9D&p1=1&p2=1&p3=1&p4=0&p5=0&p6=10&p7=249&p8=107&p9=7&p10=114&p11=1751&p12=1751&p13=0&p14=1893&p15=377&p16=1516&resources={%22badjs.json?Content=%20%5B%20Sun%20Oct%2031%202021%2001%3A02%3A39%20GMT%2B0800%20(%E5%8C%97%E7%BE%8E%E4%B8%AD%E9%83%A8%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)%20%5D%20configCenterAjaxPrame%20Exception&referer=https%3A%2F%2Fimk2.jd.com%2Fauto%2Fopen%2Fliteapp%2FconfigCenter%2Fajax%2Fsuccess%2Fexception%3Fwq&t=0.6081273460492731%22:397,%22preArousal?app=jdliteapp&refer=https%3A%2F%2Fbnzf.jd.com%2F%3FactivityId%3D"+linkId+"%26lng%3D107.648869%26lat%3D30.281194%26sid%3Df77337204fa0b3cdbc02fa03b6cfb45w%26un_area%3D4_134_19915_0&imkUserId=imk2291.330737368482&type=1&msg=configCenterAjaxPrame%20Exception&t=0.1307983996705202%22:407,%22api-getStaticResource%22:392,%22api-apTaskList%22:394,%22api-getStationMarquees%22:373,%22api-happyDigHome%22:432,%22blast.cfc8150d.gif%22:365,%22halo.6d8599b2.gif%22:370,%22crack.0f00e203.gif%22:374,%22exception?data=eyJmbGFnIjoxMzIsInJ0cyI6MTYzNTYxMzM2MDUxMCwibGliVmVyIjoiMi4xLjUiLCJ1cmwiOiJodHRwczovL2JuemYuamQuY29tLyIsInRpdGxlIjoi5Y%2BR6LSi5oyW5a6dIiwiZXJyVHlwZSI6NCwiZXJyQ29kZSI6NzUwLCJlcnJNc2ciOiJKRFBlcmZvcm1hbmNlLnNlbmRSZXNvdXJjZSBpcyBub3QgYSBmdW5jdGlvbiIsImV4Y2VwdGlvbkluZm8iOnsidHlwZSI6IlR5cGVFcnJvciIsInN0YWNrIjpbXX19%22:418,%22eff9a57761a0c45a.png%22:111,%22bbbee650e29a8525.png%22:190,%22hand.1e279b77.gif%22:153,%226e3d0e3f0efa29d3.jpg%22:532,%220af3dbd3ab14a953.jpg%22:695}"
-    headers={
-        'Cookie': cookie,
-        'Host': 'h5speed.m.jd.com',
-        'Connection': 'keep-alive',
-        'referer': f'https://bnzf.jd.com/?activityId={linkId}&lng=107.648869&lat=30.281194&sid=f77337204fa0b3cdbc02fa03b6cfb45w&un_area=4_134_19915_0',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        "User-Agent": ua(),
-        'Accept-Language': 'zh-cn',
-        'Accept-Encoding': 'gzip, deflate, br',
-    } 
-    for n in range(3):
-        try:
-            requests.post(url,headers=headers,data=data).json()
-            return res
-        except:
-            if n==3:
-                msg('API请求失败，请检查网路重试❗\n')   
-
 
 
 # 剩余血量
@@ -232,9 +204,9 @@ def happyDigHome(cookie):
     if res['code']==0:
         if res['success']:
             curRound=res['data']['curRound']                        # 未知
-            blood=res['data']['blood']                              # 剩余血量
+            incep_blood=res['data']['blood']                              # 剩余血量
             roundList=res['data']['roundList']                      # 3个总池子
-            for roundList_n in roundList:                           # 迭代每个池子
+            for e,roundList_n in enumerate(roundList):                           # 迭代每个池子
                 roundid=roundList_n['round']                        # 池序号
                 state=roundList_n['state'] 
                 rows=roundList_n['rows']                            # 池规模，rows*rows
@@ -247,16 +219,20 @@ def happyDigHome(cookie):
                 msg(f'当前池序号为 {roundid} \n当前池规模为 {rows}*{rows}')
                 msg(f'剩余血量 {a[0]}')
                 msg(f'当前池已得京东红包 {a[2]}\n当前池已得微信红包 {a[1]}\n')
-       
-                if (_blood:=xueliang(cookie))>1:
+                _blood=xueliang(cookie)
+                if _blood>1  or incep_blood>=21:
                     happyDigDo(cookie,roundid,0,0)
-                    for n in range(roundid+4):
-                        for i in range(roundid+4):
-                            if (_blood:=xueliang(cookie))>1:
+                    if e==0 or e==1:
+                        roundid_n=4
+                    else:
+                        roundid_n=5
+                    for n in range(roundid_n):
+                        for i in range(roundid_n):
+                            _blood=xueliang(cookie)
+                            if _blood>1  or incep_blood>=21:
                                 msg(f'当前血量为 {_blood} 健康，继续挖宝')
                                 msg(f'本次挖取坐标为 ({n},{i})')
                                 happyDigDo(cookie,roundid,n,i)
-                                
                             else:
                                 a=jinge(cookie,roundid)
                                 msg(f'当前血量为 {_blood} 不健康，结束该池挖宝')
@@ -268,20 +244,20 @@ def happyDigHome(cookie):
         msg(f'获取数据失败\n{res}\n')
 
 
-# 玩一玩
-def apDoTask(cookie):
-    msg('开始 玩一玩')
-    body={"linkId":linkId,"taskType":"BROWSE_CHANNEL","taskId":454,"channel":4,"itemId":"https%3A%2F%2Fsignfree.jd.com%2F%3FactivityId%3DPiuLvM8vamONsWzC0wqBGQ","checkVersion":False}
-    res=taskGetUrl('apDoTask', body, cookie)
-    if not res:
-        return
-    try:    
-        if res['success']:
-            msg('任务完成，获得血量 1\n')
-        else:
-            msg(f"{res['errMsg']}\n")
-    except:
-        msg(f"错误\n{res}\n")
+# # 玩一玩
+# def apDoTask(cookie):
+#     msg('开始 玩一玩')
+#     body={"linkId":linkId,"taskType":"BROWSE_CHANNEL","taskId":454,"channel":4,"itemId":"https%3A%2F%2Fsignfree.jd.com%2F%3FactivityId%3DPiuLvM8vamONsWzC0wqBGQ","checkVersion":False}
+#     res=taskGetUrl('apDoTask', body, cookie)
+#     if not res:
+#         return
+#     try:    
+#         if res['success']:
+#             msg('任务完成，获得血量 1\n')
+#         else:
+#             msg(f"{res['errMsg']}\n")
+#     except:
+#         msg(f"错误\n{res}\n")
     
 
 # 挖宝
@@ -308,34 +284,34 @@ def happyDigDo(cookie,roundid,rowIdx,colIdx):
     else:
         msg(f'挖取失败\n{res}\n')
 
-# 助力码
-def inviteCode(cookie):
-    global inviteCode_1_list,inviteCode_2_list
-    body={"linkId":linkId}
-    res=taskGetUrl("happyDigHome", body, cookie)
-    if not res:
-        return
-    try:
-        if res['success']:
-            msg(f"账号{get_pin(cookie)}助力码为{res['data']['inviteCode']}")
-            inviteCode_1_list.append(res['data']['inviteCode'])
-            msg(f"账号{get_pin(cookie)}助力码为{res['data']['markedPin']}")
-            inviteCode_2_list.append(res['data']['markedPin'])
-        else:
-            msg('快去买买买吧')
-    except:
-        msg(f"错误\n{res}\n")
+# # 助力码
+# def inviteCode(cookie):
+#     global inviteCode_1_list,inviteCode_2_list
+#     body={"linkId":linkId}
+#     res=taskGetUrl("happyDigHome", body, cookie)
+#     if not res:
+#         return
+#     try:
+#         if res['success']:
+#             msg(f"账号{get_pin(cookie)}助力码为{res['data']['inviteCode']}")
+#             inviteCode_1_list.append(res['data']['inviteCode'])
+#             msg(f"账号{get_pin(cookie)}助力码为{res['data']['markedPin']}")
+#             inviteCode_2_list.append(res['data']['markedPin'])
+#         else:
+#             msg('快去买买买吧')
+#     except:
+#         msg(f"错误\n{res}\n")
 
-# 助力
-def happyDigHelp(cookie,fcwbinviter,fcwbinviteCode):
-    msg(f"账号 {get_pin(cookie)} 去助力{fcwbinviteCode}")
-    xueliang(cookie)
-    body={"linkId":linkId,"inviter":fcwbinviter,"inviteCode":fcwbinviteCode}
-    res=taskGetUrl("happyDigHelp", body, cookie)
-    if res['success']:
-        msg('助力成功')
-    else:
-        msg(res['errMsg'])
+# # 助力
+# def happyDigHelp(cookie,fcwbinviter,fcwbinviteCode):
+#     msg(f"账号 {get_pin(cookie)} 去助力{fcwbinviteCode}")
+#     xueliang(cookie)
+#     body={"linkId":linkId,"inviter":fcwbinviter,"inviteCode":fcwbinviteCode}
+#     res=taskGetUrl("happyDigHelp", body, cookie)
+#     if res['success']:
+#         msg('助力成功')
+#     else:
+#         msg(res['errMsg'])
 
 # 领取奖励
 def happyDigExchange(cookie):
@@ -384,6 +360,7 @@ def spring_reward_list(cookie):
                 prizeBaseId=_items['prizeBaseId']
                 if '极速版签到返红包' not in prizeDesc:
                     msg('尝试微信提现')
+                    time.sleep(3.2)
                     wecat(cookie,amountid,poolBaseId,prizeGroupId,prizeBaseId)
         else:
             msg(f'获取数据失败\n{res}\n')
@@ -426,34 +403,27 @@ def wecat(cookie,amountid,poolBaseId,prizeGroupId,prizeBaseId):
 def main():
     msg('🔔发财挖宝，开始！\n')
 
-    msg('获取助力码\n')
-    global inviteCode_1_list,inviteCode_2_list
-    inviteCode_1_list=list()
-    inviteCode_2_list=list()
-    for cookie in cookie_list:
-       inviteCode(cookie) 
+    # msg('获取助力码\n')
+    # global inviteCode_1_list,inviteCode_2_list
+    # inviteCode_1_list=list()
+    # inviteCode_2_list=list()
+    # for cookie in cookie_list:
+    #    inviteCode(cookie) 
 
-    msg('互助\n')
-    inviteCode_2_list=inviteCode_2_list[:2]
-    for e,fcwbinviter in enumerate(inviteCode_2_list):
-        fcwbinviteCode=inviteCode_1_list[e]
-        for cookie in cookie_list:
-            happyDigHelp(cookie,fcwbinviter,fcwbinviteCode)
+    # msg('互助\n')
+    # inviteCode_2_list=inviteCode_2_list[:2]
+    # for e,fcwbinviter in enumerate(inviteCode_2_list):
+    #     fcwbinviteCode=inviteCode_1_list[e]
+    #     for cookie in cookie_list:
+    #         happyDigHelp(cookie,fcwbinviter,fcwbinviteCode)
 
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
 
-    tasksss=[]
     for e,cookie in enumerate(cookie_list,start=1):
         msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
-        activity(cookie)
-        apDoTask(cookie)
         happyDigHome(cookie)
-        if get_env('wabao_spring')=='yes':
-            spring_reward_list(cookie)
+        spring_reward_list(cookie)
         
-    msg('作者：wuye9999\n')
-    msg('地址:https://github.com/wuye999/myScripts')
-
     if run_send=='yes':
         send('### 发财挖宝 ###')   # 通知服务
 
