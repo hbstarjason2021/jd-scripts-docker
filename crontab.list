@@ -50,8 +50,8 @@
 #*/25 0-23/1 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_mooncake.js | sed 's/^/ 【合成月饼】/'; "
 
 ## 财富岛珍珠兑换
-#29,59 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jx_cfd_pearl_exchange.js | sed 's/^/ 【财富岛珍珠兑换】/'; "
-#29,59 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_pearl_ex.js | sed 's/^/ 【财富岛珍珠兑换】/'; "
+29,59 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jx_cfd_pearl_exchange.js | sed 's/^/ 【财富岛珍珠兑换】/'; "
+29,59 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_pearl_ex.js | sed 's/^/ 【财富岛珍珠兑换】/'; "
 
 ###########################
 
