@@ -1,7 +1,7 @@
 //0 * * * * 炸年兽 自动入会、签到、任务、升级、开宝箱、捡金币
 //半残品随便跑跑 
 // 学习交流 
-const $ = new Env('搞基大神-炸年兽');
+const $ = new Env('炸年兽');
 
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
@@ -22,7 +22,10 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let inviteCodes = [
-
+  'ZXASTT012_bkiAkRItguJFjRWn6W7zB55awQ',
+  'ZXASTT0225KkcRx4QplfTKUz1l6UPdQFjRWn6W7zB55awQ',
+  'ZXASTT01597g7GU9KrQGJYUMFjRWn6W7zB55awQ',
+  'ZXASTT0146Lh2RRwZrw2JdwFjRWn6W7zB55awQ',  
 ]
 $.shareCodesArr = [];
 
