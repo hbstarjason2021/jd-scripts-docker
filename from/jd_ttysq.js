@@ -48,9 +48,9 @@ const JD_API_HOST = `https://m.jingxi.com`;
             await main()
         }
     }
-    let res = await getAuthorShareCode('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/ttysq.json')
+    let res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/ttysq.json')
     if (!res) {
-        res = await getAuthorShareCode('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/ttysq.json')
+        res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/ttysq.json')
     }
     if (res) {
         authorCode = res.sort(() => 0.5 - Math.random())
