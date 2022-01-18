@@ -17,10 +17,9 @@
   任务关键字前置，方便屏蔽不想做的任务
   增加任务状态判断，细分去完成、领奖励和已完成不同状态的操作内容，提高任务完成准确度
 
-  20220114 V1.9
-  修改小程序、首页浮层、组队任务返回逻辑，提高任务成功率
-  撤销V1.7的<助力模式下返回主页，以便完成点击悬浮窗任务>修改内容
-
+  20220117 V1.9.2
+  修改城城分现金活动弹窗判断逻辑
+  普通浏览任务中增加对累计任务的判断
 */
 Start();
 console.info("开始任务");
@@ -43,7 +42,7 @@ sleep(1000);
 //Run("京东",1,0,0);home();
 //Run("京东-2",1,0,0);home();
 //手动例子
-Run("手动",0,1,1);home();
+Run("手动",0,0,0);home();
 //分身有术缓存清理
 //CleanCache("分身有术Pro",1);
 console.info("结束任务");
@@ -123,7 +122,7 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
     sleep(2000);
     if(IsInvite == 1){
         //将京口令分段填入，只要里面的特征码即可，分不清什么是特征码的也可以整段放进来，注意用双引号和逗号隔开
-        Code=new Array("￥91yW609MICRID%","#8Bk234cWiPXav@","#5AdzgD3bFepFs%","#41U9D9iIq5GlS@","#6BKkL5Xe9ZgHq@","#35bUyDRs21QXA%");//邀请码第一个是助力作者，第二个纯属举例，使用时建议删除
+        Code=new Array("");//邀请码第一个是助力作者，第二个纯属举例，使用时建议删除
         RunTime=Code.length;
         console.info("共识别到"+RunTime+"个助力码");
         for(var i = 0; i < RunTime; i++){
@@ -512,8 +511,14 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
             }
         }
     }
+    let IsChengCheng = 0
+    let IsNotJoinMemberTimes = 0
     console.log("寻找未完成任务……");
     while (true) {
+        if(IsNotJoinMemberTimes == 4){
+            IsJoinMember = 0
+            console.log("已连续"+ IsNotJoinMemberTimes +"次为新店铺，跳过入会任务");
+        }
         if(textContains("去组队可得").exists()){
             let task1 = textMatches(/.*去组队可得.*/).find()
             if (task1.empty()) {
@@ -565,7 +570,7 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
                 }
             }
         }
-        let taskButtons = textMatches(/.*浏览.*s.*|.*浏览.*秒.*|.*累计浏览.*|.*浏览即可得.*|.*浏览并关注可得.*|.*浏览可得.*|.*成功入会.*|.*小程序.*|.*每日6-9点打卡可得.*|.*点击首页浮层可得.*|.*品牌墙店铺.*|.*玩AR游戏可得.*爆竹.*/).find()
+        let taskButtons = textMatches(/.*浏览.*s.*|.*浏览.*秒.*|.*累计浏览.*|.*浏览即可得.*|.*浏览并关注可得.*|.*浏览可得.*|.*成功入会.*|.*小程序.*|.*每日6-9点打卡可得.*|.*点击首页浮层可得.*|.*参与城城点击.*|.*品牌墙店铺.*|.*玩AR游戏可得.*爆竹.*/).find()
         if (taskButtons.empty()) {
             console.log("未找到合适的任务，退出");
             sleep(3000);
@@ -588,10 +593,16 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
                 //跳过任务
                 //if (taskText.match(/成功入会/)) continue
                 //if (taskText.match(/品牌墙店铺/)) continue
+                //if (taskText.match(/参与城城点击/)) continue
                 //if (taskText.match(/小程序/)) continue
                 //if (taskText.match(/加购/)) continue
                 if (taskText.match(/成功入会/) && IsJoinMember == 0) {
                     console.log("识别到入会任务，当前设置为<不执行入会>，即将进入下一任务");
+                    sleep(1000);
+                    continue;
+                }
+                if (taskText.match(/参与城城点击/) && IsChengCheng != 0) {
+                    console.log("识别到城城任务，当前账号此任务火爆，即将进入下一任务");
                     sleep(1000);
                     continue;
                 }
@@ -610,63 +621,144 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
             taskButton.click();
             sleep(1000);
             console.log("等待浏览任务完成……");
-            let c = 0
-            while (c < 15) { // 15秒，防止死循环
-                let finish_reg = /获得.*?爆竹|浏览完成|已达上限/
-                if ((textMatches(finish_reg).exists() || descMatches(finish_reg).exists())){ // 等待已完成出现，有可能失败
-                    break;
-                }
-                sleep(1000);
-                c++;
-                if (c == 3 |c == 6 |c == 12){
-                    console.log("已等待"+c+"秒");
-                    //财富岛任务无法直接返回，只能跳转返回
-                    if(app.getAppName(currentPackage()) == "京喜"){
-                        if(LauchAPPName == "手动"){
-                            console.log("请手动返回任务界面，以便进行下一步");
-                            while(text("累计任务奖励").findOnce() == null){
-                                if(textMatches(/.*消耗.*爆竹/).exists()|
-                                    app.getAppName(currentPackage()) == "京东"|currentActivity() =="com.jingdong.app.mall.MainFrameActivity"){
-                                    break;
-                                }
-                                console.log("当前应用名:  " + app.getAppName(currentPackage())+ "\n"
-                                    +"当前活动:  " + currentActivity()+ "\n"
-                                    +"未识别到京东相关界面，继续等待……");
-                                sleep(3000);
+            if(textEndsWith("4个商品领爆竹").findOne(3000) != null){//当前页浏览加购4个商品领爆竹|当前页点击浏览4个商品领爆竹
+                console.log('任务转为累计类型');
+                if (!textContains('.jpg!q70').exists()) {
+                    console.log("模式2");
+                    for (var i = 0; i < 4; i++) {
+                        let Model2items = textEndsWith("4个商品领爆竹").findOne();
+                        if (textContains("浏览加购").exists()) {
+                            console.log("第"+ ( i + 1 ) +"次加购");
+                            console.log('待加购');
+                            sleep(200);
+                            if(!Model2items.parent().parent()){
+                                console.error("界面异常，跳过此商品");
+                                continue;
                             }
-                            console.log("已检测到京东APP，等待下一步");
+                            Model2items.parent().parent().child(2).child(i).child(4).click();
+                        } else {
+                            console.log("第"+ ( i + 1 ) +"次浏览");
+                            Model2items.parent().parent().child(2).child(i).child(4).click();
                         }
-                        else{
-                            if(IsSeparation == 1){
-                                console.info("打开分身有术Pro，准备调用分身");
-                                app.launchApp("分身有术Pro");
-                                for(var i = 0;!text(LauchAPPName).exists(); i++){
-                                    console.log("等待识别分身……");
-                                    sleep(3000);
-                                    if(i>10){
-                                        console.log("识别超时，退出当前任务");
-                                        return;
+                        sleep(1000);
+                        for(var ii = 0; !textEndsWith("4个商品领爆竹").exists(); ii++){
+                            if(ii == 0){
+                                console.log("返回");
+                            }else {
+                                console.log("再次返回");
+                            }
+                            back();
+                            sleep(2000);
+                            if(ii > 4){
+                                console.error("任务异常，退出当前账号");
+                                home();
+                                return;
+                            }
+                        }
+                        if (i >= 3) {
+                            break;
+                        }
+                    }
+                }
+                else{
+                    console.log("模式1");
+                    for (var i = 0; i < 4; i++) {
+                        let Model1items = textContains('.jpg!q70').find();
+                        if (textContains("浏览加购").exists()) {
+                            console.log("第"+ ( i + 1 ) +"次加购");
+                            let Model1tmp = Model1items[i].parent().parent();
+                            console.log('待加购');
+                            sleep(200);
+                            if(!Model1tmp){
+                                console.error("界面异常，跳过此商品");
+                                continue;
+                            }
+                            Model1tmp.child(Model1tmp.childCount() - 1).click();
+                        } else {
+                            console.log("第"+ ( i + 1 ) +"次浏览");
+                            Model1items[i].parent().parent().child(4).click();
+                        }
+                        sleep(1000);
+                        for(var ii = 0; !textEndsWith("4个商品领爆竹").exists(); ii++){
+                            if(ii == 0){
+                                console.log("返回");
+                            }else {
+                                console.log("再次返回");
+                            }
+                            back();
+                            sleep(2000);
+                            if(ii > 4){
+                                console.error("加购任务异常，退出当前账号");
+                                home();
+                                return;
+                            }
+                        }
+                        if (i >= 3) {
+                            break;
+                        }
+                    }
+                }
+                console.log("浏览商品任务完成");
+            }
+            else{
+                let c = 0
+                while (c < 15) { // 15秒，防止死循环
+                    let finish_reg = /获得.*?爆竹|浏览完成|已达上限/
+                    if ((textMatches(finish_reg).exists() || descMatches(finish_reg).exists())){ // 等待已完成出现，有可能失败
+                        break;
+                    }
+                    sleep(1000);
+                    c++;
+                    if (c == 3 |c == 6 |c == 12){
+                        console.log("已等待"+c+"秒");
+                        //财富岛任务无法直接返回，只能跳转返回
+                        if(app.getAppName(currentPackage()) == "京喜"){
+                            if(LauchAPPName == "手动"){
+                                console.log("请手动返回任务界面，以便进行下一步");
+                                while(text("累计任务奖励").findOnce() == null){
+                                    if(textMatches(/.*消耗.*爆竹/).exists()|
+                                        app.getAppName(currentPackage()) == "京东"|currentActivity() =="com.jingdong.app.mall.MainFrameActivity"){
+                                        break;
                                     }
+                                    console.log("当前应用名:  " + app.getAppName(currentPackage())+ "\n"
+                                        +"当前活动:  " + currentActivity()+ "\n"
+                                        +"未识别到京东相关界面，继续等待……");
+                                    sleep(3000);
                                 }
-                                if(text(LauchAPPName).exists()){
-                                    text(LauchAPPName).findOne().parent().click();
-                                    console.log("分身已启动，等待活动检测……");
-                                }
+                                console.log("已检测到京东APP，等待下一步");
                             }
                             else{
-                                console.info("打开"+LauchAPPName+"");
-                                app.launchApp(LauchAPPName);
-                                console.log("等待活动检测……");
+                                if(IsSeparation == 1){
+                                    console.info("打开分身有术Pro，准备调用分身");
+                                    app.launchApp("分身有术Pro");
+                                    for(var i = 0;!text(LauchAPPName).exists(); i++){
+                                        console.log("等待识别分身……");
+                                        sleep(3000);
+                                        if(i>10){
+                                            console.log("识别超时，退出当前任务");
+                                            return;
+                                        }
+                                    }
+                                    if(text(LauchAPPName).exists()){
+                                        text(LauchAPPName).findOne().parent().click();
+                                        console.log("分身已启动，等待活动检测……");
+                                    }
+                                }
+                                else{
+                                    console.info("打开"+LauchAPPName+"");
+                                    app.launchApp(LauchAPPName);
+                                    console.log("等待活动检测……");
+                                }
                             }
                         }
                     }
                 }
-            }
-            if (c >= 15) {
-                console.log("超时，即将返回");
-            }
-            else{
-                console.log("浏览时长任务完成");
+                if (c >= 15) {
+                    console.log("超时，即将返回");
+                }
+                else{
+                    console.log("浏览时长任务完成");
+                }
             }
         }
 
@@ -756,11 +848,59 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
         if (taskText.match(/浏览.*s|浏览.*秒/)) {
             console.log("进行", taskText);
             timeTask();
+        }else if (taskText.match(/参与城城点击/) && IsChengCheng == 0) {
+            console.log("进行", taskText);
+            taskButton.click();
+            sleep(2000);
+            for(var ii = 0; !text("邀请新朋友 更快赚现金").exists(); ii++){
+                console.log("等待识别助力状态");
+                sleep(2000);
+                if(textContains("活动太火爆了").findOne(3000) != null){
+                    console.error("该账号活动火爆，屏蔽此任务");
+                    IsChengCheng = 1;
+                    break;
+                }
+                if(textContains("可微信零钱提现").exists()){
+                    console.log("点我收下");
+                    textContains("可微信零钱提现").findOne().parent().parent().parent().child(3).click();
+                    sleep(500);
+                }
+                if(textMatches(/获得.*现金/).exists()){
+                    console.log("获得现金");
+                    textMatches(/获得.*现金/).findone().parent().child(1).click();
+                    sleep(500);
+                }
+                if(textContains("邀请活动新朋友，金额更高噢").exists()){
+                    console.log("关闭弹窗");
+                    textContains("邀请活动新朋友，金额更高噢").findOne().parent().child(0).click();
+                    sleep(500);
+                }
+                if(textContains("有机会得大额现金").exists()){
+                    console.log("发起邀请");
+                    textContains("有机会得大额现金").findOne().parent().child(1).click();
+                    sleep(2000);
+                    back();
+                    sleep(500);
+                }
+                if(text("京口令已复制").exists()){
+                    console.log("关闭弹窗");
+                    text("京口令已复制").findOne().parent().parent().child(1).click();
+                    sleep(500);
+                }
+                if(ii > 5){
+                    console.error("助力超时，退出当前助力账号");
+                    break;
+                }
+            }
         } else if (taskText.match(/点击首页浮层可得/)) {
             console.log("进行", taskText);
             taskButton.click();
             sleep(2000);
             /* 如果任务按钮为去完成，则此处应该有弹窗 */
+            if(textContains("立即完成").exists()){
+                console.log("立即完成");
+                textContains("立即完成").findOne().click();
+            }
             if(!text("首页").exists()){
                 console.log("未识别到首页，等待5秒待跳转");
                 if(text("首页").findOne(5000) == null){
@@ -968,6 +1108,7 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
             if(textContains("确认授权并加入店铺会员").exists()){
                 if(IsJoinMember == 2){
                     console.log("当前店铺未入会，跳过");
+                    IsNotJoinMemberTimes = IsNotJoinMemberTimes + 1
                 }
                 else if(IsJoinMember == 1){
                     console.log("涉及个人隐私，请手动加入店铺会员或者忽略加入会员任务");
@@ -981,6 +1122,7 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
             else{
                 console.info("已是当前店铺会员");
                 console.log("任务完成");
+                IsNotJoinMemberTimes = 0;
             }
         } else if (taskText.match(/玩AR游戏可得|每日6-9点打卡/)) {
             console.log("进行", taskText);
@@ -1002,10 +1144,14 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
                             console.log("返回");
                             back();
                             sleep(2000);
-                            while(!text("互动种草城").exists()){
+                            for(var ii = 0; !text("互动种草城").exists(); ii++){
                                 console.log("再次返回");
-                                back();
                                 sleep(2000);
+                                back();
+                                if(ii > 3){
+                                    console.error("无法识别关键节点，退出当前账号任务");
+                                    return;
+                                }
                             }
                         }
                     }
