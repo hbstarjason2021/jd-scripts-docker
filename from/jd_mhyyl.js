@@ -5,7 +5,7 @@ cron 0 0,12,18 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/j
 const $ = new Env('萌虎摇摇乐');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [];
-let allInvite = ['7c70c3534edd4271b6af9b3a31cfc08e', 'd7fa7bfe25164c39a2e15575bd03729b', '108cd89244d942c5b321bb05551c31ff', '044eac9cad1b4cc8bf4e8e31478858e8'];
+let allInvite = [{'user':jd_709c349f13b51,'need':99,'code':7c70c3534edd4271b6af9b3a31cfc08e},{'user':starjason,'need':99,'code':d7fa7bfe25164c39a2e15575bd03729b},{'user':yuxiachenqi,'need':99,'code':108cd89244d942c5b321bb05551c31ff},{'user':fu5520jing,'need':99,'code':044eac9cad1b4cc8bf4e8e31478858e8}];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
