@@ -16,10 +16,7 @@
   精简代码，合并重复动作，提高代码可读性
   任务关键字前置，方便屏蔽不想做的任务
   增加任务状态判断，细分去完成、领奖励和已完成不同状态的操作内容，提高任务完成准确度
-
-  20220117 V1.9.2
-  修改城城分现金活动弹窗判断逻辑
-  普通浏览任务中增加对累计任务的判断
+  20220118 V1.9.4
 */
 Start();
 console.info("开始任务");
@@ -42,7 +39,7 @@ sleep(1000);
 //Run("京东",1,0,0);home();
 //Run("京东-2",1,0,0);home();
 //手动例子
-Run("手动",0,0,0);home();
+Run("手动",0,1,1);home();
 //分身有术缓存清理
 //CleanCache("分身有术Pro",1);
 console.info("结束任务");
@@ -122,7 +119,7 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
     sleep(2000);
     if(IsInvite == 1){
         //将京口令分段填入，只要里面的特征码即可，分不清什么是特征码的也可以整段放进来，注意用双引号和逗号隔开
-        Code=new Array("");//邀请码第一个是助力作者，第二个纯属举例，使用时建议删除
+        Code=new Array("￥3BCKO9vt2RAcA￥","￥1B4Og5F7ClD1C%","￥9EvqH71xBBThK%","￥7BRq97CCsj3NJ￥","#4CJLV76AyaSA9%","￥44MvLFk9NeBlt￥");//邀请码第一个是助力作者，第二个纯属举例，使用时建议删除
         RunTime=Code.length;
         console.info("共识别到"+RunTime+"个助力码");
         for(var i = 0; i < RunTime; i++){
@@ -860,32 +857,44 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
                     IsChengCheng = 1;
                     break;
                 }
-                if(textContains("可微信零钱提现").exists()){
-                    console.log("点我收下");
-                    textContains("可微信零钱提现").findOne().parent().parent().parent().child(3).click();
-                    sleep(500);
+                if(text("活动已结束").findOne(3000) != null){
+                    console.error("活动已结束");
+                    console.log("查看我的现金");
+                    text("活动已结束").findOne().parent().parent().parent().child(5).child(0).click();
+                    console.log("任务完成");
+                    break;
                 }
-                if(textMatches(/获得.*现金/).exists()){
-                    console.log("获得现金");
-                    textMatches(/获得.*现金/).findone().parent().child(1).click();
-                    sleep(500);
-                }
-                if(textContains("邀请活动新朋友，金额更高噢").exists()){
-                    console.log("关闭弹窗");
-                    textContains("邀请活动新朋友，金额更高噢").findOne().parent().child(0).click();
-                    sleep(500);
-                }
-                if(textContains("有机会得大额现金").exists()){
-                    console.log("发起邀请");
-                    textContains("有机会得大额现金").findOne().parent().child(1).click();
-                    sleep(2000);
-                    back();
-                    sleep(500);
-                }
-                if(text("京口令已复制").exists()){
-                    console.log("关闭弹窗");
-                    text("京口令已复制").findOne().parent().parent().child(1).click();
-                    sleep(500);
+                else{
+                    if(textContains("可微信零钱提现").exists()){
+                        console.log("点我收下");
+                        textContains("可微信零钱提现").findOne().parent().parent().parent().child(3).click();
+                        sleep(500);
+                    }
+                    if(textMatches(/.*获得.*现金/).exists()){
+                        let tmp = textMatches(/.*获得.*现金/).findOne()
+                        console.log("获得现金");
+                        tmp.parent().child(1).click();
+                        sleep(500);
+                    }
+                    if(textContains("邀请活动新朋友，金额更高噢").exists()){
+                        console.log("关闭弹窗");
+                        textContains("邀请活动新朋友，金额更高噢").findOne().parent().child(0).click();
+                        sleep(500);
+                    }
+                    if(textContains("有机会得大额现金").exists()){
+                        console.log("发起邀请");
+                        textContains("有机会得大额现金").findOne().parent().child(1).click();
+                        sleep(2000);
+                        console.log("任务完成");
+                        back();
+                        sleep(500);
+                        ii = 6;//任务完成，提前跳出循环
+                    }
+                    if(text("京口令已复制").exists()){
+                        console.log("关闭弹窗");
+                        text("京口令已复制").findOne().parent().parent().child(1).click();
+                        sleep(500);
+                    }
                 }
                 if(ii > 5){
                     console.error("助力超时，退出当前助力账号");
@@ -978,7 +987,15 @@ function Run(LauchAPPName,IsSeparation,IsInvite,IsJoinMember) {
                 var task2 = textContains("后满").findOne().parent().parent()
                 for(var i = 0; i < 3; i++){
                     console.log("第" + ( i + 1 ) + "个店铺")
-                    task2.child(task2.childCount()-3).child(0).child(1).child(i).click();
+                    let tmp = task2.child(task2.childCount()-3).child(0).child(1).child(i)//.click();
+                    if(tmp.clickable(true)){
+                        tmp.click();
+                    }
+                    else {
+                        console.log("控件异常，尝试坐标点击")
+                        setScreenMetrics(device.width,device.height);
+                        click(tmp.bounds().centerX(),tmp.bounds().centerY());
+                    }
                     sleep(3500);
                     for(var ii = 0;!textContains("后满").exists(); ii++){
                         console.log("返回")
