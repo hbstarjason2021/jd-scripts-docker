@@ -57,7 +57,7 @@
 
 ###########################
 ## 炸年兽
-18 0-7/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_travel.js | sed 's/^/ 【炸年兽】/'; "
+# 18 0-7/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_travel.js | sed 's/^/ 【炸年兽】/'; "
 
 
 ## 牧场助农兑换
@@ -86,6 +86,7 @@
 
 # 萌虎摇摇乐
 2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_tiger.js | sed 's/^/ 【萌虎摇摇乐】/'; "
+4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_mhyyl.js | sed 's/^/ 【萌虎摇摇乐】/'; "
 
 # 天天压岁钱
 3 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_ttysq.js | sed 's/^/ 【天天压岁钱】/'; "
@@ -97,7 +98,7 @@
 6 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_superMarket_new.js | sed 's/^/ 【京小超】/'; "
 #8 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car.js | sed 's/^/ 【京东汽车】/'; "
 
-## 上传助力码
+############# 上传助力码
 2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_help.js | sed 's/^/ 【上传农场助力码】/'; "
 0,1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_mooncake_help.js | sed 's/^/ 【上传财富岛珍珠助力码】/'; "
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_help.js | sed 's/^/ 【上传财富岛助力码】/'; "
@@ -145,6 +146,10 @@
 
 ## 升级赚京豆
 25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_MMdou.js | sed 's/^/ 【升级赚京豆】/'; "
+
+## 手机年货节
+27 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/js_sjnhj.js | sed 's/^/ 【手机年货节】/'; "
+
 
 
 ## 粉丝互动
