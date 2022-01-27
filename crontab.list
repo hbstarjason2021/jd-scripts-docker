@@ -145,7 +145,7 @@
 25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_MMdou.js | sed 's/^/ 【升级赚京豆】/'; "
 
 ## 手机年货节
-27 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/js_sjnhj.js | sed 's/^/ 【手机年货节】/'; "
+27 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sjnhj.js | sed 's/^/ 【手机年货节】/'; "
 
 
 ## 粉丝互动
