@@ -88,7 +88,8 @@ async function perl_auto() {
       }
       return flag
     })
-	await wait()
+    await wait()
+    console.log(`请求兑换API时间 ${(new Date()).Format("yyyy-MM-dd hh:mm:ss | S")}`)
     if (!prizes.length) {
       console.log('无红包满足条件,结束')
       return
@@ -111,7 +112,7 @@ async function perl_auto() {
       const prize = prizes[i]
       console.log('兑换面额:', prize.strPrizeName || '随机红包')
       await perl_rp(prize.dwLvl,prize.ddwVirHb ? 0 : 1,prize.ddwVirHb,prize.strPool)
-      await $.wait(3000)
+      await $.wait(1000 + Math.floor(Math.random()*500))
     }
   } catch (e) {
     $.logErr(e)
