@@ -44,7 +44,7 @@
 ########################
 #59 * * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdhb.js | sed 's/^/ 【财富岛提现】/'; "
 #0,2 */1 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdhb.js | sed 's/^/ 【财富岛提现】/'; "
-#0,1 */1 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_hb.js | sed 's/^/ 【财富岛红包】/'; "
+
 
 #3 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_wealth_island_help.js | sed 's/^/ 【财富岛】/'; "
 #4 */1 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_shell.js | sed 's/^/ 【财富岛捡贝壳】/'; "
@@ -56,6 +56,8 @@
 */25 0-23/2 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_mooncake.js | sed 's/^/ 【合成月饼】/'; "
 
 ## 财富岛珍珠兑换
+50 * * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_hb.js | sed 's/^/ 【财富岛红包】/'; "
+
 0,29,59 * * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jx_cfd_pearl_exchange.js | sed 's/^/ 【财富岛珍珠兑换】/'; "
 0,29,59 0-23/1 * * *   bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_pearl_ex.js | sed 's/^/ 【财富岛珍珠兑换】/'; "
 
