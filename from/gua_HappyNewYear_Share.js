@@ -190,6 +190,8 @@ function showCoupon() {
                 console.log("助力码："+res.inviteCode)
                 if(res.haveAssistedNum){
                   $.temp.push(res.inviteCode);
+                  if ($.index == cookiesArr.length)
+                  $.temp.push('ycXdOb2lrE6SWVUNJKbLLmPU')    
                 }else{
                   console.log("助力已满")
                 }
