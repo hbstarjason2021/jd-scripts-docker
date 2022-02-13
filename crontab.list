@@ -139,6 +139,13 @@
 ## 升级赚京豆
 25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_MMdou.js | sed 's/^/ 【升级赚京豆】/'; "
 
+## 微信签到领红包
+26 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_wq_wxsign.js | sed 's/^/ 【微信签到领红包】/'; "
+
+## 锦鲤红包
+27 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_redPacket-new.js | sed 's/^/ 【锦鲤红包】/'; "
+
+
 
 ## 粉丝互动
 11 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fan-new.js | sed 's/^/ 【粉丝互动】/'; "
