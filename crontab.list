@@ -29,6 +29,9 @@
 ## 健康社区兑换
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health_exchange.js | sed 's/^/ 【健康社区兑换】/'; "
 
+## 抢极速版全品卷5-2
+58,59 6,9,14,17,20 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_5_2.js | sed 's/^/ 【抢极速版全品卷5-2】/'; "
+
 
 ## 财富岛提现
 #0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdtx-new.js | sed 's/^/ 【财富岛提现】/'; "
