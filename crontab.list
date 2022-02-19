@@ -90,10 +90,6 @@
 #1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/ddo_pk-new.js | sed 's/^/ 【京享值pk】/'; "
 
 
-# 天天压岁钱
-3 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_ttysq.js | sed 's/^/ 【天天压岁钱】/'; "
-
-
 #2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_daydlt.js | sed 's/^/ 【天天优惠大乐透】/'; "
 #2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_drawEntrance.js | sed 's/^/ 【天天优惠大乐透】/'; "
 4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_ms.js | sed 's/^/ 【秒杀币】/'; "
@@ -219,7 +215,7 @@
 ## 极速汪汪乐园
 15 0-23/3 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joypark_joy.js | sed 's/^/ 【极速汪汪乐园】/'; "
 #21 0-23/3 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joypark_task.js | sed 's/^/ 【极速汪汪乐园】/'; "
-42 0-23/8 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joy_park_task.js | sed 's/^/ 【极速汪汪乐园】/'; "
+42 0-23/6 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joy_park_task.js | sed 's/^/ 【极速汪汪乐园】/'; "
 
 ## 京喜牧场
 45 0-23/1 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc-new.js | sed 's/^/ 【京喜牧场】/'; "
@@ -227,6 +223,8 @@
 
 
 
+## 天天压岁钱
+#3 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_ttysq.js | sed 's/^/ 【天天压岁钱】/'; "
 ## 萌虎摇摇乐
 #2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_tiger.js | sed 's/^/ 【萌虎摇摇乐】/'; "
 #4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_mhyyl.js | sed 's/^/ 【萌虎摇摇乐】/'; "
