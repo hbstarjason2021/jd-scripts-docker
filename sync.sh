@@ -189,7 +189,7 @@ cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/h
 
 #cd /Loon && npm install -g
 
-npm install png-js  date-fns axios dotenv ts-md5 jsdom && npm cache clean --force
+npm install png-js  date-fns axios dotenv ts-md5 jsdom moment && npm cache clean --force
 cd /jddj && npm install request && npm cache clean --force
 
 ##################################
