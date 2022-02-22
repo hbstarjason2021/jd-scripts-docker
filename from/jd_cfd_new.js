@@ -38,7 +38,7 @@ let cookiesArr = [], cookie = '', token = '';
 let UA, UAInfo = {};
 let nowTimes;
 const randomCount = $.isNode() ? 20 : 3;
-$.appId = 92a36;
+$.appId = "92a36";
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
