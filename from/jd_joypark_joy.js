@@ -512,7 +512,7 @@ function apCashWithDraw(id, poolBaseId, prizeGroupId, prizeBaseId) {
 function getShareCode() {
   return new Promise(resolve => {
       $.get({
-          url: "https://raw.githubusercontent.com/KingRan/JD-Scripts/main/shareCodes/joypark.json",
+          url: "",
           headers: {
               "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
           }
