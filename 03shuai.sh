@@ -41,9 +41,6 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##许愿池
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wish.js'
 
-##天天压岁钱
-docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttysq.js'
-
 ##京喜牧场
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxmc-new3.js'
 
@@ -51,6 +48,8 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 #docker stop jd3 && docker rm jd3
 
 
+##天天压岁钱
+##docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttysq.js'
 ##集卡
 ##docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jika.js'
 ##东东小窝
