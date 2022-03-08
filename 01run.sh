@@ -9,6 +9,8 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##过期京豆兑换为喜豆
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; exjxbeans=true; node jd_exchangejxbeans.js'
 
+## 3.8女神节签到
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_38qd.js'
 
 ## 东东工厂jd_jdfactory.js
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdfactory.js'
