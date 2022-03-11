@@ -184,10 +184,6 @@ def main():
             lotteryForTurntableFarm(cookie)
         else:
             print('抽奖次数不足\n')
-    
-    if run_send=='yes':
-        send('东东农场-天天红包抽奖')   # 通知服务
-
 
 if __name__ == '__main__':
     main()
