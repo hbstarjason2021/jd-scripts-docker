@@ -101,47 +101,7 @@ class Judge_env(object):
         return a
 cookie_list=Judge_env().main_run()
 
-## 获取通知服务
-class Msg(object):
-    def getsendNotify(self):
-        url_list = [
-            'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
-            'https://cdn.jsdelivr.net/gh/wuye999/myScripts@main/sendNotify.py',
-            'https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
-        ]
-        for e,url in enumerate(url_list):
-            try:
-                response = requests.get(url,timeout=10)
-                with open('sendNotify.py', "w+", encoding="utf-8") as f:
-                    f.write(response.text)
-                return
-            except:
-                if e >= (len(url_list)-1):
-                    print('获取通知服务失败，请检查网络连接...')               
-    def main(self,f=0):
-        global send,msg,initialize
-        sys.path.append(os.path.abspath('.'))
-        for _ in range(2):
-            try:
-                from sendNotify import send,msg,initialize
-                break
-            except:
-                self.getsendNotify()
-        l=['BARK','SCKEY','TG_BOT_TOKEN','TG_USER_ID','TG_API_HOST','TG_PROXY_HOST','TG_PROXY_PORT','DD_BOT_TOKEN','DD_BOT_SECRET','Q_SKEY','QQ_MODE','QYWX_AM','PUSH_PLUS_TOKEN','PUSH_PLUS_USER','FSKEY','GOBOT_URL','GOBOT_QQ','GOBOT_TOKEN']
-        d={}
-        for a in l:
-            try:
-                d[a]=eval(a)
-            except:
-                d[a]=''
-        try:
-            initialize(d)
-        except:
-            if f < 2:
-                f += 1
-                self.getsendNotify()
-                return self.main(f)
-Msg().main()   # 初始化通知服务    
+ 
 
 # type 和 抽奖次数
 def initForTurntableFarm(cookie):
@@ -171,10 +131,10 @@ def initForTurntableFarm(cookie):
             turntableInfos=res['turntableInfos']                # type
             global type_name_s
             type_name_s={type_name['type']:type_name['name'] for type_name in turntableInfos}     # type与name的映射
-            msg(f'剩余抽奖次数为 {remainLotteryTimes}')
+            print(f'剩余抽奖次数为 {remainLotteryTimes}')
             return int(remainLotteryTimes)
     except:
-        msg(f"错误\n{res}")
+        print(f"错误\n{res}")
 
 # 抽奖
 def lotteryForTurntableFarm(cookie):
@@ -203,16 +163,16 @@ def lotteryForTurntableFarm(cookie):
             type_i=res['type']        # 奖品类型
             remainLotteryTimes=res['remainLotteryTimes']        # 剩余抽奖次数
             name=type_name_s[type_i]
-            msg(f"抽到 {name}")
+            print(f"抽到 {name}")
             if int(remainLotteryTimes) > 0:
                 # msg(f'剩余抽奖次数为 {remainLotteryTimes}')
                 return lotteryForTurntableFarm(cookie)
             else:
-                msg('抽奖次数不足\n')
+                print('抽奖次数不足\n')
         else:
             return lotteryForTurntableFarm(cookie)
     except:
-        msg(f"错误\n{res}")    
+        print(f"错误\n{res}")    
 
 def main():
     msg('🔔东东农场-天天红包抽奖，开始！\n')
@@ -223,7 +183,7 @@ def main():
         if remainLotteryTimes>0:
             lotteryForTurntableFarm(cookie)
         else:
-            msg('抽奖次数不足\n')
+            print('抽奖次数不足\n')
     
     if run_send=='yes':
         send('东东农场-天天红包抽奖')   # 通知服务
