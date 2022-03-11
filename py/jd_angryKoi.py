@@ -171,7 +171,7 @@ statusDesc_findall=re.compile(r',"statusDesc":"(.+?)"')
 def jinli_h5assist(cookie,redPacketId):
     body={"redPacketId":redPacketId,"followShop":0,"random":''.join(random.sample(string.digits, 6)),"log":log(),"sceneid":sceneid}
     res=taskPostUrl("jinli_h5assist", body, cookie)
-    msg(f'账号 {get_pin(cookie)} 去助力{redPacketId}')
+    print(f'账号 {get_pin(cookie)} 去助力{redPacketId}')
     if not res:
         return
     if statusDesc:=statusDesc_findall.findall(res):
