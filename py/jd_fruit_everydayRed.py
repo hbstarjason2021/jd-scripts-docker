@@ -175,10 +175,10 @@ def lotteryForTurntableFarm(cookie):
         print(f"错误\n{res}")    
 
 def main():
-    msg('🔔东东农场-天天红包抽奖，开始！\n')
-    msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
+    print('🔔东东农场-天天红包抽奖，开始！\n')
+    print(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
     for e,cookie in enumerate(cookie_list):
-        msg(f'******开始【账号 {e+1}】 {get_pin(cookie)} *********\n')
+        print(f'******开始【账号 {e+1}】 {get_pin(cookie)} *********\n')
         remainLotteryTimes=initForTurntableFarm(cookie)
         if remainLotteryTimes>0:
             lotteryForTurntableFarm(cookie)
