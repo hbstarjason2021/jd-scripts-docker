@@ -867,7 +867,7 @@ async function doFriendsWater() {
   const { waterFriendCountKey, waterFriendMax } = $.farmTask.waterFriendTaskInit;
   console.log(`今日已给${waterFriendCountKey}个好友浇水`);
   if (waterFriendCountKey < waterFriendMax) {
-    let needWaterFriends = [];
+    let needWaterFriends = ["d84e778fb9a6451290a4c1c0234b4d6c","6a50b2b887b246bd9d455d437392e59c"];
     if ($.friendList.friends && $.friendList.friends.length > 0) {
       $.friendList.friends.map((item, index) => {
         if (item.friendState === 1) {
