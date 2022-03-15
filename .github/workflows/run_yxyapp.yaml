@@ -21,7 +21,10 @@ jobs:
       
     # 设置服务器时区为东八区 
     - name: Set time zone
-      run: sudo timedatectl set-timezone 'Asia/Shanghai'
+      run: |
+         sudo timedatectl set-timezone 'Asia/Shanghai'
+         current_time=$(date +"%Y-%m-%d-%k")
+         echo ${current_time}
 
     - name: Run yxyapp
       run: |
