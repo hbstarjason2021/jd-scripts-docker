@@ -38,14 +38,13 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 (
   exec 2<>/dev/null
   set -e
-  cd /qx
+  cd /JDHelloWorld
   git pull
 ) || {
-  #git clone --branch=main https://github.com/i-chenzhe/qx.git /qx_tmp
-  git clone --branch=qx https://github.com/hbstarjason2021/jd_scripts.git /qx_tmp  
-  [ -d /qx_tmp ] && {
-    rm -rf /qx
-    mv /qx_tmp /qx
+  git clone --branch=JDHelloWorld-jd_scripts https://github.com/hbstarjason2021/jd_scripts.git /JDHelloWorld 
+  [ -d /JDHelloWorld_tmp ] && {
+    rm -rf /JDHelloWorld
+    mv /JDHelloWorld_tmp /JDHelloWorld
   }
 }
 
@@ -93,22 +92,15 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 }
 
 #######
-(
-  exec 2<>/dev/null
-  set -e
-  cd /scripts-bak
-  git pull
-) || {
-  #git clone --branch=master https://gitlab.com/MrRight/Scripts.git /scripts-bak_tmp
-  git clone --branch=dust-new https://github.com/hbstarjason2021/jd_scripts.git /scripts-bak_tmp
-  [ -d /scripts-bak_tmp ] && {
-    rm -rf /scripts-bak
-    mv /scripts-bak_tmp /scripts-bak
-  }
-}
+
+cd /JDHelloWorld || exit 1
+npm install -g   || npm install --registry=https://registry.npm.taobao.org || exit 1
+## npm install -g typescript ts-node
+npm cache clean --force
 
 cd /scripts || exit 1
 npm install || npm install --registry=https://registry.npm.taobao.org || exit 1
+npm cache clean --force
 
 [ -f /crontab.list ] && {
   cp /crontab.list /crontab.list.old
@@ -136,58 +128,12 @@ cp /jd-scripts-docker/crontab.list /crontab.list
 cp /jd-scripts-docker/from/*  /scripts/
 cp /jd-scripts-docker/utils/*  /scripts/utils/
 
-
-cp /qx/jd_fanslove.js /scripts/jd_fanslove.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/jd_fanslove.js
-##cp /jd-scripts-docker/from/z_wish.js  /scripts/z_wish.js 
-#cp /qx/z_wish.js  /scripts/z_wish.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
-
-#cp /qx/z_lenovo.js     /scripts/z_lenovo.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_lenovo.js
-#cp /qx/z_mgold.js      /scripts/z_mgold.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_mgold.js
-#cp /qx/z_super5g.js    /scripts/z_super5g.js   && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_super5g.js
-#cp /qx/z_city_cash.js  /scripts/z_city_cash.js && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_city_cash.js
-
 cp /ljqailym/jd_live_redrain_half.js /scripts/jd_live_redrain_half.js
 cp /ljqailym/redman_rain_hr.js       /scripts/redman_rain_hr.js 
 cp /ljqailym/redman_rain_hy.js       /scripts/redman_rain_hy.js 
 cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js
 cp /ljqailym/redman_rain_hyzb.js     /scripts/redman_rain_hyzb.js
 cp /ljqailym/redman_rain_x9b.js      /scripts/redman_rain_x9b.js
-
-cp /scripts-bak/normal/adolf_martin.js  /scripts/adolf_martin.js
-#cp /scripts-bak/normal/adolf_mi.js      /scripts/adolf_mi.js
-cp /scripts-bak/normal/adolf_pk.js      /scripts/adolf_pk.js
-cp /scripts-bak/normal/adolf_newInteraction.js  /scripts/adolf_newInteraction.js
-cp /scripts-bak/normal/adolf_superbox.js        /scripts/adolf_superbox.js
-cp /scripts-bak/normal/adolf_urge.js            /scripts/adolf_urge.js
-cp /scripts-bak/normal/adolf_jxhb.js            /scripts/adolf_jxhb.js
-cp /scripts-bak/normal/adolf_star.js            /scripts/adolf_star.js
-
-cp /scripts-bak/normal/monk_inter_shop_sign.js  /scripts/monk_inter_shop_sign.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_inter_shop_sign.js
-cp /scripts-bak/normal/monk_shop_follow_sku.js  /scripts/monk_shop_follow_sku.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_follow_sku.js
-cp /scripts-bak/normal/monk_shop_lottery.js     /scripts/monk_shop_lottery.js     && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_lottery.js
-cp /scripts-bak/car/monk_shop_add_to_car.js     /scripts/monk_shop_add_to_car.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/monk_shop_add_to_car.js
-
-#cp /scripts-bak/car/adolf_haier.js  /scripts/adolf_haier.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/adolf_haier.js
-#cp /scripts-bak/car/adolf_ETIP.js  /scripts/adolf_ETIP.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/adolf_ETIP.js
-
-#cp /scripts-bak/normal/jd_live_lottery_social.js     /scripts/jd_live_lottery_social.js
-#cp /scripts-bak/normal/jd_zjd_tuan.js     /scripts/jd_zjd_tuan.js
-#cp /scripts-bak/normal/jd_zjd.js     /scripts/jd_zjd.js
-
-cp /scripts-bak/i-chenzhe/z_shop_captain.js   /scripts/z_shop_captain.js
-cp /scripts-bak/i-chenzhe/z_fanslove.js   /scripts/z_fanslove.js  && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_fanslove.js
-#cp /scripts-bak/i-chenzhe/z_wish.js  /scripts/z_wish.js    && sed -i 's/helpAuthor = true/helpAuthor = false/' /scripts/z_wish.js
-
-#cp /scripts-bak/i-chenzhe/z_city_cash.js     /scripts/z_city_cash.js
-#cp /scripts-bak/i-chenzhe/z_carnivalcity.js  /scripts/z_carnivalcity.js
-
-#cp /jd-scripts-docker/jd_ms.js  /scripts
-#cp /jd-scripts-docker/jd_vote.js  /scripts
-
-#cp /jd-scripts-docker/USER_AGENTS.js /Loon
-#cp /jd-scripts-docker/jdCookie.js /Loon
-
-#cd /Loon && npm install -g
 
 npm install png-js  date-fns axios dotenv ts-md5 jsdom moment && npm cache clean --force
 cd /jddj && npm install request && npm cache clean --force
