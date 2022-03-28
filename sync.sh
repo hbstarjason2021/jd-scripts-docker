@@ -95,7 +95,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 
 cd /JDHelloWorld || exit 1
 npm install -g   || npm install --registry=https://registry.npm.taobao.org || exit 1
-## npm install -g typescript ts-node
+npm install -g typescript ts-node
 npm cache clean --force
 
 cd /scripts || exit 1
@@ -125,15 +125,17 @@ cat /etc/os-release | grep -q ubuntu && {
 cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
 
+cp /jd-scripts-docker/jdCookie.js  /JDHelloWorld/
+
 cp /jd-scripts-docker/from/*  /scripts/
 cp /jd-scripts-docker/utils/*  /scripts/utils/
 
-cp /ljqailym/jd_live_redrain_half.js /scripts/jd_live_redrain_half.js
-cp /ljqailym/redman_rain_hr.js       /scripts/redman_rain_hr.js 
-cp /ljqailym/redman_rain_hy.js       /scripts/redman_rain_hy.js 
-cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js
-cp /ljqailym/redman_rain_hyzb.js     /scripts/redman_rain_hyzb.js
-cp /ljqailym/redman_rain_x9b.js      /scripts/redman_rain_x9b.js
+#cp /ljqailym/jd_live_redrain_half.js /scripts/jd_live_redrain_half.js
+#cp /ljqailym/redman_rain_hr.js       /scripts/redman_rain_hr.js 
+#cp /ljqailym/redman_rain_hy.js       /scripts/redman_rain_hy.js 
+#cp /ljqailym/redman_rain_mz.js       /scripts/redman_rain_mz.js
+#cp /ljqailym/redman_rain_hyzb.js     /scripts/redman_rain_hyzb.js
+#cp /ljqailym/redman_rain_x9b.js      /scripts/redman_rain_x9b.js
 
 npm install png-js  date-fns axios dotenv ts-md5 jsdom moment && npm cache clean --force
 cd /jddj && npm install request && npm cache clean --force
