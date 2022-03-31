@@ -393,6 +393,7 @@ function getshareCodeHW(key) {
     });
 }
 exports.getshareCodeHW = getshareCodeHW;
+/*
 function getShareCodePool(key, num) {
     return __awaiter(this, void 0, void 0, function () {
         var shareCode, i, data, e_3;
@@ -432,6 +433,7 @@ function getShareCodePool(key, num) {
     });
 }
 exports.getShareCodePool = getShareCodePool;
+*/
 /*async function wechat_app_msg(title: string, content: string, user: string) {
   let corpid: string = "", corpsecret: string = ""
   let {data: gettoken} = await axios.get(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`)
