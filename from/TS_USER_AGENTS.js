@@ -393,47 +393,9 @@ function getshareCodeHW(key) {
     });
 }
 exports.getshareCodeHW = getshareCodeHW;
-/*
-function getShareCodePool(key, num) {
-    return __awaiter(this, void 0, void 0, function () {
-        var shareCode, i, data, e_3;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    shareCode = [];
-                    i = 0;
-                    _a.label = 1;
-                case 1:
-                    if (!(i < 2)) return [3 /*break*/, 7];
-                    _a.label = 2;
-                case 2:
-                    _a.trys.push([2, 4, , 6]);
-                    return [4 /*yield*/, axios_1["default"].get("https://api.jdsharecode.xyz/api/".concat(key, "/").concat(num))];
-                case 3:
-                    data = (_a.sent()).data;
-                    shareCode = data.data || [];
-                    console.log("\u968F\u673A\u83B7\u53D6".concat(num, "\u4E2A").concat(key, "\u6210\u529F\uFF1A").concat(JSON.stringify(shareCode)));
-                    if (shareCode.length !== 0) {
-                        return [3 /*break*/, 7];
-                    }
-                    return [3 /*break*/, 6];
-                case 4:
-                    e_3 = _a.sent();
-                    console.log("getShareCodePool Error, Retry...");
-                    return [4 /*yield*/, wait(getRandomNumberByRange(2000, 6000))];
-                case 5:
-                    _a.sent();
-                    return [3 /*break*/, 6];
-                case 6:
-                    i++;
-                    return [3 /*break*/, 1];
-                case 7: return [2 /*return*/, shareCode];
-            }
-        });
-    });
-}
-exports.getShareCodePool = getShareCodePool;
-*/
+
+
+
 /*async function wechat_app_msg(title: string, content: string, user: string) {
   let corpid: string = "", corpsecret: string = ""
   let {data: gettoken} = await axios.get(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`)
