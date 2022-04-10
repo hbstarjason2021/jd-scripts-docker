@@ -84,11 +84,11 @@ var assets = parseFloat(process.env.JD_JOY_PARK_RUN_ASSETS || '0.04');
                 cookiesArr = _e.sent();
                 _e.label = 2;
             case 2:
-                _e.trys.push([2, 20, 21, 22]);
+                _e.trys.push([2, 23, 24, 25]);
                 _a = __values(cookiesArr.entries()), _b = _a.next();
                 _e.label = 3;
             case 3:
-                if (!!_b.done) return [3 /*break*/, 19];
+                if (!!_b.done) return [3 /*break*/, 22];
                 _c = __read(_b.value, 2), index = _c[0], value = _c[1];
                 cookie = value;
                 UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
@@ -116,36 +116,42 @@ var assets = parseFloat(process.env.JD_JOY_PARK_RUN_ASSETS || '0.04');
                  */
                 res = _e.sent();
                 console.log('能量恢复中', secondsToMinutes(res.data.runningHomeInfo.nextRunningTime / 1000), '能量棒', res.data.runningHomeInfo.energy);
-                if (!(res.data.runningHomeInfo.nextRunningTime / 1000 < 300)) return [3 /*break*/, 7];
-                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(res.data.runningHomeInfo.nextRunningTime)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 5:
                 _e.sent();
-                return [4 /*yield*/, runningPageHome()];
+                if (!(res.data.runningHomeInfo.nextRunningTime / 1000 < 300)) return [3 /*break*/, 9];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(res.data.runningHomeInfo.nextRunningTime)];
             case 6:
+                _e.sent();
+                return [4 /*yield*/, runningPageHome()];
+            case 7:
                 res = _e.sent();
                 console.log('能量恢复中', secondsToMinutes(res.data.runningHomeInfo.nextRunningTime / 1000), '能量棒', res.data.runningHomeInfo.energy);
-                _e.label = 7;
-            case 7:
-                if (!!res.data.runningHomeInfo.nextRunningTime) return [3 /*break*/, 16];
-                return [4 /*yield*/, (0, V3_1.requestAlgo)('b6ac3', 'jdltapp;')];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 8:
+                _e.sent();
+                _e.label = 9;
+            case 9:
+                if (!!res.data.runningHomeInfo.nextRunningTime) return [3 /*break*/, 18];
+                return [4 /*yield*/, (0, V3_1.requestAlgo)('b6ac3', 'jdltapp;')];
+            case 10:
                 _e.sent();
                 console.log('终点目标', assets);
                 i = 0;
-                _e.label = 9;
-            case 9:
-                if (!(i < 10)) return [3 /*break*/, 16];
+                _e.label = 11;
+            case 11:
+                if (!(i < 10)) return [3 /*break*/, 18];
                 return [4 /*yield*/, api('runningOpenBox', { "linkId": "L-sOanK_5RJCz7I314FpnQ" })];
-            case 10:
+            case 12:
                 res = _e.sent();
                 (0, TS_USER_AGENTS_1.o2s)(res);
-                if (!(parseFloat(res.data.assets) >= assets)) return [3 /*break*/, 12];
+                if (!(parseFloat(res.data.assets) >= assets)) return [3 /*break*/, 14];
                 return [4 /*yield*/, api('runningPreserveAssets', { "linkId": "L-sOanK_5RJCz7I314FpnQ" })];
-            case 11:
+            case 13:
                 res = _e.sent();
                 console.log('领取成功', res.data.prizeValue);
-                return [3 /*break*/, 16];
-            case 12:
+                return [3 /*break*/, 18];
+            case 14:
                 if (res.data.doubleSuccess) {
                     console.log('翻倍成功', parseFloat(res.data.assets));
                 }
@@ -154,35 +160,39 @@ var assets = parseFloat(process.env.JD_JOY_PARK_RUN_ASSETS || '0.04');
                 }
                 else {
                     console.log('翻倍失败');
-                    return [3 /*break*/, 16];
+                    return [3 /*break*/, 18];
                 }
-                _e.label = 13;
-            case 13: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
-            case 14:
-                _e.sent();
                 _e.label = 15;
-            case 15:
-                i++;
-                return [3 /*break*/, 9];
-            case 16: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
-            case 17:
+            case 15: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
+            case 16:
                 _e.sent();
-                _e.label = 18;
-            case 18:
+                _e.label = 17;
+            case 17:
+                i++;
+                return [3 /*break*/, 11];
+            case 18: return [4 /*yield*/, runningPageHome()];
+            case 19:
+                res = _e.sent();
+                console.log('🧧', res.data.runningHomeInfo.prizeValue);
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
+            case 20:
+                _e.sent();
+                _e.label = 21;
+            case 21:
                 _b = _a.next();
                 return [3 /*break*/, 3];
-            case 19: return [3 /*break*/, 22];
-            case 20:
+            case 22: return [3 /*break*/, 25];
+            case 23:
                 e_1_1 = _e.sent();
                 e_1 = { error: e_1_1 };
-                return [3 /*break*/, 22];
-            case 21:
+                return [3 /*break*/, 25];
+            case 24:
                 try {
                     if (_b && !_b.done && (_d = _a["return"])) _d.call(_a);
                 }
                 finally { if (e_1) throw e_1.error; }
                 return [7 /*endfinally*/];
-            case 22: return [2 /*return*/];
+            case 25: return [2 /*return*/];
         }
     });
 }); })();
