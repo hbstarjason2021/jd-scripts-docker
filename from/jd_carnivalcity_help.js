@@ -253,7 +253,7 @@ function getAuthorShareCode(url) {
 
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://gitee.com/starjason/sharecode/raw/master/carnivalcity`, 'timeout': 20000}, (err, resp, data) => {
+    $.get({url: `https://gitee.com/starjason/sharecode/raw/master/carnivalcity2`, 'timeout': 20000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
