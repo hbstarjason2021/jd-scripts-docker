@@ -56,7 +56,7 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 
 ##极速版特价翻翻乐
-docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdtj_winner.js'
+#docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdtj_winner.js'
 ##天天压岁钱
 ##docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttysq.js'
 ##集卡
