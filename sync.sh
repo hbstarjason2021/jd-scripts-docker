@@ -64,18 +64,18 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 #}
 
 #######
-(
-  exec 2<>/dev/null
-  set -e
-  cd /ljqailym
-  git pull
-) || {
-  git clone --branch=ljqailym https://github.com/hbstarjason2021/jd_scripts.git /ljqailym_tmp
-  [ -d /ljqailym_tmp ] && {
-    rm -rf /ljqailym
-    mv /ljqailym_tmp /ljqailym
-  }
-}
+#(
+#  exec 2<>/dev/null
+#  set -e
+#  cd /ljqailym
+#  git pull
+#) || {
+#  git clone --branch=ljqailym https://github.com/hbstarjason2021/jd_scripts.git /ljqailym_tmp
+#  [ -d /ljqailym_tmp ] && {
+#    rm -rf /ljqailym
+#    mv /ljqailym_tmp /ljqailym
+#  }
+#}
 
 #######
 (
@@ -99,7 +99,7 @@ npm install -g typescript ts-node
 npm cache clean --force
 
 cd /scripts || exit 1
-npm install || npm install --registry=https://registry.npm.taobao.org || exit 1
+npm install -g || npm install --registry=https://registry.npm.taobao.org || exit 1
 npm cache clean --force
 
 [ -f /crontab.list ] && {
@@ -125,7 +125,8 @@ cat /etc/os-release | grep -q ubuntu && {
 cp /crontab.list /crontab.list.old
 cp /jd-scripts-docker/crontab.list /crontab.list
 
-cp /jd-scripts-docker/jdCookie.js  /JDHelloWorld/
+cp /jd-scripts-docker/jdCookie.js  /JDHelloWorld/jdCookie.js
+cp /jd-scripts-docker/from/TS_USER_AGENTS.ts  /JDHelloWorld/TS_USER_AGENTS.ts
 
 cp /jd-scripts-docker/from/*  /scripts/
 cp /jd-scripts-docker/utils/*  /scripts/utils/
