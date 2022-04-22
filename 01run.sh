@@ -50,7 +50,7 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 ## 微信签到领红包
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cash_wx.js'
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wq_wxsign.js'
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wq_wxsign.js'
 
 ## 京东-京喜双签
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jx_sign.js'
@@ -76,8 +76,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jmsign.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_genz.js'
 
-## 十元街jd_syj.js
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_syj-new.js'
 
 ##京小超jd_superMarket.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_superMarket.js'
@@ -85,9 +83,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 # 幸运大转盘
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_market_lottery.js'
 
-
-## 锦鲤红包 jd_redPacket.js
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_redPacket-new.js'
 
 # 京东极速版-领红包
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_speed_redpocke.js'
@@ -104,10 +99,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_live.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_live.js'
 
-## 领现金
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cash-new.js'
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cash-new2.js'
-
 ## 领金贴
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jin_tie.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jintie.js'
@@ -116,12 +107,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 ## 京东金融-积分
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdjrjf.js'
-
-## 京享值PK
-#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node ddo_pk-new.js'
-
-## 京东赚赚 jd_jdzz.js
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdzz.js'
 
 ## 小魔方
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_mf.js'
@@ -217,9 +202,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ###### 各种签到
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bean_sign.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_sign_graphics.js'
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_nh_sign.js'
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_nh_sign.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bt_sign.js'
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_babel_sign.js'
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_babel_sign.js'
 
 ## 粉丝互动
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_fanslove.js'
@@ -242,6 +227,22 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 
 #################################################################################################################################################
+## 京享值PK
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node ddo_pk-new.js'
+
+## 京东赚赚 jd_jdzz.js
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdzz.js'
+
+## 十元街jd_syj.js
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_syj-new.js'
+
+## 领现金
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cash-new.js'
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cash-new2.js'
+
+## 锦鲤红包 jd_redPacket.js
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_redPacket-new.js'
+
 ## 京喜消消乐
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jx_cash_sign.js'
 
