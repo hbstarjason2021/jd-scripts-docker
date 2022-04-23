@@ -1,6 +1,7 @@
 #!/bin/env python3
 # -*- coding: utf-8 -*
 '''
+
 感谢Curtin提供的其他脚本供我参考
 感谢aburd ch大佬的指导抓包
 项目名称:xF_DDmc_Sign
@@ -9,15 +10,24 @@ Author: 一风一燕
 Date: 2021-09-16
 cron: 22 7,10 * * * xF_DDmc_Sign
 new Env('叮咚买菜积分活动');
+
 ****************叮咚买菜是买菜APP，30分钟内到家，挺快挺专业的。如果没有用过叮咚买菜APP的人，可以TG私聊我，我就叫一风一燕，我发个邀请码给你注册，这样双方都有优惠券，也算是支持一下小风，谢谢各位大佬*******************
+
+
 【教程】：需要自行用手机抓取cookies和token。
 在青龙变量中添加变量DD_token，DD_cookies。
 多个账号时，DD_token，DD_cookies用&隔开，例如DD_token=xxxxx&xxxx
+
 手机抓包后，喂食一次，查看URL
 搜索station_id=，&前面，=后面的东西就是你需要的token。
 例如：https://maicai.api.ddxq.mobi/user/info?api_version=9.1.0&app_client_id=1&station_id=xxxx&native_version=&latitude=23.017158&longitude=113.811603
 其中station_id=xxxx，xxxx就是token，cookies的话就要自己去该URL中，查看headers（表头）。
 抓取运行正常后，只要手机不退出登录，应该是永远不过期的。
+
+
+
+
+
 '''
 
 
@@ -26,7 +36,11 @@ DD_cookies = ''
 
 
 '''
+
+
 =================================以下代码不懂不要随便乱动=================================
+
+
 '''
 tokens = ''
 cookies = ''
@@ -120,7 +134,7 @@ else:
 
 if "DD_cookies" in os.environ:
     print(len (os.environ["DD_cookies"]))
-    if len (os.environ["DD_cookies"]) > 43:
+    if len (os.environ["DD_cookies"]) > 40:
         cookies = os.environ["DD_cookies"]
         # temporary = cookies.split ('&')
         # cookies = temporary[0]
