@@ -11,17 +11,17 @@
 ============Quantumultx===============
 [task_local]
 #领券中心签到
-15 0 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_ccSign.js, tag=领券中心签到, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+15 0 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js, tag=领券中心签到, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "15 0 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_ccSign.js,tag=领券中心签到
+cron "15 0 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js,tag=领券中心签到
 
 ===============Surge=================
-领券中心签到 = type=cron,cronexp="15 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_ccSign.js
+领券中心签到 = type=cron,cronexp="15 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js
 
 ============小火箭=========
-领券中心签到 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_ccSign.js, cronexpr="15 0 * * *", timeout=3600, enable=true
+领券中心签到 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js, cronexpr="15 0 * * *", timeout=3600, enable=true
  */
 const $ = new Env('领券中心签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -93,6 +93,7 @@ async function getCouponConfig() {
           if (data) {
             data = JSON.parse(data)
             let functionId, body
+            	console.log(data.result)
             if (data.result.couponConfig.signNecklaceDomain) {
               if (data.result.couponConfig.signNecklaceDomain.roundData.ynSign === '1') {
                 console.log(`签到失败：今日已签到~`)
@@ -124,6 +125,9 @@ async function getCouponConfig() {
 async function ccSign(functionId, body) {
   let sign = await getSign(functionId, body)
   return new Promise(async resolve => {
+    console.log(functionId)
+    console.log(body)
+    console.log(sign)
     $.post(taskUrl(functionId, sign), async (err, resp, data) => {
       try {
         if (err) {
@@ -132,6 +136,7 @@ async function ccSign(functionId, body) {
         } else {
           if (data) {
             data = JSON.parse(data)
+            	console.log(data)
             if (data.busiCode === '0') {
               console.log(functionId === 'ccSignInNew' ? `签到成功：获得 ${data.result.signResult.signData.amount} 红包` : `签到成功：获得 ${data.result.signResult.signData.necklaceScore} 点点券，${data.result.signResult.signData.amount}`)
             } else {
@@ -147,72 +152,39 @@ async function ccSign(functionId, body) {
     })
   })
 }
+const JD_SIGN_API = 'http://127.0.0.1:12666/sign';
+const JD_PIN_API = 'http://127.0.0.1:12666/pin';
 function getSign(functionId, body) {
-  return new Promise(async resolve => {
-    let data = {
-      functionId,
-      body: JSON.stringify(body),
-      "client":"android",
-      "clientVersion":"10.3.2"
-    }
-    let HostArr = ['jdsign.cf', 'signer.nz.lu']
-    let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
-    let options = {
-      url: `https://cdn.nz.lu/ddo`,
-      body: JSON.stringify(data),
-      headers: {
-        Host,
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-      },
-      timeout: 30 * 1000
-    }
-    $.post(options, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} getSign API请求失败，请检查网路重试`)
-        } else {
-
+    return new Promise((resolve) => {
+        let url = {
+            url: `${JD_SIGN_API}?functionId=${functionId}`,
+            body: JSON.stringify(body),
+		    followRedirect: false,
+		    headers: {
+		        'Accept': '*/*'
+		    },
+		    timeout: 30000
         }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
+        $.post(url, async(err, resp, data) => {
+            resolve(data);
+        })
     })
-  })
 }
 function getsecretPin(pin) {
-  return new Promise(async resolve => {
-    let data = {
-      "pt_pin": pin
-    }
-    let HostArr = ['jdsign.cf', 'signer.nz.lu']
-    let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
-    let options = {
-      url: `https://cdn.nz.lu/pin`,
-      body: JSON.stringify(data),
-      headers: {
-        Host,
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-      },
-      timeout: 30 * 1000
-    }
-    $.post(options, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} getsecretPin API请求失败，请检查网路重试`)
-        } else {
-
+    return new Promise((resolve) => {
+        let url = {
+            url: `${JD_PIN_API}`,
+            body: pin,
+		    followRedirect: false,
+		    headers: {
+		        'Accept': '*/*'
+		    },
+		    timeout: 30000
         }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
+        $.post(url, async(err, resp, data) => {
+            resolve(data);
+        })
     })
-  })
 }
 
 function showMsg() {
