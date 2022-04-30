@@ -191,7 +191,7 @@ async function pasture() {
         console.warn('活动初始化错误')
       }
       console.log('获取活动信息成功');
-      console.log(`互助码：${$.homeInfo.sharekey}`);
+      console.log(`互助码:${$.homeInfo.sharekey}`);
       console.log(`jxmc_share_code：${$.homeInfo.sharekey}`);
       $.taskList = [], $.dateType = ``, $.source = `jxmc`, $.bizCode = `jxmc`;
       await takeGetRequest('GetUserTaskStatusList');
