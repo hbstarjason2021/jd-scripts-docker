@@ -1,9 +1,9 @@
 "use strict";
 /**
- * 汪汪乐园-跑步
+ * 汪汪乐园-跑步+组队
  * 默认翻倍到0.04红包结束
  * export JD_JOY_PARK_RUN_ASSETS="0.04"
- * cron: 20,50 * * * *
+ * cron: 20 * * * *
  */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -70,168 +70,264 @@ var __read = (this && this.__read) || function (o, n) {
 };
 exports.__esModule = true;
 var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
-var V3_1 = require("./utils/V3");
-var crypto_js_1 = require("crypto-js");
+var h5st_1 = require("./utils/h5st");
+var fs_1 = require("fs");
 var cookie = '', res = '', data, UserName;
-var assets = parseFloat(process.env.JD_JOY_PARK_RUN_ASSETS || '0.04');
+var assets = 0.04, captainId = '', h5stTool = new h5st_1.H5ST('b6ac3', 'jdltapp;', '1804945295425750');
 !(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var cookiesArr, _a, _b, _c, index, value, i, e_1_1;
-    var e_1, _d;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
+    var cookiesArr, account, _a, _b, _c, index, value, account_1, account_1_1, user, _d, _e, member, e_1, i, assets_1, e_2, e_3_1;
+    var e_3, _f, e_4, _g, e_5, _h;
+    return __generator(this, function (_j) {
+        switch (_j.label) {
             case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 1:
-                cookiesArr = _e.sent();
-                _e.label = 2;
+                cookiesArr = _j.sent();
+                account = [];
+                if ((0, fs_1.existsSync)('./utils/account.json')) {
+                    try {
+                        account = JSON.parse((0, fs_1.readFileSync)('./utils/account.json').toString());
+                    }
+                    catch (e) {
+                        console.log('./utils/account.json 加载出错');
+                    }
+                }
+                _j.label = 2;
             case 2:
-                _e.trys.push([2, 23, 24, 25]);
+                _j.trys.push([2, 36, 37, 38]);
                 _a = __values(cookiesArr.entries()), _b = _a.next();
-                _e.label = 3;
+                _j.label = 3;
             case 3:
-                if (!!_b.done) return [3 /*break*/, 22];
+                if (!!_b.done) return [3 /*break*/, 35];
                 _c = __read(_b.value, 2), index = _c[0], value = _c[1];
                 cookie = value;
                 UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
                 console.log("\n\u5F00\u59CB\u3010\u4EAC\u4E1C\u8D26\u53F7".concat(index + 1, "\u3011").concat(UserName, "\n"));
-                return [4 /*yield*/, runningPageHome()];
+                assets = parseFloat(process.env.JD_JOY_PARK_RUN_ASSETS || '0.04');
+                try {
+                    for (account_1 = (e_4 = void 0, __values(account)), account_1_1 = account_1.next(); !account_1_1.done; account_1_1 = account_1.next()) {
+                        user = account_1_1.value;
+                        if (user.pt_pin === encodeURIComponent(UserName) && user.joy_park_run) {
+                            console.log('自定义终点', user.joy_park_run);
+                            assets = parseFloat(user.joy_park_run.toString());
+                            break;
+                        }
+                    }
+                }
+                catch (e_4_1) { e_4 = { error: e_4_1 }; }
+                finally {
+                    try {
+                        if (account_1_1 && !account_1_1.done && (_g = account_1["return"])) _g.call(account_1);
+                    }
+                    finally { if (e_4) throw e_4.error; }
+                }
+                _j.label = 4;
             case 4:
-                /*
-                res = await api('apTaskList', {"linkId": "LsQNxL7iWDlXUs6cFl-AAg"})
-                o2s(res)
-                for (let t of res.data) {
-                  if (t.id === 662 && t.taskDoTimes < t.taskLimitTimes) {
-                    console.log(t.taskShowTitle)
-                    data = await api('apDoTask', {"taskType": t.taskType, "taskId": t.id, "itemId": t.taskSourceUrl, "linkId": "LsQNxL7iWDlXUs6cFl-AAg"})
-                    await wait(1000)
-                    o2s(data)
-                  }
-                  if (t.canDrawAwardNum === 1) {
-                    data = await api('apTaskDrawAward', {"taskType": t.taskType, "taskId": t.id, "linkId": "LsQNxL7iWDlXUs6cFl-AAg"})
-                    o2s(data)
-                    // console.log('任务完成', parseInt(data.data.awardGivenNumber))
-                    await wait(1000)
-                  }
-                }
-            
-                 */
-                res = _e.sent();
-                console.log('能量恢复中', secondsToMinutes(res.data.runningHomeInfo.nextRunningTime / 1000), '能量棒', res.data.runningHomeInfo.energy);
-                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
+                _j.trys.push([4, 11, , 12]);
+                return [4 /*yield*/, h5stTool.__genAlgo()];
             case 5:
-                _e.sent();
-                if (!(res.data.runningHomeInfo.nextRunningTime / 1000 < 300)) return [3 /*break*/, 9];
-                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(res.data.runningHomeInfo.nextRunningTime)];
+                _j.sent();
+                return [4 /*yield*/, team('runningTeamInfo', { "linkId": "L-sOanK_5RJCz7I314FpnQ" })];
             case 6:
-                _e.sent();
-                return [4 /*yield*/, runningPageHome()];
-            case 7:
-                res = _e.sent();
-                console.log('能量恢复中', secondsToMinutes(res.data.runningHomeInfo.nextRunningTime / 1000), '能量棒', res.data.runningHomeInfo.energy);
-                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
-            case 8:
-                _e.sent();
-                _e.label = 9;
-            case 9:
-                if (!!res.data.runningHomeInfo.nextRunningTime) return [3 /*break*/, 18];
-                return [4 /*yield*/, (0, V3_1.requestAlgo)('b6ac3', 'jdltapp;')];
-            case 10:
-                _e.sent();
-                console.log('终点目标', assets);
-                i = 0;
-                _e.label = 11;
-            case 11:
-                if (!(i < 10)) return [3 /*break*/, 18];
-                return [4 /*yield*/, api('runningOpenBox', { "linkId": "L-sOanK_5RJCz7I314FpnQ" })];
-            case 12:
-                res = _e.sent();
+                res = _j.sent();
                 (0, TS_USER_AGENTS_1.o2s)(res);
-                if (!(parseFloat(res.data.assets) >= assets)) return [3 /*break*/, 14];
-                return [4 /*yield*/, api('runningPreserveAssets', { "linkId": "L-sOanK_5RJCz7I314FpnQ" })];
+                if (!(!captainId && res.data.members.length === 0)) return [3 /*break*/, 7];
+                console.log('组队ID不存在,开始创建组队');
+                captainId = res.data.captainId;
+                return [3 /*break*/, 10];
+            case 7:
+                if (!(captainId && res.data.members.length === 0)) return [3 /*break*/, 9];
+                console.log('已有组队ID，未加入队伍');
+                return [4 /*yield*/, team('runningJoinTeam', { "linkId": "L-sOanK_5RJCz7I314FpnQ", "captainId": captainId })];
+            case 8:
+                res = _j.sent();
+                if (res.code === 0) {
+                    console.log('组队成功');
+                    try {
+                        for (_d = (e_5 = void 0, __values(res.data.members)), _e = _d.next(); !_e.done; _e = _d.next()) {
+                            member = _e.value;
+                            if (member.captain) {
+                                console.log('队长', member.nickName);
+                                break;
+                            }
+                        }
+                    }
+                    catch (e_5_1) { e_5 = { error: e_5_1 }; }
+                    finally {
+                        try {
+                            if (_e && !_e.done && (_h = _d["return"])) _h.call(_d);
+                        }
+                        finally { if (e_5) throw e_5.error; }
+                    }
+                    if (res.data.members.length === 6) {
+                        console.log('队伍已满');
+                        captainId = '';
+                    }
+                }
+                return [3 /*break*/, 10];
+            case 9:
+                console.log('已组队', res.data.members.length);
+                _j.label = 10;
+            case 10: return [3 /*break*/, 12];
+            case 11:
+                e_1 = _j.sent();
+                console.log('组队 Error', e_1);
+                return [3 /*break*/, 12];
+            case 12:
+                _j.trys.push([12, 33, , 34]);
+                return [4 /*yield*/, runningPageHome()];
             case 13:
-                res = _e.sent();
-                console.log('领取成功', res.data.prizeValue);
-                return [3 /*break*/, 18];
-            case 14:
-                if (res.data.doubleSuccess) {
-                    console.log('翻倍成功', parseFloat(res.data.assets));
-                }
-                else if (!res.data.doubleSuccess && !res.data.runningHomeInfo.runningFinish) {
-                    console.log('开始跑步', parseFloat(res.data.assets));
-                }
-                else {
-                    console.log('翻倍失败');
-                    return [3 /*break*/, 18];
-                }
-                _e.label = 15;
-            case 15: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
-            case 16:
-                _e.sent();
-                _e.label = 17;
-            case 17:
-                i++;
-                return [3 /*break*/, 11];
-            case 18: return [4 /*yield*/, runningPageHome()];
-            case 19:
-                res = _e.sent();
+                res = _j.sent();
                 console.log('🧧', res.data.runningHomeInfo.prizeValue);
                 return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
+            case 14:
+                _j.sent();
+                console.log('能量恢复中', secondsToMinutes(res.data.runningHomeInfo.nextRunningTime / 1000), '能量棒', res.data.runningHomeInfo.energy);
+                if (!(res.data.runningHomeInfo.nextRunningTime && res.data.runningHomeInfo.nextRunningTime / 1000 < 300)) return [3 /*break*/, 18];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(res.data.runningHomeInfo.nextRunningTime)];
+            case 15:
+                _j.sent();
+                return [4 /*yield*/, runningPageHome()];
+            case 16:
+                res = _j.sent();
+                console.log('能量恢复中', secondsToMinutes(res.data.runningHomeInfo.nextRunningTime / 1000), '能量棒', res.data.runningHomeInfo.energy);
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
+            case 17:
+                _j.sent();
+                _j.label = 18;
+            case 18:
+                if (!!res.data.runningHomeInfo.nextRunningTime) return [3 /*break*/, 30];
+                console.log('终点目标', assets);
+                i = 0;
+                _j.label = 19;
+            case 19:
+                if (!(i < 10)) return [3 /*break*/, 30];
+                return [4 /*yield*/, api('runningOpenBox', { "linkId": "L-sOanK_5RJCz7I314FpnQ" })];
             case 20:
-                _e.sent();
-                _e.label = 21;
+                res = _j.sent();
+                if (!(parseFloat(res.data.assets) >= assets)) return [3 /*break*/, 22];
+                assets_1 = parseFloat(res.data.assets);
+                return [4 /*yield*/, api('runningPreserveAssets', { "linkId": "L-sOanK_5RJCz7I314FpnQ" })];
             case 21:
+                res = _j.sent();
+                console.log('领取成功', assets_1);
+                return [3 /*break*/, 30];
+            case 22:
+                if (!res.data.doubleSuccess) return [3 /*break*/, 24];
+                console.log('翻倍成功', parseFloat(res.data.assets));
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
+            case 23:
+                _j.sent();
+                return [3 /*break*/, 27];
+            case 24:
+                if (!(!res.data.doubleSuccess && !res.data.runningHomeInfo.runningFinish)) return [3 /*break*/, 26];
+                console.log('开始跑步', parseFloat(res.data.assets));
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
+            case 25:
+                _j.sent();
+                return [3 /*break*/, 27];
+            case 26:
+                console.log('翻倍失败');
+                return [3 /*break*/, 30];
+            case 27: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
+            case 28:
+                _j.sent();
+                _j.label = 29;
+            case 29:
+                i++;
+                return [3 /*break*/, 19];
+            case 30: return [4 /*yield*/, runningPageHome()];
+            case 31:
+                res = _j.sent();
+                console.log('🧧', res.data.runningHomeInfo.prizeValue);
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
+            case 32:
+                _j.sent();
+                return [3 /*break*/, 34];
+            case 33:
+                e_2 = _j.sent();
+                console.log('跑步 Error', e_2);
+                return [3 /*break*/, 34];
+            case 34:
                 _b = _a.next();
                 return [3 /*break*/, 3];
-            case 22: return [3 /*break*/, 25];
-            case 23:
-                e_1_1 = _e.sent();
-                e_1 = { error: e_1_1 };
-                return [3 /*break*/, 25];
-            case 24:
+            case 35: return [3 /*break*/, 38];
+            case 36:
+                e_3_1 = _j.sent();
+                e_3 = { error: e_3_1 };
+                return [3 /*break*/, 38];
+            case 37:
                 try {
-                    if (_b && !_b.done && (_d = _a["return"])) _d.call(_a);
+                    if (_b && !_b.done && (_f = _a["return"])) _f.call(_a);
                 }
-                finally { if (e_1) throw e_1.error; }
+                finally { if (e_3) throw e_3.error; }
                 return [7 /*endfinally*/];
-            case 25: return [2 /*return*/];
+            case 38: return [2 /*return*/];
         }
     });
 }); })();
 function api(fn, body) {
     return __awaiter(this, void 0, void 0, function () {
-        var timestamp, t, h5st;
+        var timestamp, h5st, params;
         return __generator(this, function (_a) {
-            timestamp = Date.now(), t = [
-                { key: 'functionId', value: fn },
-                { key: 'body', value: (0, crypto_js_1.SHA256)(JSON.stringify(body)).toString() },
-                { key: 't', value: timestamp.toString() },
-                { key: 'client', value: 'ios' },
-                { key: 'clientVersion', value: '3.8.16' }
-            ];
-            h5st = '';
-            if (fn === 'runningOpenBox') {
-                h5st = (0, V3_1.geth5st)(t, 'b6ac3');
+            switch (_a.label) {
+                case 0:
+                    timestamp = Date.now(), h5st = '';
+                    if (fn === 'runningOpenBox') {
+                        h5st = h5stTool.__genH5st({
+                            appid: "activities_platform",
+                            body: JSON.stringify(body),
+                            client: "ios",
+                            clientVersion: "3.1.0",
+                            functionId: "runningOpenBox",
+                            t: timestamp.toString()
+                        });
+                    }
+                    params = "functionId=".concat(fn, "&body=").concat(JSON.stringify(body), "&t=").concat(timestamp, "&appid=activities_platform&client=ios&clientVersion=3.1.0&cthr=1");
+                    h5st && (params += "&h5st=".concat(h5st));
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.post)('https://api.m.jd.com/', params, {
+                            'authority': 'api.m.jd.com',
+                            'content-type': 'application/x-www-form-urlencoded',
+                            'cookie': cookie,
+                            'origin': 'https://h5platform.jd.com',
+                            'referer': 'https://h5platform.jd.com/',
+                            'user-agent': 'jdltapp;'
+                        })];
+                case 1: return [2 /*return*/, _a.sent()];
             }
-            return [2 /*return*/, (0, TS_USER_AGENTS_1.post)('https://api.m.jd.com/', "functionId=".concat(fn, "&body=").concat(JSON.stringify(body), "&_t=").concat(Date.now(), "&appid=activities_platform&h5st=").concat(h5st), {
-                    'Host': 'api.m.jd.com',
-                    'Origin': 'https://joypark.jd.com',
-                    'User-Agent': 'jdltapp;',
-                    'Referer': 'https://joypark.jd.com/',
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Cookie': cookie
-                })];
         });
     });
 }
 function runningPageHome() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, (0, TS_USER_AGENTS_1.get)("https://api.m.jd.com/?functionId=runningPageHome&body=%7B%22linkId%22:%22L-sOanK_5RJCz7I314FpnQ%22,%22isFromJoyPark%22:true,%22joyLinkId%22:%22LsQNxL7iWDlXUs6cFl-AAg%22%7D&t=".concat(Date.now(), "&appid=activities_platform&client=ios&clientVersion=3.8.16"), '', {
+            return [2 /*return*/, (0, TS_USER_AGENTS_1.get)("https://api.m.jd.com/?functionId=runningPageHome&body=%7B%22linkId%22:%22L-sOanK_5RJCz7I314FpnQ%22,%22isFromJoyPark%22:true,%22joyLinkId%22:%22LsQNxL7iWDlXUs6cFl-AAg%22%7D&t=".concat(Date.now(), "&appid=activities_platform&client=ios&clientVersion=3.1.0"), {
                     'Host': 'api.m.jd.com',
                     'Origin': 'https://h5platform.jd.com',
                     'User-Agent': 'jdltapp;',
                     'Referer': 'https://h5platform.jd.com/',
                     'Cookie': cookie
                 })];
+        });
+    });
+}
+function team(fn, body) {
+    return __awaiter(this, void 0, void 0, function () {
+        var timestamp, h5st;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    timestamp = Date.now();
+                    h5st = '';
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.get)("https://api.m.jd.com/?functionId=".concat(fn, "&body=").concat(encodeURIComponent(JSON.stringify(body)), "&t=").concat(timestamp, "&appid=activities_platform&client=ios&clientVersion=3.1.0&cthr=1&h5st=").concat(h5st), {
+                            'Host': 'api.m.jd.com',
+                            'User-Agent': 'jdltapp;',
+                            'Origin': 'https://h5platform.jd.com',
+                            'X-Requested-With': 'com.jd.jdlite',
+                            'Referer': 'https://h5platform.jd.com/',
+                            'Cookie': cookie
+                        })];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
         });
     });
 }
