@@ -16,7 +16,7 @@
 2022-4-27
 */
  
-let tuannum = 3; 
+let tuannum = 4; 
 
 const $ = new Env('赚京豆-加密');
 
