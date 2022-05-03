@@ -128,6 +128,7 @@ cp /jd-scripts-docker/crontab.list /crontab.list
 cp /jd-scripts-docker/jdCookie.js  /JDHelloWorld/jdCookie.js
 cp /jd-scripts-docker/from/TS_USER_AGENTS.ts  /JDHelloWorld/TS_USER_AGENTS.ts
 
+cp /jd-scripts-docker/jdCookie.js  /scripts/jdCookie.js
 cp /jd-scripts-docker/from/*  /scripts/
 cp /jd-scripts-docker/utils/*  /scripts/utils/
 
