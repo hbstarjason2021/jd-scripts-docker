@@ -1,30 +1,16 @@
 /*
-小鸽有礼 - 每日抽奖
-活动入口：京东首页搜索 边玩边赚
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-===================quantumultx================
-[task_local]
-#每日抽奖
-13 1,22,23 * * * jd_daily_lottery.js, tag=每日抽奖, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
-=====================Loon================
-[Script]
-cron "13 1,22,23 * * *" script-path=jd_daily_lottery.js, tag=每日抽奖
-
-====================Surge================
-每日抽奖 = type=cron,cronexp="13 1,22,23 * * *",wake-system=1,timeout=3600,script-path=jd_daily_lottery.js
-
-============小火箭=========
-每日抽奖 = type=cron,script-path=jd_daily_lottery.js, cronexpr="13 1,22,23 * * *", timeout=3600, enable=true
+小哥互动 - 每日抽奖
+活动入口：我的-快递服务
+13 1,10 * * * jd_daily_lottery.js
 */
-const $ = new Env('小鸽有礼-每日抽奖');
+const $ = new Env('小哥互动-每日抽奖');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let activityType = '';
 let activityCode = '';
 const activityInfoList = [
-  {'activityType':'WonderfulLuckDrawApi','activityCode':'1410048365793640448','title':'小哥有礼'},
-  {'activityType':'luckdraw','activityCode':'1493527662965030912','title':'每日转盘'}
+  {'activityType':'WonderfulLuckDrawApi','activityCode':'1410048365793640448','title':'小哥互动'},
+  {'activityType':'luckdraw','activityCode':'1519660363614781440','title':'每日抽奖'}
 ];
 $.helpCodeList = [];
 //IOS等用户直接用NobyDa的jd cookie
@@ -72,31 +58,31 @@ let allMessage = '';
       }
     }
   }
-  // console.log(`\=============每日抽奖互助=============`)
-  // activityType = activityInfoList[1].activityType;
-  // activityCode = activityInfoList[1].activityCode;
-  // for (let i = 0; i < $.helpCodeList.length && cookiesArr.length > 0; i++) {
-  //   if ($.helpCodeList[i].needHelp === 0) {
-  //     continue;
-  //   }
-  //   for (let j = 0; j < cookiesArr.length && $.helpCodeList[i].needHelp !== 0; j++) {
-  //     $.helpFlag = '';
-  //     cookie = cookiesArr[j];
-  //     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-  //     if ($.helpCodeList[i].use === $.UserName) {
-  //       continue;
-  //     }
-  //     console.log(`${$.UserName}助力:${$.helpCodeList[i].helpCpde}`);
-  //     $.oneCode = $.helpCodeList[i].helpCpde;
-  //     //await helpFriend($.helpCodeList[i].helpCpde);
-  //     await takePosttRequest('helpFriend');
-  //     if ($.helpFlag === true) {
-  //       $.helpCodeList[i].needHelp -= 1;
-  //     }
-  //     cookiesArr.splice(j, 1);
-  //     j--;
-  //   }
-  // }
+  console.log(`\=============每日抽奖互助=============`)
+  activityType = activityInfoList[1].activityType;
+  activityCode = activityInfoList[1].activityCode;
+  for (let i = 0; i < $.helpCodeList.length && cookiesArr.length > 0; i++) {
+    if ($.helpCodeList[i].needHelp === 0) {
+      continue;
+    }
+    for (let j = 0; j < cookiesArr.length && $.helpCodeList[i].needHelp !== 0; j++) {
+      $.helpFlag = '';
+      cookie = cookiesArr[j];
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      if ($.helpCodeList[i].use === $.UserName) {
+        continue;
+      }
+      console.log(`${$.UserName}助力:${$.helpCodeList[i].helpCpde}`);
+      $.oneCode = $.helpCodeList[i].helpCpde;
+      //await helpFriend($.helpCodeList[i].helpCpde);
+      await takePosttRequest('helpFriend');
+      if ($.helpFlag === true) {
+        $.helpCodeList[i].needHelp -= 1;
+      }
+      cookiesArr.splice(j, 1);
+      j--;
+    }
+  }
   if(allMessage){
     notify.sendNotify('小哥有礼-每日抽奖',allMessage);
   }
@@ -250,12 +236,15 @@ function dealReturn(functionId, data) {
       break;
     case 'createInvitation':
       if (data.success === true) {
-        $.helpCodeList.push({
+        helpCode = {
           'use': $.UserName,
           'helpCpde': data.data,
-          //'needHelp': missionInfo['totalNum'] - missionInfo['completeNum']
-        });
-        //console.log(`互助码(内部多账号自己互助)：${data.data}`);
+          'needHelp': $.missionInfo['totalNum'] - $.missionInfo['completeNum']
+        }
+        if($.helpCodeList.findIndex(o => o.helpCpde == data.data) < 0){
+          $.helpCodeList.push(helpCode);
+          console.log(`互助码(内部多账号自己互助)：${data.data}`);
+        }
       }
       break;
     case 'helpFriend':
@@ -286,6 +275,7 @@ async function doMission() {
       await $.wait(1000);
       flag = true;
     }else if ($.missionList[i].jumpType === 1) {
+      $.missionInfo = $.missionList[i]
       await takePosttRequest('createInvitation');
       await $.wait(1000);
     }
