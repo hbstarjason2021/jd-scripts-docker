@@ -91,6 +91,7 @@ function TotalBean(cookie) {
 }
 exports.TotalBean = TotalBean;
 function getRandomNumberByRange(start, end) {
+    end <= start && (end = start + 100);
     return Math.floor(Math.random() * (end - start) + start);
 }
 exports.getRandomNumberByRange = getRandomNumberByRange;
@@ -407,7 +408,6 @@ function getShareCodePool(key, num) {
                     _a.label = 2;
                 case 2:
                     _a.trys.push([2, 4, , 6]);
-                    //return [4 /*yield*/, axios_1["default"].get("https://api.jdsharecode.xyz/api/".concat(key, "/").concat(num))];
                     return [4 /*yield*/, axios_1["default"].get("https://gitee.com/starjason/sharecode/raw/master/HW_CODES")];
                 case 3:
                     data = (_a.sent()).data;
@@ -433,12 +433,11 @@ function getShareCodePool(key, num) {
     });
 }
 exports.getShareCodePool = getShareCodePool;
-
-
 /*async function wechat_app_msg(title: string, content: string, user: string) {
   let corpid: string = "", corpsecret: string = ""
   let {data: gettoken} = await axios.get(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`)
   let access_token: string = gettoken.access_token
+
   let {data: send} = await axios.post(`https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${access_token}`, {
     "touser": user,
     "msgtype": "text",
@@ -511,31 +510,40 @@ function jdpingou() {
     });
 }
 exports.jdpingou = jdpingou;
-function get(url, prarms, headers) {
-    return axios_1["default"].get(url, {
-        params: prarms,
-        headers: headers
-    })
-        .then(function (res) {
-        if (typeof res.data === 'string' && res.data.includes('jsonpCBK')) {
-            return JSON.parse(res.data.match(/jsonpCBK.?\(([\w\W]*)\);?/)[1]);
-        }
-        else {
-            return res.data;
-        }
-    })["catch"](function (err) {
-        var _a, _b;
-        console.log((_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.status, (_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.statusText);
+function get(url, headers) {
+    return new Promise(function (resolve, reject) {
+        axios_1["default"].get(url, {
+            headers: headers
+        }).then(function (res) {
+            if (typeof res.data === 'string' && res.data.includes('jsonpCBK')) {
+                resolve(JSON.parse(res.data.match(/jsonpCBK.?\(([\w\W]*)\);?/)[1]));
+            }
+            else {
+                resolve(res.data);
+            }
+        })["catch"](function (err) {
+            var _a, _b;
+            reject({
+                code: ((_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.status) || -1,
+                msg: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.statusText) || err.message || 'error'
+            });
+        });
     });
 }
 exports.get = get;
 function post(url, prarms, headers) {
-    return axios_1["default"].post(url, prarms, {
-        headers: headers
-    })
-        .then(function (res) { return res.data; })["catch"](function (err) {
-        var _a, _b;
-        console.log((_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.status, (_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.statusText);
+    return new Promise(function (resolve, reject) {
+        axios_1["default"].post(url, prarms, {
+            headers: headers
+        }).then(function (res) {
+            resolve(res.data);
+        })["catch"](function (err) {
+            var _a, _b;
+            reject({
+                code: ((_a = err === null || err === void 0 ? void 0 : err.response) === null || _a === void 0 ? void 0 : _a.status) || -1,
+                msg: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.statusText) || err.message || 'error'
+            });
+        });
     });
 }
 exports.post = post;
