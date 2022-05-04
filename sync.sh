@@ -95,7 +95,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 
 cd /JDHelloWorld || exit 1
 npm install  || npm install --registry=https://registry.npm.taobao.org || exit 1
-npm install  typescript ts-node
+npm install -g typescript ts-node
 npm cache clean --force
 
 cd /scripts || exit 1
