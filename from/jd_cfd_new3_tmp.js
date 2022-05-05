@@ -56,7 +56,7 @@ if ($.isNode()) {
     return;
   }
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
-  await requestAlgo();
+  //**********await requestAlgo();
   await $.wait(1000)
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -136,6 +136,141 @@ async function cfd() {
       }
     }
 
+    /***********************************************************************************
+    // 寻宝
+    console.log(`寻宝`)
+    let XBDetail = beginInfo.XbStatus.XBDetail.filter((x) => x.dwRemainCnt !== 0)
+    if (XBDetail.length !== 0) {
+      console.log(`开始寻宝`)
+      $.break = false
+      for (let key of Object.keys(XBDetail)) {
+        let vo = XBDetail[key]
+        await $.wait(2000)
+        await TreasureHunt(vo.strIndex)
+        if ($.break) break
+      }
+    } else {
+      console.log(`暂无宝物`)
+    }
+
+    //每日签到
+    await $.wait(2000)
+    await getTakeAggrPage('sign')
+
+    //小程序每日签到
+    await $.wait(2000)
+    await getTakeAggrPage('wxsign')
+
+    //使用道具
+    if (new Date().getHours() < 22){
+      await $.wait(2000)
+      await GetPropCardCenterInfo()
+    }
+
+    //助力奖励
+    await $.wait(2000)
+    await getTakeAggrPage('helpdraw')
+
+    console.log('')
+    //卖贝壳
+    // await $.wait(2000)
+    // await querystorageroom('1')
+
+    //升级建筑
+    await $.wait(2000)
+    for(let key of Object.keys($.info.buildInfo.buildList)) {
+      let vo = $.info.buildInfo.buildList[key]
+      let body = `strBuildIndex=${vo.strBuildIndex}&dwType=1`
+      await getBuildInfo(body, vo)
+      await $.wait(2000)
+    }
+
+    //接待贵宾
+    console.log(`接待贵宾`)
+    if ($.info.StoryInfo.StoryList) {
+      await $.wait(2000)
+      for (let key of Object.keys($.info.StoryInfo.StoryList)) {
+        let vo = $.info.StoryInfo.StoryList[key]
+        if (vo.Special) {
+          console.log(`请贵宾下船，需等待${vo.Special.dwWaitTime}秒`)
+          await specialUserOper(vo.strStoryId, '2', vo.ddwTriggerDay, vo)
+          await $.wait(vo.Special.dwWaitTime * 1000)
+          await specialUserOper(vo.strStoryId, '3', vo.ddwTriggerDay, vo)
+          await $.wait(2000)
+        } else {
+          console.log(`当前暂无贵宾\n`)
+        }
+      }
+    } else {
+      console.log(`当前暂无贵宾\n`)
+    }
+
+    //收藏家
+    console.log(`收藏家`)
+    if ($.info.StoryInfo.StoryList) {
+      await $.wait(2000)
+      for (let key of Object.keys($.info.StoryInfo.StoryList)) {
+        let vo = $.info.StoryInfo.StoryList[key]
+        if (vo.Collector) {
+          console.log(`喜欢贝壳的收藏家来了，快去卖贝壳吧~`)
+          await collectorOper(vo.strStoryId, '2', vo.ddwTriggerDay)
+          await $.wait(2000)
+          await querystorageroom('2')
+          await $.wait(2000)
+          await collectorOper(vo.strStoryId, '4', vo.ddwTriggerDay)
+        } else {
+          console.log(`当前暂无收藏家\n`)
+        }
+      }
+    } else {
+      console.log(`当前暂无收藏家\n`)
+    }
+
+    //美人鱼
+    console.log(`美人鱼`)
+    if ($.info.StoryInfo.StoryList) {
+      await $.wait(2000)
+      for (let key of Object.keys($.info.StoryInfo.StoryList)) {
+        let vo = $.info.StoryInfo.StoryList[key]
+        if (vo.Mermaid) {
+          if (vo.Mermaid.dwIsToday === 1) {
+            console.log(`可怜的美人鱼困在沙滩上了，快去解救她吧~`)
+            await mermaidOper(vo.strStoryId, '1', vo.ddwTriggerDay)
+          } else if (vo.Mermaid.dwIsToday === 0) {
+            await mermaidOper(vo.strStoryId, '4', vo.ddwTriggerDay)
+          }
+        } else {
+          console.log(`当前暂无美人鱼\n`)
+        }
+      }
+    } else {
+      console.log(`当前暂无美人鱼\n`)
+    }
+
+    //倒垃圾
+    await $.wait(2000)
+    await queryRubbishInfo()
+
+    console.log(`\n做任务`)
+    //牛牛任务
+    await $.wait(2000)
+    await getActTask()
+
+    //日常任务
+    await $.wait(2000);
+    await getTaskList(0);
+    await $.wait(2000);
+    await browserTask(0);
+
+    //成就任务
+    await $.wait(2000);
+    await getTaskList(1);
+    await $.wait(2000);
+    await browserTask(1);
+
+    //卡片任务
+    await $.wait(2000);
+    await getPropTask();
 
     await $.wait(2000);
     const endInfo = await getUserInfo(false);
@@ -679,6 +814,7 @@ function rubbishOper(dwType, body = '') {
   })
 }
 
+
 // 牛牛任务
 async function getActTask(type = true) {
   return new Promise(async (resolve) => {
@@ -732,6 +868,10 @@ async function getActTask(type = true) {
     })
   })
 }
+
+*******************************************************************************************************************/
+
+
 function awardActTask(function_path, taskInfo = '') {
   const { ddwTaskId, strTaskName} = taskInfo
   return new Promise((resolve) => {
@@ -789,6 +929,7 @@ function awardActTask(function_path, taskInfo = '') {
     }
   })
 }
+
 
 // 升级建筑
 async function getBuildInfo(body, buildList, type = true) {
