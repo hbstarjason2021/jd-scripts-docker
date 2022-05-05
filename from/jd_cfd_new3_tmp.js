@@ -56,7 +56,7 @@ if ($.isNode()) {
     return;
   }
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
-  //**********await requestAlgo();
+  await requestAlgo();
   await $.wait(1000)
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -135,6 +135,21 @@ async function cfd() {
         return
       }
     }
+
+
+    const endInfo = await getUserInfo(false);
+    $.result.push(
+        `【京东账号${$.index}】${$.nickName || $.UserName}`,
+        `【🥇金币】${endInfo.ddwCoinBalance}`,
+        `【💵财富值】${endInfo.ddwRichBalance}\n`,
+    );
+
+  } catch (e) {
+    $.logErr(e)
+  }
+}
+
+
 
 
 // 助力
