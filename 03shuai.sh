@@ -35,7 +35,7 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_sgmh.js'
 
 ##财富岛助力
-docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node gua_wealth_island_help.js'
+#docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node gua_wealth_island_help.js'
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cfd_new3.js'
 
 ##内容鉴赏
@@ -47,8 +47,6 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ##许愿池
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wish.js'
 
-docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_carnivalcity_help.js'
-
 ##京喜牧场
 docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxmc-new3.js'
 
@@ -56,6 +54,7 @@ docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-
 #docker stop jd3 && docker rm jd3
 
 
+#docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_carnivalcity_help.js'
 ##极速版特价翻翻乐
 #docker exec jd3 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdtj_winner.js'
 ##天天压岁钱
