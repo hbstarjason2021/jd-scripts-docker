@@ -129,7 +129,7 @@
 
 ## 东东农场任务
 #18 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_friend.js | sed 's/^/ 【东东农场】/'; "
-18 0,12,19 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_hw.js | sed 's/^/ 【东东农场】/'; "
+18 12,19 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_hw.js | sed 's/^/ 【东东农场】/'; "
 29 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_moreTask.js | sed 's/^/ 【东东农场】/'; "
 
 
