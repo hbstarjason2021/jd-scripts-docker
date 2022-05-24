@@ -1564,7 +1564,7 @@ function submitCode(myInviteCode, user) {
 function readShareCode() {
   return new Promise(async resolve => {
     $.get({
-      url: `https://gitee.com/starjason/sharecode/raw/master/cfd_new.json`,
+      url: `https://jihulab.com/hbstarjason/sharecode/-/raw/master/cfd_new.json`,
       'timeout': 10000
     }, (err, resp, data) => {
       try {
