@@ -100,7 +100,7 @@ if ($.isNode()) {
 			}
     }
   }
-  let res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/cfd.json')
+  let res = await getAuthorShareCode('https://jihulab.com/hbstarjason/sharecode/-/raw/master/cfd.json')
   $.strMyShareIds = [...(res || [])]
   await shareCodesFormat()
   for (let i = 0; i < cookiesArr.length; i++) {
