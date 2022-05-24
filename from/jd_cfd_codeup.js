@@ -84,11 +84,11 @@ if ($.isNode()) {
       await $.wait(2000);
     }
   }
-  let res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/cfd_new3.json')
+  let res = await getAuthorShareCode('https://jihulab.com/hbstarjason/sharecode/-/raw/master/cfd_new3.json')
   if (!res) {
-    $.http.get({url: 'https://gitee.com/starjason/sharecode/raw/master/cfd_new3.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: 'https://jihulab.com/hbstarjason/sharecode/-/raw/master/cfd_new3.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/cfd_new3.json')
+    res = await getAuthorShareCode('https://jihulab.com/hbstarjason/sharecode/-/raw/master/cfd_new3.json')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   await shareCodesFormat()
@@ -655,7 +655,7 @@ function showMsg() {
 
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://gitee.com/starjason/sharecode/raw/master/cfd_new3_2.json`, timeout: 30 * 1000}, (err, resp, data) => {
+    $.get({url: `https://jihulab.com/hbstarjason/sharecode/-/raw/master/cfd_new3_2.json`, timeout: 30 * 1000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
