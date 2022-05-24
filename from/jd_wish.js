@@ -72,7 +72,7 @@ if ($.isNode()) {
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage)
   }
-  let res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/wish.json')
+  let res = await getAuthorShareCode('https://jihulab.com/hbstarjason/sharecode/-/raw/master/wish.json')
   $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
