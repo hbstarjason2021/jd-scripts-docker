@@ -170,7 +170,7 @@ async function getshareCodeHW(key: string) {
   let shareCodeHW: string[] = []
   for (let i = 0; i < 5; i++) {
     try {
-      let {data}: any = await axios.get('https://gitee.com/starjason/sharecode/raw/master/HW_CODES')
+      let {data}: any = await axios.get('https://jihulab.com/hbstarjason/sharecode/-/raw/master/HW_CODES')
       shareCodeHW = data[key] || []
       if (shareCodeHW.length !== 0) {
         break
@@ -187,7 +187,7 @@ async function getShareCodePool(key: string, num: number) {
   let shareCode: string[] = []
   for (let i = 0; i < 2; i++) {
     try {
-      let {data}: any = await axios.get(`https://gitee.com/starjason/sharecode/raw/master/HW_CODES`)
+      let {data}: any = await axios.get(`https://jihulab.com/hbstarjason/sharecode/-/raw/master/HW_CODES`)
       shareCode = data.data || []
       console.log(`随机获取${num}个${key}成功：${JSON.stringify(shareCode)}`)
       if (shareCode.length !== 0) {
