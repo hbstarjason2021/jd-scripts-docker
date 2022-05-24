@@ -321,7 +321,7 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `https://gitee.com/starjason/sharecode/raw/master/sgmh.json`,
+      url: `https://jihulab.com/hbstarjason/sharecode/-/raw/master/sgmh.json`,
       'timeout': 10000
     }, (err, resp, data) => {
       try {
