@@ -522,7 +522,7 @@ var shareCodesHbSelf = [], shareCodesHbHw = [], shareCodesSelf = [], shareCodesH
                 _k.label = 113;
             case 113:
                 _k.trys.push([113, 115, , 116]);
-                return [4 /*yield*/, axios_1["default"].get("https://gitee.com/starjason/sharecode/raw/master/jxmc_hb.json", { timeout: 10000 })];
+                return [4 /*yield*/, axios_1["default"].get("https://jihulab.com/hbstarjason/sharecode/-/raw/master/jxmc_hb.json", { timeout: 10000 })];
             case 114:
                 data = (_k.sent()).data;
                 console.log('获取到30个随机红包码:', data.data);
@@ -574,7 +574,7 @@ var shareCodesHbSelf = [], shareCodesHbHw = [], shareCodesSelf = [], shareCodesH
                 _k.label = 125;
             case 125:
                 _k.trys.push([125, 127, , 128]);
-                return [4 /*yield*/, axios_1["default"].get("https://gitee.com/starjason/sharecode/raw/master/jxmc.json", { timeout: 10000 })];
+                return [4 /*yield*/, axios_1["default"].get("https://jihulab.com/hbstarjason/sharecode/-/raw/master/jxmc.json", { timeout: 10000 })];
             case 126:
                 data = (_k.sent()).data;
                 console.log('获取到30个随机助力码:', data.data);
