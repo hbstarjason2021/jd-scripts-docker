@@ -110,13 +110,13 @@ if ($.isNode()) {
     await pasture();
     await $.wait(2000);
   }
-  $.res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/jxmc2.json')
+  $.res = await getAuthorShareCode('https://jihulab.com/hbstarjason/sharecode/-/raw/master/jxmc2.json')
   if (!$.res) {
-    $.http.get({url: 'https://gitee.com/starjason/sharecode/raw/master/jxmc2.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: 'https://jihulab.com/hbstarjason/sharecode/-/raw/master/jxmc2.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    $.res = await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/jxmc2.json')
+    $.res = await getAuthorShareCode('https://jihulab.com/hbstarjason/sharecode/-/raw/master/jxmc2.json')
   }
-  $.res = [...($.res || []), ...(await getAuthorShareCode('https://gitee.com/starjason/sharecode/raw/master/jxmc2.json') || [])]
+  $.res = [...($.res || []), ...(await getAuthorShareCode('https://jihulab.com/hbstarjason/sharecode/-/raw/master/jxmc2.json') || [])]
   await shareCodesFormat()
   for (let i = 0; i < cookiesArr.length; i++) {
     $.cookie = cookiesArr[i];
@@ -923,7 +923,7 @@ function shareCodesFormat() {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://gitee.com/starjason/sharecode/raw/master/jxmc.json`, timeout: 30 * 1000}, (err, resp, data) => {
+    $.get({url: `https://jihulab.com/hbstarjason/sharecode/-/raw/master/jxmc.json`, timeout: 30 * 1000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
