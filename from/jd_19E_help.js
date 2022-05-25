@@ -1,16 +1,7 @@
-
-/*
-
-建议手动先点开一次
-33 0,6-23/3 * * * jd_19E_help.js
-
-*/
-
 const CryptoJS = require("crypto-js");
 const $ = new Env('热爱奇旅互助版');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-//let cookiesArr = [], cookie = '', message, helpCodeArr = [], helpPinArr = [], wxCookie = "";
 let cookiesArr = [], cookie = '', message, helpCodeArr = [{pin:'jd_709c349f13b51',code:'ZXASTT0225KkcRx4QplfTKUz1l6UPdQFjRWn6S7zB55awQ'},{pin:'starjason',code:'ZXASTT012_bkiAkRItguJFjRWn6S7zB55awQ'},{pin:'yuxiachenqi',code:'ZXASTT01597g7GU9KrQGJYUMFjRWn6S7zB55awQ'},{pin:'fu5520jing',code:'ZXASTT0146Lh2RRwZrw2JdwFjRWn6S7zB55awQ'}], helpPinArr = [], wxCookie = "";
 let wxCookieArr = process.env.WXCookie?.split("@") || []
 const teamLeaderArr = [], teamPlayerAutoTeam = {}
@@ -126,20 +117,20 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
                         $.newHelpCodeArr = $.newHelpCodeArr.filter(x => x.pin !== pin)
                     }
                     console.log(`互助失败，原因：${helpRes?.bizMsg}（${helpRes?.bizCode}）`)
-                    if (![0, -201, -202].includes(helpRes?.bizCode)) break
+                    //if (![0, -201, -202].includes(helpRes?.bizCode)) break
                 }
             }
             helpCodeArr = [...$.newHelpCodeArr]
         //}
         // $.joyytoken = ""
         // cookie = cookie.replace(/joyytoken=\S+?;/, "joyytoken=;") 
-        if (teamPlayerAutoTeam.hasOwnProperty($.UserName)) {
-            const { groupJoinInviteId, groupNum, groupName } = teamLeaderArr[teamPlayerAutoTeam[$.UserName]]
-            console.log(`${groupName}人数：${groupNum}，正在去加入他的队伍${groupJoinInviteId}...`)
-            await joinTeam(groupJoinInviteId)
-            teamLeaderArr[teamPlayerAutoTeam[$.UserName]].groupNum += 1
-            await $.wait(2000)
-        }
+        //if (teamPlayerAutoTeam.hasOwnProperty($.UserName)) {
+        //     const { groupJoinInviteId, groupNum, groupName } = teamLeaderArr[teamPlayerAutoTeam[$.UserName]]
+        //     console.log(`${groupName}人数：${groupNum}，正在去加入他的队伍${groupJoinInviteId}...`)
+            await joinTeam('-HE-pbNodlsaU7jjtwOgK7BrMd-9Ssjkc7RCbGJyUQ')
+            // teamLeaderArr[teamPlayerAutoTeam[$.UserName]].groupNum += 1
+            // await $.wait(2000)
+        // }
     }
 })()
     .catch((e) => {
