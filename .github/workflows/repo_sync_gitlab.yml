@@ -9,12 +9,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: wangchucheng/git-repo-sync@v0.1.0
-      with:
-        target-url: https://jihulab.com/hbstarjason/jd-scripts-docker.git
-        target-username: starjason
-        target-token: ${{ secrets.JIHULAB }}
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Push gitlab
+      run: |
+         pwd
+         ls -l 
+    
+    #- uses: wangchucheng/git-repo-sync@v0.1.0
+    #  with:
+    #    target-url: https://jihulab.com/hbstarjason/jd-scripts-docker.git
+    #    target-username: starjason
+    #    target-token: ${{ secrets.JIHULAB }}
     #- name: Mirror + trigger CI
     #  uses: SvanBoxel/gitlab-mirror-and-ci-action@master
     #  with:
