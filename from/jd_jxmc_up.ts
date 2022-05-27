@@ -240,7 +240,7 @@
        }
      }
      await wait(6000)
-
+*************************************************************/
      for (let j = 0; j < 30; j++) {
        try {
          res = await api('operservice/Action', 'activeid,activekey,channel,jxmc_jstoken,petid,phoneid,sceneid,timestamp,type', {type: '1', petid: petids[Math.floor((Math.random() * petids.length))]})
@@ -253,7 +253,7 @@
        }
      }
    }
-*************************************************************/ 
+ 
 
    /*
    for (let [index, value] of cookiesArr.entries()) {
