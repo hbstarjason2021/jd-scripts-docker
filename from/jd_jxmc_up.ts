@@ -54,7 +54,7 @@
        continue
      }
  
-    /************************************************************************************************************
+    
      let food: number = 0, petid: string = '', coins: number = 0, petNum: number = 0, petids: string[] = []
      try {
        food = homePageInfo.data.materialinfo[0].value
@@ -69,8 +69,6 @@
        console.log('初始化出错，手动去app')
        continue
      }
- 
-     ******************/
   
      console.log('助力码:', homePageInfo.data.sharekey)
      shareCodesSelf.push(homePageInfo.data.sharekey)
