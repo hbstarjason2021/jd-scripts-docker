@@ -129,6 +129,8 @@ cp /jd-scripts-docker/crontab.list /crontab.list
 ## sed -i '10,11d' jdCookie.js
 #cp /jd-scripts-docker/from/TS_USER_AGENTS.ts  /JDHelloWorld/TS_USER_AGENTS.ts
 cp /jd-scripts-docker/from/TS_USER_AGENTS_new.ts  /JDHelloWorld/TS_USER_AGENTS.ts
+cp /jd-scripts-docker/from/jd_cfd_up.ts  /JDHelloWorld/jd_cfd_up.ts
+cp /jd-scripts-docker/from/jd_jxmc_up.ts  /JDHelloWorld/jd_jxmc_up.ts
 
 cp /jd-scripts-docker/jdCookie.js  /scripts/jdCookie.js
 cp /jd-scripts-docker/from/*  /scripts/
