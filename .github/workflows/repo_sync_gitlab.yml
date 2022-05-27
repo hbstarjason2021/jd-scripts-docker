@@ -1,6 +1,9 @@
-name: Mirror and run GitLab CI
+name: repo_sync_gitlab
 
-on: [push]
+on: 
+  workflow_dispatch:
+  push:
+    branches: [ main]
 
 jobs:
   build:
@@ -14,6 +17,6 @@ jobs:
       env:
         GITLAB_HOSTNAME: "jihulab.com"
         GITLAB_USERNAME: "starjason"
-        GITLAB_PASSWORD: ${{ secrets.JIHULAB }} // Generate here: https://gitlab.com/profile/personal_access_tokens
-        GITLAB_PROJECT_ID: "25786" // https://gitlab.com/<namespace>/<repository>/edit
-        GITHUB_TOKEN: ${{ secrets.PAT }} // https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+        GITLAB_PASSWORD: ${{ secrets.JIHULAB }}
+        GITLAB_PROJECT_ID: "25786"
+        GITHUB_TOKEN: ${{ secrets.PAT }} 
