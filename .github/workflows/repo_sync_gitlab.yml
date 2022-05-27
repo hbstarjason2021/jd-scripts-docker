@@ -10,13 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Mirror + trigger CI
-      uses: SvanBoxel/gitlab-mirror-and-ci-action@master
+    - uses: wangchucheng/git-repo-sync@v0.1.0
       with:
-        args: "https://jihulab.com/hbstarjason/jd-scripts-docker"
-      env:
-        GITLAB_HOSTNAME: "jihulab.com"
-        GITLAB_USERNAME: "starjason"
-        GITLAB_PASSWORD: ${{ secrets.JIHULAB }}
-        GITLAB_PROJECT_ID: "25786"
-        GITHUB_TOKEN: ${{ secrets.PAT }} 
+        target-url: https://jihulab.com/hbstarjason/jd-scripts-docker.git
+        target-username: starjason
+        target-token: ${{ secrets.JIHULAB }}
+    #- name: Mirror + trigger CI
+    #  uses: SvanBoxel/gitlab-mirror-and-ci-action@master
+    #  with:
+    #    args: "https://jihulab.com/hbstarjason/jd-scripts-docker"
+    #  env:
+    #    GITLAB_HOSTNAME: "jihulab.com"
+    #    GITLAB_USERNAME: "starjason"
+    #    GITLAB_PASSWORD: ${{ secrets.JIHULAB }}
+    #    GITLAB_PROJECT_ID: "25786"
+    #    GITHUB_TOKEN: ${{ secrets.PAT }} 
