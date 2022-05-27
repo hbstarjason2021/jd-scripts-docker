@@ -54,6 +54,7 @@
        continue
      }
  
+    /************************************************************************************************************
      let food: number = 0, petid: string = '', coins: number = 0, petNum: number = 0, petids: string[] = []
      try {
        food = homePageInfo.data.materialinfo[0].value
@@ -69,6 +70,8 @@
        continue
      }
  
+     ******************/
+  
      console.log('助力码:', homePageInfo.data.sharekey)
      shareCodesSelf.push(homePageInfo.data.sharekey)
      try {
@@ -238,8 +241,6 @@
      }
      await wait(6000)
 
-     *************************************************************/ 
-
      for (let j = 0; j < 30; j++) {
        try {
          res = await api('operservice/Action', 'activeid,activekey,channel,jxmc_jstoken,petid,phoneid,sceneid,timestamp,type', {type: '1', petid: petids[Math.floor((Math.random() * petids.length))]})
@@ -252,7 +253,7 @@
        }
      }
    }
-
+*************************************************************/ 
 
    /*
    for (let [index, value] of cookiesArr.entries()) {
