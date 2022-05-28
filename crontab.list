@@ -8,7 +8,7 @@
 ## 热爱奇旅-互助
 ##28 0-23/3 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_19E_help.js | sed 's/^/ 【热爱奇旅互助】/'; "
 ## 热爱奇旅-收集
-28 */2 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_19E_collect.js | sed 's/^/ 【热爱奇旅收集】/'; "
+#28 */2 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_19E_collect.js | sed 's/^/ 【热爱奇旅收集】/'; "
 
 ## 京东汽车兑换
 #0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car_exchange.js | sed 's/^/ 【京东汽车兑换】/'; "
