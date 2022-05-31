@@ -1,7 +1,7 @@
 //20 8 10 4 * jd_farm_automation.js
 
 console.log('默认种2级，如需调整请设置变量 M_JD_FARM_LEVEL\n使用率不高，指定（desi）账号运行\n')
-const {Env} = require('./function/magic');
+const {Env} = require('./utils/magic');
 const $ = new Env('农场自动种植兑换');
 let level = process.env.M_JD_FARM_LEVEL ? process.env.M_JD_FARM_LEVEL * 1 : 2
 $.logic = async function () {
