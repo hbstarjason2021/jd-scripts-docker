@@ -9,12 +9,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-    - name: Push gitlab
+    - name: sync-gitlab
       run: |
          pwd
          ls -l 
+         GITHUB_REPO="https://github.com/hbstarjason2021/jd-scripts-docker.git"
+         GITLAB_TOKEN="${{ secrets.JIHULAB }}"
+         GITLAB_REPO=https://oauth2:${GITLAB_TOKEN}@jihulab.com/hbstarjason/jd-scripts-docker.git
+         
+         git clone --mirror "$GITHUB_REPO" && cd `basename "$GITHUB_REPO"`
+         git remote set-url --push origin "$GITLAB_REPO"
+         git fetch -p origin
+         git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+         git push --mirror
+         
+         echo "****** sync to gitlab success ******"
+         
+    #- name: Checkout repo
+    #  uses: actions/checkout@v2
+    #- name: Push gitlab
+    #  run: |
+    #     pwd
+    #     ls -l 
     
     #- uses: wangchucheng/git-repo-sync@v0.1.0
     #  with:
