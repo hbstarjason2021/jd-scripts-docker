@@ -20,7 +20,7 @@ allMessage='';
 message='';
 $.hotFlag=false;
 $.outFlag=false;
-let shareUuidArr=['il64pE7v1zdguoOwD5otHV4tLNYA4seuA67MOIYQxEk3Vl9+AVo4NF+tgyeIc6A6kdK3rLBQpEQH9V4tdrrh0w==','WGBDyRWX5BAZAb38Cd4ugV4tLNYA4seuA67MOIYQxEk3Vl9+AVo4NF+tgyeIc6A6kdK3rLBQpEQH9V4tdrrh0w==','Y4NPsZfI1UgpdeJHr4Ycre2eeeAAy+Z4dS9uCTK4WDbpzoLrW7NWpeN+ekvNaPF4','APx7DtkdguWchCKDrRZvy/2KELO9izRVpwCyqu0eqVZ5aW7RHzlMobrzJ/e9r/uf'];
+let shareUuidArr=['8waUF21RYhvk5aueyIC9oM7TwJCmNe8NFvhpI0XmJDULVU108+UxlHw7qoUuHA4F','Y4NPsZfI1UgpdeJHr4Ycre2eeeAAy+Z4dS9uCTK4WDbpzoLrW7NWpeN+ekvNaPF4','Y4NPsZfI1UgpdeJHr4Ycre2eeeAAy+Z4dS9uCTK4WDbpzoLrW7NWpeN+ekvNaPF4','APx7DtkdguWchCKDrRZvy/2KELO9izRVpwCyqu0eqVZ5aW7RHzlMobrzJ/e9r/uf'];
 let n=0;
 n=Math.floor(Math.random()*shareUuidArr.length);
 let shareUuid=shareUuidArr[n]||'';
