@@ -49,8 +49,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ### 探味奇遇记
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_tanwei.js'
 
-### 小米618
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_xm618.js'
 
 ## 京享周周乐
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_xs_zzl.js'
@@ -221,6 +219,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 
 #################################################################################################################################################
+
+### 小米618
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_xm618.js'
 
 ## 内容鉴赏官
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_connoisseur.js'
