@@ -2,23 +2,23 @@
 领京豆额外奖励&抢京豆
 脚本自带助力码，介意者可将 29行 helpAuthor 变量设置为 false
 活动入口：京东APP首页-领京豆
-更新地址：https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js
+更新地址：jd_bean_home.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #领京豆额外奖励
-23 1,18 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
+10 7 * * * jd_bean_home.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "23 1,18 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, tag=领京豆额外奖励
+cron "10 7 * * *" script-path=jd_bean_home.js, tag=领京豆额外奖励
 
 ===============Surge=================
-领京豆额外奖励 = type=cron,cronexp="23 1,18 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js
+领京豆额外奖励 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=3600,script-path=jd_bean_home.js
 
 ============小火箭=========
-领京豆额外奖励 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_bean_home.js, cronexpr="23 1,18 * * *", timeout=3600, enable=true
+领京豆额外奖励 = type=cron,script-path=jd_bean_home.js, cronexpr="10 7 * * *", timeout=3600, enable=true
  */
 const $ = new Env('领京豆额外奖励');
 
@@ -66,6 +66,7 @@ const JD_API_HOST = 'https://api.m.jd.com/';
         continue
       }
       await jdBeanHome();
+			await $.wait(parseInt(Math.random() * 5000 + 8000, 10))
     }
   }
   // for (let i = 0; i < cookiesArr.length; i++) {
@@ -111,11 +112,6 @@ const JD_API_HOST = 'https://api.m.jd.com/';
   //     }
   //   }
   // }
-	if($.outFlag) {
-    let msg = '好像IP黑了，换个IP试试吧'
-    $.msg($.name, ``, `${msg}`);
-    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${msg}`);
-  }
 })()
   .catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -132,11 +128,11 @@ async function jdBeanHome() {
     //   await $.wait(1000)
     //   if ($.doneState) break
     // }
+		$.outFlag = false
 		do {
-			$.outFlag = false
       await doTask2()
-			if ($.outFlag) return
-      await $.wait(3000)
+			if ($.outFlag) break
+      await $.wait(5000)
     } while (!$.doneState)
     await $.wait(1000)
     await award("feeds")
@@ -150,16 +146,16 @@ async function jdBeanHome() {
     //await $.wait(1000)
 
     await beanTaskList(1)
-    await $.wait(1000)
+    await $.wait(2000)
     await queryCouponInfo()
     $.doneState = false
     let num = 0
     do {
-      await $.wait(2000)
+      await $.wait(3000)
       await beanTaskList(2)
       num++
     } while (!$.doneState && num < 5)
-    await $.wait(2000)
+    await $.wait(3000)
     if ($.doneState) await beanTaskList(3)
 
     await showMsg();
