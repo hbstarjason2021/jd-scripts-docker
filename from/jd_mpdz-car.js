@@ -26,7 +26,7 @@ let n=0;
 n=Math.floor(Math.random()*shareUuidArr.length);
 let shareUuid=shareUuidArr[n]||'';
 !(async()=>{
-	console.log('活动快捷入口： 11:/参与头文字J，集能量兑换京豆，【Jιιngヵ栋】 ￥Z9yfjBqzLWt￥');
+	console.log('活动快捷入口： 14:/￥VFbAYF6tRl% ，【京ㅠDōδδng】参与头文字J，集能量兑换京豆');
     if (!cookiesArr[0]) {
       $.msg($.name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
         "open-url": "https://bean.m.jd.com/"
@@ -94,8 +94,8 @@ async function run(){
                 case 'shareAct':    
                     break;
                 case 'viewCommodity':
+                case 'viewThemeConference':
                     for(let i=0;i<3;i++){
-                        $.missionType='viewCommodity';
                         await takePostRequest('doTask');
                         await $.wait(parseInt(Math.random()*1000+1000,10));
                     }
@@ -103,7 +103,6 @@ async function run(){
                 case 'collectShop':
                     for(let i=0;i<3;i++){
                         await takePostRequest('getCusShop');
-                        $.missionType='collectShop';
                         await takePostRequest('followShop');
                         await $.wait(parseInt(Math.random()*1000+1000,10));
                     }
@@ -112,7 +111,6 @@ async function run(){
                     if (process.env.car_addsku && process.env.car_addsku === 'true'){
                     for(let i=0;i<3;i++){
                         await takePostRequest('getCusShopProduct');
-                        $.missionType='addCart';
                         await takePostRequest('addCart');
                         await $.wait(parseInt(Math.random()*1000+1000,10));
                     }
