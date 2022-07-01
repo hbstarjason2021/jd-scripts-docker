@@ -1485,7 +1485,7 @@ function readShareCode() {
 function runTimes(thisShareCode) {
   return new Promise((resolve, reject) => {
     $.get({
-      url: `https://api.jdsharecode.xyz/api/runTimes0509?activityId=farm&sharecode=${thisShareCode}`
+      url: `https://api.jdsharecode.xyz/api/runTimes0701?activityId=farm&sharecode=${thisShareCode}`
     }, (err, resp, data) => {
       if (err) {
         console.log('上报失败', err)
