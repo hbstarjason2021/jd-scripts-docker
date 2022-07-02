@@ -1,6 +1,6 @@
 /**
  * 签到领现金_Windfgg，每日2毛～5毛
- * cron "0 0 6 * *" sign_xj.js,tag=签到领现金
+ * 0 0 6 * * sign_xj.js,tag=签到领现金
  * 
  * 无助力活动 助力码无用
  * 活动入口：京东APP搜索领现金进入
@@ -23,10 +23,14 @@
  }
  const JD_API_HOST = 'https://api.m.jd.com/client.action';
  let allMessage = '';
+
  let jdWindfggToken = '';
+ let jdWindfggHost='api.windfgg.cf'
+
  jdWindfggToken = $.isNode() ? (process.env.WindfggToken ? process.env.WindfggToken : `${jdWindfggToken}`) : ($.getdata('WindfggToken') ? $.getdata('WindfggToken') : `${jdWindfggToken}`);
+ jdWindfggHost = $.isNode() ? (process.env.WindfggHost ? process.env.WindfggHost : `${jdWindfggHost}`) : ($.getdata('WindfggHost') ? $.getdata('WindfggHost') : `${jdWindfggHost}`);
  if (!jdWindfggToken) {
-		 console.log('\n请前往 https://t.me/wind_fgg   获取Token\n请填写Windfgg获取的Token,变量是WindfggToken');
+     console.log('请填写Windfgg获取的Token,变量名是WindfggToken');
      return;
  }
  
@@ -263,7 +267,7 @@
      }
      return new Promise((resolve) => {
          let url = {
-             url: "https://api.windfgg.cf/jd/sign",
+             url: `http://${jdWindfggHost}jd/sign`,
              body: JSON.stringify(data),
              followRedirect: false,
              headers: {
@@ -289,7 +293,6 @@
                      console.log("签名获取失败,Token使用次数上限.");
                  }
              } catch (e) {
-                 $.log("签名获取失败. 状态码:" +resp.statusCode +'(401是未授权或可能被拉黑,521是服务器宕机)')
                  $.logErr(e,resp)
              } finally {
                  resolve('');
