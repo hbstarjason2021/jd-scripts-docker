@@ -1535,7 +1535,7 @@ function showMsg() {
 //提交互助码
 function submitCode(myInviteCode, user) {
     return new Promise(async resolve => {
-    $.get({url: `http://www.helpu.cf/jdcodes/submit.php?code=${myInviteCode}&type=jxcfd&user=${user}`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: `http://www.jdhelp.cf/jdcodes/submit.php?code=${myInviteCode}&type=jxcfd&user=${user}`, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
