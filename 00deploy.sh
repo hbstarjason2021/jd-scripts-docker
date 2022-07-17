@@ -40,6 +40,7 @@ sed -i '2s/pt_key=/XXXX/' env/env1 && \
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node getJDCookie.js'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_get_share_code.js'
 
+##########################################################################################################################
 << CONTENT
 
 https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster
@@ -50,5 +51,15 @@ sudo curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-
     git clone https://github.com/hbstarjason2021/jd-scripts-docker && \
    cd jd-scripts-docker && ls -l  && \
  docker pull hbstarjason/jd-scripts
+
+
+###############################
+
+28 */2 * * *  sh /home/ubuntu/jd-scripts-docker/00run.sh > /home/ubuntu/jd_cron.log 2>&1
+
+8 21 * * * sh /home/ubuntu/jd-scripts-docker/01run.sh > /home/ubuntu/jd1.log 2>&1
+38 21 * * * sh /home/ubuntu/jd-scripts-docker/02run.sh > /home/ubuntu/jd2.log 2>&1
+8 22 * * * sh /home/ubuntu/jd-scripts-docker/04run.sh > /home/ubuntu/jd4.log 2>&1
+38 22 * * * sh /home/ubuntu/jd-scripts-docker/03run.sh > /home/ubuntu/jd3.log 2>&1
 
 CONTENT
