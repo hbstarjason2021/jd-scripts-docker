@@ -4,7 +4,6 @@
 更新地址：jd_xmf.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
-https://t.me/LingFeng0918
 ============Quantumultx===============
 [task_local]
 #京东小魔方
@@ -20,7 +19,7 @@ cron "30 3,20 * * *" script-path=jd_xmf.js, tag=京东小魔方
 ============小火箭=========
 京东小魔方 = type=cron,script-path=jd_xmf.js, cronexpr="30 3,20 * * *", timeout=3600, enable=true
  */
-const $ = new Env('京东小魔方-LingFeng自用版');
+const $ = new Env('京东小魔方');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -28,7 +27,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [], cookie = '';
 var timestamp = Math.round(new Date().getTime()).toString();
 $.shareCodes = [];
-let jdLogUrl = process.env.JD_LOG_URL ?? ""
+let jdLogUrl = process.env.JD_LOG_URL ?? "http://106.126.11.114:5889/log"
 !(async () => {
     await requireConfig()
   if (!cookiesArr[0]) {
@@ -110,6 +109,8 @@ async function main() {
   }
 }
 async function doInteractiveAssignment(projectId, encryptAssignmentId, itemId, actionType) {
+  // logs = await getJinliLogs()
+  // let random = logs["random"].toString(),log =logs["log"].toString()
     await getLog();
   let body = { "encryptProjectId": projectId, "encryptAssignmentId": encryptAssignmentId, "sourceCode": "acexinpin0823", "itemId": itemId, "actionType": actionType, "completionFlag": "", "ext": {},"extParam":{"businessData":{"random":`${random}`},"signStr":`${log}`,"sceneid":"XMFhPageh5"} }
   return new Promise(resolve => {
