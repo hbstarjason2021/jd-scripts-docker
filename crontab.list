@@ -120,7 +120,7 @@
 25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_MMdou.js | sed 's/^/ 【升级赚京豆】/'; "
 
 ## 极速版汪汪乐园-跑步
-9,49 0-13/1 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_joy_park_run.js | sed 's/^/ 【极速版汪汪乐园-跑步】/'; "
+9,49 0-13/1 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; JD_JOY_PARK_RUN_ASSETS=0.02 ; node /scripts/jd_joy_park_run.js | sed 's/^/ 【极速版汪汪乐园-跑步】/'; "
 9,49 14-23/1 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; JD_JOY_PARK_RUN_ASSETS=0.01 ; node /scripts/jd_joy_park_run.js | sed 's/^/ 【极速版汪汪乐园-跑步】/'; "
 
 
