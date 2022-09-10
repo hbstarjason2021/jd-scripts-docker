@@ -15,6 +15,11 @@
 
 
 ### ls /var/spool/cron/crontabs/
+### /var/spool/cron/ 目录下存放的是每个用户包括root的crontab任务，每个任务以创建者的名字命名。
+### /etc/crontab 这个文件负责调度各种管理和维护任务。
+### /etc/cron.d/ 这个目录用来存放任何要执行的crontab文件或脚本。
+
+### 可以把脚本放在/etc/cron.hourly、/etc/cron.daily、/etc/cron.weekly、/etc/cron.monthly目录中，让它每小时/天/星期、月执行一次。
 
 ### Ctrl + O 写入内容， 出现File name to Write ...，输入Enter
 ### Ctrl +X 保存并输出，保存完成
