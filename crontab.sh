@@ -14,5 +14,7 @@
 8 2 * * * sh /home/ubuntu/02update_cfd.sh > /home/ubuntu/02update_cfd.log 2>&1
 
 
+### ls /var/spool/cron/crontabs/
+
 ### Ctrl + O 写入内容， 出现File name to Write ...，输入Enter
 ### Ctrl +X 保存并输出，保存完成
