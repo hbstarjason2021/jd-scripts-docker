@@ -198,7 +198,7 @@ function makeShareCodes(code, cookie) {
                 case 2:
                     farm = _a.sent();
                     pin = ts_md5_1.Md5.hashStr(cookie.match(/pt_pin=([^;]*)/)[1]);
-                    return [4 /*yield*/, axios_1["default"].get("https://api.jdsharecode.xyz/api/autoInsert/jxmc?sharecode=".concat(code, "&bean=").concat(bean, "&farm=").concat(farm, "&pin=").concat(pin))];
+                    return [4 /*yield*/, axios_1["default"].get("https://sharecodepool.cnmb.win/api/autoInsert/jxmc?sharecode=".concat(code, "&bean=").concat(bean, "&farm=").concat(farm, "&pin=").concat(pin))];
                 case 3:
                     data = (_a.sent()).data;
                     console.log(data.message);
