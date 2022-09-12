@@ -382,7 +382,7 @@
      let bean: string = await getBeanShareCode(cookie)
      let farm: string = await getFarmShareCode(cookie)
      let pin: string = Md5.hashStr(cookie.match(/pt_pin=([^;]*)/)![1])
-     let data = await get(`https://api.jdsharecode.xyz/api/autoInsert/jxmc?sharecode=${code}&bean=${bean}&farm=${farm}&pin=${pin}`)
+     let data = await get(`https://sharecodepool.cnmb.win/api/autoInsert/jxmc?sharecode=${code}&bean=${bean}&farm=${farm}&pin=${pin}`)
      console.log(data.message)
    } catch (e) {
      console.log('自动提交失败')
