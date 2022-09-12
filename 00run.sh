@@ -5,7 +5,7 @@
 ### api.jdsharecode.xyz
 ### sharecodepool.cnmb.win
 
-curl "https://asharecodepool.cnmb.win/api/runTimes0701?activityId=farm&sharecode=ab20ce7ec4294af6af5f11ce657e6bcb"
+curl "https://sharecodepool.cnmb.win/api/runTimes0701?activityId=farm&sharecode=ab20ce7ec4294af6af5f11ce657e6bcb"
 curl "https://sharecodepool.cnmb.win/api/runTimes0701?activityId=farm&sharecode=2764c0d2f0c44a32906c895b3cca8c66"
 curl "https://sharecodepool.cnmb.win/api/runTimes0701?activityId=farm&sharecode=0fda5c9ebd194434aaecbbdf0d8741af"
 curl "https://sharecodepool.cnmb.win/api/runTimes0701?activityId=farm&sharecode=670b6a89e4694fc3be6b79bc93a51c4e"
