@@ -132,7 +132,7 @@ var message = '', log = { help: '', runTimes: '' };
             case 8:
                 _j.trys.push([8, 10, , 12]);
                 today = (0, date_fns_1.getDate)(new Date());
-                return [4 /*yield*/, (0, TS_USER_AGENTS_1.get)("https://sharecodepool.cnmb.win/api/runTimes0701?activityId=farm&sharecode=".concat(res.farmUserPro.shareCode, "&today=").concat(today))];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.get)("https://sharecodepool.cnmb.win/api/runTimes0917?activityId=farm&sharecode=".concat(res.farmUserPro.shareCode, "&today=").concat(today))];
             case 9:
                 res = _j.sent();
                 console.log(res);
