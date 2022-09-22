@@ -1,6 +1,6 @@
 /*
 
-2 12-14 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_zjd_new.js
+2 12-14 * * * https://raw.githubusercontent.com/11111129/jdpro/main/jd_zjd_new.js
 
 默认前3个CK开团，如需修改，变量export DY_ZJDTOP=数量
 
@@ -8,7 +8,7 @@
 
 2022-9-19 
 
-author:https://github.com/6dylan6/jdpro
+author:https://github.com/11111129/jdpro
  */
  
 
