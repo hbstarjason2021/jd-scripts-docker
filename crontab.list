@@ -6,6 +6,9 @@
 ## 特物
 #3 10,18,20 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_tewu.ts | sed 's/^/ 【特物】/'; "
 
+## 京东超市兑换
+0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_supermarket_ex.js | sed 's/^/ 【京东超市兑换】/'; "
+0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_supermarket_exchange.js | sed 's/^/ 【京东超市兑换】/'; "
 
 ## 东东爱消除
 18 */4 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_moxigame.js | sed 's/^/ 【东东爱消除】/'; "
@@ -14,7 +17,7 @@
 48 */4 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_gehugame.js | sed 's/^/ 【个护爱消除】/'; "
 
 ## 新百货盖楼
-38 */2 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_xbhdl.js | sed 's/^/ 【新百货盖楼】/'; "
+38 */1 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_xbhdl.js | sed 's/^/ 【新百货盖楼】/'; "
 
 
 ##################### 上传助力码 #############################
