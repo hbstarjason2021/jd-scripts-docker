@@ -1,6 +1,6 @@
 /*
 种豆得豆
-updatetime:2022-10-10 做特价双签任务
+updatetime:2022-10-11 做特价双签和万人团任务
 活动入口：京东APP我的-更多工具-种豆得豆
 已支持IOS京东多账号,云端多京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -28,7 +28,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 //助力好友分享码(最多3个,否则后面的助力失败)
 //此此内容是IOS用户下载脚本到本地使用，填写互助码的地方，同一京东账号的好友互助码请使用@符号隔开。
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
-let shareCodes = ['4npkonnsy7xi23qpldd3r2j7uacjaa2lz2pdlji@ik7t7zkjpb2rs6zc7ufixlk6xa@ll3bia54pjfx47gq5c2rmder7u@5y5ua2n2xjibrnna4xpkq3gmmq']
+let shareCodes = ['']
 let allMessage = ``;
 let currentRoundId = null;//本期活动id
 let lastRoundId = null;//上期id
@@ -489,7 +489,7 @@ async function receivefruit(){
     "monitor_refer": "plant_receiveNutrientsTask",
     "monitor_source": "plant_app_plant_index",
     "awardType": "92",
-    "version": "9.2.4.1"
+    "version": "9.2.4.2"
 }
 await request('receiveNutrientsTask',body)
 }
@@ -570,9 +570,9 @@ function tjdoublesign(url){
   let opt = {
     url,
     headers: {
-      'accept':'application/json',
-      'referer': 'https://wqs.jd.com/',
-      'User-Agent': 'jdapp;iPhone;4.13.0;14.4.2;${randomString(40)};network/wifi;model/iPhone10,2;appBuild/100609;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/1;hasOCPay/0;supportBestPay/0;session/${Math.random * 98 + 1};pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+      'Accept':'application/json',
+      'Referer': 'https://wqs.jd.com/',
+      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
       'Cookie': cookie
     }
   }
@@ -780,7 +780,7 @@ function requireConfig() {
 }
 function requestGet(function_id, body = {}) {
   if (!body.version) {
-    body["version"] = "9.2.4.1";
+    body["version"] = "9.2.4.2";
   }
   body["monitor_source"] = "plant_app_plant_index";
   body["monitor_refer"] = "";
@@ -885,7 +885,7 @@ function request(function_id, body = {}){
   })
 }
 function taskUrl(function_id, body) {
-  body["version"] = "9.2.4.1";
+  body["version"] = "9.2.4.2";
   body["monitor_source"] = "plant_app_plant_index";
   if (!body["monitor_refer"]){
   body["monitor_refer"] = "";
