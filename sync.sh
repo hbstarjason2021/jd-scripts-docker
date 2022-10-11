@@ -99,6 +99,7 @@ npm install -g typescript ts-node
 npm cache clean --force
 
 cd /scripts || exit 1
+rm -f package-lock.json 
 npm install -g || npm install --registry=https://registry.npm.taobao.org || exit 1
 npm cache clean --force
 
