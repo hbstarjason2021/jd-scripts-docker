@@ -15,6 +15,17 @@ curl "https://sharecodepool.cnmb.win/api/runTimes0917?activityId=bean&sharecode=
 curl "https://sharecodepool.cnmb.win/api/runTimes0917?activityId=bean&sharecode=ll3bia54pjfx47gq5c2rmder7u"
 curl "https://sharecodepool.cnmb.win/api/runTimes0917?activityId=bean&sharecode=5y5ua2n2xjibrnna4xpkq3gmmq"
 
+###
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=ab20ce7ec4294af6af5f11ce657e6bcb&type=farm"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=2764c0d2f0c44a32906c895b3cca8c66&type=farm"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=0fda5c9ebd194434aaecbbdf0d8741af&type=farm"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=670b6a89e4694fc3be6b79bc93a51c4e&type=farm"
+
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=4npkonnsy7xi23qpldd3r2j7uacjaa2lz2pdlji&type=bean"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=ik7t7zkjpb2rs6zc7ufixlk6xa&type=bean"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=ll3bia54pjfx47gq5c2rmder7u&type=bean"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=5y5ua2n2xjibrnna4xpkq3gmmq&type=bean"
+
 ### api.jdsharecode.xyz
 docker exec jd4 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_cfd_up.ts'
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_cfd_up.ts'
