@@ -11,13 +11,20 @@ let tokenArr=[
 "2FzVtkSfUtvU8YoiTeALkJ68PxAs",
 "3S28janPLYmtFxypu37AYAGgivfp",
 "2QUxWHx5BSCNtnBDjtt5gZTq7zdZ",
-"4RRGXprBUCFVkQtQ2y5QUdDyBMkV",
+"2u1ZhLtcmRWeBPLf8mWqPRWwvXQV",//汽车
 "412SRRXnKE1Q4Y6uJRWVT6XhyseG",
 "3SC6rw5iBg66qrXPGmZMqFDwcyXi",
-"4RBT3H9jmgYg1k2kBnHF8NAHm7m8",
+"1bPFn6hHWWmyiRsEiijoMTUap11",
 "kPM3Xedz1PBiGQjY4ZYGmeVvrts",
 "3MFSkPGCDZrP2WPKBRZdiKm9AZ7D",
-"3joSPpr7RgdHMbcuqoRQ8HbcPo9U",
+"3YDEucGmCvu1uNmyq4GHMMgwczjE",
+"3xj74a5WenijFqCMJJJ2d2qRdobK",
+"2JJSsGjdExwpjrf1TcMZnU5A6p5h",//京品种草馆
+"3fJZ27dqd7iAffkm2QRwc1eZwbK6",//生活福利
+"49UHoKFiX6tvpdRTjBah5SSnEAPc",//先锋邀您签到领京豆
+"3vdmrPp9MPExwj3hHzicZhDbNpm2",//车型管
+"3MFSkPGCDZrP2WPKBRZdiKm9AZ7D",//附近频道
+"33L9JZAc6UoEQxwEf8cZhVTsGE9s",//京东国际
 
 ]
 const $ = new Env('京东日常签到');
