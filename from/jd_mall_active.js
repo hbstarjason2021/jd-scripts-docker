@@ -1,30 +1,9 @@
 /*
 逛京东会场
-活动入口：逛京东会场
 自定义环境变量 ACT_URL 为json地址，格式参考默认
-脚本更新时间：2021-12-7 14:20
-脚本兼容: Node.js
-新手写脚本，难免有bug，能用且用。
-============Quantumultx===============
-[task_local]
-#逛京东会场
-0 0,18 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_mall_active.js, tag=逛京东会场, enabled=true
-
-================Loon==============
-[Script]
-cron "0 0,18 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_mall_active.js,tag=逛京东会场
-
-===============Surge=================
-逛京东会场 = type=cron,cronexp="0 0,18 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_mall_active.js
-
-============小火箭=========
-逛京东会场 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_mall_active.js, cronexpr="0 0,18 * * *", timeout=3600, enable=true
-
-逛京东会场
-
-0 0,18 * * * jd_mall_active.js
+cron 0 0 * * * jd_mall_active.js
 */
-const $ = new Env("逛京东会场");
+const $ = new Env("逛会场任务");
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 let cookiesArr = [], cookie;
 let actURL = ''
@@ -35,7 +14,7 @@ if ($.isNode()) {
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === "false")
     console.log = () => {};
   if (process.env.ACT_URL && process.env.ACT_URL === '') console.log = () => {};
-  actURL = process.env.ACT_URL || 'https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/mall_active.json'
+  actURL = process.env.ACT_URL || 'https://gitee.com/wulove/mt/raw/master/mall_active.json'
 } else {
   cookiesArr = [$.getdata("CookieJD"), $.getdata("CookieJD2"), ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
@@ -72,7 +51,7 @@ if ($.isNode()) {
       }
     }
   } else {
-    console.log('请正确配置自定义环境变量 ACT_URL 为json地址，格式参考默认')
+    console.log('当前不在任务时间，请在活动时间内运行脚本')
   }
 
 })()
@@ -303,13 +282,13 @@ const window = {};
 const document = {
   location: {
     ancestorOrigins: {},
-    href: "https://prodev.m.jd.com/mall/active/3BbAVGQPDd6vTyHYjmAutXrKAos6/index.html",
+    href: "https://prodev.m.jd.com/mall/active/47iRuTnm2my35mksNKrpUhiXNF2u/index.html",
     origin: "https://prodev.m.jd.com",
     protocol: "https:",
     host: "prodev.m.jd.com",
     hostname: "prodev.m.jd.com",
     port: "",
-    pathname: "/mall/active/3BbAVGQPDd6vTyHYjmAutXrKAos6/index.html",
+    pathname: "/mall/active/47iRuTnm2my35mksNKrpUhiXNF2u/index.html",
     search: "",
     hash: "",
   },
