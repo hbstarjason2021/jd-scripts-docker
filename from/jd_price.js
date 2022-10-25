@@ -1,24 +1,24 @@
 /*
-京东保价
-
+京东保价(h5st)
+2022-02-24
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京东保价
-41 0,12,23 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js, tag=京东保价, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+55 12 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js, tag=京东保价, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=京东保价
+cron "55 12 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=京东保价
 
 ===============Surge=================
-京东保价 = type=cron,cronexp="41 0,12,23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js
+京东保价 = type=cron,cronexp="55 12 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js
 
 ============小火箭=========
-京东保价 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js, cronexpr="41 0,12,23 * * *", timeout=3600, enable=true
+京东保价 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js, cronexpr="55 12 * * *", timeout=3600, enable=true
  */
-const $ = new Env('京东保价');
+const $ = new Env('京东价保');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -47,8 +47,9 @@ const JD_API_HOST = 'https://api.m.jd.com/';
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
-      $.token = ''
+      $.token = undefined;
       message = '';
+      $.tryCount = 0;
       await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
@@ -60,7 +61,10 @@ const JD_API_HOST = 'https://api.m.jd.com/';
         continue
       }
       await price()
-      await $.wait(2000)
+      if (i != cookiesArr.length - 1) {
+        await $.wait(2000)
+        await jstoken();
+      }
     }
   }
   if (allMessage) {
@@ -77,12 +81,14 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 async function price() {
   let num = 0
   do {
-    $.token = $.jab.getToken() || ''
-    if ($.token) {
+    if ($.jab){
+      $.token = $.jab.getToken() || ''
+    }
+    if (($.jab && $.token)|| !$.jab) {
       await siteppM_skuOnceApply();
     }
     num++
-  } while (num < 3 && !$.token)
+  } while (num < 3 && (!$.token && $.jab))
   await showMsg()
 }
 
@@ -90,12 +96,21 @@ async function siteppM_skuOnceApply() {
   let body = {
     sid: "",
     type: "25",
-    forcebot: "",
-    token: $.token,
-    feSt: $.token ? "s" : "f"
+    forcebot: ""
   }
+  if ($.jab){
+    body.token = $.token
+    body.feSt = $.token ? "s" : "f"
+  }
+  const time = Date.now();
+  const h5st = await $.signWaap("d2f64", {
+    appid: "siteppM",
+    functionId: "siteppM_skuOnceApply",
+    t: time,
+    body: body
+});
   return new Promise(async resolve => {
-    $.post(taskUrl("siteppM_skuOnceApply", body), async (err, resp, data) => {
+    $.post(taskUrl("siteppM_skuOnceApply", body, h5st, time), async (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
@@ -104,11 +119,19 @@ async function siteppM_skuOnceApply() {
           if (safeGet(data)) {
             data = JSON.parse(data)
             if (data.flag) {
-              await $.wait(25 * 1000)
-              await siteppM_appliedSuccAmount()
+              await $.wait(25 * 1000);
+              await siteppM_appliedSuccAmount();
             } else {
-              console.log(`保价失败：${data.responseMessage}`)
-              message += `保价失败：${data.responseMessage}\n`
+              console.log(`保价失败：${data.responseMessage}`);
+              // 重试3次
+              if ($.tryCount < 4) {
+                await $.wait(2 * 1000);
+                siteppM_skuOnceApply();
+                $.tryCount++;
+              } else {
+                //message += `保价失败：${data.responseMessage}\n`;
+              }
+
             }
           }
         }
@@ -154,6 +177,10 @@ function siteppM_appliedSuccAmount() {
 }
 
 async function jstoken() {
+  if ($.signWaap) {
+    return;
+  }
+
   const { JSDOM } = jsdom;
   let resourceLoader = new jsdom.ResourceLoader({
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0',
@@ -171,18 +198,28 @@ async function jstoken() {
     pretendToBeVisual: true,
     virtualConsole
   };
-  const { window } = new JSDOM(``, options);
-  const jdPriceJs = await downloadUrl("https://js-nocaptcha.jd.com/statics/js/main.min.js")
-  try {
-    window.eval(jdPriceJs)
-    window.HTMLCanvasElement.prototype.getContext = () => {
-      return {};
-    };
-    $.jab = new window.JAB({
-      bizId: 'jdjiabao',
-      initCaptcha: false
-    })
-  } catch (e) {}
+  const dom = new JSDOM(`<body>
+  <script src="https:////static.360buyimg.com/siteppStatic/script/mescroll/map.js"></script>
+  <script src="https://storage.360buyimg.com/webcontainer/js_security_v3_0.1.0.js"></script>
+  <script src="https://static.360buyimg.com/siteppStatic/script/utils.js"></script>
+  <script src="https://js-nocaptcha.jd.com/statics/js/main.min.js"></script>
+  </body>`, options);
+  let num = 0
+  do {
+    num+=1
+    await $.wait(1000)
+    try {
+        if (dom.window.JAB){
+            $.jab = new dom.window.JAB({
+                bizId: 'jdjiabao',
+                initCaptcha: false
+            });
+        }else{
+            $.jab = undefined
+        }
+        $.signWaap = dom.window.signWaap;
+  } catch (e) { }
+  }while ( !$.signWaap && num < 4)
 }
 
 function downloadUrl(url) {
@@ -215,10 +252,10 @@ function showMsg() {
   })
 }
 
-function taskUrl(functionId, body) {
+function taskUrl(functionId, body, h5st = '', time = Date.now()) {
   return {
-    url: `${JD_API_HOST}api?appid=siteppM&functionId=${functionId}&forcebot=&t=${Date.now()}`,
-    body: `body=${encodeURIComponent(JSON.stringify(body))}`,
+    url: `${JD_API_HOST}api?appid=siteppM&functionId=${functionId}&forcebot=&t=${time}`,
+    body: `body=${encodeURIComponent(JSON.stringify(body))}&h5st=${encodeURIComponent(h5st)}`,
     headers: {
       "Host": "api.m.jd.com",
       "Accept": "application/json",
