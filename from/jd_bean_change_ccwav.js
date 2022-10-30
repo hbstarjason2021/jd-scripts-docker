@@ -14,7 +14,8 @@ const JXUserAgent = $.isNode() ? (process.env.JX_USER_AGENT ? process.env.JX_USE
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let NowHour = new Date().getHours();
 
-let checkbeanDetailMode=0;
+//默认开启缓存模式
+let checkbeanDetailMode=1;
 if ($.isNode() && process.env.BEANCHANGE_BEANDETAILMODE){
 	checkbeanDetailMode=process.env.BEANCHANGE_BEANDETAILMODE*1;
 }
@@ -305,7 +306,7 @@ if(DisableIndex!=-1){
 }	
 
 //金融养猪
-let EnablePigPet=true;
+let EnablePigPet=false;
 DisableIndex=strDisableList.findIndex((item) => item === "金融养猪");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭金融养猪查询");
@@ -427,11 +428,16 @@ if(DisableIndex!=-1){
 			TempBaipiao = "";
 			strGuoqi="";
 			console.log(`******开始查询【京东账号${$.index}】${$.nickName || $.UserName}*********`);
-		
 			await TotalBean();			
 		    //await TotalBean2();
-			
 			if ($.beanCount == 0) {
+				console.log("数据获取失败，等待30秒后重试....")
+				await $.wait(30*1000);
+				await TotalBean();		
+			}
+			if ($.beanCount == 0) {
+				console.log("疑似获取失败,等待10秒后用第二个接口试试....")
+				await $.wait(10*1000);
 			    var userdata = await getuserinfo();
 			    if (userdata.code == 1) {
 			        $.beanCount = userdata.content.jdBean;
@@ -497,7 +503,7 @@ if(DisableIndex!=-1){
 			    TodayCache.push(tempAddCache);
 			}
 						
-			await getjdfruitinfo() //东东农场
+			await getjdfruitinfo(); //东东农场
 			await $.wait(1000);
 			
 			await Promise.all([
@@ -1173,7 +1179,7 @@ async function bean() {
 	        // console.log(`第${page}页: ${JSON.stringify(response)}`);
 	        if (response && response.code === "0") {
 	            page++;
-	            let detailList = response.detailList;
+	            let detailList = response.jingDetailList;
 	            if (detailList && detailList.length > 0) {
 	                for (let item of detailList) {
 	                    const date = item.date.replace(/-/g, '/') + "+08:00";
@@ -1268,7 +1274,7 @@ async function Monthbean() {
 		// console.log(`第${allpage}页: ${JSON.stringify(response)}`);
 		if (response && response.code === "0") {
 			allpage++;
-			let detailList = response.detailList;
+			let detailList = response.jingDetailList;
 			if (detailList && detailList.length > 0) {
 				for (let item of detailList) {
 					const date = item.date.replace(/-/g, '/') + "+08:00";
@@ -1587,39 +1593,38 @@ function isLoginByX1a0He() {
 }
 
 function getJingBeanBalanceDetail(page) {
-	return new Promise(async resolve => {
-		const options = {
-			"url": `https://api.m.jd.com/client.action?functionId=getJingBeanBalanceDetail`,
-			"body": `body=${escape(JSON.stringify({"pageSize": "20", "page": page.toString()}))}&appid=ld`,
-			"headers": {
-				'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-				'Host': 'api.m.jd.com',
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Cookie': cookie,
-			}
-		}
-		$.post(options, (err, resp, data) => {
-			try {
-				if (err) {
-					console.log(`${JSON.stringify(err)}`)
-					console.log(`getJingBeanBalanceDetail API请求失败，请检查网路重试`)
-				} else {
-					if (data) {
-						data = JSON.parse(data);
-						// console.log(data)
-					} else {
-						console.log(`京东服务器返回空数据`)
-					}
-				}
-			} catch (e) {
-				$.logErr(e, resp)
-			}
-			finally {
-				resolve(data);
-			}
-		})
-	})
+  return new Promise(async resolve => {
+    const options = {
+      "url": `https://bean.m.jd.com/beanDetail/detail.json?page=${page}`,
+      "body": `body=${escape(JSON.stringify({"pageSize": "20", "page": page.toString()}))}&appid=ld`,
+      "headers": {
+        'User-Agent': "Mozilla/5.0 (Linux; Android 12; SM-G9880) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Mobile Safari/537.36 EdgA/106.0.1370.47",       
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': cookie,
+      }
+    }
+    $.post(options, (err, resp, data) => {
+      try {
+        if (err) {
+          // console.log(`${JSON.stringify(err)}`)
+          // console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (data) {
+            data = JSON.parse(data);
+            // console.log(data)
+          } else {
+            // console.log(`京东服务器返回空数据`)
+          }
+        }
+      } catch (e) {
+        // $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
 }
+
 function queryexpirejingdou() {
 	return new Promise(async resolve => {
 		const options = {
@@ -2030,9 +2035,14 @@ function jdfruitRequest(function_id, body = {}, timeout = 1000) {
 						console.log(`function_id:${function_id}`)
 						$.logErr(err);
 					} else {
-						if (safeGet(data)) {
+						if (safeGet(data)) {							
 							data = JSON.parse(data);
-							$.JDwaterEveryDayT = data.totalWaterTaskInit.totalWaterTaskTimes;
+							if (data.code=="400"){
+								console.log('东东农场: '+data.message);
+								llgeterror = true;
+							}
+							else
+								$.JDwaterEveryDayT = data.totalWaterTaskInit.totalWaterTaskTimes;
 						}
 					}
 				} catch (e) {
@@ -2055,7 +2065,10 @@ async function getjdfruitinfo() {
             "channel": 1,
             "babelChannel": "120"
         });
-
+		
+		if (llgeterror)
+			return
+		
         await getjdfruit();
         if (llgeterror) {
             console.log(`东东农场API查询失败,等待10秒后再次尝试...`)
@@ -3053,7 +3066,7 @@ async function queryScores() {
 }
 
 async function getuserinfo() {
-	var body={"pin": "$cooMrdGatewayUid$"};
+	var body=[{"pin": "$cooMrdGatewayUid$"}];
 	var ua = `jdapp;iPhone;${random(["11.1.0", "10.5.0", "10.3.6"])};${random(["13.5", "14.0", "15.0"])};${uuidRandom()};network/wifi;supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone11,6;addressid/7565095847;supportBestPay/0;appBuild/167541;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`;
 
     let config = {
