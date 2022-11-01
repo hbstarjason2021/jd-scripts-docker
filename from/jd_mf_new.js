@@ -3,7 +3,7 @@
 updatetime: 2022-10-31
 入口：京东app首页-新品-右侧悬浮
 签到 + 任务 + 3魔方兑换10或35豆
-45 8,17 * * * https://raw.githubusercontent.com/11111129/jdpro/main/jd_mf_new.js
+45 8,17 * * * https://raw.githubusercontent.com/6dylan6/jdpro/main/jd_mf_new.js
 author:6dy
  */
 const $ = new Env('京东魔方-加密');
