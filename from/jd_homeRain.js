@@ -1,11 +1,7 @@
 
 /*
-一次性，主页红包雨
-cron:29 20 * * *
-============Quantumultx===============
-[task_local]
-#整点红包雨
-29 20 * * * jd_homeRain.js, tag=整点红包雨, enabled=true
+主页红包雨
+5 20-23 * * * jd_homeRain.js
  */
 
 const $ = new Env('整点红包雨');
