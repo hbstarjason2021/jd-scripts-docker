@@ -25,8 +25,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ['1EFRWxKuG', '1ElZXwKuP', '1FVRZxKiD'];
-let appNameArr = ['众筹许愿池', '闪购盲盒', '超级大转盘'];
+let appIdArr = ["1ElZXwKuP", "1FVRZxKiD"];
+let appNameArr = ["闪购盲盒","超级大转盘"];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
@@ -42,6 +42,10 @@ if ($.isNode()) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
+	if(appIdArr.length <= 0) {
+		console.log(`\n暂无活动~\n`);
+		return;
+	}
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -50,7 +54,7 @@ if ($.isNode()) {
       $.isLogin = true;
       $.nickName = '';
       message = '';
-      await TotalBean();
+      //await TotalBean();
       console.log(`\n*******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -60,6 +64,7 @@ if ($.isNode()) {
         }
         continue
       }
+			
       for (let j = 0; j < appIdArr.length; j++) {
         appId = appIdArr[j]
         appName = appNameArr[j]
@@ -113,7 +118,9 @@ if ($.isNode()) {
     })
 async function jd_wish() {
   try {
+		$.hasEnd = false;
     await healthyDay_getHomeData();
+		if($.hasEnd) return;
     await $.wait(2000)
 
     let getHomeDataRes = (await healthyDay_getHomeData(false)).data.result.userInfo
@@ -129,6 +136,10 @@ async function jd_wish() {
     $.canLottery = true
     for (let j = 0; j < forNum && $.canLottery; j++) {
       await interact_template_getLotteryResult()
+			if (j == 9 && $.canLottery) {
+        console.log('抽太多次了，下次再继续吧！');
+        break
+      }
       await $.wait(2000)
     }
 
@@ -149,6 +160,7 @@ async function healthyDay_getHomeData(type = true) {
           if (safeGet(data)) {
             data = JSON.parse(data);
             // console.log(data);
+						if(data.data.bizCode === 0) {
             if (type) {
               for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
                 let vo = data.data.result.hotTaskVos[key]
@@ -159,8 +171,8 @@ async function healthyDay_getHomeData(type = true) {
                   } else {
                   console.log(`【${vo.taskName}】已完成\n`)
                 }
-				}	
-				}						
+							}	
+							}						
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
                 if (vo.status !== 2) {
@@ -192,7 +204,7 @@ async function healthyDay_getHomeData(type = true) {
                       }
                     }
                   } else if (vo.taskType === 3) {
-					for (let key of Object.keys(vo.shoppingActivityVos)) {
+							for (let key of Object.keys(vo.shoppingActivityVos)) {
                       let shoppingActivityVos = vo.shoppingActivityVos[key]
                       if (shoppingActivityVos.status !== 2) {
                         console.log(`【${vo.subTitleName}】`)
@@ -239,6 +251,10 @@ async function healthyDay_getHomeData(type = true) {
                 }
               }
             }
+					} else {
+              console.log(`黑号，火爆了\n`)
+							$.hasEnd = true;
+						}
           }
         }
       } catch (e) {
