@@ -33,9 +33,6 @@ jobs:
          git clone https://github.com/hbstarjason2021/jd-scripts-docker && cd jd-scripts-docker
          docker pull hbstarjason/jd-scripts
          
-         sed -i '2s/pt_key=/pt_key="${{secrets.KEY1}}"/' env/env1 
-         sed -i '3s/pt_pin=/pt_pin="${{secrets.PIN1}}"/' env/env1
-         
          docker-compose up --no-build --force-recreate --detach jd1
          docker ps 
          docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; yxyPhone="${{secrets.YXYPHONE}}";  node yxyapp.js'
