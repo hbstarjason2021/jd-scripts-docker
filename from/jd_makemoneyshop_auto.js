@@ -11,7 +11,7 @@ https://raw.githubusercontent.com/11111129/jdpro/main/jd_makemoneyshop.js
 
 const $ = new Env('特价版大赢家-自动ck1');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdCookieC.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 let shareId = [];
