@@ -43,7 +43,7 @@ services:
     volumes:
       - ./env/all:/all
       - ./env/env5:/env
-   jd6:
+  jd6:
     <<: [ *logger, *common ]
     container_name: jd6
     volumes:
