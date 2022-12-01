@@ -1,18 +1,18 @@
 name: jddj_bean_plantBeans
 
 on:
-    #workflow_dispatch:
+    workflow_dispatch:
     #schedule:
     #    - cron: "1 2,13 * * *"
-    watch:
-        types: [started]
-    repository_dispatch:
-        types: jddj_bean_plantBeans
+    #watch:
+    #    types: [started]
+    #repository_dispatch:
+    #    types: jddj_bean_plantBeans
 
 jobs:
     build:
         runs-on: ubuntu-latest
-        if: github.event.repository.owner.id == github.event.sender.id
+        #if: github.event.repository.owner.id == github.event.sender.id
         steps:
             #- uses: actions/checkout@v1
             - name: Checkout
