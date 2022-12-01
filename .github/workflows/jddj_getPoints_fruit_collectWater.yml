@@ -1,18 +1,18 @@
 name: jddj_getPoints_fruit_collectWater
 
 on:
-    #workflow_dispatch:
+    workflow_dispatch:
     #schedule:
     #    - cron: "*/8 * * * *"
-    watch:
-        types: [started]
-    repository_dispatch:
-        types: jddj_getPoints_fruit_collectWater
+    #watch:
+    #    types: [started]
+    #repository_dispatch:
+    #    types: jddj_getPoints_fruit_collectWater
 
 jobs:
     build:
         runs-on: ubuntu-latest
-        if: github.event.repository.owner.id == github.event.sender.id
+        #if: github.event.repository.owner.id == github.event.sender.id
         steps:
             #- uses: actions/checkout@v1
             - name: Checkout
