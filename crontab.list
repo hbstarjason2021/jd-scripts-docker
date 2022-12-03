@@ -3,6 +3,9 @@
 ## 手机狂欢城
 ##0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_carnivalcity-new.js | sed 's/^/ 【手机狂欢城】/'; "
 
+### 赚钱大赢家提现
+58 59 23 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; isCashOut=true; node /scripts/jd_makemoneyshop_reward.js | sed 's/^/ 【赚钱大赢家提现】/'; "
+
 
 ## 京东超市兑换
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_supermarket_ex.js | sed 's/^/ 【京东超市兑换】/'; "
