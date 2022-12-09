@@ -26,6 +26,12 @@ curl "http://www.jdhelp.cf/jdcodes/submit.php?code=ik7t7zkjpb2rs6zc7ufixlk6xa&ty
 curl "http://www.jdhelp.cf/jdcodes/submit.php?code=ll3bia54pjfx47gq5c2rmder7u&type=bean"
 curl "http://www.jdhelp.cf/jdcodes/submit.php?code=5y5ua2n2xjibrnna4xpkq3gmmq&type=bean"
 
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=46yqG_ZdJTsdL17EBpfUh4s&type=city&user=starjason"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=6a2zAP1fPjEdIkuIBtuJu_7yvQ&type=city&user=yuxiachenqi"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=9q3-XK4MPD0dNF6ISpeJ5ire&type=city&user=fu5520jing"
+curl "http://www.jdhelp.cf/jdcodes/submit.php?code=-ryUXqwFNWdHakTFSYnA9sux6ZHZflFB&type=city&user=jd_709c349f13b51"
+
+
 ### api.jdsharecode.xyz
 #docker exec jd4 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_cfd_up.ts'
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_cfd_up.ts'
