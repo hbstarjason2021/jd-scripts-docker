@@ -45,7 +45,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
             $.nickName = $.UserName;
             $.startActivityTime = Date.now().toString() + randomNum(1e8).toString()
             message = '';
-            await TotalBean();
+            //await TotalBean();
             console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
             if (!$.isLogin) {
                 $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
@@ -99,6 +99,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         $.blog_joyytoken = s.blog_joyytoken
         $.secretp = s.secretp
         //if (helpFlag) {
+        /*
             $.newHelpCodeArr = [...helpCodeArr]
             for (let i = 0, codeLen = helpCodeArr.length; i < codeLen; i++) {
                 const helpCode = helpCodeArr[i]
@@ -120,9 +121,11 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
                 }
             }
             helpCodeArr = [...$.newHelpCodeArr]
+        */
         //}
         // $.joyytoken = ""
         // cookie = cookie.replace(/joyytoken=\S+?;/, "joyytoken=;") 
+        /*
         if (teamPlayerAutoTeam.hasOwnProperty($.UserName)) {
             const { groupJoinInviteId, groupNum, groupName } = teamLeaderArr[teamPlayerAutoTeam[$.UserName]]
             console.log(`${groupName}人数：${groupNum}，正在去加入他的队伍...`)
@@ -130,6 +133,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
             teamLeaderArr[teamPlayerAutoTeam[$.UserName]].groupNum += 1
             await $.wait(2000)
         }
+        */
     }
 })()
     .catch((e) => {
