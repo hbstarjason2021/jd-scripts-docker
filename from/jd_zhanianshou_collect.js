@@ -1,5 +1,5 @@
 const CryptoJS = require("crypto-js");
-const $ = new Env('柠檬带你打年兽');
+const $ = new Env('炸年兽_收集');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 let cookiesArr = [], cookie = '', message, helpCodeArr = [], helpPinArr = [], wxCookie = "";
