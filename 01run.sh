@@ -13,6 +13,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 购物抵现金20豆
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_gwxj.js'
 
+## 集魔方
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jmf.js'
+
 ## 天天来赚钱
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wxttzq.js'
 
