@@ -33,6 +33,9 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let inviteCodes = [
+    'wsDvVJZSAAEOIWC_cqR6QI8',
+    'yMH2T51QGwsOLHXzcugnfIkcig',
+    '29DREcwKEF1UZHq-PbpuMaYLn4v6fuTX'
 ]
 $.shareCodesArr = [];
 $.toStatus = false
@@ -207,7 +210,7 @@ function taskPostUrl(functionId, body) {
         url: `${JD_API_HOST}`,
         body: `functionId=${functionId}&appid=signed_wh5&body=${(JSON.stringify(body))}&client=wh5&clientVersion=1.0.0`,
         headers: {
-            'Cookie': cookie,
+            'Cookie': ($.abcv ? $.abcv : "")+cookie,
             'Connection': 'keep-alive',
             'Content-Type': 'application/x-www-form-urlencoded',
             "User-Agent": $.UA,
