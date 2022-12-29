@@ -417,7 +417,7 @@ function readShareCode() {
     }
     console.log(`开始`)
     return new Promise(async resolve => {
-        $.post({ url: `${$.getSignUrl}/city`, 'timeout': 10000 }, (err, resp, data) => {
+        $.post({ url: `https://jihulab.com/hbstarjason/sharecode/-/raw/master/city.json`, 'timeout': 10000 }, (err, resp, data) => { //${$.getSignUrl}/city
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`)
