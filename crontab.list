@@ -17,30 +17,8 @@
 ## 个护爱消除
 48 */4 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_gehugame.js | sed 's/^/ 【个护爱消除】/'; "
 
-
 ## 日常签到
 1 0 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_dailysign.js | sed 's/^/ 【京东日常签到】/'; "
-
-##################### 上传助力码 #############################
-4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_help.js | sed 's/^/ 【上传农场助力码】/'; "
-
-0,2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_cfd_up.ts | sed 's/^/ 【上传财富岛助力码】/'; "
-0,3 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_jxmc_up.ts | sed 's/^/ 【上传京喜牧场助力码】/'; "
-
-0,4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc_codeup.js | sed 's/^/ 【上传京喜牧场助力码】/'; "
-
-0,5 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_codeup.js | sed 's/^/ 【上传财富岛助力码】/'; "
-0,7 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_new3.js | sed 's/^/ 【上传财富岛助力码】/'; "
-0,9 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_new.js | sed 's/^/ 【上传财富岛助力码】/'; "
-
-10 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sgmh_help.js | sed 's/^/ 【上传闪购盲盒助力码】/'; "
-11 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health-new.js | sed 's/^/ 【上传健康社区助力码】/'; "
-12 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help.js | sed 's/^/ 【上传种豆得豆助力码】/'; "
-
-### 0,1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_city_help.js | sed 's/^/ 【上传城城助力码】/'; "
-### 0,1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_mooncake_help.js | sed 's/^/ 【上传财富岛珍珠助力码】/'; "
-### 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_help.js | sed 's/^/ 【上传财富岛助力码】/'; "
-
 
 ## 临期京豆续存
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; DY_WASHBEANS=true; node /scripts/jd_washbeans.js | sed 's/^/ 【临期京豆续存】/'; "
@@ -51,22 +29,26 @@
 ## 健康社区兑换
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health_exchange.js | sed 's/^/ 【健康社区兑换】/'; "
 
+## 签到
+16 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_bean_sign-new.js | sed 's/^/ 【签到】/'; "
 
-## 各种签到 jd_dailysign.js
-#25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_nh_sign.js | sed 's/^/ 【签到】/'; "
-#27 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sign_graphics.js | sed 's/^/ 【签到】/'; "
-#28 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_gold_sign.js | sed 's/^/ 【签到】/'; "
-#31 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_m_sign.js | sed 's/^/ 【签到】/'; "
-#32 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_babel_sign.js | sed 's/^/ 【签到】/'; "
-#33 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car.js | sed 's/^/ 【汽车签到】/'; "
 
-25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_shangou.js | sed 's/^/ 【签到】/'; "
-26 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_bean_sign.js | sed 's/^/ 【签到】/'; "
-29 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sign.js | sed 's/^/ 【签到】/'; "
-30 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sign_graphics1.js | sed 's/^/ 【签到】/'; "
-34 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jx_sign.js | sed 's/^/ 【京东-京喜双签】/'; "
-35 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_js_sign.js | sed 's/^/ 【京东极速版签到】/'; "
-36 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_tj_sign.js | sed 's/^/ 【特价双签签到】/'; "
+##################### 上传助力码 #############################
+4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_help.js | sed 's/^/ 【上传农场助力码】/'; "
+10 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health-new.js | sed 's/^/ 【上传健康社区助力码】/'; "
+12 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help.js | sed 's/^/ 【上传种豆得豆助力码】/'; "
+
+### 0,2 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_cfd_up.ts | sed 's/^/ 【上传财富岛助力码】/'; "
+### 0,3 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_jxmc_up.ts | sed 's/^/ 【上传京喜牧场助力码】/'; "
+### 0,4 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc_codeup.js | sed 's/^/ 【上传京喜牧场助力码】/'; "
+#0,5 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_codeup.js | sed 's/^/ 【上传财富岛助力码】/'; "
+### 0,7 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_new3.js | sed 's/^/ 【上传财富岛助力码】/'; "
+### 0,9 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_new.js | sed 's/^/ 【上传财富岛助力码】/'; "
+### 10 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sgmh_help.js | sed 's/^/ 【上传闪购盲盒助力码】/'; "
+### 0,1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_city_help.js | sed 's/^/ 【上传城城助力码】/'; "
+### 0,1 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_mooncake_help.js | sed 's/^/ 【上传财富岛珍珠助力码】/'; "
+### 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_help.js | sed 's/^/ 【上传财富岛助力码】/'; "
+
 
 ### 东东健康社区
 */18 2-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health.js | sed 's/^/ 【东东健康社区】/'; "
@@ -89,18 +71,34 @@
 ## 升级赚京豆
 25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_MMdou.js | sed 's/^/ 【升级赚京豆】/'; "
 
-## 极速版签到
-1 19-23/1 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_speed_sign-new.js | sed 's/^/ 【极速版签到】/'; "
-
 ## 极速版我是大老板
 28 0-23/2 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_wsdlb.js | sed 's/^/ 【极速版我是大老板】/'; "
 
+
+######################################################
+
+## 极速版签到
+#1 19-23/1 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_speed_sign-new.js | sed 's/^/ 【极速版签到】/'; "
+
 ## 京喜牧场
-45 0-23/1 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc-new.js | sed 's/^/ 【京喜牧场】/'; "
-25 0-23/2 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc.js | sed 's/^/ 【京喜牧场】/'; "
+#45 0-23/1 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc-new.js | sed 's/^/ 【京喜牧场】/'; "
+#25 0-23/2 * * *     bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jxmc.js | sed 's/^/ 【京喜牧场】/'; "
 
+## 各种签到 jd_dailysign.js
+#25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_nh_sign.js | sed 's/^/ 【签到】/'; "
+#27 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sign_graphics.js | sed 's/^/ 【签到】/'; "
+#28 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_gold_sign.js | sed 's/^/ 【签到】/'; "
+#31 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_m_sign.js | sed 's/^/ 【签到】/'; "
+#32 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_babel_sign.js | sed 's/^/ 【签到】/'; "
+#33 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_car.js | sed 's/^/ 【汽车签到】/'; "
+#25 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_shangou.js | sed 's/^/ 【签到】/'; "
 
-########################
+#29 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sign.js | sed 's/^/ 【签到】/'; "
+#30 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_sign_graphics1.js | sed 's/^/ 【签到】/'; "
+#34 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_jx_sign.js | sed 's/^/ 【京东-京喜双签】/'; "
+#35 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_js_sign.js | sed 's/^/ 【京东极速版签到】/'; "
+#36 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_tj_sign.js | sed 's/^/ 【特价双签签到】/'; "
+
 #59 * * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdhb.js | sed 's/^/ 【财富岛提现】/'; "
 #0,2 */1 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfdhb.js | sed 's/^/ 【财富岛提现】/'; "
 
@@ -109,7 +107,7 @@
 #4 */3 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_loop.js | sed 's/^/ 【财富岛捡贝壳】/'; "
 
 #*/35 0-23/2 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jx_cfd-new2.js | sed 's/^/ 【财富岛】/'; "
-18 0-23/3 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_new3.js | sed 's/^/ 【财富岛】/'; "
+#18 0-23/3 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_new3.js | sed 's/^/ 【财富岛】/'; "
 #*/45 0-23/2 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/gua_wealth_island.js | sed 's/^/ 【财富岛】/'; "
 ## 合成月饼
 #*/25 0-23/2 * * *        bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_mooncake.js | sed 's/^/ 【合成月饼】/'; "
@@ -156,7 +154,6 @@
 
 ## 特物
 #3 10,18,20 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /JDHelloWorld; ts-node jd_tewu.ts | sed 's/^/ 【特物】/'; "
-
 
 ## 新百货盖楼
 #38 */1 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_xbhdl.js | sed 's/^/ 【新百货盖楼】/'; "
