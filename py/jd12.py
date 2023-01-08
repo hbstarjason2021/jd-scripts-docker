@@ -15,7 +15,7 @@ from threading import Thread
 urllib3.disable_warnings()
 
 # 循环任务次数，可以多跑几次没事
-task_times = 15
+task_times = 8
 # 间隔时间，默认在任务所需的基础上加，一般设置5s左右就成，看自己
 sleep_times = 5
 
@@ -24,7 +24,7 @@ inviteId_temp_list = []
 #是否愿意为作者助力：True, False
 help_author = True
 # 是否自动提升等级：True, False
-auto_raise_level = True
+auto_raise_level = False
 
 
 cookies = [
@@ -247,6 +247,7 @@ def vxtask_list(headers, data):
                 browseShopVos = i.get('browseShopVo', '')
                 followShopVos = i.get('followShopVo', '')
                 simpleRecordInfoVos = i.get('simpleRecordInfoVo', '')
+                brandMemberVos = i.get('brandMemberVos', '')
                 if taskId in [24, 28, 31]:
                     print(f'>>>>>>[{get_user_name(headers)}]开始进行{taskTitle}任务')
                     taskToken = simpleRecordInfoVos.get('taskToken')
@@ -254,7 +255,7 @@ def vxtask_list(headers, data):
                     time.sleep(sleep_times)
 
                 # shoppingActivityVos 需领取
-                if taskId in [3, 6, 8, 12, 33, 34, 35, 36, 61, 67]:  #
+                if taskId in [3, 6, 7, 8, 10, 12, 33, 34, 35, 36, 61, 67, 70, 72, 73]:  #
                     print(f'>>>>>>[{get_user_name(headers)}]开始进行{taskTitle}任务')
                     for shop in shoppingActivityVos:
                         shopstatus = shop.get('status')
@@ -337,14 +338,27 @@ def vxtask_list(headers, data):
                     print('等待%s秒' % (waitDuration + sleep_times))
                     time.sleep(int(waitDuration + sleep_times))
                     guangdian(taskId, taskToken, itemId, headers,'')
-                if taskId == 5:
+                if taskId in [5]:
                     taskToken = i.get('simpleRecordInfoVo').get('taskToken')
                     ii = 0
                     while ii <= 4:
                         ress = guangdian(5, taskToken, '', headers,1)
                         ii += 1
                         time.sleep(sleep_times)
-
+                # 入会浏览
+                if taskId in [14, 15]:
+                    print(f'>>>>>>[{get_user_name(headers)}]开始进行{taskTitle}任务')
+                    for member in brandMemberVos:
+                        memberStatus = member.get('status')
+                        taskToken = member.get('taskToken')
+                        membertitle = member.get('title')
+                        itemId = member.get('itemId')
+                        if memberStatus == 1:
+                            print('任务“%s”' % membertitle)
+                            guangdian(taskId, taskToken, itemId, headers, 1)
+                            print('等待%s秒' % (waitDuration + sleep_times))
+                            time.sleep(int(waitDuration + sleep_times))
+                            lingqu(taskToken, headers)
             if status == 2:
                 print(taskTitle + '任务已完成')
         lotteryTaskVos = task_list(headers, data).get('lotteryTaskVos')
