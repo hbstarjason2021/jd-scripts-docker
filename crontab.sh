@@ -23,3 +23,14 @@
 
 ### Ctrl + O 写入内容， 出现File name to Write ...，输入Enter
 ### Ctrl +X 保存并输出，保存完成
+
+
+###### systemctl is-enabled crond.service
+###### systemctl enable crond.service
+###### systemctl status crond.service
+
+###### cat /etc/crontab
+######  cat /var/spool/cron/root
+
+###### tail -f -n 10 /var/log/cron
+###### ls -l /var/spool/cron
