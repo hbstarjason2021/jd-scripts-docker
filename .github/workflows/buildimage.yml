@@ -51,7 +51,8 @@ jobs:
     - name: Push image to ali
       uses: risfeng/docker-image-build-push-action@v1.0
       with:
-         registry_url: 'registry.cn-beijing.aliyuncs.com'
+         #registry_url: 'registry.cn-beijing.aliyuncs.com'
+         registry_url: 'registry.cn-wulanchabu.aliyuncs.com'
          namespaces: 'hbstarjason'
          repository_name: 'jd-scripts'
          user_name: ${{ secrets.ALIYUN_IMAGES_HUB_USER_NAME }}
