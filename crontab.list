@@ -1,11 +1,11 @@
 #### 55 */2 * * * bash /sync 1>/proc/1/fd/1 2>/proc/1/fd/2
 
 ### 赚钱大赢家提现
-0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_makemoneyshop_tx.js | sed 's/^/ 【赚钱大赢家提现】/'; "
-58 59 23 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; isCashOut=true; node /scripts/jd_makemoneyshop_reward.js | sed 's/^/ 【赚钱大赢家提现】/'; "
+#0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_makemoneyshop_tx.js | sed 's/^/ 【赚钱大赢家提现】/'; "
+#58 59 23 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; isCashOut=true; node /scripts/jd_makemoneyshop_reward.js | sed 's/^/ 【赚钱大赢家提现】/'; "
 
 ## 临期京豆续存
-0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; DY_WASHBEANS=true; node /scripts/jd_washbeans.js | sed 's/^/ 【临期京豆续存】/'; "
+#0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; DY_WASHBEANS=true; node /scripts/jd_washbeans.js | sed 's/^/ 【临期京豆续存】/'; "
 
 ## 健康社区兑换
 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health_exchange.js | sed 's/^/ 【健康社区兑换】/'; "
