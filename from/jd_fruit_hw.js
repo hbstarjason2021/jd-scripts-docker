@@ -23,11 +23,8 @@ if ($.isNode() && process.env.CC_NOHELPAFTER8) {
     }
   }
 }
-let boolneedUpdate = false;
-let TempShareCache = [];
 let WP_APP_TOKEN_ONE = "";
 let lnrun = 0;
-let llgetshare = false;
 let NoNeedCodes = [];
 !(async () => {
   await requireConfig();
@@ -71,24 +68,6 @@ async function jdFruit() {
       message = `【水果名称】${$.farmInfo.farmUserPro.name}\n`;
       console.log(`\n【已成功兑换水果】${$.farmInfo.farmUserPro.winTimes}次\n`);
       message += `【已兑换水果】${$.farmInfo.farmUserPro.winTimes}次\n`;
-
-      try {
-        let myShareCode = $.farmInfo.farmUserPro.shareCode
-        console.log('助力码', myShareCode)
-        await $.wait(1000)
-        for (let k = 0; k < 5; k++) {
-          try {
-            await runTimes(myShareCode)
-            break
-          } catch (e) {
-            console.log('runTimes Error', e)
-            await $.wait(Math.floor(Math.random() * 10 + 3) * 1000)
-          }
-        }
-      } catch (e) {
-        console.log('上报模块出错', e)
-      }
-
       await masterHelpShare();//助力好友
       if ($.farmInfo.treeState === 2 || $.farmInfo.treeState === 3) {
         option['open-url'] = urlSchema;
@@ -535,27 +514,27 @@ async function turntableFarm() {
       }
     }
     //天天抽奖助力
-    console.log('开始天天抽奖--好友助力--每人每天只有三次助力机会.')
-    for (let code of newShareCodes) {
-      if (code === $.farmInfo.farmUserPro.shareCode) {
-        console.log('天天抽奖-不能自己给自己助力\n')
-        continue
-      }
-      await lotteryMasterHelp(code);
-      if (!$.lotteryMasterHelpRes?.helpResult?.code){
-        console.log($.lotteryMasterHelpRes)
-        break
-      }
-      if ($.lotteryMasterHelpRes.helpResult.code === '0') {
-        console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}成功\n`)
-      } else if ($.lotteryMasterHelpRes.helpResult.code === '11') {
-        console.log(`天天抽奖-不要重复助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}\n`)
-      } else if ($.lotteryMasterHelpRes.helpResult.code === '13') {
-        console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}失败,助力次数耗尽\n`);
-        break;
-      }
-    }
-    console.log(`---天天抽奖次数remainLotteryTimes----${remainLotteryTimes}次`)
+     console.log('开始天天抽奖--好友助力--每人每天只有三次助力机会.')
+     for (let code of newShareCodes) {
+       if (code === $.farmInfo.farmUserPro.shareCode) {
+         console.log('天天抽奖-不能自己给自己助力\n')
+         continue
+       }
+       await lotteryMasterHelp(code);
+       if (!$.lotteryMasterHelpRes?.helpResult?.code) {
+         console.log($.lotteryMasterHelpRes)
+         break
+       }
+       if ($.lotteryMasterHelpRes.helpResult.code === '0') {
+         console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}成功\n`)
+       } else if ($.lotteryMasterHelpRes.helpResult.code === '11') {
+         console.log(`天天抽奖-不要重复助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}\n`)
+       } else if ($.lotteryMasterHelpRes.helpResult.code === '13') {
+         console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}失败,助力次数耗尽\n`);
+         break;
+       }
+     }
+     console.log(`---天天抽奖次数remainLotteryTimes----${remainLotteryTimes}次`)
     //抽奖
     if (remainLotteryTimes > 0) {
       console.log('开始抽奖')
@@ -1020,47 +999,6 @@ async function duck() {
   }
 }
 
-async function GetCollect() {
-  try {
-    console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】`);
-    var llfound = false;
-    var strShareCode = "";
-    if (TempShareCache) {
-      for (let j = 0; j < TempShareCache.length; j++) {
-        if (TempShareCache[j].pt_pin == $.UserName) {
-          llfound = true;
-          strShareCode = TempShareCache[j].ShareCode;
-        }
-      }
-    }
-    if (!llfound) {
-      console.log($.UserName + "该账号无缓存，尝试联网获取互助码.....");
-      llgetshare = true;
-      await initForFarm();
-      if ($.farmInfo.farmUserPro) {
-        var tempAddCK = {};
-        strShareCode = $.farmInfo.farmUserPro.shareCode;
-        tempAddCK = {
-          "pt_pin": $.UserName,
-          "ShareCode": strShareCode
-        };
-        TempShareCache.push(tempAddCK);
-        //标识，需要更新缓存文件
-        boolneedUpdate = true;
-      }
-    }
-
-    if (strShareCode) {
-      console.log(`\n` + strShareCode);
-      newShareCodes.push(strShareCode)
-    } else {
-      console.log(`\n数据异常`);
-    }
-  } catch (e) {
-    $.logErr(e);
-  }
-}
-
 // ========================API调用接口========================
 //鸭子，点我有惊喜
 async function getFullCollectionReward() {
@@ -1419,9 +1357,12 @@ function requireConfig() {
 
     let jdFruitShareCodes = ''
     if ($.isNode()) {
-      const dotenv = require('dotenv');
-      dotenv.config()
-      jdFruitShareCodes = require('./jdFruitShareCodes')
+      try {
+        const dotenv = require('dotenv');
+        dotenv.config()
+        jdFruitShareCodes = require('./jdFruitShareCodes')
+      } catch (e) {
+      }
     }
     $.shareCodesArr = [];
     if ($.isNode()) {
@@ -1460,7 +1401,7 @@ function shareCodesFormat() {
 
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: ``, timeout: 10000}, (err, resp, data) => {//https://sharecodepool.cnmb.win/api/farm/50
+    $.get({url: `https://jihulab.com/hbstarjason/sharecode/-/raw/master/farm.json`, timeout: 10000}, (err, resp, data) => {//http://sharecodepool.cnmb.pw/api/farm/50
       try {
         if (err) {
           console.log(JSON.stringify(err))
@@ -1479,23 +1420,6 @@ function readShareCode() {
     })
     await $.wait(10000);
     resolve()
-  })
-}
-
-function runTimes(thisShareCode) {
-  return new Promise((resolve, reject) => {
-    $.get({
-      /* url: `https://sharecodepool.cnmb.win/api/runTimes0917?activityId=farm&sharecode=${thisShareCode}`  */
-      url: ``
-    }, (err, resp, data) => {
-      if (err) {
-        console.log('上报失败', err)
-        reject(err)
-      } else {
-        console.log(data)
-        resolve()
-      }
-    })
   })
 }
 
