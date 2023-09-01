@@ -4,7 +4,7 @@
 updatetime:2023/8/29
 变量
 epxort FRUIT_DELAY = '1000',设置等待时间(毫秒)，默认请求5次接口等待5秒（5000）
-export FRUITCODES = 'xxx&xxx' 指定助力码助力，多个用&分割，不指定则自动搜集任务助力码
+export FRUITCODES = 'ab20ce7ec4294af6af5f11ce657e6bcb&2764c0d2f0c44a32906c895b3cca8c66&0fda5c9ebd194434aaecbbdf0d8741af&670b6a89e4694fc3be6b79bc93a51c4e' 指定助力码助力，多个用&分割，不指定则自动搜集任务助力码
 */
 
 let shareCodes = [];
