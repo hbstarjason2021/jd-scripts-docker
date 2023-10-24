@@ -1,9 +1,5 @@
 #### 55 */2 * * * bash /sync 1>/proc/1/fd/1 2>/proc/1/fd/2
 
-### 赚钱大赢家提现
-#0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_makemoneyshop_tx.js | sed 's/^/ 【赚钱大赢家提现】/'; "
-#58 59 23 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; isCashOut=true; node /scripts/jd_makemoneyshop_reward.js | sed 's/^/ 【赚钱大赢家提现】/'; "
-
 ## 临期京豆续存
 #0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; DY_WASHBEANS=true; node /scripts/jd_washbeans.js | sed 's/^/ 【临期京豆续存】/'; "
 
@@ -15,7 +11,8 @@
 */46 2-23/1 * * *      bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_health_collect.js | sed 's/^/ 【东东健康社区】/'; "
 
 ## 种豆得豆
-5 5-23/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help.js | sed 's/^/ 【种豆得豆】/'; "
+#5 5-23/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help.js | sed 's/^/ 【种豆得豆】/'; "
+5 5-23/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help-6dy.js | sed 's/^/ 【种豆得豆】/'; "
 
 ## 东东农场任务
 #18 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_friend.js | sed 's/^/ 【东东农场】/'; "
@@ -46,6 +43,10 @@
 ### 0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_cfd_help.js | sed 's/^/ 【上传财富岛助力码】/'; "
 
 ######################################################
+
+### 赚钱大赢家提现
+#0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_makemoneyshop_tx.js | sed 's/^/ 【赚钱大赢家提现】/'; "
+#58 59 23 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; isCashOut=true; node /scripts/jd_makemoneyshop_reward.js | sed 's/^/ 【赚钱大赢家提现】/'; "
 
 ## 京东超市兑换
 #0 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_supermarket_ex.js | sed 's/^/ 【京东超市兑换】/'; "
