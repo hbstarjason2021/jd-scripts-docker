@@ -12,7 +12,10 @@
 
 ## 种豆得豆
 #5 5-23/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help.js | sed 's/^/ 【种豆得豆】/'; "
-5 5-23/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help-6dy.js | sed 's/^/ 【种豆得豆】/'; "
+#5 5-23/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean_help-6dy.js | sed 's/^/ 【种豆得豆】/'; "
+
+5 5-23/2 * * *  bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_plantBean-6dy.js | sed 's/^/ 【种豆得豆】/'; "
+
 
 ## 东东农场任务
 #18 0 * * * bash -c " exec 1<>/proc/1/fd/1; exec 2<>/proc/1/fd/2; set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node /scripts/jd_fruit_friend.js | sed 's/^/ 【东东农场】/'; "
