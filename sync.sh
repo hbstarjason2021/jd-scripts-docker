@@ -35,18 +35,18 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 }
 
 #######
-(
-  exec 2<>/dev/null
-  set -e
-  cd /JDHelloWorld
-  git pull
-) || {
-  git clone --branch=JDHelloWorld-jd_scripts https://github.com/hbstarjason2021/jd_scripts.git /JDHelloWorld 
-  [ -d /JDHelloWorld_tmp ] && {
-    rm -rf /JDHelloWorld
-    mv /JDHelloWorld_tmp /JDHelloWorld
-  }
-}
+#(
+#  exec 2<>/dev/null
+#  set -e
+#  cd /JDHelloWorld
+#  git pull
+#) || {
+#  git clone --branch=JDHelloWorld-jd_scripts https://github.com/hbstarjason2021/jd_scripts.git /JDHelloWorld 
+#  [ -d /JDHelloWorld_tmp ] && {
+#    rm -rf /JDHelloWorld
+#    mv /JDHelloWorld_tmp /JDHelloWorld
+#  }
+#}
 
 ########
 #(
