@@ -135,7 +135,7 @@ cp /jd-scripts-docker/from/jd_jxmc_up.ts  /JDHelloWorld/jd_jxmc_up.ts
 
 cp /jd-scripts-docker/jdCookie.js  /scripts/jdCookie.js
 cp /jd-scripts-docker/from/*  /scripts/
-cp /jd-scripts-docker/utils/*  /scripts/utils/
+cp -rf /jd-scripts-docker/utils/*  /scripts/utils/
 mkdir /scripts/function && cp -rf /jd-scripts-docker/function/*  /scripts/function/
 
 #cp /ljqailym/jd_live_redrain_half.js /scripts/jd_live_redrain_half.js
