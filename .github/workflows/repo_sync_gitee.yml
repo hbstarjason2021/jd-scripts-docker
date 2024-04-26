@@ -17,7 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Mirror the Github organization repos to Gitee .
-      uses: Yikun/hub-mirror-action@master
+      uses: liyipeng3/hub-mirror-action@master
+      ### uses: Yikun/hub-mirror-action@master
+      
       ### uses: x-dr/sync-repo-to-gitee@master
       ### uses: serverlesslife-cn/sync-repo-to-coding@master
       ### uses: wearerequired/git-mirror-action@v1
