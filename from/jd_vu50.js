@@ -1,5 +1,5 @@
 /*
-15 19 * * * jd_vu50.js
+15 19 * * 4 jd_vu50.js
  */
 
 const $ = new Env('V你50超市卡');
