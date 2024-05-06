@@ -13,8 +13,6 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 京豆国际
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ddgj.js'
 
-## jd_ttlhb.js
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttlhb.js'
 
 ## jd_jdgj_sign.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jdgj_sign.js'
@@ -87,6 +85,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 
 #################################################################################################################################################
+
+## jd_ttlhb.js
+#docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttlhb.js'
 
 ## 领现金
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cash-new.js'
