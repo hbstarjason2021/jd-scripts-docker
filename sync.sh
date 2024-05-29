@@ -35,6 +35,20 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
 }
 
 #######
+(
+  exec 2<>/dev/null
+  set -e
+  cd /6dylan6
+  git pull
+) || {
+  git clone --branch=main https://github.com/bak-up/6dylan6.git /6dylan6
+  [ -d /6dylan6_tmp ] && {
+    rm -rf /6dylan6
+    mv /6dylan6_tmp /6dylan6
+  }
+}
+
+#######
 #(
 #  exec 2<>/dev/null
 #  set -e
@@ -145,7 +159,7 @@ mkdir /scripts/function && cp -rf /jd-scripts-docker/function/*  /scripts/functi
 #cp /ljqailym/redman_rain_hyzb.js     /scripts/redman_rain_hyzb.js
 #cp /ljqailym/redman_rain_x9b.js      /scripts/redman_rain_x9b.js
 
-npm install png-js  date-fns axios dotenv ts-md5 jsdom moment ws ds && npm cache clean --force
+npm install png-js  date-fns axios dotenv crypto-js ts-md5  tslib jsdom moment ws ds @types/node requests && npm cache clean --force
 cd /jddj && npm install request && npm cache clean --force
 
 ##################################
