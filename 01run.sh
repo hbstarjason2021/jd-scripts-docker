@@ -59,7 +59,7 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 #################################################################################################################################################
 
 ## 
-docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_vu50.js'
+## docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_vu50.js'
 
 
 ## 健康社区
