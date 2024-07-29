@@ -1,103 +1,86 @@
 /*
- * 详细版京东京豆统计
- 
- * 默认不发送通知。
- 
-[task_local]
-#京豆详情统计
-20 22 * * * jd_bean_info.js, tag=京豆详情统计, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
- * */
+定时自定义
+2 20 14 12 * jd_bean_info.js
+ */
+
 const $ = new Env('京豆详情统计');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
-let cookiesArr = [], cookie = '', allMessage = '', message;
+//Node.js用户请在jdCookie.js处填写京东ck;
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+let allMessage = '';
 let myMap = new Map();
 let allBean = 0;
-
+//IOS等用户直接用NobyDa的jd cookie
+let cookiesArr = [], cookie = '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  let cookiesData = $.getdata('CookiesJD') || "[]";
-  cookiesData = jsonParse(cookiesData);
-  cookiesArr = cookiesData.map(item => item.cookie);
-  cookiesArr.reverse();
-  cookiesArr.push(...[$.getdata('CookieJD2'), $.getdata('CookieJD')]);
-  cookiesArr.reverse();
-  cookiesArr = cookiesArr.filter(item => item !== "" && item !== null && item !== undefined);
+  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-
 !(async () => {
-  
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
-        cookie = cookiesArr[i];
-        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-        $.index = i + 1;
-        $.beanCount = 0;
-        $.incomeBean = 0;
-        $.expenseBean = 0;
-        $.todayIncomeBean = 0;
-        $.errorMsg = '';
-        $.isLogin = true;
-        $.nickName = '';
-        $.message = '';
-        $.balance = 0;
-        $.expiredBalance = 0;
-        allMessage = '';
-      await TotalBean();
-      
-      console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
+      cookie = cookiesArr[i];
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      $.index = i + 1;
+      $.beanCount = 0;
+      $.incomeBean = 0;
+      $.expenseBean = 0;
+      $.todayIncomeBean = 0;
+      $.errorMsg = '';
+      $.isLogin = true;
+      $.nickName = '';
+      $.message = '';
+      $.balance = 0;
+      $.expiredBalance = 0;
+	  $.UA=require('./USER_AGENTS').UARAM();
+      //await TotalBean();
+      //console.log(`\n********开始【京东账号${$.index}】${$.nickName || $.UserName}******\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+
         if ($.isNode()) {
-          //await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+          await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
         continue
       }
-        if (i === 0) {await queryGiftCard()}
-        await bean();
-        await showMsg();
-
+      await bean();
+      await showMsg();
+      await $.wait(2000);
     }
-	allMessage = `【账号🆔${$.index}详情统计】收入：${$.todayIncomeBean}京豆\n`+allMessage;
-    console.log(`${allMessage}`)
-    await $.wait(1500)
-    }
+  }
+  allMessage += `\n今日全部账号收入：${allBean}个京豆 🐶\n`
+  console.log(`${allMessage}`)
   if ($.isNode() && allMessage) {
-    //await notify.sendNotify(`${$.name}`, `${allMessage}`)
+    await notify.sendNotify(`${$.name}`, `${allMessage}`, { url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean` })
   }
 })()
     .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+      // $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
     })
     .finally(() => {
       $.done();
     })
-
 async function showMsg() {
   if ($.errorMsg) return
-  
-  var arrayObj=Array.from(myMap);
-  arrayObj.sort(function(a,b){return a[1]-b[1]})
-  
-  for (var [key, value] of arrayObj) {
-    /* allMessage += key + ' ---> ' +myMap.get(key)+'京豆\n' */
-	allMessage += "【" +value+"豆"+"】 "+key+'\n'
+  allMessage += `\n【账号${$.index}：${$.nickName || $.UserName} 京豆详情统计】\n\n`;
+  allMessage += `今日收入总计：${$.todayIncomeBean}京豆 🐶\n`
+  allBean = allBean + parseInt($.todayIncomeBean)
+  for (let key of myMap.keys()) {
+	allMessage += "【" +myMap.get(key)+"豆"+"】 "+key+'\n'
   }
-}
-function IsNumber(value) {
-    intPerSent = parseInt(value);
-    if (!intPerSent)
-        return false;
-    else
-        return true;
+  myMap = new Map()
+  // if ($.isNode()) {
+  //   await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, `账号${$.index}：${$.nickName || $.UserName}\n昨日收入：${$.incomeBean}京豆 🐶\n昨日支出：${$.expenseBean}京豆 🐶\n当前京豆：${$.beanCount}京豆 🐶${$.message}`, { url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean` })
+  // }
+  // $.msg($.name, '', `账号${$.index}：${$.nickName || $.UserName}\n今日收入：${$.todayIncomeBean}京豆 🐶\n昨日收入：${$.incomeBean}京豆 🐶\n昨日支出：${$.expenseBean}京豆 🐶\n当前京豆：${$.beanCount}(七天将过期${$.expirejingdou})京豆🐶${$.message}`, {"open-url": "https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean", "media-url": "https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png"});
 }
 async function bean() {
   // console.log(`北京时间零点时间戳:${parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000}`);
@@ -108,25 +91,33 @@ async function bean() {
   const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 - (24 * 60 * 60 * 1000);
   // 今天0:0:0时间戳
   const tm1 = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000;
-  let page = 1, t = 0, todayArr = [];
+  let page = 1, t = 0, yesterdayArr = [], todayArr = [];
   do {
     let response = await getJingBeanBalanceDetail(page);
     // console.log(`第${page}页: ${JSON.stringify(response)}`);
+	await $.wait(1000);
     if (response && response.code === "0") {
       page++;
       let detailList = response.detailList;
       if (detailList && detailList.length > 0) {
         for (let item of detailList) {
           const date = item.date.replace(/-/g, '/') + "+08:00";
-          if (new Date(date).getTime() >= tm1 && (!item['eventMassage'].includes("退还") && !item['eventMassage'].includes('扣赠'))) {
+          if (new Date(date).getTime() >= tm1 && (!item['eventMassage'].includes("退还") && !item['eventMassage'].includes("物流") && !item['eventMassage'].includes('扣赠'))) {
             todayArr.push(item);
-          } else if (tm > new Date(date).getTime()) {            
+          } else if (tm <= new Date(date).getTime() && new Date(date).getTime() < tm1 && (!item['eventMassage'].includes("退还") && !item['eventMassage'].includes('扣赠'))) {
+            //昨日的
+            yesterdayArr.push(item);
+          } else if (tm > new Date(date).getTime()) {
+            //前天的
             t = 1;
             break;
           }
         }
       } else {
-        $.errorMsg = `数据异常`;
+        // 完全无数据时才抛出异常，否则返回之前统计出来的数据
+        if (!todayArr.length && !yesterdayArr.length) {
+          $.errorMsg = `数据异常`;
+        }
         // $.msg($.name, ``, `账号${$.index}：${$.nickName}\n${$.errorMsg}`);
         t = 1;
       }
@@ -134,35 +125,34 @@ async function bean() {
       // console.log(`cookie已过期，或者填写不规范，跳出`)
       t = 1;
     } else {
-      // console.log(`未知情况：${JSON.stringify(response)}`);
-      // console.log(`未知情况，跳出`)
+       console.log(`未知情况：${JSON.stringify(response)}`);
+       console.log(`未知情况，跳出`)
       t = 1;
     }
   } while (t === 0);
-  var strtemp="";
+  for (let item of yesterdayArr) {
+    if (Number(item.amount) > 0) {
+      $.incomeBean += Number(item.amount);
+    } else if (Number(item.amount) < 0) {
+      $.expenseBean += Number(item.amount);
+    }
+  }
   for (let item of todayArr) {
     if (Number(item.amount) > 0) {
       $.todayIncomeBean += Number(item.amount);
-	  strtemp=item.eventMassage;	  
-	  strtemp=strtemp.replace("参加[","").replace("]-奖励","").replace("]店铺活动-奖励","");
-	  strtemp=strtemp.replace("京东自营旗舰店","(自营)").replace("京东自营官方旗舰店","(自营官方)");
-	  strtemp=strtemp.replace("（","(").replace("）",")");
-	  strtemp=strtemp.replace("官方旗舰店","(官方)");
-	  strtemp=strtemp.replace("旗舰店","(旗舰)").replace("专营店","(专营)").replace("专卖店","(专卖)");	  
-      myMap.set(strtemp,0)
+      myMap.set(item.eventMassage,0)
     }
   }
   for (let item of todayArr) {
     if (Number(item.amount) > 0) {
-	  strtemp=item.eventMassage;
-	  strtemp=strtemp.replace("参加[","").replace("]-奖励","").replace("]店铺活动-奖励","");
-	  strtemp=strtemp.replace("京东自营旗舰店","(自营)").replace("京东自营官方旗舰店","(自营官方)");
-	  strtemp=strtemp.replace("（","(").replace("）",")");
-	  strtemp=strtemp.replace("官方旗舰店","(官方)");
-	  strtemp=strtemp.replace("旗舰店","(旗舰)").replace("专营店","(专营)").replace("专卖店","(专卖)");	  
-      myMap.set(strtemp,parseInt(myMap.get(strtemp))+parseInt(item.amount))
+      myMap.set(item.eventMassage,parseInt(myMap.get(item.eventMassage))+parseInt(item.amount))
     }
   }
+  // console.log(myMap)
+  // await queryexpirejingdou();//过期京豆
+  // await redPacket();//过期红包
+  // console.log(`今日收入：${$.todayIncomeBean}个京豆 🐶`);
+  // console.log(`昨日支出：${$.expenseBean}个京豆 🐶`)
 }
 function TotalBean() {
   return new Promise(async resolve => {
@@ -173,7 +163,7 @@ function TotalBean() {
         Accept: "*/*",
         Connection: "keep-alive",
         Cookie: cookie,
-        "User-Agent": "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         "Accept-Language": "zh-cn",
         "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
         "Accept-Encoding": "gzip, deflate, br"
@@ -208,51 +198,13 @@ function TotalBean() {
     })
   })
 }
-async function queryGiftCard() {
-    return new Promise((resolve, reject) => {
-        let option = taskurl_xh()
-        $.post(option, (err, resp, data) => {
-            try {
-                if (err) {
-                    console.log('err', err)
-                } else {
-                    data = JSON.parse(data);
-					          if (data.code === 'success' && data.couponVOList!==[]) {
-                      for(i=0;i<data.couponVOList.length;i++){
-                        console.log(data.couponVOList[i].cardTypeName, data.couponVOList[i].amount)
-                      }
-              
-            }
-                }
-            } catch (e) {
-                reject(`⚠️ ${arguments.callee.name.toString()} API返回结果解析出错\n${e}\n${JSON.stringify(data)}`)
-            } finally {
-                resolve(data)
-            }
-        })
-    })
-}
-
-function taskurl_xh() {
-    return {
-			url: "https://mygiftcard.jd.com/giftcard/queryGiftCardItem/app?source=JDAP",
-            body: `pageNo=1&queryType=1&cardType=-1&pageSize=20`,
-            headers: {
-                'origin': 'https://mygiftcard.jd.com',
-				        'user-agent': 'jdapp;iPhone;10.1.2;15.0;ff2caa92a8529e4788a34b3d8d4df66d9573f499;network/wifi;model/iPhone13,4;addressid/2074196292;appBuild/167802;jdSupportDarkMode/1;Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-                'referer': 'https://mygiftcard.jd.com/giftcardForM.html?source=JDAP&sid=a7ccfc6561307ec18b8594167136d89w&un_area=7_446_451_37392',
-                'cookie': cookie,
-            },
-			}
-}
-
 function getJingBeanBalanceDetail(page) {
   return new Promise(async resolve => {
     const options = {
       "url": `https://api.m.jd.com/client.action?functionId=getJingBeanBalanceDetail`,
       "body": `body=${escape(JSON.stringify({"pageSize": "20", "page": page.toString()}))}&appid=ld`,
       "headers": {
-        'User-Agent': "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
+        'User-Agent': $.UA,
         'Host': 'api.m.jd.com',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': cookie,
@@ -261,8 +213,8 @@ function getJingBeanBalanceDetail(page) {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
-          // console.log(`${JSON.stringify(err)}`)
-          // console.log(`${$.name} API请求失败，请检查网路重试`)
+           console.log(`${JSON.stringify(err)}`)
+           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
             data = JSON.parse(data);
