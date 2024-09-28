@@ -16,7 +16,16 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 日常签到
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_dailysign-6dy.js'
 
-##  jd_signbeanact_.js
+## 无名小豆
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_wmdou.js'
+
+## 瓜分打卡
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_gfdk.js'
+
+## 每日抽豆
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_dygetbeans.js'
+
+## 领京豆签到
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_signbeanact_.js'
 
 ## jd_beanSign.js
