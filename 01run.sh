@@ -41,6 +41,9 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 ## 秒杀浏览
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_seckillViewTask.js'
 
+## 秒送抽奖
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_msdraw.js'
+
 ## 秒送签到
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_mssign.js'
 
@@ -92,6 +95,16 @@ docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-
 
 ## 服装抽奖
 ## docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_clothing_draw.js'
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_fzmz_draw.js'
+
+## 惠寻抽奖
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hx_draw.js'
+
+## 家装福利抽奖
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jzfl_draw.js'
+
+## 手机数码抽奖
+docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_phonedraw.js'
 
 ##取关京东店铺和商品jd_unsubscribe.js
 docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_unsubscribe.js'
