@@ -4,7 +4,7 @@
 #互助码生成顺序变量HPTYPE='2'随机，HPTOPNUM='10'固定在车头数量,具体看57行注释
 ## update 20231028
 
-DIR="$( cd "$( dirname $0 )" >/dev/null 2>&1 && pwd )"
+DIR="$( pwd )"
 ## 导入通用变量与函数
 #dir_shell=/ql/shell
 #. $dir_shell/share.sh
@@ -23,7 +23,7 @@ else
     dir_code=$dir_log/6dylan6_jdpro_main_jd_sharecode
     repo='6dylan6_jdpro_main' 
 fi
-grep '6dylan6_0212' /ql/data/config/task_before.sh >/dev/null 2>&1 || grep '6dylan6_0212' /ql/config/task_before.sh > /dev/null 2>&1
+grep '6dylan6_20240905' /ql/data/config/task_before.sh >/dev/null 2>&1 || grep '6dylan6_20240905' /ql/config/task_before.sh > /dev/null 2>&1
 if [[ $? != 0 ]];then
  cp /ql/repo/${repo}/docker/task_before.sh /ql/config/ >/dev/null 2>&1 || cp /ql/data/repo/${repo}/docker/task_before.sh /ql/data/config/ > /dev/null 2>&1
 fi
