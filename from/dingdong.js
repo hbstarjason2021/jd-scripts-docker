@@ -1,4 +1,5 @@
 // 叮咚买菜-叮咚鱼塘自动签到
+// 20241025
 /*
 备注：需要Cookie、seedId、propsId。"叮咚买菜"APP，然后用抓包软件进行抓包，分别在叮咚鱼塘中点击喂饲料，在果园中点击浇水，就能抓到含有Cookie、seedId和propsId的包。（叮咚鱼塘与叮咚果园的seedId、propsId不同，因此需要分别抓包，Cookie相同）
 */
@@ -110,7 +111,7 @@ function bark(message, key) {
     if (key != "") {
       message = messagePushHeader + message // 消息头最前方默认存放：【xxxx】
       message = encodeURIComponent(message)
-      BARK_ICON = "https://s21.ax1x.com/pkrUkfe.png"
+      BARK_ICON = "https://s21.ax1x.com/2024/06/23/pkrUkfe.png"
     let url = "https://api.day.app/" + key + "/" + message + "/" + "?icon=" + BARK_ICON;
     // 若需要修改推送的分组，则将上面一行改为如下的形式
     // let url = 'https://api.day.app/' + bark_id + "/" + message + "?group=分组名";
@@ -406,7 +407,7 @@ function execHandle(cookie, pos) {
   }
 
   posLabel = pos-2 ;  // 存放下标，从0开始
-  messageHeader[posLabel] = "👨🚀 " + messageName
+  messageHeader[posLabel] = "👨‍🚀 " + messageName
 
   try {
     let seedId = Application.Range("F" + pos).Text;
@@ -488,7 +489,7 @@ function execHandle(cookie, pos) {
         messageSuccess += content
         console.log(content);
       }else{
-        // {"msg":"出了点问题哦，请稍后再试吧","code":119000001,"timestamp":"2024-11-06 21:06:53","success":false,"exec_time":{}}
+        // {"msg":"出了点问题哦，请稍后再试吧","code":119000001,"timestamp":"2023-08-10 21:06:53","success":false,"exec_time":{}}
         // content += "帐号：" + messageName + msg + " ";
         content += "📢 " + msg + "\n";
         messageFail += content;
@@ -520,8 +521,8 @@ function execHandle(cookie, pos) {
         flagSign = 1;
         console.log("🍳 帐号：" + messageName + "鱼塘签到成功 ");
       }else{
-        // {"msg":"今日已完成任务，明日再来吧！","code":601,"timestamp":"2024-11-06 21:23:49","success":false,"exec_time":{}}
-        // {"msg":"出了点问题哦，请稍后再试吧","code":119000001,"timestamp":"2024-11-06 21:36:53","success":false,"exec_time":{}}
+        // {"msg":"今日已完成任务，明日再来吧！","code":601,"timestamp":"2023-08-10 21:23:49","success":false,"exec_time":{}}
+        // {"msg":"出了点问题哦，请稍后再试吧","code":119000001,"timestamp":"2023-08-10 21:06:53","success":false,"exec_time":{}}
         // messageFail += "帐号：" + messageName + msg + " ";
         console.log("🍳 帐号：" + messageName + msg + " ");
       }
@@ -547,7 +548,7 @@ function execHandle(cookie, pos) {
       }else{
         if(code == 601){
           // 此不为错误消息
-          // {"msg":"今日已完成任务，明日再来吧！","code":601,"timestamp":"2024-11-06 20:40:28","success":false}
+          // {"msg":"今日已完成任务，明日再来吧！","code":601,"timestamp":"2024-06-13 20:30:28","success":false}
           flagSign = 1;
           console.log("🍳 帐号：" + messageName + msg + " ");
         }else{
