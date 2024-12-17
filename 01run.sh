@@ -58,7 +58,7 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_dygetbeans.js'
 
 ## 领京豆签到
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_signbeanact_.js'
+##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_signbeanact_.js'
 
 ## jd_beanSign.js
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_beanSign.js'
