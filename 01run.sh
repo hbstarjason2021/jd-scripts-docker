@@ -22,6 +22,9 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 3c签到
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_3c_task.js'
 
+## jd_jpt_draw.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_jpt_draw.js'
+
 ## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_10bean.js'
 
