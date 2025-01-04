@@ -28,6 +28,10 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 加购的6个豆子
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; ADDCAR='true'; node  jd_taskbean.js'
 
+## jd_xnqf_draw.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_xnqf_draw.js'
+
+
 ## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_book_draw.js'
 
