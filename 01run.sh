@@ -28,8 +28,21 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 加购的6个豆子
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; ADDCAR='true'; node  jd_taskbean.js'
 
+
 ## jd_xnqf_draw.js
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_xnqf_draw.js'
+
+## jd_xnjfq_task.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_xnjfq_task.js'
+
+## jd_huwai_draw.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_huwai_draw.js'
+
+## jd_snake_pk.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_snake_pk.js'
+
+
+
 
 ## jd_sjxnw.js
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_sjxnw.js'
@@ -39,6 +52,9 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 
 ## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_dyf_draw.js'
+
+## 惠寻抽奖
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hx_draw.js'
 
 
 ## 天天领豆
@@ -128,8 +144,8 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wxttzq.js'
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_wechat_ttlzq.js'
 
-## 惠寻抽奖
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hx_draw.js'
+## jx_ttlhb.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jx_ttlhb.js'
 
 ##取关京东店铺和商品jd_unsubscribe.js
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_unsubscribe.js'
