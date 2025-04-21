@@ -34,6 +34,12 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_baglx.js'
 
+## 
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_baglx_sign.js'
+
+## jd_hssign.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hssign.js'
+
 
 ## 做任务赚奖票
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_task_piao.js' 
