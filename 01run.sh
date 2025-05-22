@@ -53,6 +53,14 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ##
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttDraw.js'
 
+##
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jipiao_draw.js'
+
+##
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_tuitui_red_task.js'
+
+##
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jrsign.js'
 
 
 ## 做任务赚奖票
@@ -60,12 +68,6 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 
 ## 日常签到
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_dailysign-6dy.js'
-
-## 3c签到
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_3c_task.js'
-
-## 加购的6个豆子
-##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; ADDCAR='true'; node  jd_taskbean.js'
 
 
 ## 
@@ -170,6 +172,13 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 
 
 #################################################################################################################################################
+
+## 3c签到
+##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_3c_task.js'
+
+## 加购的6个豆子
+##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; ADDCAR='true'; node  jd_taskbean.js'
+
 
 ## 摇钱树
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_yqs.js'
