@@ -21,6 +21,12 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_superzzj.js'
 
 ## 
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_fdshkj.js'
+
+## 
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jjg.js'
+
+## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_vu50.js'
 
 ## 
@@ -45,10 +51,7 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_kjsign.js'
 
 ## 
-## time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bgcity.js'
-
-## 
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hlw_draw.js'
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bgcity.js'
 
 ##
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttDraw.js'
@@ -164,6 +167,8 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 
 #################################################################################################################################################
 
+## 
+##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hlw_draw.js'
 
 ## 做任务赚奖票
 #time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_task_piao.js' 
