@@ -45,7 +45,7 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_baglx.js'
 
 ## 
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_baglx_sign.js'
+##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_baglx_sign.js'
 
 ## jd_hssign.js
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hssign.js'
@@ -56,14 +56,17 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_bgcity.js'
 
-##
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttDraw.js'
+## jd_zzhb_new.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_zzhb_new.js'
+
+## jd_yb_draw.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_yb_draw.js'
 
 ##
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jipiao_draw.js'
 
 ##
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_tuitui_red_task.js'
+##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_tuitui_red_task.js'
 
 ##
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jrsign.js'
@@ -170,6 +173,10 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 
 #################################################################################################################################################
 
+##
+## time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttDraw.js'
+
+
 ## 
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_hlw_draw.js'
 
@@ -231,9 +238,6 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 
 ## 
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_10bean.js'
-
-## jd_yb_draw.js
-##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_yb_draw.js'
 
 ## 无名小豆
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_wmdou.js'
