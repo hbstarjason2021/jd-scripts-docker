@@ -34,12 +34,28 @@ jobs:
 
 
     - name: Build and push
-      id: docker_build
+      id: docker_build-bak
       uses: docker/build-push-action@v2
       with:
          push: true
          tags: hbstarjason/jd-scripts:${{ github.sha }}-${{ matrix.platform == 'linux/amd64' && 'amd64' || 'arm64' }}
          platforms: ${{ matrix.platform }}
     
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+         push: true
+         tags: hbstarjason/jd-scripts:latest-arm64
+         platforms: linux/arm64
 
-     
+    - name: Push image to ali
+      uses: risfeng/docker-image-build-push-action@v1.0
+      with:
+         #registry_url: 'registry.cn-beijing.aliyuncs.com'
+         registry_url: 'registry.cn-wulanchabu.aliyuncs.com'
+         namespaces: 'hbstarjason'
+         repository_name: 'jd-scripts'
+         user_name: ${{ secrets.ALIYUN_IMAGES_HUB_USER_NAME }}
+         password: ${{ secrets.ALIYUN_IMAGES_HUB_TOKEN }}
+         image_version: 'latest-arm64'
