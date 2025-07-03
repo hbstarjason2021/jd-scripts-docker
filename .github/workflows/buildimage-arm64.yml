@@ -41,10 +41,5 @@ jobs:
          tags: hbstarjason/jd-scripts:${{ github.sha }}-${{ matrix.platform == 'linux/amd64' && 'amd64' || 'arm64' }}
          platforms: ${{ matrix.platform }}
     
-    - name: Upload digest
-      uses: actions/upload-artifact@v3
-      with:
-          name: digest-${{ matrix.platform }}
-          path: |
-               ${{ steps.docker_build.outputs.digest }}
+
      
