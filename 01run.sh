@@ -14,6 +14,40 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_cjzzj.js' 
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_superzzj.js'
 
+## 天天刮京豆
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttgd.js'
+
+## jd_daka_bean.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_daka_bean.js'
+
+## jd_dddraw.js
+
+## 天天领豆
+##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_deliverySign_sign.js'
+
+## jd_fs_sign.js
+
+## jd_green.js
+
+## jd_jiaju_draw.js
+
+## jd_jiaz_draw.js
+
+## jd_jjg.js
+
+## jd_jxfl.js
+
+## jd_lmdraw.js
+
+## jd_msDraw.js
+
+## jd_msSign.js
+
+## jd_qy_sign.js
+
+
+
+
 ## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_yssign.js'
 
@@ -135,8 +169,6 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_dyf_draw.js'
 
-## 天天领豆
-##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_deliverySign_sign.js'
 
 ## 每日抽豆
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_dygetbeans.js'
