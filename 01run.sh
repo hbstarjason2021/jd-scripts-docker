@@ -23,30 +23,34 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## jd_dddraw.js
 
 ## 天天领豆
-##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_deliverySign_sign.js'
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node  jd_deliverySign_sign.js'
 
 ## jd_fs_sign.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_fs_sign.js'
 
 ## jd_green.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_green.js'
 
 ## jd_jiaju_draw.js
-
 ## jd_jiaz_draw.js
-
 ## jd_jjg.js
 
 ## jd_jxfl.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_jxfl.js'
 
 ## jd_lmdraw.js
 
-## jd_msDraw.js
+## 秒送抽奖
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_msDraw.js'
 
-## jd_msSign.js
+## 秒送签到
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_msSign.js'
+
+## 秒杀浏览
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_seckillViewTask.js'
 
 ## jd_qy_sign.js
-
-
-
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_qy_sign.js'
 
 ## 
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_yssign.js'
@@ -69,12 +73,6 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 积分换话费
 #docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_dwapp.js'
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_dwapp-6dy.js'
-
-## 秒杀浏览
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_seckillViewTask.js'
-
-## 秒送抽奖
-time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_msdraw.js'
 
 ## 赚汪贝
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_zwb.js'
@@ -185,8 +183,6 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## jd_vxFans.js
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_vxFans.js'
 
-## 秒送签到
-##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_mssign.js'
 
 ## 答题
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_mkt_answer.js'
@@ -201,9 +197,6 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 
 ## jx_ttlhb.js
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jx_ttlhb.js'
-
-
-
 
 
 ##
