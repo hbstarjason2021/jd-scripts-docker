@@ -17,6 +17,8 @@ time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source
 ## 天天刮京豆
 time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ttgd.js'
 
+## jd_new_vote.js
+time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_new_vote.js'
 
 ### 东东农场
 ##time docker exec jd1 bash -c 'set -o allexport; source /all; source /env; source /jd-scripts-docker/resolve.sh; cd /scripts; node jd_ddnc_farmpark.js'
